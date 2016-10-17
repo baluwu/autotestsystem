@@ -1,0 +1,49 @@
+/* here you can put your own css to customize and override the theme */
+.padding-lt-0{padding-left: 0 !important;}
+.page-content{
+  padding-top: 30px;
+}
+.page-content-row .page-sidebar{
+  width: 180px;
+  min-width: 180px;
+}
+@media (max-width: 991px){
+  .page-content-row .page-sidebar{ width: auto;}
+}
+.ats-dropzone {
+  border: 2px dashed #028AF4;
+  background: white;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* 768px */
+  .ats-dropzone {
+    width: auto;
+  }
+}
+.breadcrumbs{
+  margin-bottom: 0 !important;
+  padding:4px 0 4px 10px !important;
+}
+
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  background-color:transparent !important;
+}
+
+.hoverBg{
+  background-color: #27282E;
+  color: #fff;
+}
+.portlet-body.list{
+
+}
+.portlet-body.list p{}
+.portlet-body.list p i{
+  width: 1.25rem;
+  margin-right: 1rem;
+}

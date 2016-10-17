@@ -1,0 +1,9 @@
+.idea/
+App/Runtime/
+RemoteSystemsTempFiles/
+.settings/
+.buildpath
+.project
+Uploads/
+.metadata/
+/vendor/

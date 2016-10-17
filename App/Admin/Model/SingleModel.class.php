@@ -1,0 +1,188 @@
+<?php
+namespace Admin\Model;
+
+use Think\Model;
+
+//用户用例模型
+class SingleModel extends Model {
+
+    //自动验证
+    protected $_validate = [
+        //-1,'名称长度不合法！'
+        ['name', '/^[^@]{2,100}$/i', '名称长度不合法！', self::EXISTS_VALIDATE],
+        //-5,'帐号被占用！'
+//    ['name', '', -5, self::EXISTS_VALIDATE, 'unique', self::MODEL_INSERT],
+    ];
+
+    //用户表自动完成
+    protected $_auto = [
+        ['create_time', 'time', self::MODEL_INSERT, 'function'],
+    ];
+
+
+
+    public function getList($order, $sort, $page, $rows, $all = false, $where = [], $isrecovery = 0,$ispublic=null) {
+        if ($all) {
+            return $this
+                    ->field('s.id,s.name,u.manager,u.nickname')
+                    ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
+                    ->select();
+        }
+        $map = [];
+        foreach ($where as $key => $value) {
+            $map['s.' . $key] = $value;
+        }
+
+        if ($ispublic !== null) {
+            $map['s.ispublic'] = $ispublic;
+        } else {
+            $map['s.uid'] = ['eq', session('admin')['id']];
+        }
+
+        $map['s.isrecovery'] = ['eq', $isrecovery];
+
+
+        $obj = $this
+            ->field('s.id,s.uid,s.name,s.ispublic,s.create_time,s.nlp,s.arc,s.isrecovery,s.validates,s.status,u.manager,u.nickname')
+            ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
+            ->where($map)
+            ->order([$order => $sort])
+            ->limit($page, $rows)
+            ->select();
+
+
+        //转换属性及规则
+        if ($obj) foreach ($obj as $k => $v) {
+            $obj[$k]['validates'] = unserialize($v['validates']);
+            $obj[$k]['ispublic'] = ($obj[$k]['ispublic'] == 1) ? '公共' : '私有';
+        }
+        $total = $this->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();
+
+        return [
+            'recordsTotal'    => $total,
+            'recordsFiltered' => $total,
+            'data'            => $obj ? $obj : [],
+        ];
+    }
+
+//获取数据总数
+    public function countData($where = []) {
+        return $this->where($where)->count();
+
+    }
+
+    //获取公共数据总数
+    public function countPubData($where = []) {
+        return $this->where($where)->count();
+
+    }
+
+    public function getListById($id) {
+        $map = ['uid' => $id];
+        $obj = $this->table('__SINGLE__')
+            ->field('`id`,`uid`,`name`,`ispublic`,`create_time`,`nlp`,`arc`,`isrecovery`,`validates`')
+            ->where($map)
+            ->order(['create_time' => 'desc'])
+            ->select();
+
+        return $obj;
+    }
+
+    //新增用例
+    public function addSingle($mc, $property, $type_switch, $nlp, $arc, $v1, $dept, $v2) {
+        $data = [
+            'uid'      => session('admin')['id'],
+            'name'     => $mc,
+            'ispublic' => $property,
+        ];
+        if ($type_switch) {
+            $data['arc'] = $arc;
+        } else {
+            $data['nlp'] = $nlp;
+        }
+        $data['validates'] = serialize($this->getVali($v1, $dept, $v2));
+
+        if ($this->create($data)) {
+            $data['create_time'] = REQUEST_TIME;
+            $sid = $this->add($data);
+
+            return $sid ? $sid : '';
+        }
+        return $this->getError();
+    }
+
+    //获取规则公用方法
+    private function getVali($data1, $data2, $data3) {
+        $temp = [];
+        foreach ($data1 as $key => $value) {
+            if ($value && $data2[$key] && $data3[$key]) {
+                $temp[] = [
+                    'v1'   => $value,
+                    'dept' => $data2[$key],
+                    'v2'   => $data3[$key],
+                ];
+            }
+        }
+        return $temp;
+    }
+
+    //获取一条数据
+    public function getSingle($id) {
+      $vali = $this
+        ->field('s.id,s.name,s.ispublic,s.create_time,s.uid,s.validates,s.nlp,s.arc,u.manager,u.nickname')
+        ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
+        ->where(['s.id' => $id])
+        ->find();
+       if (!$vali) return false;
+        $vali['validates'] = unserialize($vali['validates']);
+        return $vali;
+    }
+
+    //修改用例
+    public function updateSingle($id, $mc_edit, $property_edit, $type_switch, $nlp_edit, $arc_edit, $v1_edit, $dept_edit, $v2_edit) {
+        $data = [
+            'id'       => $id,
+            'name'     => $mc_edit,
+            'ispublic' => $property_edit
+        ];
+        if ($type_switch) {
+            $data['arc'] = $arc_edit;
+            $data['nlp'] = '';
+        } else {
+            $data['arc'] = '';
+            $data['nlp'] = $nlp_edit;
+        }
+        $data['validates'] = serialize($this->getVali($v1_edit, $dept_edit, $v2_edit));
+
+        if (!$this->create($data)) {
+            return $this->getError();
+        }
+        $sid = $this->save($data);
+
+        return $sid ? $sid : '';
+
+    }
+
+    //删除到回收站
+    public function Remove($ids) {
+      return $this->where(['id' => ['IN', $ids]])->setField('isrecovery', 1);
+    }
+
+    //还原用例
+    public function Restore($ids) {
+        return $this->where(['id' => ['IN', $ids]])->setField('isrecovery', 0);
+
+    }
+
+
+    //状态修改
+    public function setStatus($id, $status) {
+        $rows = $this->where(['id' => $id])->setField('status', $status);
+
+        return $rows;
+    }
+
+    public function setfields($id, $data = []) {
+        return $this->where(['id' => $id])->setField($data);
+    }
+}
