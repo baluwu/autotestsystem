@@ -94,7 +94,7 @@
                         <i class="fa fa-home"></i> Dashboard </a>
                     </li>
 
-
+                    {/*  R47:屏蔽用例管理tab 
                     <li
                   <if condition="(CONTROLLER_NAME eq 'Single')">
                     <in name="ACTION_NAME" value="index,add,edit,execute_history,execute_history_show,execute_history_diff,recycle">
@@ -106,7 +106,7 @@
                     <a href="/Single/index" class="text-uppercase">
                         <i class="fa fa-object-ungroup"></i> 用例管理 </a>
                     </li>
-
+                    */}    
 
 
                   <li
