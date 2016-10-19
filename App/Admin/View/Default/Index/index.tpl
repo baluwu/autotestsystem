@@ -71,7 +71,7 @@
             </div>
             <div class="details">
               <div class="number">
-                <span data-counter="counterup" data-value="{$count.single}">0</span>
+                <span data-counter="counterup">{$count.single}</span>
               </div>
               <div class="desc"> 我的用例</div>
             </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="details">
               <div class="number">
-                <span data-counter="counterup" data-value="{$count.group}">0</span>
+                <span data-counter="counterup" >{$count.group}</span>
               </div>
               <div class="desc"> 我的用例组</div>
             </div>
@@ -97,7 +97,7 @@
             </div>
             <div class="details">
               <div class="number">
-                <span data-counter="counterup" data-value="{$count.singlePub}">0</span>
+                <span data-counter="counterup" >{$count.singlePub}</span>
               </div>
               <div class="desc">公共用例</div>
             </div>
@@ -110,7 +110,7 @@
             </div>
             <div class="details">
               <div class="number">
-                <span data-counter="counterup" data-value="{$count.groupPub}">0</span></div>
+                <span data-counter="counterup" >{$count.groupPub}</span></div>
               <div class="desc">公共用例组</div>
             </div>
           </a>
