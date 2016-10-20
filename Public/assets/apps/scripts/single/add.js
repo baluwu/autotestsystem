@@ -204,4 +204,9 @@ jQuery(document).ready(function () {
     iconBase: 'fa',
     tickIcon: 'fa-check'
   });
+
+  $('.J_asr_type_nav li').click(function() {
+    $('.J_asr_type_nav li').removeClass('active');     
+    $(this).addClass('active');
+  });
 });
