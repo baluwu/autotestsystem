@@ -16,25 +16,19 @@
   <script src="/Public/assets/global/plugins/pace/pace.min.js"></script>
   <link href="/Public/assets/global/plugins/pace/themes/pace-theme-flash.css" rel="stylesheet" type="text/css"/>
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
-
   <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
   <!-- END GLOBAL MANDATORY STYLES -->
   <!-- BEGIN PAGE LEVEL PLUGINS -->
-
   <link href="/Public/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
   <!-- END PAGE LEVEL PLUGINS -->
   <!-- BEGIN THEME GLOBAL STYLES -->
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
   <!-- END THEME GLOBAL STYLES -->
-
-
   <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
-
-
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -213,10 +207,32 @@
                                 </label>
 
                                 <div class="col-md-10">
-                                  <input type="hidden" name="arc" value="" />
-                                  <div id="arc_upload" class="ats-dropzone" /> 拖拽到此处上传(*.wav,*.mp3,*.amr)</if></div>
-
-                              </div>
+                                    <ul class="nav nav-tabs J_asr_type_nav" role="tablist">
+                                        <li role="presentation" class="active"><a href="#">语音录制</a></li>
+                                        <li role="presentation"><a href="#">本地上传</a></li>
+                                        <li role="presentation"><a href="#">语音文件库</a></li>
+                                    </ul>
+                                    <ul class="nav">
+                                    <li>
+                                        <form class="form-horizontal form-row-seperated" action="./addSingle" method="post" id="atsform" novalidate="novalidate">
+                                            <div class="form-body">
+                                                <div class="form-group form-md-line-input">
+                                                    <label class="control-label col-md-1">
+                                                        <span class="required"> * </span>名称
+                                                    </label>
+                                                    <div class="col-md-11">
+                                                        <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="录音文件名称">
+                                                        <div class="form-control-focus"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <li style="display: none">
+                                    <input type="hidden" name="arc" value="" />
+                                    <div id="arc_upload" class="ats-dropzone" /> 拖拽到此处上传(*.wav,*.mp3,*.amr)</if></div>
+                                    </li>
+                                </div>
                               </div>
                               <div class="form-group ">
                                 <label class="col-md-2 control-label">
@@ -270,9 +286,7 @@
                                             <div class="form-control-focus"></div>
                                           </div>
                                         </div>
-
                                       </td>
-
                                       <td>
                                         <a href="javascript:;" class="btn btn-default btn-sm remove">
                                           <i class="fa fa-times"></i> Remove </a>
@@ -283,8 +297,6 @@
                                   </table>
                                 </div>
                               </div>
-
-
                       </div>
                     </div>
                   </div>
