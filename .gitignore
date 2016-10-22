@@ -1,9 +1,4 @@
-.idea/
-App/Runtime/
-RemoteSystemsTempFiles/
-.settings/
-.buildpath
-.project
-Uploads/
-.metadata/
-/vendor/
+App/Runtime/*
+Uploads/*
+App/Common/Conf/*
+.gitignore

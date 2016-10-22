@@ -1,7 +1,0 @@
-production:
-  only:
-  - develop
-  type: deploy
-  script:
-    - cd /data/www/me.menma.rokid/ats
-    - git pull origin develop
