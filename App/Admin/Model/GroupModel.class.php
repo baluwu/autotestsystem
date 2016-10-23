@@ -22,7 +22,10 @@ class GroupModel extends Model {
     //用例组列表
     public function getList($order, $sort, $page, $rows, $all = false, $where = [], $isrecovery = 0) {
         if ($all) {
-            return $this->field('g.id,g.name,u.manager,u.nickname')->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')->select();
+            return $this->field('g.id,g.name,g.ispublic,u.manager,u.nickname')
+                        ->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')
+                        ->order('g.ispublic asc')
+                        ->select();
         }
         $map = [];
         foreach ($where as $key => $value) {

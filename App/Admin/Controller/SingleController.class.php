@@ -12,11 +12,14 @@ class SingleController extends AuthController {
 
 //添加用例
     public function add() {
+        $priveGroup =D('Group')->getList('','','','',true);
+        $this->assign('group', $priveGroup);    
         $this->display();
     }
 
     static $addSingleRules = [
         'singleName'  => ['name' => 'mc', 'type' => 'string', 'min' => 2, 'max' => 100, 'method' => 'post', 'desc' => '用例名称'],
+        'groupid'    => ['name' => 'groupid', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
         'ispublic'    => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
         'type_switch' => ['name' => 'type_switch', 'type' => 'string', 'method' => 'post', 'desc' => '类型'],
         'nlp'         => ['name' => 'nlp', 'type' => 'string', 'method' => 'post', 'desc' => 'NLP'],
@@ -28,8 +31,6 @@ class SingleController extends AuthController {
 
     public function addSingle() {
         if (!IS_AJAX) $this->error("非法操作！");
-
-        $single = D('Single');
 
         if ($this->type_switch) {
             if (!$this->arc) $this->ajaxReturn([
@@ -45,8 +46,20 @@ class SingleController extends AuthController {
             ]);
         }
 
-        $data = $single->addSingle($this->singleName, $this->ispublic, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
+        if(empty($this->groupid)){
+            $this->ajaxReturn([
+                'error' => -11,
+                'data'  => '',
+                'msg'   => '请选择用例分组'
+            ]);   
+        }
 
+        //R7：创建用例，指定用例组
+        $single = D('GroupSingle');
+        $data = $single->addSingle($this->singleName, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
+
+        //$single = D('Single');
+        //$data = $single->addSingle($this->singleName, $this->ispublic, $this->type_switch, $this->nlp, $this->arc, //$this->v1, $this->dept, $this->v2);
 
         logs('single.add', $data > 0);
         $this->ajaxReturn([

@@ -76,6 +76,11 @@
               <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li>
+                  <a href="/Single/add">
+                    <i class="fa fa-plus "></i> 添加用例
+                  </a>
+                </li>
+                <li>
                   <a href="./add">
                     <i class="fa fa-plus "></i> 添加用例组
                   </a>
