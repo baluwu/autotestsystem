@@ -246,7 +246,7 @@
                                                 </label>
                                                 <div class="col-md-5">
                                                     <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="录音文件名称">
-                                                    <div class="form-control-focus"></div>
+                                                    <div class="form-control-focus"> </div>
                                                 </div>
                                             </div>
                                             <div class="form-group form-md-line-input">
