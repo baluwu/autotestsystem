@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Asr List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="jquery.min.js" type="text/javascript"></script>
+<script src="recorder.js" type="text/javascript"></script>
+<meta name="layout" content="main">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 main">	
+	<div id="edit-category" class="content scaffold-edit" role="main">
+<h1>
+	New Recording
+</h1>
+<hr>
+<table border="0px;" cellspacing="0px">
+	<tbody>
+		<tr>
+			<td>
+				<button type="button" id="startbtn" class="btn btn-primary"
+					onclick="startRecording();" disabled="disabled">
+					Start
+				</button>
+
+				<button type="button" id="stopbtn" class="btn btn-primary"
+					onclick="stopRecording();" disabled="disabled">
+					Stop&nbsp;
+				</button>
+			</td>
+			<td>&nbsp;</td>
+			<td>
+				<div id="controldiv" style="display: none;">
+					<audio controls="" src="" id="audioctl"
+						style="display: inline-block !important; vertical-align: middle;">
+					</audio>
+					<a class="btn btn-primary" href="" id="downloada"> Download
+					</a>
+					<button type="button" class="btn btn-primary" onclick="uploadit();">
+						Upload
+					</button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<script>
+			var audio_context;
+			var recorder;
+			var formdata;
+
+			function __log(e) {
+				console.log(e);
+			}
+
+			function startUserMedia(stream) {
+				var input = audio_context.createMediaStreamSource(stream);
+				__log('Media stream created.');
+
+				recorder = new Recorder(input);
+				__log('Recorder initialised.');
+				startbtn.disabled = false;
+			}
+
+			function startRecording() {
+				recorder && recorder.record();
+				startbtn.disabled = true;
+				stopbtn.disabled = false;
+				__log('Recording...');
+			}
+
+			function stopRecording() {
+				recorder && recorder.stop();
+				startbtn.disabled = true;
+				stopbtn.disabled = false;
+				__log('Stopped recording.');
+
+				recorder && recorder.exportWAV(function(blob) {
+					var url = URL.createObjectURL(blob);
+					var name = new Date().toISOString() + '.wav'
+
+					audioctl.src = url;
+					downloada.href = url;
+					downloada.download = name;
+					
+					formdata = new FormData();
+					formdata.append('wav', blob);
+					formdata.append('name', name);
+				});
+
+				recorder.clear();
+				$('#controldiv').show("slow");
+				stopbtn.disabled = true;
+				startbtn.disabled = false;
+			}
+
+			function uploadit() {
+				if (!formdata) {
+					return;
+				}
+
+				if (typeof(beforeUpload) === typeof(Function)) {
+					beforeUpload();
+				}
+				
+					$.ajax({
+						url : "/asrTest/upload",
+					type : 'POST',
+					data : formdata,
+					contentType : false,
+					processData : false,
+					success : function(data) {
+						//alert('Upload Success!');
+						location.reload();
+					},
+					error : function() {
+						alert('Upload Failed!');
+					}
+				});
+			}
+
+			$(document).ready(function init() {
+				try {
+					// webkit shim
+					window.AudioContext = window.AudioContext
+							|| window.webkitAudioContext;
+					navigator.getUserMedia = navigator.getUserMedia
+							|| navigator.webkitGetUserMedia
+							|| navigator.mozGetUserMedia
+							|| navigator.msGetUserMedia;
+
+					window.URL = window.URL || window.webkitURL;
+
+					audio_context = new AudioContext;
+					__log('Audio context set up.');
+					__log('navigator.getUserMedia '
+							+ (navigator.getUserMedia ? 'available.'
+									: 'not present!'));
+				} catch (e) {
+					alert('No web audio support in this browser!');
+				}
+
+				navigator.getUserMedia({
+					audio : true
+				}, startUserMedia, function(e) {
+					__log('No live audio input: ' + e + ', code = ' + e.code);
+					startbtn.disabled = true;
+				});
+			});
+</script>
+				<hr />
+				<p class="text-center">&copy; Rokid 2015~2016</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

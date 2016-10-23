@@ -1,10 +1,46 @@
 /**
  * Created by andy on 16/7/8.
  */
-
-
-
 jQuery(document).ready(function () {
+
+  function warning(msg, ctn) {
+    App.notification({
+      type: 'danger',
+      icon: 'warning',
+      message: msg,
+      container: ctn,
+      place: 'prepend',
+      align: 'center',
+      closeInSeconds: 3
+    });
+  }
+
+  function ok(msg, ctn) {
+     App.notification({
+      type: 'success',
+      icon: 'success',
+      message: msg,
+      container: ctn,
+      place: 'prepend',
+      align: 'center',
+      closeInSeconds: 3
+    });
+  }
+
+  function formatSeconds(a) { 
+      var hh = parseInt(a/3600);
+      if(hh<10) hh = "0" + hh;
+      var mm = parseInt((a-hh*3600)/60);
+      if(mm<10) mm = "0" + mm;
+      var ss = parseInt((a-hh*3600)%60);
+      if(ss<10) ss = "0" + ss;
+      var length = hh + ":" + mm + ":" + ss;
+      if(a>0){
+          return length;
+      }else{
+          return "NaN";
+      }
+  }
 
   var validates= function () {
 
@@ -37,15 +73,9 @@ jQuery(document).ready(function () {
     };
   }();
 
-
-
-
   $("input[name='type_switch']").on('switchChange.bootstrapSwitch', function () {
     $("#arc_warp,#nlp_warp").toggle();
   });
-
-
-
 
   $('#atsform').validate({
     errorElement: 'span', //default input error message container
@@ -67,7 +97,6 @@ jQuery(document).ready(function () {
       property: {
         required: true,
       },
-        //not(:checked) 没有被选中的
       nlp: {
         required:"#type_switch:not(:checked)",
       },
@@ -88,7 +117,6 @@ jQuery(document).ready(function () {
     },
 
     invalidHandler: function (event, validator) { //display error alert on form submit
-
       App.scrollTo($('#atsform'), -200);
     },
 
@@ -118,8 +146,6 @@ jQuery(document).ready(function () {
 
         },
         success: function (res, response, status) {
-
-
           if (res.error >= 0) {
             location.href='/Single/index';
             return;
@@ -160,35 +186,14 @@ jQuery(document).ready(function () {
     },
     success: function (file) {
       if(file.status!="success"){
-
-        App.notification({
-          type: 'danger',
-          icon: 'warning',
-          message: '上传失败',
-          container: $(".page-content-col .portlet-title"),
-          place: 'prepend',
-          closeInSeconds: 1.5
-        });
-        return;
+        return warning('上传失败');
       }
       var res=JSON.parse(file.xhr.responseText);
       if (res.status==0){
-        App.notification({
-          type: 'danger',
-          icon: 'warning',
-          message: res.msg,
-          container: $(".page-content-col .portlet-title"),
-          place: 'prepend',
-          closeInSeconds: 1.5
-        });
-        return;
+        return warning(res.msg);
       }
       $('input[name="arc"]').val(res.path);
       $('#arc_upload').html(res.path);
-
-
-
-
       console.log(file.xhr.responseText);
       console.log(file);
     },
@@ -196,8 +201,6 @@ jQuery(document).ready(function () {
       console.log(file);
     }
   });
-
-
 
   validates.init();
   $('.bs-select').selectpicker({
@@ -208,5 +211,167 @@ jQuery(document).ready(function () {
   $('.J_asr_type_nav li').click(function() {
     $('.J_asr_type_nav li').removeClass('active');     
     $(this).addClass('active');
+  });
+
+  /*recorder*/
+  var audio_context;
+  var recorder;
+  var formdata;
+
+  function enableRecord() { 
+      $('.icon-record').css('color', '#333').attr('data-status', '0');
+      $('.record-btn').text('录音');
+  }
+  function disableRecord() {
+      $('.icon-record').css('color', '#A00000').attr('data-status', '1');
+      $('.record-btn').text('停止');
+  }
+
+  function startUserMedia(stream) {
+      var input = audio_context.createMediaStreamSource(stream);
+      console.log('Media stream created.');
+
+      recorder = new Recorder(input);
+      console.log('Recorder initialised.');
+      enableRecord();
+  }
+
+  function startRecording() {
+      recorder && recorder.record();
+      disableRecord();
+      console.log('Recording...');
+  }
+
+  function stopRecording() {
+      recorder && recorder.stop();
+      disableRecord();
+      console.log('Stopped recording.');
+
+      recorder && recorder.exportWAV(function(blob) {
+          var url = URL.createObjectURL(blob);
+          $('.use-audio').attr('data-url', url);
+          $('#audio-player').attr('src', url);
+
+          formdata = new FormData();
+          formdata.append('wav', blob);
+      });
+
+      recorder && recorder.clear();
+      enableRecord();
+  }
+
+  function uploadit() {
+      if (!formdata) {
+          return;
+      }
+
+      var item = $('#J_record_name'), name = item.val();
+      if ($.trim(name) == '') {
+         item.parents('.form-group').addClass('has-error');
+         $('<span class="help-block help-block-error">This field is required.</span>').insertAfter('#J_record_name');
+         return;
+      }
+
+      formdata.append('name', name);
+
+      $.ajax({
+          url : "/single/uploadAsr",
+          type : 'POST',
+          data : formdata,
+          contentType : false,
+          processData : false,
+          success : function(data) {
+              $('#record-path').val(data.path);
+              ok('已上传至' + data.path);
+              $('.form-hd').show();
+          },
+          error : function() {
+              warning('上传失败');
+          }
+      });
+  }
+
+  function reRecord() {
+    formdata = null;
+    enableRecord();
+  }
+
+  try {
+      // webkit shim
+      window.AudioContext = window.AudioContext
+          || window.webkitAudioContext;
+      navigator.getUserMedia = navigator.getUserMedia
+          || navigator.webkitGetUserMedia
+          || navigator.mozGetUserMedia
+          || navigator.msGetUserMedia;
+
+      window.URL = window.URL || window.webkitURL;
+
+      audio_context = new AudioContext;
+      console.log('Audio context set up.');
+      console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+
+      $('.icon-record').click(function() {
+        var self = $(this), st = self.attr('data-status');
+        if (st == '1') {
+            return stopRecording();
+        }
+        startRecording();
+      });
+
+      $('.use-audio').click(uploadit);
+      $('#J_record_name').blur(function() {
+        var p = $(this).parents('.form-group');
+        if ($.trim($(this).val()) != '') {
+            p.removeClass('has-error');
+            $(this).next().remove();
+        }
+      });
+      $('.icon-play').click(function() {
+        var player = $('#audio-player').get(0);
+
+        var self = $(this);
+        player.onplay = function() {
+            self.css('color', '#A00000').attr('data-status', '1');
+            $('.play-btn').text('暂停');
+        }
+        player.onended = player.onpause = function() {
+            self.css('color', '#333').attr('data-status', '0');
+            $('.play-btn').text('播放');
+        }
+
+        if (player.ended || player.paused) {
+            player.play();
+
+            var hd = setInterval(function() {
+                var p = 0;
+                var e = player.ended;
+                if (e) {
+                    p = 100;
+                }
+                else {
+                    var t = player.duration;
+                    var n = player.currentTime;
+                    $('.J_eclipse_time').text(formatSeconds(n));
+                    p = (n / t) * 100;
+                }
+
+                $('.progress-front').css('width', p + '%');    
+
+                p == 100 && clearInterval(hd);
+            }, 1000);
+        }
+        else {
+            player.pause();
+        }
+      });
+  } catch (e) {
+      alert('No web audio support in this browser!');
+  }
+
+  navigator.getUserMedia({
+      audio : true
+  }, startUserMedia, function(e) {
+      console.log('No live audio input: ' + e + ', code = ' + e.code);
   });
 });
