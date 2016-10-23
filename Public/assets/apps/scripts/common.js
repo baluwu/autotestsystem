@@ -904,7 +904,7 @@ var App = function() {
           var opts= $.extend(_opts,options);
 
           $.bootstrapGrowl(opts.message, {
-            ele: 'body', // which element to append to
+            ele: opts.container || 'body', // which element to append to
             type: opts.type,
             offset: {
               from:  opts.offset.from,

@@ -32,6 +32,7 @@
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/apps/css/single-add.css" rel="stylesheet" type="text/css"/>
   <!-- END THEME LAYOUT STYLES -->
   <link rel="shortcut icon" href="/favicon.ico"/>
   <script>
@@ -39,6 +40,7 @@
       'ROOT': '__ROOT__',
       'MODULE': '__MODULE__',
       'INDEX': '{:U("Index/index")}',
+      'WORKER': '/Public/assets/apps/scripts/single/recorderWorker.js'
     };
   </script>
 </head>
@@ -228,26 +230,52 @@
                                 </label>
 
                                 <div class="col-md-10">
-                                    <ul class="nav nav-tabs J_asr_type_nav" role="tablist">
+                                    <ul class="nav nav-pills J_asr_type_nav" role="tablist">
                                         <li role="presentation" class="active"><a href="#">语音录制</a></li>
                                         <li role="presentation"><a href="#">本地上传</a></li>
                                         <li role="presentation"><a href="#">语音文件库</a></li>
                                     </ul>
                                     <ul class="nav">
                                     <li>
-                                        <form class="form-horizontal form-row-seperated" action="./addSingle" method="post" id="atsform" novalidate="novalidate">
-                                            <div class="form-body">
-                                                <div class="form-group form-md-line-input">
-                                                    <label class="control-label col-md-1">
-                                                        <span class="required"> * </span>名称
-                                                    </label>
-                                                    <div class="col-md-11">
-                                                        <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="录音文件名称">
-                                                        <div class="form-control-focus"></div>
-                                                    </div>
+                                        <input type="hidden" name="record-path" id="record-path" />
+                                        <div class="form-body record-form">
+                                            <div class="form-hd"> 已上传 </div>
+                                            <div class="form-group form-md-line-input">
+                                                <label class="control-label col-md-1">
+                                                    <span class="required"> * </span>名称
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="录音文件名称">
+                                                    <div class="form-control-focus"></div>
                                                 </div>
                                             </div>
-                                        </form>
+                                            <div class="form-group form-md-line-input">
+                                                <div class="progress-plh">&nbsp;</div>
+                                                <div class="progress-back">
+                                                    <div class="progress-front">&nbsp;</div>
+                                                </div>
+                                                <div class="play-time">
+                                                    <div class="progress-plh">&nbsp;</div>
+                                                    <div class="J_eclipse_time">00:00:00</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-md-line-input">
+                                                <div class="col-md-12 record-ctrl">
+                                                    <span class="glyphicon glyphicon-record icon-record"></span>
+                                                    <span class="glyphicon glyphicon-play-circle icon-play"></span>
+                                                    <span class="record-btn">录音</span>
+                                                    <span class="play-btn">播放</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-md-line-input">
+                                                <div class="progress-plh">&nbsp;</div>
+                                                <div class="record-tools">
+                                                    <button type="button" class="btn btn-primary use-audio">保存并使用</button>
+                                                    <button type="button" class="btn btn-default re-record">重新录制</button>
+                                                    <button type="button" class="btn btn-default download-record">下载文件</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </li>
                                     <li style="display: none">
                                     <input type="hidden" name="arc" value="" />
@@ -334,9 +362,8 @@
     <include file="Public/footer"/>
     <!-- END FOOTER -->
   </div>
-
-
 </div>
+<audio controls="false" src="" id="audio-player" style="display: inline-block !important; vertical-align: middle;"></audio>
 <!-- END CONTAINER -->
 
 <!--[if lt IE 9]>
@@ -363,6 +390,7 @@
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/single/add.js"></script>
+<script src="/Public/assets/apps/scripts/single/recorder.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/Public/assets/layout/scripts/layout.js"></script>

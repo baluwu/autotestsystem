@@ -536,11 +536,15 @@ class SingleController extends AuthController {
     }
 
 
-//文件上传
+    //文件上传
     public function uploadFile() {
-//登陆状态判断  return array('status'=>0,'msg'=>$Upload->getError());
+        //登陆状态判断  return array('status'=>0,'msg'=>$Upload->getError());
         $File = D('File');
         $this->ajaxReturn($File->uploadFile());
+    }
 
+    public function uploadAsr() {
+        $File = D('File');
+        $this->ajaxReturn($File->uploadAsr());
     }
 }

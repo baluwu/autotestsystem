@@ -29,6 +29,8 @@ define('APP_DEBUG',TRUE);
 // 定义应用目录
 define('APP_PATH','./App/');
 
+function DB() { var_dump(func_get_args()); exit; }
+
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
 

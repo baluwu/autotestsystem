@@ -44,6 +44,8 @@ return [
   'SESSION_REDIS_AUTH'   => 'menma',    //Redis auth认证(密钥中不能有逗号),如果相同只填一个,用英文逗号分隔
   'SESSION_REDIS_DB'     => 5,    //Redis 数据库
 
+  'UPLOAD_PATH'          => 'Uploads/',
+
   'SWOOLE_PORT'          => 3333,
 
   'REDIS_HOST'           => "menma.me",
