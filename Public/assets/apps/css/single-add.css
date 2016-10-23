@@ -1,0 +1,57 @@
+.glyphicon { font-size: 32px;}
+.progress-plh { width: 4%; padding-left: 15px; float: left; }
+.progress-back {
+    width: 45%;
+    height: 5px;
+    background: #ccc;
+    float: left;
+}
+.play-time { clear: both; }
+.progress-front {
+    width: 0%;
+    height: 100%;
+    background: #333;
+}
+.record-form {
+    padding: 20px 15px 10px 15px;
+    border: 1px solid #e7ecf1;
+    position: relative;
+}
+.record-ctrl {
+    position: relative;
+    height: 50px;
+}
+.record-ctrl span {
+    position: absolute;
+    display: inline-block;
+}
+.record-ctrl span.icon-record {
+    top: 0;
+    left: 57px;
+}
+.record-ctrl span.icon-play {
+    top: 0; left: 128px;
+}
+.record-ctrl span.record-btn {
+    top: 32px;
+    left: 64px;
+    color: #666;
+}
+.record-ctrl span.play-btn {
+    top: 32px;
+    left: 136px;
+    color: #666;
+}
+.record-tools { float: left; width: 45%; text-align: right; }
+.form-hd { 
+    color: #AAA;
+    font-weight: 700;
+    position: absolute;
+    top: 0; right: 0;
+    text-align: left;
+    background-color: #E8E8E8;
+    border-bottom-left-radius: 4px;
+    padding: 3px 5px;
+    display: none;
+}
+
