@@ -233,6 +233,8 @@ jQuery(document).ready(function () {
 
       recorder = new Recorder(input);
       console.log('Recorder initialised.');
+
+      bindEvent();
       enableRecord();
   }
 
@@ -251,6 +253,7 @@ jQuery(document).ready(function () {
           var url = URL.createObjectURL(blob);
           $('.use-audio').attr('data-url', url);
           $('#audio-player').attr('src', url);
+          $('#J_download_link').attr('href', url).attr('download', ($('.J_record_name').val() || new Date().toISOString()) + '.wav');
 
           formdata = new FormData();
           formdata.append('wav', blob);
@@ -273,6 +276,7 @@ jQuery(document).ready(function () {
       }
 
       formdata.append('name', name);
+      $('#J_download_link').attr('download', name + '.wav');
 
       $.ajax({
           url : "/single/uploadAsr",
@@ -291,11 +295,6 @@ jQuery(document).ready(function () {
       });
   }
 
-  function reRecord() {
-    formdata = null;
-    enableRecord();
-  }
-
   try {
       // webkit shim
       window.AudioContext = window.AudioContext
@@ -311,6 +310,11 @@ jQuery(document).ready(function () {
       console.log('Audio context set up.');
       console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
 
+  } catch (e) {
+      alert('No web audio support in this browser!');
+  }
+
+  function bindEvent() {
       $('.icon-record').click(function() {
         var self = $(this), st = self.attr('data-status');
         if (st == '1') {
@@ -352,8 +356,9 @@ jQuery(document).ready(function () {
                 else {
                     var t = player.duration;
                     var n = player.currentTime;
-                    $('.J_eclipse_time').text(formatSeconds(n));
-                    p = (n / t) * 100;
+                    $('.J_eclipse_time').text(formatSeconds(n + 1));
+                    p = ((n + 1) / t) * 100;
+                    p = p > 100 ? 100 : p;
                 }
 
                 $('.progress-front').css('width', p + '%');    
@@ -365,8 +370,10 @@ jQuery(document).ready(function () {
             player.pause();
         }
       });
-  } catch (e) {
-      alert('No web audio support in this browser!');
+      $('.re-record').click(function() {
+        formdata = null;
+        enableRecord();
+      });
   }
 
   navigator.getUserMedia({
