@@ -230,14 +230,14 @@
                                 </label>
 
                                 <div class="col-md-10">
+                                    <input type="hidden" name="arc" value="" id="arc" />
                                     <ul class="nav nav-pills J_asr_type_nav" role="tablist">
-                                        <li role="presentation" class="active"><a href="#">语音录制</a></li>
-                                        <li role="presentation"><a href="#">本地上传</a></li>
-                                        <li role="presentation"><a href="#">语音文件库</a></li>
+                                        <li role="presentation" class="active" role-index="0"><a href="javascript:;">语音录制</a></li>
+                                        <li role="presentation" role-index="1"><a href="javascript:;">本地上传</a></li>
+                                        <li role="presentation" role-index="2"><a href="javascript:;">语音文件库</a></li>
                                     </ul>
                                     <ul class="nav">
-                                    <li>
-                                        <input type="hidden" name="record-path" id="record-path" />
+                                    <li class="audio-item record-item">
                                         <div class="form-body record-form">
                                             <div class="form-hd"> 已上传 </div>
                                             <div class="form-group form-md-line-input">
@@ -277,10 +277,10 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li style="display: none">
-                                    <input type="hidden" name="arc" value="" />
-                                    <div id="arc_upload" class="ats-dropzone" /> 拖拽到此处上传(*.wav,*.mp3,*.amr)</if></div>
+                                    <li class="audio-item upload-item">
+                                        <div id="arc_upload" class="ats-dropzone" /> 拖拽到此处上传(*.wav,*.mp3,*.amr)</if></div>
                                     </li>
+                                    <li class="audio-item lib-item">111</li>
                                 </div>
                               </div>
                               <div class="form-group ">
