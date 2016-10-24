@@ -272,7 +272,7 @@
                                                 <div class="record-tools">
                                                     <button type="button" class="btn btn-primary use-audio">保存并使用</button>
                                                     <button type="button" class="btn btn-default re-record">重新录制</button>
-                                                    <button type="button" class="btn btn-default download-record">下载文件</button>
+                                                    <button type="button" class="btn btn-default download-record"><a href="javascript:;" id="J_download_link">下载文件</a></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -363,7 +363,7 @@
     <!-- END FOOTER -->
   </div>
 </div>
-<audio controls="false" src="" id="audio-player" style="display: inline-block !important; vertical-align: middle;"></audio>
+<audio controls="" src="" id="audio-player" style="display: none; vertical-align: middle;"></audio>
 <!-- END CONTAINER -->
 
 <!--[if lt IE 9]>
