@@ -49,40 +49,29 @@
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
 <!-- BEGIN CONTAINER -->
 <div class="wrapper">
-  <!-- BEGIN HEADER -->
   <include file="Public/header"/>
-  <!-- END HEADER -->
-
-
   <div class="container-fluid">
     <div class="page-content">
-
       <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
           <!-- BEGIN PAGE SIDEBAR -->
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <!-- Collect the nav links, forms, and other content for toggling -->
               <h3>用例管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
-                  <a href="./index">
-                    <i class="fa fa-object-ungroup"></i> 用例列表 </a>
+                  <a href="./index"><i class="fa fa-object-ungroup"></i> 用例列表 </a>
                 </li>
                 <li>
-                  <a href="./del">
-                    <i class="fa fa-recycle "></i> 回收站 </a>
+                  <a href="./del"><i class="fa fa-recycle "></i> 回收站 </a>
                 </li>
               </ul>
               <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li class="active">
-                  <a href="./add">
-                    <i class="fa fa-plus "></i> 添加用例</a>
+                  <a href="./add"><i class="fa fa-plus "></i> 添加用例</a>
                 </li>
-
               </ul>
             </nav>
           </div>
@@ -99,7 +88,6 @@
                       </div>
                       <!-- BEGIN BREADCRUMBS -->
                       <div class="breadcrumbs">
-
                         <ol class="breadcrumb">
                           <li>
                             <a href="/Index">Home</a>
@@ -130,31 +118,24 @@
                         <button type="submit" name="submit" value="Save" class="btn btn-success">
                           <i class="fa fa-check"></i> Save & Return List
                         </button>
-
                       </div>
                     </div>
                     <div class="portlet-body">
-
                             <div class="form-body">
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label" for="mc">
                                   <span class="required"> * </span>名称
                                 </label>
-
                                 <div class="col-md-10">
                                   <input type="text" name="mc" class="form-control" id="mc" placeholder="名称">
-
                                   <div class="form-control-focus"></div>
                                 </div>
                               </div>
-
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label">
                                   <span class="required"> * </span>属性:
                                 </label>
-
                                 <div class="col-md-10">
-
                                   <div class="md-radio-inline">
                                     <div class="md-radio">
                                       <input type="radio" id="property1" name="property" value="1" class="md-radiobtn">
@@ -164,19 +145,15 @@
                                         <span class="box"></span> 公开 </label>
                                     </div>
                                     <div class="md-radio">
-                                      <input type="radio" id="property2" name="property" value="0" class="md-radiobtn"
-                                             checked>
+                                      <input type="radio" id="property2" name="property" value="0" class="md-radiobtn" checked>
                                       <label for="property2">
                                         <span></span>
                                         <span class="check"></span>
                                         <span class="box"></span> 私有 </label>
                                     </div>
-
                                   </div>
-
                                 </div>
                               </div>
-
                               <div class="form-group form-md-line-input">
                                 <label for="groupid" class="col-md-2 control-label">
                                   <span class="required" aria-required="true"> * </span>用例组
@@ -186,11 +163,7 @@
                                       <foreach name="group" item="g" >
                                           <option value="{$g.id}">
                                           <?php 
-                                            if($g['ispublic'] == 1){
-                                              echo "[公共]";
-                                            }else{
-                                              echo "[私有]";
-                                            }
+                                            if($g['ispublic'] == 1){ echo "[公共]"; }else{ echo "[私有]"; }
                                           ?>
                                           {$g.name}
                                           </option>
@@ -199,19 +172,16 @@
                                   <div class="form-control-focus"></div>
                                 </div>
                               </div>  
-
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label" for="type">
                                   <span class="required"> * </span>类型
                                 </label>
-
                                 <div class="col-md-10">
                                   <input type="checkbox" name="type_switch"  id="type_switch" class="make-switch"
                                          data-on-switch-change="type_switch_fn" data-on-color="info"
                                          data-off-color="success" data-on-text="ASR" data-off-text="NLP">
                                 </div>
                               </div>
-
                               <div class="form-group form-md-line-input" id="nlp_warp">
                                 <label class="col-md-2 control-label" for="nlp">
                                   <span class="required"> * </span>NLP
@@ -222,13 +192,10 @@
                                   <div class="form-control-focus"></div>
                                 </div>
                               </div>
-
-
                               <div class="form-group " id="arc_warp" style="display: none">
                                 <label class="col-md-2 control-label" for="ARC">
                                   <span class="required"> * </span>ASR
                                 </label>
-
                                 <div class="col-md-10">
                                     <input type="hidden" name="arc" value="" id="arc" />
                                     <ul class="nav nav-pills J_asr_type_nav" role="tablist">
@@ -280,73 +247,98 @@
                                     <li class="audio-item upload-item">
                                         <div id="arc_upload" class="ats-dropzone" /> 拖拽到此处上传(*.wav,*.mp3,*.amr)</if></div>
                                     </li>
-                                    <li class="audio-item lib-item">111</li>
+                                    <li class="audio-item lib-item">
+                                        <div class="form-group ">
+                                            <div class="col-md-12">
+                                                <table class="table table-bordered table-hover" id="audio-grid">
+                                                    <thead>
+                                                    <tr role="row" class="heading">
+                                                        <th width="50">No</th>
+                                                        <th width="360">名称</th>
+                                                        <th width="220">Date</th>
+                                                        <th width="160">时长</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                    <!--begin search bar-->
+                                                    <tr role="row" class="filter">
+                                                        <td></td>
+                                                        <td>
+                                                        <input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="按名称搜索">
+                                                        </td>
+                                                        <td></td><td></td>
+                                                        <td>
+                                                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                                                                <i class="fa fa-search"></i> Search
+                                                            </button>
+                                                            <button class="btn btn-sm red btn-outline filter-cancel">
+                                                                <i class="fa fa-times"></i> Reset
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <!--end search bar-->
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </div>
                               </div>
-                              <div class="form-group ">
-                                <label class="col-md-2 control-label">
-                                  <span class="required"> * </span>验证规则
-                                </label>
-
-                                <div class="col-md-10">
-                                  <div class="text-align-reverse margin-bottom-10">
-                                    <a id="validates_btn_add" href="javascript:;" class="btn red ">
-                                      <i class="fa fa-plus"></i> 添加规则 </a>
-                                  </div>
-                                  <table class="table table-bordered table-hover" id="validates_table">
-                                    <thead>
-                                    <tr role="row" class="heading">
-                                      <th width="2%"> №</th>
-                                      <th width="30%"> key</th>
-                                      <th width="8%"> condition</th>
-                                      <th width="30%"> value <i class="fa fa-info-circle tooltips" data-original-title="区分大小写,数字和字符串不做严格区分,如：'xxx' != 'XXX', 123 = '123' "></i></th>
-                                      <th width="10%"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                      <td>
-                                        1
-                                      </td>
-                                      <td>
+                            </div>
+                            <div class="form-group">
+                            <label class="col-md-2 control-label">
+                            <span class="required"> * </span>验证规则
+                            </label>
+                            <div class="col-md-10">
+                            <div class="text-align-reverse margin-bottom-10">
+                                <a id="validates_btn_add" href="javascript:;" class="btn red "><i class="fa fa-plus"></i> 添加规则 </a>
+                            </div>
+                            <table class="table table-bordered table-hover" id="validates_table">
+                            <thead>
+                                <tr role="row" class="heading">
+                                <th width="2%"> №</th>
+                                <th width="30%"> key</th>
+                                <th width="8%"> condition</th>
+                                <th width="30%"> value <i class="fa fa-info-circle tooltips" data-original-title="区分大小写,数字和字符串不做严格区分,如：'xxx' != 'XXX', 123 = '123' "></i></th>
+                                <th width="10%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> 1 </td>
+                                    <td>
                                         <div class="col-md-12">
-                                          <div class="form-group form-md-line-input">
-                                            <input type="text" class="form-control" name="v1[]" placeholder="如: intent.slots.whois">
-                                            <div class="form-control-focus"></div>
-                                          </div>
+                                        <div class="form-group form-md-line-input">
+                                        <input type="text" class="form-control" name="v1[]" placeholder="如: intent.slots.whois">
+                                        <div class="form-control-focus"></div>
                                         </div>
-
-                                      </td>
-                                      <td>
+                                        </div>
+                                    </td>
+                                    <td>
                                         <select name="dept[]" class="bs-select form-control">
-                                          <option value="大于">大于</option>
-                                          <option value="小于">小于</option>
-                                          <option value="包含">包含</option>
-                                          <option value="不包含">不包含</option>
-                                          <option value="等于" selected>等于</option>
-                                          <option value="不等于">不等于</option>
+                                            <option value="大于">大于</option>
+                                            <option value="小于">小于</option>
+                                            <option value="包含">包含</option>
+                                            <option value="不包含">不包含</option>
+                                            <option value="等于" selected>等于</option>
+                                            <option value="不等于">不等于</option>
                                         </select>
-
-                                      </td>
-                                      <td>
+                                    </td>
+                                    <td>
                                         <div class="col-md-12">
-                                          <div class="form-group form-md-line-input">
-                                            <input type="text" class="form-control" name="v2[]" placeholder="谁是">
-                                            <div class="form-control-focus"></div>
-                                          </div>
+                                            <div class="form-group form-md-line-input">
+                                                <input type="text" class="form-control" name="v2[]" placeholder="谁是">
+                                                <div class="form-control-focus"></div>
+                                            </div>
                                         </div>
-                                      </td>
-                                      <td>
-                                        <a href="javascript:;" class="btn btn-default btn-sm remove">
-                                          <i class="fa fa-times"></i> Remove </a>
-                                      </td>
-                                    </tr>
-
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                      </div>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:;" class="btn btn-default btn-sm remove"><i class="fa fa-times"></i> Remove </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
                     </div>
                   </div>
                 </form>
@@ -365,7 +357,6 @@
 </div>
 <audio controls="" src="" id="audio-player" style="display: none; vertical-align: middle;"></audio>
 <!-- END CONTAINER -->
-
 <!--[if lt IE 9]>
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
 <script src="/Public/assets/global/plugins/excanvas.min.js"></script>
@@ -383,21 +374,24 @@
 <script src="/Public/assets/global/plugins/dropzone/dropzone.min.js"></script>
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/Public/assets/global/plugins/datatables/datatables.min.js"></script>
+<script src="/Public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+<script src="/Public/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/Public/assets/global/scripts/datatable.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
-
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/common.js"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/single/add.js"></script>
 <script src="/Public/assets/apps/scripts/single/recorder.js"></script>
+<script src="/Public/assets/apps/scripts/single/audio_list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/Public/assets/layout/scripts/layout.js"></script>
 <script src="/Public/assets/layout/scripts/quick-sidebar.js"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
-
 </html>
 
 

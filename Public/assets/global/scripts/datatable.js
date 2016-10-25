@@ -26,7 +26,6 @@ var Datatable = function () {
 
     //main function to initiate the module
     init: function (options) {
-
       if (!$().dataTable) {
         return;
       }

@@ -170,8 +170,8 @@ class Redis {
 	public function write($sessID, $sessData) {
 		if (!$sessData || $sessData == $this->get_result) {
 			return true;
-		}
-		$this->connect(1);
+        }
+        $this->connect(0);
         $expire  =  $this->options['expire'];
         $sessID   =   $this->options['prefix'].$sessID;
         if(is_int($expire) && $expire > 0) {

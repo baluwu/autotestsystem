@@ -174,7 +174,6 @@ class SingleModel extends Model {
 
     }
 
-
     //状态修改
     public function setStatus($id, $status) {
         $rows = $this->where(['id' => $id])->setField('status', $status);

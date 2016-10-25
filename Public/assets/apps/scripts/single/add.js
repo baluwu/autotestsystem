@@ -2,44 +2,19 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
-
-  function warning(msg, ctn) {
-    App.notification({
-      type: 'danger',
-      icon: 'warning',
-      message: msg,
-      container: ctn,
-      place: 'prepend',
-      align: 'center',
-      closeInSeconds: 3
-    });
-  }
-
-  function ok(msg, ctn) {
-     App.notification({
-      type: 'success',
-      icon: 'success',
-      message: msg,
-      container: ctn,
-      place: 'prepend',
-      align: 'center',
-      closeInSeconds: 3
-    });
-  }
-
   function formatSeconds(a) { 
-      var hh = parseInt(a/3600);
-      if(hh<10) hh = "0" + hh;
-      var mm = parseInt((a-hh*3600)/60);
-      if(mm<10) mm = "0" + mm;
-      var ss = parseInt((a-hh*3600)%60);
-      if(ss<10) ss = "0" + ss;
-      var length = hh + ":" + mm + ":" + ss;
-      if(a>0){
-          return length;
-      }else{
-          return "NaN";
-      }
+    var hh = parseInt(a/3600);
+    if(hh<10) hh = "0" + hh;
+    var mm = parseInt((a-hh*3600)/60);
+    if(mm<10) mm = "0" + mm;
+    var ss = parseInt((a-hh*3600)%60);
+    if(ss<10) ss = "0" + ss;
+    var length = hh + ":" + mm + ":" + ss;
+    if(a>0){
+        return length;
+    }else{
+        return "NaN";
+    }
   }
 
   var validates= function () {
@@ -167,7 +142,7 @@ jQuery(document).ready(function () {
   });
 
   $("#arc_upload").dropzone({
-    url: "/Single/uploadFile",
+    url: "/Single/uploadLocalAudio",
     maxFilesize: 1,//单位MB
     uploadMultiple:false,
     dictInvalidFileType:'非法文件',
@@ -186,11 +161,11 @@ jQuery(document).ready(function () {
     },
     success: function (file) {
       if(file.status!="success"){
-        return warning('上传失败');
+        return App.warning('上传失败');
       }
       var res=JSON.parse(file.xhr.responseText);
       if (res.status==0){
-        return warning(res.msg);
+        return App.warning(res.msg);
       }
       $('input[name="arc"]').val(res.path);
       $('#arc_upload').html(res.path);
@@ -275,18 +250,21 @@ jQuery(document).ready(function () {
       $('#J_download_link').attr('download', name + '.wav');
 
       $.ajax({
-          url : "/single/uploadAsr",
+          url : "/single/uploadRecordAudio",
           type : 'POST',
           data : formdata,
           contentType : false,
           processData : false,
           success : function(data) {
-              $('#arc').val(data.path);
-              $('.form-hd').show();
-              ok('已上传至' + data.path);
+              if (data.status == 1) {
+                  $('#arc').val(data.path);
+                  $('.form-hd').show();
+                  App.ok('已上传至' + data.path);
+              }
+              else App.warning(data.msg);
           },
           error : function() {
-              warning('上传失败');
+              App.warning('上传失败');
           }
       });
   }

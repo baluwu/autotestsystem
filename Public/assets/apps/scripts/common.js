@@ -917,6 +917,31 @@ var App = function() {
             stackup_spacing: 10 // spacing between consecutively stacked growls.
           });
         },
+
+        ok: function(msg, ctn) {
+            this.notification({
+                type: 'success',
+                icon: 'success',
+                message: msg,
+                container: ctn,
+                place: 'prepend',
+                align: 'center',
+                closeInSeconds: 3
+            });
+        },
+
+        warning: function(msg, ctn) {
+            this.notification({
+                type: 'danger',
+                icon: 'warning',
+                message: msg,
+                container: ctn,
+                place: 'prepend',
+                align: 'center',
+                closeInSeconds: 3
+            });
+        },
+
         //public function to initialize the fancybox plugin
         initFancybox: function() {
             handleFancybox();

@@ -10,7 +10,7 @@ class SingleController extends AuthController {
         $this->display();
     }
 
-//添加用例
+    //添加用例
     public function add() {
         $priveGroup =D('Group')->getList('','','','',true);
         $this->assign('group', $priveGroup);    
@@ -518,8 +518,7 @@ class SingleController extends AuthController {
 
     }
 
-
-//执行
+    //执行
     static $ExecuteSingleRules = [
         'id'   => ['name' => 'id', 'type' => 'int', 'method' => 'post', 'desc' => 'id'],
         'ip'   => ['name' => 'ip', 'type' => 'string', 'method' => 'post', 'desc' => 'ip'],
@@ -548,16 +547,21 @@ class SingleController extends AuthController {
         ]);
     }
 
-
-    //文件上传
-    public function uploadFile() {
-        //登陆状态判断  return array('status'=>0,'msg'=>$Upload->getError());
-        $File = D('File');
-        $this->ajaxReturn($File->uploadFile());
+    public function uploadLocalAudio() {
+        $mdl = D('AudioUploads');
+        $this->ajaxReturn($mdl->uploadLocalAudio());
     }
 
-    public function uploadAsr() {
-        $File = D('File');
-        $this->ajaxReturn($File->uploadAsr());
+    public function uploadRecordAudio() {
+        $mdl = D('AudioUploads');
+        $this->ajaxReturn($mdl->uploadRecordAudio());
+    }
+    
+    public function getAudioList() {
+        $mdl = D('AudioUploads');
+
+        $this->ajaxReturn(
+            $mdl->getAudioList([ 'name' => ['LIKE', '%' . I('post.name') . '%']], I('post.start'), I('post.length'))
+        );
     }
 }
