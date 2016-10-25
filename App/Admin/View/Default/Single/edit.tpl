@@ -191,6 +191,28 @@
                               </div>
                             </div>
 
+                              <div class="form-group form-md-line-input">
+                                <label for="groupid" class="col-md-2 control-label">
+                                  <span class="required" aria-required="true"> * </span>用例组
+                                </label>
+                                <div class="col-md-4">
+                                  <select name="groupid" class="form-control" aria-invalid="false">
+                                      <foreach name="group" item="g" >
+                                          <option value="{$g.id}">
+                                          <?php 
+                                            if($g['ispublic'] == 1){
+                                              echo "[公共]";
+                                            }else{
+                                              echo "[私有]";
+                                            }
+                                          ?>
+                                          {$g.name}
+                                          </option>
+                                      </foreach>                           
+                                  </select>
+                                  <div class="form-control-focus"></div>
+                                </div>
+                              </div>
 
                             <div class="form-group form-md-line-input">
                               <label class="col-md-2 control-label" for="type">

@@ -76,7 +76,8 @@ class SingleController extends AuthController {
         if ($singleData['uid'] != session('admin')['id']) {
             $this->error('非法参数');
         }
-
+        $priveGroup =D('Group')->getList('','','','',true);
+        $this->assign('group', $priveGroup);
         if (!$singleData) {
             $this->error('该用例已被删除');
         }
@@ -88,6 +89,7 @@ class SingleController extends AuthController {
 //修改用例
     static $updateSingleRules = [
         'singleName'  => ['name' => 'mc', 'type' => 'string', 'min' => 2, 'max' => 100, 'method' => 'post', 'desc' => '用例名称'],
+        'groupid'    => ['name' => 'groupid', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
         'ispublic'    => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
         'type_switch' => ['name' => 'type_switch', 'type' => 'string', 'method' => 'post', 'desc' => '类型'],
         'nlp'         => ['name' => 'nlp', 'type' => 'string', 'method' => 'post', 'desc' => 'NLP'],
@@ -109,8 +111,19 @@ class SingleController extends AuthController {
                 'msg'   => '非法参数'
             ]);
         }
-        $data = $single->updateSingle($id, $this->singleName, $this->ispublic, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
 
+        if(empty($this->groupid)){
+            $this->ajaxReturn([
+                'error' => -11,
+                'data'  => '',
+                'msg'   => '请选择用例分组'
+            ]);   
+        }
+        $single = D('GroupSingle');
+        //编辑原来没有绑定分组的用例，做分组用例插入
+        $data = $single->addSingle($this->singleName, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
+        D('Single')->Remove($id);//删除原用例
+       
         logs('single.update', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -11,
