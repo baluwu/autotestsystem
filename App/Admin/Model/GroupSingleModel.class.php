@@ -67,6 +67,9 @@ class GroupSingleModel extends Model {
 
         if ($obj) foreach ($obj as $key => $value) {
             $obj[$key]['validates'] = unserialize($value['validates']);
+            $obj[$key]['short_name'] = mb_substr($value['name'],0,5,"utf-8")."...";
+            $obj[$key]['short_nlp'] = mb_substr($value['nlp'],0,5,"utf-8")."...";
+            $obj[$key]['short_arc'] = mb_substr($value['arc'],0,5,"utf-8")."...";
         }
 
         //统计
