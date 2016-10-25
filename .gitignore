@@ -1,4 +1,3 @@
 App/Runtime/*
 Uploads/*
-//App/Common/Conf/*
-.gitignore
+App/Common/Conf/*

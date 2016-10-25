@@ -37,20 +37,21 @@ return [
     'use_trans_sid'    => 1,                               //跨页传递
     'use_only_cookies' => 0,                               //是否只开启基于cookies的session的会话方式
   ],
+  /*
   'SESSION_TYPE'         => 'Redis',
   'SESSION_PREFIX'       => 'ATS:session:',
-  'SESSION_REDIS_HOST'   => 'menma.me', //分布式Redis,默认第一个为主服务器
-  'SESSION_REDIS_PORT'   => 7379,           //端口,如果相同只填一个,用英文逗号分隔
-  'SESSION_REDIS_AUTH'   => 'menma',    //Redis auth认证(密钥中不能有逗号),如果相同只填一个,用英文逗号分隔
+  'SESSION_REDIS_HOST'   => '127.0.0.1', //分布式Redis,默认第一个为主服务器
+  'SESSION_REDIS_PORT'   => 6379,           //端口,如果相同只填一个,用英文逗号分隔
+  'SESSION_REDIS_AUTH'   => 'FAFFDBYG',    //Redis auth认证(密钥中不能有逗号),如果相同只填一个,用英文逗号分隔
   'SESSION_REDIS_DB'     => 5,    //Redis 数据库
-
+  */
   'UPLOAD_PATH'          => 'Uploads/',
 
   'SWOOLE_PORT'          => 3333,
 
-  'REDIS_HOST'           => "menma.me",
-  'REDIS_PORT'           => 7379,
-  'REDIS_AUTH'           => 'menma',
+  'REDIS_HOST'           => '127.0.0.1',
+  'REDIS_PORT'           => 6379,
+  'REDIS_AUTH'           => 'FAFFDBYG',
   'DATA_CACHE_TIMEOUT'   => 200,
   'DATA_CACHE_PREFIX'    => "ATS:",
   'REDIS_PCONNECT'       => true,
