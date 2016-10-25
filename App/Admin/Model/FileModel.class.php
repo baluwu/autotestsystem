@@ -15,6 +15,12 @@ class  FileModel extends Model{
             $savePath = $info['file']['savepath'];
             $saveName = $info['file']['savename'];
             $filePath = C('UPLOAD_PATH').$savePath.$saveName;
+            M('AudioUploads')->add([
+                'name' => $saveName,
+                'path' => $savePath,
+                'uploader' => 'admin',
+                'when' => date('Y-m-d H:i:s')
+            ]);
             return array('status'=>1,'path'=>$filePath,'msg'=>'上传成功');
         } else {
             return array('status'=>0,'msg'=>$Upload->getError());
@@ -41,6 +47,13 @@ class  FileModel extends Model{
 
         $dst_path = $dst_dir . '/' . $_POST['name'] . '.wav';
         if (move_uploaded_file($file['tmp_name'], $dst_path)) {
+            M('AudioUploads')->add([
+                'name' => $_POST['name'],
+                'path' => addslashes($dst_path),
+                'uploader' => 'admin',
+                'when' => date('Y-m-d H:i:s')
+            ]);
+
             return array('status'=>1,'path'=>$dst_path,'msg'=>'上传成功');
         }
         else {

@@ -54,3 +54,5 @@
     padding: 3px 5px;
     display: none;
 }
+.nav li.upload-item, .nav li.lib-item { display: none; }
+

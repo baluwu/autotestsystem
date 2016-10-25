@@ -208,10 +208,7 @@ jQuery(document).ready(function () {
     tickIcon: 'fa-check'
   });
 
-  $('.J_asr_type_nav li').click(function() {
-    $('.J_asr_type_nav li').removeClass('active');     
-    $(this).addClass('active');
-  });
+  bindEvent();
 
   /*recorder*/
   var audio_context;
@@ -234,7 +231,6 @@ jQuery(document).ready(function () {
       recorder = new Recorder(input);
       console.log('Recorder initialised.');
 
-      bindEvent();
       enableRecord();
   }
 
@@ -285,9 +281,9 @@ jQuery(document).ready(function () {
           contentType : false,
           processData : false,
           success : function(data) {
-              $('#record-path').val(data.path);
-              ok('已上传至' + data.path);
+              $('#arc').val(data.path);
               $('.form-hd').show();
+              ok('已上传至' + data.path);
           },
           error : function() {
               warning('上传失败');
@@ -315,6 +311,16 @@ jQuery(document).ready(function () {
   }
 
   function bindEvent() {
+      $('.J_asr_type_nav li').click(function() {
+        $('.J_asr_type_nav li').removeClass('active');     
+        $(this).addClass('active');
+
+        var idx = $(this).attr('role-index');
+        var tabs = $('.audio-item');
+        tabs.not('[role-index=' + idx + ']').hide();
+        tabs.eq(idx).show();
+      });
+
       $('.icon-record').click(function() {
         var self = $(this), st = self.attr('data-status');
         if (st == '1') {
