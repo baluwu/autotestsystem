@@ -89,9 +89,19 @@ jQuery(document).ready(function () {
                         [4, "desc"]
                     ],
                     "columnDefs": [
+                          {
+                            "render": function (data, type, row) {
+                                return "<span title='"+row.name+"'>"+row.short_name+"</span>";
+                            },
+                            "targets": 1
+                        },
                         {
                             "render": function (data, type, row) {
-                              return data ? data : "<audio src='"+row.arc+"' controls>"
+                                if(data){
+                                    return "<span title='"+row.nlp+"'>"+row.short_nlp+"</span>";
+                                }else{
+                                    return "<audio src='"+row.arc+"' controls>"  
+                                }
                             },
                             "targets": 2
                         },
@@ -103,11 +113,18 @@ jQuery(document).ready(function () {
                         },
                         {
                             "render": function (data, type, row) {
-                                var _str = [];
-                                $.each(data, function (k, v) {
-                                    _str.push('<li>' + v.v1 + v.dept + v.v2 + '</li>');
-                                });
-                                return _str.join('');
+                                  var _str = '<div class="btn-group-red btn-group">\
+                                        <button data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="btn btn-sm md-skip dropdown-toggle" type="button">\
+                                            『' +data[0].v1+'』' + data[0].dept + '『'+ data[0].v2 + '』\
+                                        </button>\
+                                        <ul role="menu" class="dropdown-menu-v2">\
+                                        ';
+                                    for(var i in data){
+                                    _str += '<li><a href="javascript:;">『' +data[i].v1+'』' + data[i].dept + '『'+ data[i].v2 + '』</a></li>';  
+                                    }
+                                    _str+='</ul>\
+                                        </div>';
+                                    return _str;
                             },
                             "targets": 3
                         },
@@ -119,10 +136,15 @@ jQuery(document).ready(function () {
                       },
                         {
                             "render": function (data, type, row) {
-
-                                return '<a  data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '" data-status="' + row.status + '"  '+(row.status==1?'disabled':'')+'   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a>'
-                                    + '<a href="./execute_history_pub/id/' + row.id + '"  class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a>';
-
+                                  return '<div class="btn-group">\
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\
+                                        操作 <span class="caret"></span>\
+                                    </button>\
+                                    <ul class="dropdown-menu" role="menu">\
+                                        <li><a  data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '" data-status="' + row.status + '"  '+(row.status==1?'disabled':'')+'   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a></li>\
+                                        <li><a href="./execute_history_pub/id/' + row.id + '"  class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a></li>\
+                                    </ul>\
+                                    </div>';
                             },
                             "targets": 7
                         }
