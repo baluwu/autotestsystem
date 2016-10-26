@@ -119,9 +119,19 @@ jQuery(document).ready(function () {
                         [3, "desc"]
                     ],
                     "columnDefs": [
+                        {
+                            "render": function (data, type, row) {
+                                return "<span title='"+row.name+"'>"+row.short_name+"</span>";
+                            },
+                            "targets": 1
+                        },
                       {
                         "render": function (data, type, row) {
-                          return data ? data : "<audio src='"+row.arc+"' controls>"
+                            if(data){
+                                return "<span title='"+row.nlp+"'>"+row.short_nlp+"</span>";
+                            }else{
+                                return "<audio src='"+row.arc+"' controls>"  
+                            }
                         },
                         "targets": 2
                       },
@@ -134,22 +144,33 @@ jQuery(document).ready(function () {
 
                         {
                             "render": function (data, type, row) {
-                                var _str = [];
-                                $.each(data, function (k, v) {
-                                    _str.push('<li>' + v.v1 + v.dept + v.v2 + '</li>');
-                                });
-                                return _str.join('');
+                                    var _str = '<div class="btn-group-red btn-group">\
+                                        <button data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="btn btn-sm md-skip dropdown-toggle" type="button">\
+                                            『' +data[0].v1+'』' + data[0].dept + '『'+ data[0].v2 + '』\
+                                        </button>\
+                                        <ul role="menu" class="dropdown-menu-v2">\
+                                        ';
+                                    for(var i in data){
+                                        _str += '<li><a href="javascript:;">『' +data[i].v1+'』' + data[i].dept + '『'+ data[i].v2 + '』</a></li>';  
+                                    }
+                                    _str+='</ul>\
+                                        </div>';
+                                    return _str;
                             },
                             "targets": 4
                         },
 
                         {
                             "render": function (data, type, row) {
-
-                                return '<a data-toggle="confirmation" data-id="' + data.id + '" data-title="确定还原用例" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 还原 </a>'
-                                    + '<a href="./execute_history/id/' + data.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a>';
-
-
+                                 return '<div class="btn-group">\
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\
+                                        操作 <span class="caret"></span>\
+                                    </button>\
+                                    <ul class="dropdown-menu" role="menu">\
+                                        <li><a data-toggle="confirmation" data-id="' + data.id + '" data-title="确定还原用例" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 还原 </a></li>\
+                                        <li><a href="./execute_history/id/' + data.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a></li>\
+                                    </ul>\
+                                    </div>';
                             },
                             "targets": 6
                         }
