@@ -55,6 +55,9 @@ class SingleModel extends Model {
         if ($obj) foreach ($obj as $k => $v) {
             $obj[$k]['validates'] = unserialize($v['validates']);
             $obj[$k]['ispublic'] = ($obj[$k]['ispublic'] == 1) ? '公共' : '私有';
+            $obj[$k]['short_name'] = mb_substr($v['name'],0,10,"utf-8")."...";
+            $obj[$k]['short_nlp'] = mb_substr($v['nlp'],0,10,"utf-8")."...";
+            $obj[$k]['short_arc'] = mb_substr($v['arc'],0,10,"utf-8")."...";
         }
         $total = $this->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();
 

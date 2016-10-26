@@ -151,13 +151,6 @@ jQuery(document).ready(function () {
                     _str+='</ul>\
                 </div>';
                     return _str;
-                    
-
-                    // var _str = [];
-                    // $.each(data, function (k, v) {
-                    //   _str.push('<li>' + v.v1 + v.dept + v.v2 + '</li>');
-                    // });
-                    // return _str.join('');
               },
               "targets": 3
             },
