@@ -112,7 +112,7 @@ jQuery(document).ready(function () {
 
     submitHandler: function (form) {
       var form_temp=$(form).serializeArray();
-      console.log(form_temp["submit"]);
+      
       $.ajax({
         url: CONFIG['MODULE'] + '/Single/addSingle',
         type: 'POST',
@@ -148,13 +148,8 @@ jQuery(document).ready(function () {
     dictInvalidFileType:'非法文件',
     dictDefaultMessage:'拖拽文件到此处',
     acceptedFiles:'audio/*',
-    init: function () {
-
-    },
-    complete: function (file) {
-      //console.log(file);
-    },
-
+    init: function () {},
+    complete: function (file) {},
     error: function (file, message) {
       alert(message);
       return false;
@@ -168,6 +163,8 @@ jQuery(document).ready(function () {
         return App.warning(res.msg);
       }
       $('input[name="arc"]').val(res.path);
+
+      $('.J_selected_audio').html('已选择: ' + res.path);
       $('#arc_upload').html(res.path);
       console.log(file.xhr.responseText);
       console.log(file);
@@ -224,7 +221,6 @@ jQuery(document).ready(function () {
           var url = URL.createObjectURL(blob);
           $('.use-audio').attr('data-url', url);
           $('#audio-player').attr('src', url);
-          $('#J_download_link').attr('href', url).attr('download', ($('.J_record_name').val() || new Date().toISOString()) + '.wav');
 
           formdata = new FormData();
           formdata.append('wav', blob);
@@ -247,10 +243,10 @@ jQuery(document).ready(function () {
       }
 
       formdata.append('name', name);
-      $('#J_download_link').attr('download', name + '.wav');
+      formdata.append('len', Math.floor($('#audio-player').get(0).duration || 0));
 
       $.ajax({
-          url : "/single/uploadRecordAudio",
+          url : "/single/uploadRecordAudio/",
           type : 'POST',
           data : formdata,
           contentType : false,
@@ -258,7 +254,7 @@ jQuery(document).ready(function () {
           success : function(data) {
               if (data.status == 1) {
                   $('#arc').val(data.path);
-                  $('.form-hd').show();
+                  $('.J_selected_audio').html('已选择: ' + data.path);
                   App.ok('已上传至' + data.path);
               }
               else App.warning(data.msg);

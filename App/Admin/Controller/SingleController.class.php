@@ -554,14 +554,20 @@ class SingleController extends AuthController {
 
     public function uploadRecordAudio() {
         $mdl = D('AudioUploads');
-        $this->ajaxReturn($mdl->uploadRecordAudio());
+        $this->ajaxReturn($mdl->uploadRecordAudio(intval(I('post.len'))));
     }
     
     public function getAudioList() {
         $mdl = D('AudioUploads');
 
         $this->ajaxReturn(
-            $mdl->getAudioList([ 'name' => ['LIKE', '%' . I('post.name') . '%']], I('post.start'), I('post.length'))
+            $mdl->getAudioList([ 'name' => ['LIKE', '%' . I('post.search_name') . '%']], I('post.start'), I('post.length'))
+        );
+    }
+
+    public function RemoveAudio() {
+        $this->ajaxReturn(
+            D('AudioUploads')->RemoveAudio(intval(I('post.id')))
         );
     }
 }

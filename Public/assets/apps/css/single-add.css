@@ -43,16 +43,7 @@
     color: #666;
 }
 .record-tools { float: left; width: 45%; text-align: right; }
-.form-hd { 
-    color: #AAA;
-    font-weight: 700;
-    position: absolute;
-    top: 0; right: 0;
-    text-align: left;
-    background-color: #E8E8E8;
-    border-bottom-left-radius: 4px;
-    padding: 3px 5px;
-    display: none;
-}
 .nav li.upload-item, .nav li.lib-item { display: none; }
-
+.audio-ctn { float: left; padding: 1px 4px; }
+.select-audio-ctn { position: relative; }
+.selected-audio { position: absolute; top: 5px; right: 20px; height: 30px; line-height: 30px; color: #009dc7; }

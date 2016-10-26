@@ -1,16 +1,18 @@
+
 (function(window){
 
-  var WORKER_PATH = CONFIG.WORKER;//"recorderWorker.js";
+//  var WORKER_PATH = "js/recorderWorker.js";
 
   var Recorder = function(source, cfg){
     var config = cfg || {};
     var bufferLen = config.bufferLen || 4096;
     this.context = source.context;
     this.node = (this.context.createScriptProcessor ||
-                 this.context.createJavaScriptNode).call(this.context,bufferLen, 2, 2);
-				 
-	console.log(config,WORKER_PATH);
-    var worker = new Worker(config.workerPath || WORKER_PATH);
+                 this.context.createJavaScriptNode).call(this.context,
+                                                         bufferLen, 2, 2);
+    //var worker = new Worker(config.workerPath || WORKER_PATH);
+    var worker = new Worker(URL.createObjectURL(new Blob(["("+worker_function.toString()+")()"], {type: 'text/javascript'})));
+	console.log(worker);
     worker.postMessage({
       command: 'init',
       config: {
@@ -67,6 +69,7 @@
     }
 
     worker.onmessage = function(e){
+      //console.log("recorder="+e);
       var blob = e.data;
       currCallback(blob);
     }

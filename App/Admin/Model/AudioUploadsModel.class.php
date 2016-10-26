@@ -48,15 +48,15 @@ class AudioUploadsModel extends Model{
         }
     }
 
-    public function uploadRecordAudio() {
+    public function uploadRecordAudio($audio_length = 0) {
         $ret = [ 'status' => 0, 'path' => '', 'msg' => '' ];
 
-        $name = I('post.name');
+        $name = I('post.name') . '.wav';
         /*web显示路径*/
         $web_dir = C('UPLOAD_PATH') . date('Y-m-d');
 
-        if (!is_dir($dst_dir)) {
-            mkdir($dst_dir, 0777, true);            
+        if (!is_dir('.' . $web_dir)) {
+            mkdir('.' . $web_dir, 0777, true);            
         }
 
         $obj = each($_FILES);
@@ -70,18 +70,18 @@ class AudioUploadsModel extends Model{
             return array('status'=>0,'msg'=>'文件大小不能超过2M');
         }
 
-        $web_path = $web_dir . '/' . $name . '.wav';
+        $web_path = $web_dir . '/' . $name;
 
         if (file_exists('.' . $web_path)) {
             $ret['msg'] = '文件名已使用';
             return $ret;
         }
-
         if (move_uploaded_file($file['tmp_name'], '.' . $web_path)) {
             $r = $this->add([
                 'source' => 1,
                 'name' => $name,
                 'path' => $web_path,
+                'len' => $audio_length,
                 'uploader' => session('admin')['manager'],
                 'when' => date('Y-m-d H:i:s')
             ]);
@@ -111,5 +111,10 @@ class AudioUploadsModel extends Model{
             'recordsFiltered' => $total,
             'data'            => $data ? $data : [],
         ];
+    }
+
+    public function RemoveAudio($id) {
+        $r = $this->where(['id' => $id])->delete();
+        return array('status' => $r > 0, msg => '');
     }
 }

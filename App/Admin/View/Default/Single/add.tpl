@@ -186,7 +186,6 @@
                                 <label class="col-md-2 control-label" for="nlp">
                                   <span class="required"> * </span>NLP
                                 </label>
-
                                 <div class="col-md-10">
                                   <input type="text" name="nlp" class="form-control" id="nlp" placeholder="nlp">
                                   <div class="form-control-focus"></div>
@@ -196,7 +195,8 @@
                                 <label class="col-md-2 control-label" for="ARC">
                                   <span class="required"> * </span>ASR
                                 </label>
-                                <div class="col-md-10">
+                                <div class="col-md-10 select-audio-ctn">
+                                    <div class="selected-audio J_selected_audio"></div>
                                     <input type="hidden" name="arc" value="" id="arc" />
                                     <ul class="nav nav-pills J_asr_type_nav" role="tablist">
                                         <li role="presentation" class="active" role-index="0"><a href="javascript:;">语音录制</a></li>
@@ -206,7 +206,6 @@
                                     <ul class="nav">
                                     <li class="audio-item record-item">
                                         <div class="form-body record-form">
-                                            <div class="form-hd"> 已上传 </div>
                                             <div class="form-group form-md-line-input">
                                                 <label class="control-label col-md-1">
                                                     <span class="required"> * </span>名称
@@ -239,7 +238,6 @@
                                                 <div class="record-tools">
                                                     <button type="button" class="btn btn-primary use-audio">保存并使用</button>
                                                     <button type="button" class="btn btn-default re-record">重新录制</button>
-                                                    <button type="button" class="btn btn-default download-record"><a href="javascript:;" id="J_download_link">下载文件</a></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -263,7 +261,7 @@
                                                     <tr role="row" class="filter">
                                                         <td></td>
                                                         <td>
-                                                        <input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="按名称搜索">
+                                                        <input type="text" class="form-control form-filter input-sm" name="search_name" id="search_name" placeholder="按名称搜索">
                                                         </td>
                                                         <td></td><td></td>
                                                         <td>
@@ -378,6 +376,7 @@
 <script src="/Public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="/Public/assets/global/scripts/datatable.js"></script>
+<script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/common.js"></script>
@@ -385,6 +384,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/single/add.js"></script>
 <script src="/Public/assets/apps/scripts/single/recorder.js"></script>
+<script src="/Public/assets/apps/scripts/single/recorderWorker.js"></script>
 <script src="/Public/assets/apps/scripts/single/audio_list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->

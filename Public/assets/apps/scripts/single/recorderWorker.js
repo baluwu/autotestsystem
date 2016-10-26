@@ -1,9 +1,14 @@
+
+
+function worker_function() {
+    // all code here
 var recLength = 0,
   recBuffersL = [],
   recBuffersR = [],
   sampleRate;
 
 this.onmessage = function(e){
+//  console.log(""+e.data.command);
   switch(e.data.command){
     case 'init':
       init(e.data.config);
@@ -168,3 +173,9 @@ function downsampleBuffer(buffer, rate) {
     }
     return result;
 }
+}
+// This is in case of normal worker start
+if(window!=self)
+  worker_function();
+
+
