@@ -1,6 +1,8 @@
 <?php
 namespace Admin\Model;
+
 use Think\Model;
+use Think\Upload;
 
 //文件上传模型
 class AudioUploadsModel extends Model{
@@ -9,7 +11,7 @@ class AudioUploadsModel extends Model{
         $Upload = new Upload();
         $Upload->rootPath = '.'.C('UPLOAD_PATH');
 
-        $Upload->maxSize = 0;
+        $Upload->maxSize = 2 * 1024 * 1024;
         $Upload->exts = array('mp3', 'wav', 'wma', 'mid', 'amr');
         $info = $Upload->upload();
         
@@ -29,11 +31,13 @@ class AudioUploadsModel extends Model{
                 'name' => $saveName,
                 'path' => $savePath,
                 'uploader' => session('admin')['manager'],
-                'when' => date('Y-m-d H:i:s')
+                'when' => date('Y-m-d H:i:s'),
+                'len' => '0' 
             ]);
 
             if ($r > 0) {
                 $ret['status'] = 1;
+                $ret['name'] = $saveName;
                 $ret['path'] = $filePath;
                 $ret['msg'] = '上传成功';
                 return $ret;
@@ -88,8 +92,9 @@ class AudioUploadsModel extends Model{
 
             if ($r > 0) {
                 $ret['status'] = 1;
-                $ret['path'] = $web_path;
+                $ret['name'] = $name;
                 $ret['msg'] = '上传成功';
+                $ret['path'] = $web_path;
                 return $ret;
             }
             else {

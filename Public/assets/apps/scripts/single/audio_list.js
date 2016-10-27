@@ -50,7 +50,7 @@ jQuery(document).ready(function () {
         });
 
         $('.use_btn').on('click', function() {
-          $('.J_selected_audio').html('已选择: ' + $(this).data('path'));
+          $('.J_selected_audio').html('已选择: ' + $(this).data('name'));
           $('#arc').val($(this).data('path'));
         });
       },

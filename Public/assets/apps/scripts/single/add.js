@@ -41,7 +41,6 @@ jQuery(document).ready(function () {
     };
 
     return {
-      //main function to initiate the module
       init: function () {
         addEvet();
       }
@@ -143,7 +142,7 @@ jQuery(document).ready(function () {
 
   $("#arc_upload").dropzone({
     url: "/Single/uploadLocalAudio",
-    maxFilesize: 1,//单位MB
+    maxFilesize: 2,//单位MB
     uploadMultiple:false,
     dictInvalidFileType:'非法文件',
     dictDefaultMessage:'拖拽文件到此处',
@@ -151,8 +150,7 @@ jQuery(document).ready(function () {
     init: function () {},
     complete: function (file) {},
     error: function (file, message) {
-      alert(message);
-      return false;
+      return App.warning(message);
     },
     success: function (file) {
       if(file.status!="success"){
@@ -164,14 +162,10 @@ jQuery(document).ready(function () {
       }
       $('input[name="arc"]').val(res.path);
 
-      $('.J_selected_audio').html('已选择: ' + res.path);
+      $('.J_selected_audio').html('已选择: ' + res.name);
       $('#arc_upload').html(res.path);
-      console.log(file.xhr.responseText);
-      console.log(file);
     },
-    addedfile: function (file) {
-      console.log(file);
-    }
+    addedfile: function (file) {}
   });
 
   validates.init();
@@ -254,8 +248,8 @@ jQuery(document).ready(function () {
           success : function(data) {
               if (data.status == 1) {
                   $('#arc').val(data.path);
-                  $('.J_selected_audio').html('已选择: ' + data.path);
-                  App.ok('已上传至' + data.path);
+                  $('.J_selected_audio').html('已选择: ' + $('#J_record_name').val() + '.wav');
+                  App.ok('已上传');
               }
               else App.warning(data.msg);
           },
@@ -346,10 +340,9 @@ jQuery(document).ready(function () {
                 p == 100 && clearInterval(hd);
             }, 1000);
         }
-        else {
-            player.pause();
-        }
+        else { player.pause(); }
       });
+
       $('.re-record').click(function() {
         formdata = null;
         enableRecord();
