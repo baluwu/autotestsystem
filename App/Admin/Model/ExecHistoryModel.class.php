@@ -26,6 +26,8 @@ class ExecHistoryModel extends Model {
     $map['e.mid'] = ['eq', $id];
 
     $map['e.isgroup'] = ['eq', $isgroup];
+	
+	$map['e.exec_type'] = ['eq', 1];
 
     $obj = $this
       ->field('e.id,e.mid,e.uid,e.ip,e.port,e.status,e.exec_start_time,u.manager,u.nickname')
@@ -45,7 +47,10 @@ class ExecHistoryModel extends Model {
   }
 
   //执行单例
-  public function ExecuteSingle($mid, $ip, $port = 8080) {
+  public function ExecuteSingle($mid, $ip, $port = 8080, $exec_type = 1) {
+	if( $exec_type == 2 ) {
+		return SyncExecuteSingle($mid, $ip, $port = 8080);
+	}
     $idsAr = explode(',', $mid);
     $row = 0;
     $redis = REDIS();
@@ -76,6 +81,42 @@ class ExecHistoryModel extends Model {
     }
 
     return $row;
+  }
+  
+  //执行同步单例
+  public function SyncExecuteSingle($mid, $ip, $port = 8080)
+  {
+	$idsAr = explode(',', $mid);
+    $row = 0;
+    $redis = REDIS();
+    if (!$port) $port = 8080;
+	$ret = array();
+    foreach ($idsAr as $id) {
+      //查redis   list   $id
+//      $redis->sAdd('task:single', $id);
+     if($redis->sIsMember('task:single',$id)){
+       continue;
+     }
+
+//
+//      $status = M('Single')->where(['id' => $id])->getField('status');
+//      if ($status == 1) continue;
+      $data = [
+        'isgroup'     => 0,
+        'mid'         => $id,
+        'uid'         => session('admin')['id'],
+        'ip'          => $ip,
+        'port'        => $port,
+        'create_time' => REQUEST_TIME
+      ];
+      $row = $this->add($data);
+      if ($row) {
+        $data['id'] = $row;
+        $ret[] = SyncTask($data);
+      }
+    }
+
+    return $ret;
   }
 
   //执行组单例

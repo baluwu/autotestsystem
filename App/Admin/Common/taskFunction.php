@@ -136,3 +136,31 @@ function judged($data, $validate) {
 function tasking($task_id) {
 
 }
+
+/**
+ * 同步任务，需要返回执行内容
+ * @param int $taskData 任务数据
+ * @param int $type 0 用例  1 用例组
+ * @desc 数据必须包含  id
+ * @author chengbin
+ */
+function SyncTask($taskData = []) {
+    if (!$taskData['id']) {
+        return false;
+    }
+
+    $client = new \swoole_client(SWOOLE_SOCK_TCP);
+    if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 1)) {
+
+
+        $client->send(@json_encode($taskData, true));
+		$info = $client->recv();
+        \Think\Log::write('任务返回,DATA:' . $info, 'debug');
+
+        $client->close();
+
+        return $info;
+    }
+
+    return false;
+}

@@ -539,7 +539,8 @@ class SingleController extends AuthController {
         }
 
         $excuteAr = D('ExecHistory');
-        $data = $excuteAr->ExecuteSingle($this->id, $this->ip, $this->port);
+		$exec_type = I('post.exec_type', 1);
+        $data = $excuteAr->ExecuteSingle($this->id, $this->ip, $this->port, $exec_type);
         logs('single.execute', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -11,

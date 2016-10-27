@@ -10,3 +10,6 @@ CREATE TABLE `sys_audio_uploads` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sys_exec_history`
+ADD COLUMN `exec_type` tinyint(2) NULL DEFAULT 1 COMMENT '执行类型 1 正常执行 2 编辑用例执行自检测' ;

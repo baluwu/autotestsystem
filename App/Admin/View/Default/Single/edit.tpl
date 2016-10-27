@@ -22,10 +22,9 @@
   <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
   <!-- END GLOBAL MANDATORY STYLES -->
   <!-- BEGIN PAGE LEVEL PLUGINS -->
+  <link href="/Public/assets/global/css/jsonFormater.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
-
   <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
-
   <link href="/Public/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
@@ -390,7 +389,7 @@
                         </div>
                       </div>
 					  
-					  <div class="form-group ">
+					  <div class="form-group">
                         <label class="col-md-2 control-label">
                           
                         </label>
@@ -403,6 +402,16 @@
 							<a href="javascript:;" class="btn green">
                               <i class="fa fa-rotate-left"></i> 用例执行中 </a>
 						</if>
+                        </div>
+                      </div>
+					  <!--执行报告-->
+					  <div class="form-group">
+                        <label class="col-md-2 control-label">
+                          执行报告：
+                        </label>
+
+                        <div class='col-md-10'>
+						<p class="form-control-static code"></p>
                         </div>
                       </div>
 
@@ -441,6 +450,7 @@
       <div class="tips"></div>
 
       <input type="hidden" name="id" value=""/>
+	  <input type="hidden" name="exec_type" value="2"/>
 
 
       <div class="form-group form-md-line-input">
@@ -534,6 +544,17 @@
 <script src="/Public/assets/layout/scripts/layout.js"></script>
 <script src="/Public/assets/layout/scripts/quick-sidebar.js"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
+<script src="/Public/assets/global/scripts/JsonFormater.js"></script>
+<script>
+<!--回头把这段代码加到指定的返回值-->
+  $('p.code').JsonFormater({
+    isCollapsible: true,
+    quoteKeys: true,
+    tabSize: 1,
+    json:{"is_success":true,"msg":"任务成功","content":{"success":false,"errorCode":519,"finished":true,"activation":false,"asr":"v2AOZhXHN5PaTS819NcR","domain":"TQP8cBm2I9Dvnq2ZnN","content":{"code":100000,"text":"放歌这种事情要严肃一点说，叫做“播放音乐”，你试试~！"}}}  });
+
+</script>
+
 </body>
 
 </html>

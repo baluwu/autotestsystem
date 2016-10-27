@@ -282,6 +282,9 @@ jQuery(document).ready(function () {
                 place: 'prepend',
                 closeInSeconds: 1.5
               });
+			  
+			  //显示查看详情报告
+			  
 
             },
             error: function () {
