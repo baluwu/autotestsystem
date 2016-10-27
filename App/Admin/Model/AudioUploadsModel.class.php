@@ -29,7 +29,7 @@ class AudioUploadsModel extends Model{
             $r = $this->add([
                 'source' => 0,
                 'name' => $saveName,
-                'path' => $savePath,
+                'path' => $filePath,
                 'uploader' => session('admin')['manager'],
                 'when' => date('Y-m-d H:i:s'),
                 'len' => '0' 

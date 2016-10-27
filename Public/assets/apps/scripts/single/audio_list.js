@@ -68,7 +68,6 @@ jQuery(document).ready(function () {
           { data: 'id', orderable: false },
           { data: 'name', orderable: false },
           { data: 'when', orderable: false },
-          { data: 'len', orderable: false },
           {
             class: "action-control",
             orderable: false,
@@ -76,15 +75,9 @@ jQuery(document).ready(function () {
             defaultContent: ""
           }
         ],
-        order: [ [3, "desc"] ],
+        order: [ [2, "desc"] ],
         columnDefs: [
-          {
-            render: function (data, type, row) {
-              return formatSeconds(data);
-            },
-            targets: 3
-          },
-          {
+            {
             render: function (data, type, row) {
               return [
                 '<div class="audio-ctn"><audio controls="true" src="' + data.path + '" style="width: 160px"></audio></div>',
@@ -93,7 +86,7 @@ jQuery(document).ready(function () {
 
               ].join('');
             },
-            targets: 4
+            targets: 3
           }
         ]
       }

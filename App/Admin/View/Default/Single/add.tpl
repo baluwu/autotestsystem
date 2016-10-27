@@ -262,7 +262,6 @@
                                                         <th width="50">No</th>
                                                         <th width="360">名称</th>
                                                         <th width="220">Date</th>
-                                                        <th width="160">时长</th>
                                                         <th>&nbsp;</th>
                                                     </tr>
                                                     <!--begin search bar-->
@@ -271,7 +270,7 @@
                                                         <td>
                                                         <input type="text" class="form-control form-filter input-sm" name="search_name" id="search_name" placeholder="按名称搜索">
                                                         </td>
-                                                        <td></td><td></td>
+                                                        <td></td>
                                                         <td>
                                                             <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
                                                                 <i class="fa fa-search"></i> Search
