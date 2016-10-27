@@ -70,20 +70,38 @@ class SingleController extends AuthController {
     }
 
 //编辑用例
-    public function edit($id) {
-        $single = D('Single');
-        $singleData = $single->getSingle($id);
-        if ($singleData['uid'] != session('admin')['id']) {
-            $this->error('非法参数');
+    public function edit($tid=0,$id) {
+        if(!empty($tid)){
+            $group = D('Group');
+            $groupData = $group->getGroup($tid);
+            if ($groupData['uid'] != session('admin')['id']) {
+                $this->error('非法参数');
+            }
+            $this->assign('gid', $tid);
+            $single = D('GroupSingle');
+            $data = $single->getSingle($id);
+
+            if (!$data) {
+                $this->GroupSingle('该用例已被删除');
+            }
+            if ($data['tid'] != $tid) {
+                $this->GroupSingle('非法参数');
+            }
+            $this->assign('data', $data);    
+        }else{
+            $single = D('Single');
+            $singleData = $single->getSingle($id);
+            if ($singleData['uid'] != session('admin')['id']) {
+                $this->error('非法参数');
+            }
+            if (!$singleData) {
+                $this->error('该用例已被删除');
+            }
+            //dump($singleData);exit;
+            $this->assign('data', $singleData);
         }
         $priveGroup =D('Group')->getList('','','','',true);
         $this->assign('group', $priveGroup);
-        if (!$singleData) {
-            $this->error('该用例已被删除');
-        }
-		//dump($singleData);exit;
-        $this->assign('data', $singleData);
-
         $this->display();
     }
 
@@ -102,17 +120,7 @@ class SingleController extends AuthController {
 
     public function updateSingle($id) {
         if (!IS_AJAX) $this->error('非法操作');
-        $single = D('Single');
-
-        $singleData = $single->getSingle($id);
-        if ($singleData['uid'] != session('admin')['id']) {
-            $this->ajaxReturn([
-                'error' => -10,
-                'data'  => '',
-                'msg'   => '非法参数'
-            ]);
-        }
-
+        
         if(empty($this->groupid)){
             $this->ajaxReturn([
                 'error' => -11,
@@ -120,6 +128,16 @@ class SingleController extends AuthController {
                 'msg'   => '请选择用例分组'
             ]);   
         }
+        $single = D('Single');
+        $singleData = $single->getSingle($id);
+        if (!empty($singleData) && $singleData['uid'] != session('admin')['id']) {
+            $this->ajaxReturn([
+                'error' => -10,
+                'data'  => '',
+                'msg'   => '非法参数'
+            ]);
+        }
+
         $single = D('GroupSingle');
         //编辑原来没有绑定分组的用例，做分组用例插入
         $data = $single->addSingle($this->singleName, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
