@@ -26,6 +26,9 @@
 
   <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
 
+  <link href="/Public/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
   <!-- END PAGE LEVEL PLUGINS -->
   <!-- BEGIN THEME GLOBAL STYLES -->
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
@@ -386,6 +389,22 @@
                           </script>
                         </div>
                       </div>
+					  
+					  <div class="form-group ">
+                        <label class="col-md-2 control-label">
+                          
+                        </label>
+
+                        <div>
+						<if condition="$data.status eq '0' ">
+                            <a data-toggle="modal" data-title="{$data.name}" data-id="{$data.id}" data-status="{$data.status}" id="exec_btn" href="javascript:;" class="btn green">
+                              <i class="fa fa-rotate-left"></i> 执行 </a>
+						<else />
+							<a href="javascript:;" class="btn green">
+                              <i class="fa fa-rotate-left"></i> 用例执行中 </a>
+						</if>
+                        </div>
+                      </div>
 
 
                     </div>
@@ -411,6 +430,79 @@
 
 </div>
 <!-- END CONTAINER -->
+
+<div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">用例执行</h4>
+  </div>
+  <form action="#">
+    <div class="modal-body">
+      <div class="tips"></div>
+
+      <input type="hidden" name="id" value=""/>
+
+
+      <div class="form-group form-md-line-input">
+        <label class="col-md-2 control-label">
+
+        </label>
+
+        <div class="col-md-10">
+          当前执行用例:<span class="currName"></span>
+        </div>
+      </div>
+
+
+      <div class="form-group form-md-line-input">
+        <label class="col-md-2 control-label" for="ip">
+          <span class="required">*</span>IP
+        </label>
+
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="ip" list="ip_data" placeholder="192.168.19.10" name="ip" required
+                 data-tabindex="1">
+          <datalist id="ip_data">
+            <option value="192.168.19.10">
+            <option value="192.168.1.10">
+            <option value="192.168.2.10">
+            <option value="192.168.3.10">
+            <option value="192.168.4.10">
+            <option value="192.168.5.10">
+            <option value="192.168.6.10">
+            <option value="192.168.7.10">
+          </datalist>
+          <div class="form-control-focus"></div>
+        </div>
+      </div>
+
+
+      <div class="form-group form-md-line-input">
+        <label class="col-md-2 control-label" for="port">
+          <span class="required"> * </span>Port
+        </label>
+
+        <div class="col-md-10">
+          <input type="text" name="port" class="form-control" list="port_data" id="port" placeholder="8080"
+                 data-tabindex="2">
+          <datalist id="port_data">
+            <option value="80">
+            <option value="8080">
+            <option value="8090">
+            <option value="8001">
+          </datalist>
+          <div class="form-control-focus"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+        <button type="submit" class="btn green exec_ok">Ok</button>
+      </div>
+    </div>
+  </form>
+</div>
+
 
 <!--[if lt IE 9]>
 <script src="/Public/assets/global/plugins/respond.min.js"></script>

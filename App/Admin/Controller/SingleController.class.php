@@ -81,6 +81,7 @@ class SingleController extends AuthController {
         if (!$singleData) {
             $this->error('该用例已被删除');
         }
+		//dump($singleData);exit;
         $this->assign('data', $singleData);
 
         $this->display();

@@ -132,7 +132,7 @@ class SingleModel extends Model {
     //获取一条数据
     public function getSingle($id) {
       $vali = $this
-        ->field('s.id,s.name,s.ispublic,s.create_time,s.uid,s.validates,s.nlp,s.arc,u.manager,u.nickname')
+        ->field('s.id,s.name,s.ispublic,s.create_time,s.uid,s.validates,s.nlp,s.arc,u.manager,u.nickname,s.status')
         ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
         ->where(['s.id' => $id])
         ->find();
