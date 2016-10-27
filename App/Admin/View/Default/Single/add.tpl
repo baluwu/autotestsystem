@@ -161,8 +161,16 @@
                                 <div class="col-md-4">
                                   <select name="groupid" class="form-control" aria-invalid="false">
                                       <foreach name="group" item="g" >
+                                          <?php
+                                            if($gid && $gid == $g['id']) {
+                                          ?>
+                                          <option value="{$g.id}" selected="true">
+                                          <?php    
+                                            }else{
+                                          ?>
                                           <option value="{$g.id}">
-                                          <?php 
+                                          <?php
+                                            } 
                                             if($g['ispublic'] == 1){ echo "[公共]"; }else{ echo "[私有]"; }
                                           ?>
                                           {$g.name}

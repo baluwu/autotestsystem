@@ -103,7 +103,7 @@
                     <i class="fa fa-recycle "></i> 回收站 </a>
                 </li>
                 <li>
-                  <a href="/Group/single_add/tid/{$group.id}">
+                  <a href="/Single/add/tid/{$group.id}">
                     <i class="fa fa-plus "></i> 添加用例</a>
                 </li>
               </ul>

@@ -11,9 +11,10 @@ class SingleController extends AuthController {
     }
 
     //添加用例
-    public function add() {
+    public function add($tid) {
         $priveGroup =D('Group')->getList('','','','',true);
-        $this->assign('group', $priveGroup);    
+        $this->assign('group', $priveGroup);
+        $this->assign('gid', $tid);     
         $this->display();
     }
 
