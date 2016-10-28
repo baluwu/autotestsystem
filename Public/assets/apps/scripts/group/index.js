@@ -2,6 +2,36 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
+    var ztreeClick = function(event, treeId, treeNode, clickFlag) {
+      console.log("[ onClick ]&nbsp;&nbsp;clickFlag = " + clickFlag + " (" + (clickFlag===1 ? "普通选中": (clickFlag===0 ? "<b>取消选中</b>" : "<b>追加选中</b>")) + ")")
+    }
+
+	var setting = {
+		check: {
+			enable: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+        callback:{
+          onClick:ztreeClick
+        }
+	};
+
+	var zNodes =[
+		{ id:1, pId:0, name:"随意勾选 1", open:true},
+		{ id:11, pId:1, name:"随意勾选 1-1", open:true},
+		{ id:12, pId:1, name:"随意勾选 1-2", open:true},
+		{ id:2, pId:0, name:"随意勾选 2", checked:true, open:true},
+		{ id:21, pId:2, name:"随意勾选 2-1"},
+		{ id:22, pId:2, name:"随意勾选 2-2", open:true},
+		{ id:23, pId:2, name:"随意勾选 2-3"}
+	];
+
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
