@@ -57,6 +57,8 @@ return [
   'REDIS_PCONNECT'       => true,
   'REDIS_DBNAME'         => 5,
 
+  'SERVER_NAME'          => 'https://autest.loc',
+
   /*ldap配置*/
   'LDAP_ENABLED'         => 0, //1为开启，0为关闭
   'LDAP_HOST'            => 'ldap://ldap.rokid-inc.com', //ladp服务器
