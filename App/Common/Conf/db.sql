@@ -13,3 +13,21 @@ CREATE TABLE `sys_audio_uploads` (
 
 ALTER TABLE `sys_exec_history`
 ADD COLUMN `exec_type` tinyint(2) NULL DEFAULT 1 COMMENT '执行类型 1 正常执行 2 编辑用例执行自检测' ;
+
+CREATE TABLE `sys_manage_group_classify` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自动编号',
+  `pid` int(10) NOT NULL COMMENT '父分类ID',
+  `name` varchar(255) NOT NULL COMMENT '分类名称',
+  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_manage_group_classify
+-- ----------------------------
+INSERT INTO `sys_manage_group_classify` VALUES ('1', '0', '随意勾选 1', '2016-10-30 22:12:47');
+INSERT INTO `sys_manage_group_classify` VALUES ('2', '1', '随意勾选 1-1', '2016-10-30 22:13:00');
+INSERT INTO `sys_manage_group_classify` VALUES ('3', '1', '随意勾选 1-2', '2016-10-30 22:13:11');
+INSERT INTO `sys_manage_group_classify` VALUES ('4', '0', '随意勾选 2', '2016-10-30 22:13:22');
+INSERT INTO `sys_manage_group_classify` VALUES ('5', '4', '随意勾选 2-1', '2016-10-30 22:13:36');
+INSERT INTO `sys_manage_group_classify` VALUES ('6', '4', '随意勾选 2-2', '2016-10-30 22:14:08');
