@@ -42,6 +42,7 @@
       'MODULE': '__MODULE__',
       'INDEX': '{:U("Index/index")}',
       'tid': {$group.id},
+      'authGroup':{$admin_info.group_id}
     };
   </script>
 </head>

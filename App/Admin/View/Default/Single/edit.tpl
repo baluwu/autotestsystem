@@ -47,6 +47,7 @@
       'MODULE': '__MODULE__',
       'INDEX': '{:U("Index/index")}',
       'ID': {$data.id},
+      'from':{$from}
     };
   </script>
 </head>

@@ -107,7 +107,7 @@ jQuery(document).ready(function () {
     submitHandler: function (form) {
 
       $.ajax({
-        url: CONFIG['MODULE'] + '/Single/updateSingle/id/'+CONFIG['ID'],
+        url: CONFIG['MODULE'] + '/Single/updateSingle/id/'+CONFIG['ID']+'/from/'+CONFIG['from'],
         type: 'POST',
         data: $(form).serialize(),
         beforeSend: function () {

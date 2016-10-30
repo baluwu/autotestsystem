@@ -148,7 +148,7 @@ class GroupSingleModel extends Model {
 
 
     //修改组用例
-    public function updateSingle($id, $name_edit, $type_switch, $nlp_edit, $arc_edit, $v1_edit, $dept_edit, $v2_edit) {
+    public function updateSingle($id, $name_edit, $type_switch, $nlp_edit, $arc_edit, $v1_edit, $dept_edit, $v2_edit,$tid=0) {
         $data = [
             'id'   => $id,
             'name' => $name_edit
@@ -160,6 +160,9 @@ class GroupSingleModel extends Model {
         } else {
             $data['arc'] = NULL;
             $data['nlp'] = $nlp_edit;
+        }
+        if( !empty($tid) ) {
+            $data['tid'] = $tid;
         }
 
         $data['validates'] = serialize($this->getVali($v1_edit, $dept_edit, $v2_edit));
