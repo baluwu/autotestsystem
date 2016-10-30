@@ -88,7 +88,7 @@ class GroupController extends AuthController {
             $this->error('该用例已被删除');
         }
 
-        if ($groupData['uid'] != session('admin')['id']) {
+        if (session('admin')['group_id'] !=1 && $groupData['uid'] != session('admin')['id']) {
             $this->error('非法操作');
         }
 

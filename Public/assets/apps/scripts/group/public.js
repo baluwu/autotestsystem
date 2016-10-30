@@ -102,7 +102,11 @@ jQuery(document).ready(function () {
             {
               "render": function (data, type, row) {
 
-                return '<a  href="./single_publist/tid/' + data.id + '" class="btn blue btn-sm btn-outline margin-bottom-5"> <i class="fa fa-object-ungroup"></i> 用例列表 </a>'
+                var edit  = "";
+                if(CONFIG.authGroup == 1) {
+                    edit='<a class="btn dark btn-sm btn-outline margin-bottom-5" href="./edit/id/'+data.id+'"> <i class="fa fa-edit"></i> 编辑 </a>';
+                }
+                return edit+'<a  href="./single_publist/tid/' + data.id + '" class="btn blue btn-sm btn-outline margin-bottom-5"> <i class="fa fa-object-ungroup"></i> 用例列表 </a>'
                   + '<a data-toggle="modal" data-title="' + data.name + '" data-id="' + data.id + '"  data-status="' + row.status + '"  ' + (row.status == 1 ? 'disabled' : '') + '   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a>'
                   + '<a href="./execute_history_pub/tid/' + data.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a>';
 
