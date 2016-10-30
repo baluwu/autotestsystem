@@ -153,13 +153,6 @@ class SingleController extends AuthController {
                     'msg'   => '该用例已被删除'
                 ]);
             }
-            if ($data['tid'] != $this->groupid) {
-                $this->ajaxReturn([
-                    'error' => -12,
-                    'data'  => '',
-                    'msg'   => '非法参数'
-                ]);
-            }
             $data = $groupSingle->updateSingle($id, $this->singleName, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2,$this->groupid);
         } 
        
