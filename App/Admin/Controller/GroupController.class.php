@@ -117,7 +117,7 @@ class GroupController extends AuthController {
             ]);
         }
 
-        if ($groupData['uid'] != session('admin')['id']) {
+        if (session('admin')['group_id'] !=1 && $groupData['uid'] != session('admin')['id']) {
             $this->ajaxReturn([
                 'error' => -11,
                 'data'  => '',
