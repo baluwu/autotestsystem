@@ -73,7 +73,4 @@ class CmdModel {
         M('Group')->where(['id' => $id])->setField(['status' => $status]);
     }
 
-    public function getPendingCase() {
-        return REDIS()->sMembers('pending.case');
-    }
 }

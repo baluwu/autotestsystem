@@ -37,6 +37,7 @@ class CmdController extends Controller {
     public function onStart($serv, $fd) {
         tasklog('manager_pid' . $this->serv->manager_pid);
         tasklog('master_pid' . $this->serv->master_pid);     
+
     }
 
     public function demo() {
@@ -51,6 +52,7 @@ class CmdController extends Controller {
             'id' => 1,
             'type' => 'IMME'
         ];
+
         AddTask($taskData);
         
         //group
@@ -59,10 +61,19 @@ class CmdController extends Controller {
 
         //task
         $taskData = [
-            "id"=>1, "isgroup"=>2, "type"=>"TIMER", "mid"=>"47,48,49,50,51,52,53,54,55",
-            "description"=>"只是一个注释", "ver"=>"1.0.1", "run_at"=>date('Y-m-d H:i:s', time() + 10),
-            "uid"=>"1", "ip"=>"121.42.0.84", "port"=>"", "create_time"=>"2016-07-12 16:35:08"
+            "id"=>1,
+            "isgroup"=>2,
+            "type"=>"TIMER",
+            "mid"=>"47,48,49,50,51,52,53,54,55",
+            "description"=>"只是一个注释",
+            "ver"=>"1.0.1",
+            "run_at"=>date('Y-m-d H:i:s', time() + 10),
+            "uid"=>"1",
+            "ip"=>"192.168.121.132",
+            "port"=>"3333",
+            "create_time"=>"2016-07-12 16:35:08"
         ];
         AddTask($taskData);
     }
+
 }

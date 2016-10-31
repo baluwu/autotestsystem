@@ -9,7 +9,7 @@ class WorkerModel {
     }
 
     public function removePendingCase($val) {
-        REDIS()->sRem('pending.case', $val);
+        REDIS()->sRemove('pending.case', $val);
     }
 
     public function onReceive($serv, $fd, $from_id, $strData) {
@@ -34,7 +34,7 @@ class WorkerModel {
                 return $serv->close($fd);
             }
 
-            $taskData['secs'] = $secs;
+            $taskData['secs'] = $secs < 5 ? 5 : $secs;
 
             return  $serv->task(json_encode($taskData));
         }
@@ -48,21 +48,54 @@ class WorkerModel {
     }
 
     public function onFinish($serv, $task_id, $data) {
-        tasklog('收到task进程finish消息');
-        $taskData = $data['data'];
-        $type = $taskData['type'] ?? 'IMME';
-        
-        $this->freeWokingMachine($taskData['ip']);
+        tasklog('收到task进程finish消息:' . $task_id);
+        if (!is_array($data)) return ;
 
-        if ($type == 'TIMER') {
+        $taskData = $data['data'];
+        $type = $taskData['type'];
+
+        if ($data['free_machine']) {
+            $this->freeWokingMachine($taskData['ip']);
+        }
+
+        if ($data['remove_pend']) {
+            tasklog('removePendingCase:' . $taskData['src_string']);
             $this->removePendingCase($taskData['src_string']);
         }
 
-        $serv->send($taskData['fd'], json_encode($data));
-        $serv->close($taskData['fd']);
+        if ($type == 'IMME') {
+            $serv->send($taskData['fd'], json_encode($data));
+            $serv->close($taskData['fd']);
+        }
     }
 
     public function onWorkerStart($serv, $fd) {
-        tasklog('工作线程开启,fd=', $fd);
+        if (!$serv->taskworker) {
+            /*启动定时扫描任务*/
+            $serv->tick(10000, function() use ($serv, $mdl, $fd) {
+                $redis = REDIS();
+                $cases = $redis->sMembers('pending.case'); 
+                $l = !empty($cases) ? count($cases) : 0;
+                $l = min($l, C('PARALLEL_TASKS'));
+
+                //运行中的机器
+                $runningMachines = [];
+
+                for ($x = 0; $x < $l; $x++) {
+                    $taskData = json_decode($cases[$x], true);
+                    $machine = $taskData['ip'];
+
+                    //不重复执行相同机器的任务
+                    if ($machine && !in_array($machine, $runningMachines) && !$redis->sIsMember('working.machine', $machine)) {
+                        if ($taskData['type'] == 'PEND') {
+                            $runningMachines[] = $machine;
+                            $serv->task(json_encode($taskData));
+                        }
+                        //不是PEND类型的任务将被移出
+                        else $this->removePendingCase($cases[$x]);
+                    }
+                }
+            });
+        }
     }
 }

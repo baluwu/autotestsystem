@@ -10,13 +10,13 @@ class TaskModel {
 
     /* 任务分发 */
     public function onTask($serv, $task_id, $from_id, $strTaskData) {
-        tasklog('开始执行任务:' . $task_id);
+        tasklog('开始执行任务:' . $task_id . ',' . $strTaskData);
 
         $taskData = json_decode($strTaskData, true);
         $taskData['src_string'] = $strTaskData; 
 
         $runFunc = ['runSingle', 'runGroup', 'runTask'][$taskData['isgroup'] ?? 0];
-        $type = $taskData['type'] ?? 'IMME';
+        $type = $taskData['type'];
 
         if ($type == 'TIMER') {
             tasklog('定时任务将于' . $taskData['secs'] . '秒后执行');
@@ -37,45 +37,71 @@ class TaskModel {
         return $this->doRunTask($strTaskData, $taskData, $serv);
     }
 
+    //task type in [IMME, PEND, FORCE]
     private function doRunTask($strTaskData, $taskData, $wrapObj) {
 
         $ret = ['isSuccess' => false, 'data' => $taskData, 'msg' => ''];
-        $type = $taskData['type'] ?? 'IMME';
+        $type = $taskData['type'];
 
         //超出最大并发数
         if ($this->getWorkingMachineSize() > C('PARALLEL_TASKS')) {
             if ($type == 'IMME') {
                 $ret['msg'] = '服务器正忙,请稍后操作';
-                return $wrapObj->finish($ret);   
+                $wrapObj->finish($ret);   
+                return ;
             }
 
-            $this->addPendingCase($strTaskData);
+            if ($type != 'PEND') {
+                $this->addPendingCase($this->setPendingType($strTaskData));
+            }
             $ret['msg'] = '已加入执行队列,稍后将执行';
-            return $wrapObj->finish($ret);   
+            $wrapObj->finish($ret);   
+            return ;
         }
         else {
             //当前任务的目标机器正在工作
             if (0 == $this->addWorkingMachine($taskData['ip'])) {
                 if ($type == 'IMME') {
                     $ret['msg'] = '目标机器正忙,请稍后操作';
-                    return $wrapObj->finish($ret);   
+                    $wrapObj->finish($ret);   
+                    return ;
                 }
                 else {
-                    $this->addPendingCase($strTaskData);
+                    if ($type != 'PEND') {
+                        $this->addPendingCase($this->setPendingType($strTaskData));
+                    }
                     $ret['msg'] = '已加入执行队列,稍后将执行';
-                    return $wrapObj->finish($ret);   
+                    $wrapObj->finish($ret);
+                    return ;
                 }
             }
             //执行任务
             else {
+                $ret['free_machine'] = true;
                 $runFunc = $this->getRunFunc($taskData['isgroup']);
                 $r = $this->$runFunc($taskData);
+
                 tasklog('执行结果:' . json_encode($r));
-                $wrapObj->finish($r);
+
+                $ret['isSuccess'] = $r['isSuccess'];
+                $ret['execResult'] = $r['execResult'] ? $r['execResult'] : '';
+
+                if ($type == 'PEND') {
+                    $ret['remove_pend'] = true;
+                }
+
+                //todo 写执行结果
+
+                $wrapObj->finish($ret);
                 return ;
-                //$wrapObj->finish($this->$runFunc($taskData));
             }
         }
+    }
+
+    private function setPendingType($strTaskData) {
+        $r = json_decode($strTaskData, true);
+        $r['type'] = 'PEND';
+        return json_encode($r);
     }
 
     /**
@@ -153,7 +179,7 @@ class TaskModel {
         }
 
         //$mdl->addHistoryWhenExecSingle($taskData, true, '');
-        return [ 'isSuccess' => true, 'data' => $taskData ];
+        return [ 'isSuccess' => true, 'data' => $taskData, 'execResult' => $response ];
     }
 
     /* 用例组执行 */
@@ -247,16 +273,20 @@ class TaskModel {
             ->select();
     }
 
+    /**
+     * 针对于定时任务的适配函数
+     * type in FORCE
+     */
     private function finish($data) {
         tasklog('定时任务执行完成');
         $taskData = $data['data'];
-        $type = $taskData['type'] ?? 'IMME';
+        $type = $taskData['type'];
         
-        $this->freeWokingMachine($taskData['ip']);
-
-        if ($type == 'QUEUE') {
-            $this->removePendingCase($taskData['src_string']);
+        if ($data['free_machine']) {
+            $this->freeWokingMachine($taskData['ip']);
         }
+
+        //todo email notify
     }
 
     private function getHttpClient() {
