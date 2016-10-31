@@ -308,6 +308,17 @@ class GroupController extends AuthController {
         $this->display();
     }
 
+    //任务列表
+    //
+    public function tasks() {
+        $this->display();
+    }
+
+    //获取任务列表
+    public function getTasks(){
+
+    }
+
     //获取组用例列表执行纪录
     static $getHistoryRules = [
         'id'             => ['name' => 'id', 'type' => 'int', 'method' => 'post', 'desc' => 'id'],

@@ -150,7 +150,15 @@
                     <a href="/Group/pub" class="text-uppercase"> <i class="fa fa-cubes"></i> 公共用例组 </a>
                     </li>
 
-
+                  <li
+                  <if condition="(CONTROLLER_NAME eq 'Group')">
+                    <in name="ACTION_NAME" value="tasks">
+                      class="active open selected"
+                    </in>
+                  </if>
+                  >
+                    <a href="/Group/tasks" class="text-uppercase"><i class="fa fa-tasks"></i> 任务管理 </a>
+                    </li>
 
 
                     <if condition="($admin_info.group_id eq 1)">
