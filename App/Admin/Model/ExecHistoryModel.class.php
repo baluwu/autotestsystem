@@ -49,35 +49,30 @@ class ExecHistoryModel extends Model {
   //执行单例
   public function ExecuteSingle($mid, $ip, $port = 8080, $exec_type = 1) {
 	if( $exec_type == 2 ) {
-		return SyncExecuteSingle($mid, $ip, $port = 8080);
+		return $this->SyncExecuteSingle($mid, $ip, $port = 8080);
 	}
+
     $idsAr = explode(',', $mid);
-    $row = 0;
-    $redis = REDIS();
+    
     if (!$port) $port = 8080;
     foreach ($idsAr as $id) {
-      //查redis   list   $id
-//      $redis->sAdd('task:single', $id);
-     if($redis->sIsMember('task:single',$id)){
-       continue;
-     }
 
-//
-//      $status = M('Single')->where(['id' => $id])->getField('status');
-//      if ($status == 1) continue;
-      $data = [
-        'isgroup'     => 0,
-        'mid'         => $id,
-        'uid'         => session('admin')['id'],
-        'ip'          => $ip,
-        'port'        => $port,
-        'create_time' => REQUEST_TIME
-      ];
-      $row = $this->add($data);
-      if ($row) {
-        $data['id'] = $row;
-        AddTask($data);
-      }
+        $data = [
+            'isgroup'     => 0,
+            'mid'         => $id,
+            'uid'         => session('admin')['id'],
+            'ip'          => $ip,
+            'port'        => $port,
+            'create_time' => REQUEST_TIME,
+            'type' => 'IMME'
+        ]; 
+
+        $row = $this->add($data);
+
+        if ($row) {
+            $data['id'] = $row;
+            AddTask($data);
+        }
     }
 
     return $row;

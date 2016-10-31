@@ -58,6 +58,7 @@ return [
   'REDIS_DBNAME'         => 5,
 
   'SERVER_NAME'          => 'https://autest.loc',
+  'PARALLEL_TASKS'       => 2,
 
   /*ldap配置*/
   'LDAP_ENABLED'         => 0, //1为开启，0为关闭

@@ -51,7 +51,6 @@ class Redis extends Cache {
       $this->handler->auth($this->options['auth']);
     }
     $this->switchDB(isset($options['dbname']) ? intval($options['dbname']) : 0);
-
   }
 
   /**

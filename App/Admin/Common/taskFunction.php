@@ -1,4 +1,11 @@
-<?php
+<?PHP
+
+function tasklog($msg, $lv = 'INFO') { 
+    error_log(
+        '[' . date('H:i:s') . '] ' . $lv . ' ' . $msg . PHP_EOL, 3, 
+        ABS_ROOT . '/App/Runtime/Logs/swoole_' . date('Y-m-d') . '.log'
+    );
+}
 
 /**
  * 新增任务
@@ -13,14 +20,11 @@ function AddTask($taskData = []) {
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
     if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 1)) {
-
-
         $client->send(@json_encode($taskData, true));
+        $data = $client->recv();
 
-        \Think\Log::write('任务返回,DATA:' . $client->recv(), 'debug');
-
+        tasklog('任务返回数据:' . $data);
         $client->close();
-
         return true;
     }
 
@@ -155,7 +159,7 @@ function SyncTask($taskData = []) {
 
         $client->send(@json_encode($taskData, true));
 		$info = $client->recv();
-        \Think\Log::write('任务返回,DATA:' . $info, 'debug');
+        tasklog('客户端任务返回数据:' . $info);
 
         $client->close();
 
@@ -164,3 +168,35 @@ function SyncTask($taskData = []) {
 
     return false;
 }
+
+function sendRequest($url, $params, $timeOut=10) {
+    $postFields = is_array($params) ? http_build_query($params) : $params;
+
+    tasklog('POST:' . json_encode($params));
+
+    $ch = curl_init ();
+    curl_setopt ( $ch, CURLOPT_URL, $url );
+    curl_setopt ( $ch, CURLOPT_FAILONERROR, false );
+    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt ( $ch, CURLOPT_POST, true );
+    curl_setopt ( $ch, CURLOPT_POSTFIELDS, $postFields );
+    curl_setopt ( $ch, CURLOPT_TIMEOUT, $timeOut );
+
+    $response = curl_exec ( $ch );
+    if (curl_errno ( $ch )) {
+        $curl_error = curl_error ( $ch );
+        curl_close ( $ch );
+        return false;
+    } else {
+        $httpStatusCode = curl_getinfo ( $ch, CURLINFO_HTTP_CODE );
+        if (200 !== $httpStatusCode) {
+            curl_close ( $ch );
+            return false;
+        }
+    }
+    curl_close ( $ch );
+
+    return $response;
+}
+
+
