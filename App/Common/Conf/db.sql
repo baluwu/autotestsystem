@@ -31,3 +31,6 @@ INSERT INTO `sys_manage_group_classify` VALUES ('3', '1', '随意勾选 1-2', '2
 INSERT INTO `sys_manage_group_classify` VALUES ('4', '0', '随意勾选 2', '2016-10-30 22:13:22');
 INSERT INTO `sys_manage_group_classify` VALUES ('5', '4', '随意勾选 2-1', '2016-10-30 22:13:36');
 INSERT INTO `sys_manage_group_classify` VALUES ('6', '4', '随意勾选 2-2', '2016-10-30 22:14:08');
+
+ALTER TABLE `sys_auth_group`
+ADD COLUMN `classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户组分类';
