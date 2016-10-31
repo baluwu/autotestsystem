@@ -94,4 +94,21 @@ class AuthGroupModel extends Model {
         $obj = $this->field('id,title,rules')->where(['id' => $id])->find();
         return $obj;
     }
+
+    public function getClassifyData($groupid)
+    {
+        $ret = D('ManageGroupClassify')->getList();
+        $classify_str = $this->where(array('id'=>$groupid))->getField('classify');
+        $classify_arr = explode(',', $classify_str);
+        if( !empty($classify_arr) && !empty($ret)) {
+            foreach( $ret as $k=>&$v ) {
+                if(in_array($v['id'], $classify_arr)) {
+                    $v['checked'] = true;
+                } else {
+                    $v['checked'] = false;
+                }
+            }
+        }
+        return fmt_tree_data($ret);
+    }
 }

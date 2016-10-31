@@ -7,9 +7,10 @@ jQuery(document).ready(function () {
     }
 
 	var setting = {
-		check: {
-			enable: false
-		},
+      async: {
+        enable: true,
+        url: '/ManageGroupClassify/getData'
+      },
 		data: {
 			simpleData: {
 				enable: true
@@ -20,17 +21,7 @@ jQuery(document).ready(function () {
         }
 	};
 
-	var zNodes =[
-		{ id:1, pId:0, name:"随意勾选 1", open:true},
-		{ id:11, pId:1, name:"随意勾选 1-1", open:true},
-		{ id:12, pId:1, name:"随意勾选 1-2", open:true},
-		{ id:2, pId:0, name:"随意勾选 2", checked:true, open:true},
-		{ id:21, pId:2, name:"随意勾选 2-1"},
-		{ id:22, pId:2, name:"随意勾选 2-2", open:true},
-		{ id:23, pId:2, name:"随意勾选 2-3"}
-	];
-
-    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    $.fn.zTree.init($("#treeDemo"), setting);
 		
   var TableDatatablesAjax = function () {
 

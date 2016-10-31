@@ -179,6 +179,27 @@ class ManageController extends AuthController {
         $this->ajaxReturn($AuthGroup->getList($this->page_start, $this->page_rows, $order['column'], $order['dir']));
     }
 
+    public function editgroup($id)
+    {
+        $Manage = D('Manage');
+        $user = $Manage->getManager($id);
+        $this->assign('user', $user);
+        $auth_group = D('AuthGroup')->getListAll();
+
+        $this->assign('group_id', $id);
+        $this->assign('auth_group', $auth_group);
+        $this->display();
+    }
+
+    public function getClassifyData($group_id)
+    {
+        if( empty($group_id) ) {
+            $this->error('参数传入不正确！');
+        }
+        $ret = D('AuthGroup')->getClassifyData($group_id);
+        $this->ajaxReturn($ret);
+    }
+
     //获取一条数据
 //    public function getManager() {
 //        if (!IS_AJAX) $this->error('非法操作！');

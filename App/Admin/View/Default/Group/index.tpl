@@ -74,7 +74,7 @@
                     <i class="fa fa-recycle "></i> 回收站 </a>
                 </li>
               </ul>
-              <h3>分类筛选</h3>
+              <h3>用户组分类</h3>
               <ul id="treeDemo" class="ztree">
               </ul>
               </br>

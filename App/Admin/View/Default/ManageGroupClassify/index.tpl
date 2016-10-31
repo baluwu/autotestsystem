@@ -91,7 +91,7 @@
                     <i class="fa fa-plus "></i> 用户组管理</a>
                 </li>
                 <li class="active">
-                  <a href="ManageGroupClassify/index">
+                  <a href="/ManageGroupClassify/index">
                     <i class="fa fa-plus "></i> 用户组分类管理</a>
                 </li>
               </ul>

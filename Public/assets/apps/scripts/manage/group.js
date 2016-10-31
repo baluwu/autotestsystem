@@ -81,8 +81,8 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return '系统用户组';
-                //return '<a href="./edit/id/' + data.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 编辑 </a>';
+                //return '系统用户组';
+                return '<a href="./editgroup/id/' + data.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 编辑 </a>';
 
               },
               "targets": 3
