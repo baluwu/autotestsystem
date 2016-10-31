@@ -11,7 +11,24 @@ class ManageGroupClassifyModel extends Model {
     //获取管理员列表
     public function getList()
     {
-        $ret = $this->field('id,pid as pId,name')->select();
-        return $ret;
+        $ret = $this->select();
+        return fmt_tree_data($ret);
     }
+
+    public function saveData($id, $data)
+    {
+        return $this->where(array('id'=>$id))->save($data);
+    }
+
+    public function delData($id)
+    {
+        return $this->where(array('id'=>$id))->delete();
+    }
+
+    public function addData($data)
+    {
+        return $this->add($data);
+    }
+
+
 }

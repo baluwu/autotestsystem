@@ -36,9 +36,13 @@
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+
   <link rel="stylesheet" href="/Public/assets/global/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
   <!-- END THEME LAYOUT STYLES -->
   <link rel="shortcut icon" href="/favicon.ico"/>
+  <style type="text/css">
+    .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+  </style>
   <script>
     var CONFIG = {
       'ROOT': '__ROOT__',
@@ -165,6 +169,7 @@
 <script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script src="/Public/assets/global/plugins/ztree/js/jquery.ztree.core.js"></script>
+<script src="/Public/assets/global/plugins/ztree/js/jquery.ztree.exedit.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
 

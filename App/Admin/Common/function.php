@@ -106,3 +106,24 @@ function ERR($msg, $code=0) {
   }
   Think\Think::halt($msg);        // 异常类型不存在则输出错误信息字串
 }
+
+/**
+ * 格式化树形节点数据
+ *
+ * @param $data
+ * @param array $def
+ */
+function fmt_tree_data ( $data, $def = array() )
+{
+    if( empty($data) ) {
+        return $data;
+    }
+
+    $open = isset($def['open']) ? $def['open'] : true;
+    foreach( $data as &$v ) {
+        $v['pId'] = $v['pid'];
+        $v['open'] = $open;
+    }
+
+    return $data;
+}
