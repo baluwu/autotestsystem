@@ -16,7 +16,7 @@ class CmdController extends Controller {
                 'backlog'         => 128,
                 'daemonize'       => true, //是否作为守护进程
                 'log_file'        => LOG_PATH . 'swoole_' . date('Y-m-d') . '.log',
-                'log_level'       => 0,
+                'log_level'       => 0
             ]
         );
 
@@ -44,19 +44,22 @@ class CmdController extends Controller {
         /*single*/
         $taskData = [
             'isgroup'     => 0,
-            'mid'         => 59,
+            'mid'         => 61,
             'uid'         => 1,
-            'ip'          => '192.168.121.132',//ip必须真实存在
-            'port'        => '3334',
+            'ip'          => '192.168.1.6',//ip必须真实存在
+            'port'        => '8080',
             'create_time' => REQUEST_TIME,
             'id' => 1,
             'type' => 'IMME'
         ];
 
-        AddTask($taskData);
+        /*同步添加任务,需接受返回数据*/
+        SyncTask($taskData);
+        return ;
         
         //group
         $taskData = ["isgroup"=>1,"type"=>"IMME","mid"=>"22","uid"=>"1","ip"=>"192.168.121.132","port"=>"","create_time"=>"2016-07-12 16:35:08","id"=>118];
+        /*异步添加任务，无需返回*/
         AddTask($taskData);
 
         //task

@@ -143,11 +143,11 @@ class TaskModel {
             $arc = $thisData['arc'];
             tasklog('arc:' . ABS_ROOT . $arc, 'INFO');
 
-            $postParms['voiceUrl'] = C('SERVER_NAME') . $arc;
-            $postParms['asrVoiceInject'] = $thisData['name'];//pathinfo($arc)['basename'];
+            $postParms['voiceUrl'] = 'http://192.168.1.12:8090' . $arc;
+            //$postParms['voiceUrl'] = C('SERVER_NAME') . $arc;
+            $postParms['asrVoiceInject'] = $thisData['name'];
 
             if (!file_exists(ABS_ROOT . $arc)) {
-                //$mdl->addHistoryWhenExecSingle($taskData, false, 'asr文件不存在');
                 $ret['msg'] = 'asr文件不存在';
                 return $ret;
             }
@@ -156,45 +156,37 @@ class TaskModel {
         $url = 'http://' . $taskData['ip'] . ':' . $taskData['port'] .
             ($type == 'NLP' ? '/asrToNlp' : '/asrVoiceInject');
 
-        $response = sendRequest($url, $postParms, 10);
+        $response = $this->getHttpClient()->post($url, $postParms);
 
-        if (!$response) {
-            //$mdl->addHistoryWhenExecSingle($taskData, false, 'HTTP请求失败', $response);
+        if (!$response->isOk()) {
             $ret['msg'] = 'HTTP请求失败';
             return $ret;
         }
 
-        $resData = contentAsArray($response->getContent());
+        tasklog('机器响应:' . $response);
+        $resData = contentAsArray($response);
 
         if (empty($resData)) {
             $ret['msg'] = '请求数据错误';
             return $ret;
-            //$mdl->addHistoryWhenExecSingle($taskData, false, 'HTTP请求数据错误', $response);
         }
 
         if (!judged_all($resData, $thisData['validates'])) {
             $ret['msg'] = '判定条件不通过';
             return $ret;
-            //$mdl->addHistoryWhenExecSingle($taskData, false, '判定条件不通过', $response);
         }
 
-        //$mdl->addHistoryWhenExecSingle($taskData, true, '');
         return [ 'isSuccess' => true, 'data' => $taskData, 'execResult' => $response ];
     }
 
     /* 用例组执行 */
     public function runGroup($taskData) {
 
-        //$mdl->setGroupStatus($taskData['mid'], 1);
-        //$mdl->setExecHistoryStatus($taskData['id'], 1);
-
         $groupSingleData = $this->getGroupSingle($taskData['mid']);
 
         tasklog('开始执行用例组: ' . count($groupSingleData));
         
         if (!is_array($groupSingleData) || count($groupSingleData) == 0) {
-            //$mdl->setGroupStatus($taskData['mid'], 0);
-            //$mdl->addExecHistory($taskData, false, '用例组无用例');
             return [ 'isSuccess' => false, 'data' => $taskData ];
         }
 
@@ -213,8 +205,6 @@ class TaskModel {
             $this->endExecSingle($taskData);
         }
 
-        //$mdl->addExecHistory($taskData, $isSuccess, $isSuccess ? '用例组执行成功' : '用例组执行失败');
-        //$mdl->setGroupStatus($taskData['mid'], 0);
         tasklog('用例组执行完成！');
 
         return [ 'isSuccess' => $isSuccess, 'data' => $taskData ];

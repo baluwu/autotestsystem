@@ -20,11 +20,9 @@ function AddTask($taskData = []) {
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
     if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 1)) {
-        $client->send(@json_encode($taskData, true));
-        $data = $client->recv();
-
-        tasklog('任务返回数据:' . $data);
-        $client->close();
+        $client->send(json_encode($taskData, true));
+        $data = $client->recv(65535, 1);
+        tasklog('客户端收到数据:' . $data . ',errorcode=' . $client->errCode . ',' . $client->errorNo);
         return true;
     }
 
@@ -35,10 +33,7 @@ function AddTask($taskData = []) {
  * 定时任务
  * @desc 如：每天12点执行
  */
-function cronTask($task_id, $time) {
-
-
-}
+function cronTask($task_id, $time) {}
 
 /**
  * 计划任务
@@ -154,7 +149,7 @@ function SyncTask($taskData = []) {
     }
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
-    if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 1)) {
+    if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 30)) {
 
 
         $client->send(@json_encode($taskData, true));
@@ -172,8 +167,6 @@ function SyncTask($taskData = []) {
 function sendRequest($url, $params, $timeOut=10) {
     $postFields = is_array($params) ? http_build_query($params) : $params;
 
-    tasklog('POST:' . json_encode($params));
-
     $ch = curl_init ();
     curl_setopt ( $ch, CURLOPT_URL, $url );
     curl_setopt ( $ch, CURLOPT_FAILONERROR, false );
@@ -185,12 +178,10 @@ function sendRequest($url, $params, $timeOut=10) {
     $response = curl_exec ( $ch );
     if (curl_errno ( $ch )) {
         $curl_error = curl_error ( $ch );
-        curl_close ( $ch );
         return false;
     } else {
         $httpStatusCode = curl_getinfo ( $ch, CURLINFO_HTTP_CODE );
         if (200 !== $httpStatusCode) {
-            curl_close ( $ch );
             return false;
         }
     }
@@ -199,4 +190,21 @@ function sendRequest($url, $params, $timeOut=10) {
     return $response;
 }
 
+/*
+function sendRequest($url, $params, $timeOut = 10) {
+    $data = http_build_query($params);  
+    $opts = array(  
+        'http'=>array(  
+            'method'=>"POST",  
+            'header'=>"Content-type: application/x-www-form-urlencoded\r\n".  
+            "Content-length:".strlen($data)."\r\n" .   
+            "\r\n",  
+            'content' => $data,  
+        )  
+    );  
+    $cxContext = stream_context_create($opts);  
+    $sFile = file_get_contents($url, false, $cxContext);
 
+    return $cxContext;
+}
+*/
