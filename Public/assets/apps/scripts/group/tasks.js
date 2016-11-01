@@ -49,7 +49,7 @@ jQuery(document).ready(function () {
           ],
           "pageLength": 20, // default record count per page
           "ajax": {
-            "url": CONFIG['MODULE'] + '/Group/getTask', // ajax source
+            "url": CONFIG['MODULE'] + '/Group/getTasks', // ajax source
           },
           keys: true,
           columns: [
@@ -61,13 +61,26 @@ jQuery(document).ready(function () {
               data: 'name',
               orderable: false
             },
-
-            {data: 'create_time'},
             {
-              data: 'uid'
+              data: 'run_at'
+            },
+            {
+              data: 'ver'
+            },
+            {
+              data: 'description',
+              orderable: false
             },
             {
               data: 'status',
+              orderable: false
+            },
+            {
+              data: 'nickname',
+              orderable: false
+            },
+            {
+              data: 'nickname',
               orderable: false
             },
             {
@@ -83,35 +96,36 @@ jQuery(document).ready(function () {
           "columnDefs": [
             {
               "render": function (data, type, row) {
-                return ' <span class="label label-sm label-' + (data == '公共' ? 'success' : 'info') + '">' + data + '</span>'
+                return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">' +
+                  ' <input type="checkbox" class="checkboxes" value="'+data+'" />' +
+                  '<span></span>' +
+                  ' </label>';
               },
-              "targets": 2
+              "targets": 0
             },
             {
               "render": function (data, type, row) {
-                return row.nickname ? row.nickname : row.manager ? row.manager : data
+                return ' <span class="label label-sm label-' + (data == '公共' ? 'success' : 'info') + '">' + data + '</span>'
               },
               "targets": 3
             },
             {
               "render": function (data, type, row) {
-                return data == 1 ? "执行中" : "空闲";
+                return row.nickname ? row.nickname : row.manager ? row.manager : data
               },
               "targets": 4
             },
             {
               "render": function (data, type, row) {
-
-                var edit  = "";
-                if(CONFIG.authGroup == 1) {
-                    edit='<a class="btn dark btn-sm btn-outline margin-bottom-5" href="./edit/id/'+data.id+'"> <i class="fa fa-edit"></i> 编辑 </a>';
-                }
-                return edit+'<a  href="./single_publist/tid/' + data.id + '" class="btn blue btn-sm btn-outline margin-bottom-5"> <i class="fa fa-object-ungroup"></i> 用例列表 </a>'
-                  + '<a data-toggle="modal" data-title="' + data.name + '" data-id="' + data.id + '"  data-status="' + row.status + '"  ' + (row.status == 1 ? 'disabled' : '') + '   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a>'
-                  + '<a href="./execute_history_pub/tid/' + data.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a>';
-
+                return data == 1 ? "执行中" : "空闲";
               },
-              "targets": 5
+              "targets": 6
+            },
+            {
+              "render": function (data, type, row) {
+                return '<a href="./execute_history_pub/tid/' + data.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
+              },
+              "targets": 9
             }
           ]
         }

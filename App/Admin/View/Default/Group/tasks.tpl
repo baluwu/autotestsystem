@@ -55,11 +55,35 @@
 
   <div class="container-fluid">
     <div class="page-content">
-
       <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
-          <div class="page-content-col padding-lt-0">
+              <!-- BEGIN PAGE SIDEBAR -->
+          <div class="page-sidebar">
+            <nav class="navbar" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <h3>任务管理</h3>
+              <ul class="nav navbar-nav margin-bottom-35">
+                <li class="active">
+                  <a href="./tasks">
+                    <i class="fa fa-object-group"></i> 任务列表 </a>
+                </li>
+              </ul>
+              </br>
+              <h3>Quick Actions</h3>
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="./index">
+                    <i class="fa fa-plus "></i> 添加任务
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- END PAGE SIDEBAR -->  
+
+          <div class="page-content-col">
             <!-- BEGIN PAGE BASE CONTENT -->
             <div class="row">
               <div class="col-md-12">
@@ -68,7 +92,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-cubes font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">公共用例组</span>
+                      <span class="caption-subject font-dark sbold uppercase">任务列表</span>
                     </div>
                     <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
@@ -76,7 +100,7 @@
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">公共用例组</li>
+                        <li class="active">任务列表</li>
                       </ol>
                       <!-- Sidebar Toggle Button -->
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -93,10 +117,26 @@
                   </div>
                   <div class="portlet-body">
                     <div class="table-container">
-
+                      <div class="table-toolbar">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="btn-group">
+                              <a id="execute_diff" target="_blank" class="btn sbold green">
+                                <i class="fa fa fa-th-list"></i> 对比
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
                         <thead>
                         <tr role="row" class="heading">
+                          <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                              <input type="checkbox" class="group-checkable" data-set="#datatable_ajax .checkboxes"/>
+                              <span></span>
+                            </label>
+                          </th>
                           <th> ID</th>
                           <th> 任务名称</th>
                           <th> 执行时间</th>
@@ -108,6 +148,7 @@
                           <th> 操作</th>
                         </tr>
                         <tr role="row" class="filter">
+                          <td></td>
                           <td></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_name"

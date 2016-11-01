@@ -23,7 +23,7 @@ class ExecHistoryModel extends Model {
     //执行状态:0等待执行1执行中2执行成功3执行失败
     $map['e.status'] = ['in', '2,3'];
 
-    $map['e.mid'] = ['eq', $id];
+    !empty($id) && $map['e.mid'] = ['eq', $id];
 
     $map['e.isgroup'] = ['eq', $isgroup];
 	
