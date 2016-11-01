@@ -73,6 +73,10 @@
                   <a href="./recycle">
                     <i class="fa fa-recycle "></i> 回收站 </a>
                 </li>
+                <li>
+                  <a href="./addTask">
+                    <i class="fa fa-tasks"></i> 创建任务 </a>
+                </li>
               </ul>
               <h3>分类筛选</h3>
               <ul id="treeDemo" class="ztree">

@@ -314,7 +314,11 @@ class GroupController extends AuthController {
         $this->display();
     }
 
-    //获取组用例列表执行纪录
+    public function addTask(){
+        $this->display();
+    }
+
+    //获取任务列表执行纪录
     static $getTasksRules = [
         'page_start'     => ['name' => 'start', 'type' => 'int', 'default' => 0, 'method' => 'post', 'desc' => '第几条记录开始'],
         'page_rows'      => ['name' => 'length', 'type' => 'int', 'default' => 20, 'method' => 'post', 'desc' => '输出多少条记录'],
