@@ -19,18 +19,22 @@ class TaskModel {
         $type = $taskData['type'];
 
         if ($type == 'TIMER') {
-            tasklog('定时任务将于' . $taskData['secs'] . '秒后执行');
-            $serv->finish(['isSuccess' => true, 'data' => $taskData, 'msg' => '已添加定时任务']);
+            $r = M('Task')->add([
+                'name' => $taskData['name'],
+                'uid' => $taskData['uid'],
+                'ver' => $taskData['ver'],
+                'description' => $taskData['description'],
+                'mid' => $taskData['mid'],
+                'run_at' => $taskData['run_at'],
+                'notify_email' => $taskData['notify_email'],
+                'create_time' => $taskData['create_time'],
+                'ip' => $taskData['ip'],
+                'port' => $taskData['port'] ? $taskData['port'] : '8080'
+            ]);
 
-            $serv->after($taskData['secs'] * 1000, function ($id) use ($runFunc, $taskData) {
-                $taskData['type'] = 'FORCE';
-                $self = D('Task');
+            tasklog('添加任务:' . json_encode($taskData));
 
-                tasklog('执行定时任务:' . date("Y-m-d H:i:s"));
-
-                $self->doRunTask($strTaskData, $taskData, $self);
-            });
-
+            $serv->finish(['isSuccess' => $r ? true : false, 'msg' => '']);
             return ;
         }
 
@@ -110,8 +114,12 @@ class TaskModel {
      * 执行状态 0 等待任务执行  1 正在执行 2 执行成功 3 执行失败
      */
     public function runSingle($taskData) {
+        $taskData['exec_start_time'] = date('Y-m-d H:i:s');
+        $history_id = $this->addExecHistory($taskData);
         $thisData = $this->initExecSingle($taskData, null);
-        return $this->startExecSingle($taskData, $thisData);
+        $r = $this->startExecSingle($taskData, $thisData);
+        $this->setExecHistoryResult($history_id, $taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败', $r->execResult);       
+        return $r;
     }
 
     private function initExecSingle($taskData, $thisData) {
@@ -195,11 +203,10 @@ class TaskModel {
         }
 
         $isSuccess = true;
-        foreach ($groupSingleData as $key => $thisData) {
-            $exec_start_time = date("Y-m-d H:i:s");
-            $taskData['stime'] = $exec_start_time;
-            $taskData['single_id'] = $groupSingleData[$key]['id'];
+        $taskData['exec_start_time'] = date('Y-m-d H:i:s');
+        $history_id = $this->addExecHistory($taskData);
 
+        foreach ($groupSingleData as $key => $thisData) {
             $thisData = $this->initExecSingle($taskData, $thisData);
             $execResult = $this->startExecSingle($taskData, $thisData);
             tasklog('Exec Group Single: '. json_encode($execResult));
@@ -210,6 +217,7 @@ class TaskModel {
             $this->endExecSingle($taskData);
         }
 
+        $this->setExecHistoryResult($history_id, $taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败');       
         tasklog('用例组执行完成！');
 
         return [ 'isSuccess' => $isSuccess, 'data' => $taskData ];
@@ -232,7 +240,9 @@ class TaskModel {
         }
 
         $ret['isSuccess'] = true;
+        $taskData['exec_start_time'] = date('Y-m-d H:i:s');
 
+        $history_id = $this->addExecHistory($taskData);
         foreach ($singlesData as $thisData) {
             $thisData = $this->initExecSingle($taskData, $thisData);
             $execRs = $this->startExecSingle($taskData, $thisData);
@@ -243,6 +253,9 @@ class TaskModel {
             }
             $this->endExecSingle($taskData);
         }
+
+        M('Task')->where(['id' => $taskData['id']])->delete();
+        $this->setExecHistoryResult($history_id, $taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败');       
 
         return $ret;
     }
@@ -268,22 +281,6 @@ class TaskModel {
             ->select();
     }
 
-    /**
-     * 针对于定时任务的适配函数
-     * type in FORCE
-     */
-    private function finish($data) {
-        tasklog('定时任务执行完成');
-        $taskData = $data['data'];
-        $type = $taskData['type'];
-        
-        if ($data['free_machine']) {
-            $this->freeWokingMachine($taskData['ip']);
-        }
-
-        //todo email notify
-    }
-
     private function getHttpClient() {
         $cli = new \Leaps\HttpClient\Adapter\Curl();
         $cli->setOption(CURLOPT_TIMEOUT, 30)
@@ -295,4 +292,44 @@ class TaskModel {
     private function getRunFunc($isgroup) {
         return ['runSingle', 'runGroup', 'runTask'][$isgroup ?? 0];
     }
+
+    /* 添加执行记录 */
+    public function addExecHistory($td) {
+        return M('ExecHistory')->add([
+            'mid' => $td['mid'],
+            'uid' => $td['uid'],
+            'isgroup' => $td['isgroup'],
+            'ip' => $td['ip'],
+            'port' => $td['port'],
+            'create_time' => $td['create_time'],
+            'exec_start_time' => $td['exec_start_time'],
+            'status' => 1,
+            'exec_plan_time' => $td['run_at'] ? date('Y-m-d H:i:s', $td['run_at']) : '',
+            'ver' => $td['ver'] ? $td['ver'] : '',
+            'description' => $td['description'] ? $td['description'] : '',
+        ]);
+    }
+
+    public function setExecHistoryResult($history_id, $td, $is_succ, $msg, $response = null) {
+        tasklog('执行' . ($is_succ ? '成功' : ('失败:' . $msg)), $is_succ ? 'INFO' : 'ERROR');
+
+        M('ExecHistory')->where(['id' => $history_id])->setField([
+            'status'        => $is_succ ? 2 : 3,
+            'exec_end_time' => date("Y-m-d H:i:s"),
+            'exec_content'  => json_encode([
+                'is_success' => $is_succ,
+                'msg'        => $msg,
+                'content'    => [
+                    'IP'   => $td['ip'] ?? '',
+                    'port' => $td['port'] ?? '',
+                    'arc'  => $td['arc'] ?? '',
+                    'StatusCode' => $response ? $response->getStatusCode() : '',
+                    'Header'     => $response ? $response->getRawHeader() : '',
+                    'Content'    => $response ? $response->getContent() : ''
+                ]
+            ], JSON_UNESCAPED_UNICODE)
+        ]);
+    }
+
+
 }

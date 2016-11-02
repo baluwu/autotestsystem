@@ -11,7 +11,7 @@ return [
     '__UPLOADIFY__'     => '/Public/' . MODULE_NAME . '/Uploadify',
   ],
 
-  'UPLOAD_PATH'       => '/Uploads/',
+  'UPLOAD_PATH'       => '/Public/Uploads/',
   'SHOW_ERROR_MSG'       => true,
 
 ];

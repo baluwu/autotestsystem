@@ -19,7 +19,7 @@ function AddTask($taskData = []) {
     }
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
-    if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 1)) {
+    if ($client->connect('127.0.0.1', C("SWOOLE_PORT"))) {
         $client->send(json_encode($taskData, true));
         $data = $client->recv(65535, 1);
         tasklog('客户端收到数据:' . $data . ',errorcode=' . $client->errCode . ',' . $client->errorNo);

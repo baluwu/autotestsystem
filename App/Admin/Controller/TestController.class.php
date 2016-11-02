@@ -4,11 +4,11 @@ namespace Admin\Controller;
 use Think\Controller;
 
 class TestController extends Controller {
-    public function single() {
+    public function single($mid) {
         /*single*/
         $taskData = [
             'isgroup'     => 0,
-            'mid'         => 47,
+            'mid'         => $mid,
             'uid'         => 1,
             'ip'          => '192.168.1.6',//ip必须真实存在
             'port'        => '8080',
@@ -29,6 +29,44 @@ class TestController extends Controller {
         /*同步添加任务,需接受返回数据*/
         DB($resp);
     }
+
+    public function multi_imme_single() {
+        for ($x = 0; $x < 5; $x++) {
+            $taskData = [
+                'isgroup'     => 0,
+                'mid'         => 1,
+                'uid'         => 1,
+                'ip'          => '192.168.1.6',//ip必须真实存在
+                'port'        => '8080',
+                'create_time' => REQUEST_TIME,
+                'id' => 1,
+                'type' => 'IMME'
+            ];
+            AddTask($taskData);
+        }
+    }
+
+    public function multi_timer_single() {
+        for ($x = 0; $x < 5; $x++) {
+            $taskData = [
+                'isgroup'     => 0,
+                'mid'         => 1,
+                'uid'         => 1,
+                'ip'          => '192.168.1.6',//ip必须真实存在
+                'port'        => '8080',
+                'create_time' => time(),
+                "run_at"=>time() + 15 + $x,
+                'ver' => '1.0.0',
+                'name' => 'task'. $x,
+                'notify_email' => 'baluwu.carp@gmail.com',
+                'description' => '这是一个注释',
+                'id' => 1,
+                'type' => 'TIMER'
+            ];
+            AddTask($taskData);
+        }
+    }
+
 
     public function task() {
         //task

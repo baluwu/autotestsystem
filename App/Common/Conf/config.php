@@ -13,7 +13,7 @@ return [
   'DB_HOST'              => '127.0.0.1', // 服务器地址
   'DB_NAME'              => 'rokid_ats',          // 数据库名
   'DB_USER'              => 'root',      // 用户名
-  'DB_PWD'               => 'root',          // 密码
+  'DB_PWD'               => '',          // 密码
   'DB_PORT'              => '3306',        // 端口
   'DB_PREFIX'            => 'sys_',    // 数据库表前缀
   'DB_FIELDS_CACHE'      => true,        // 启用字段缓存
@@ -45,7 +45,6 @@ return [
   'SESSION_REDIS_AUTH'   => 'FAFFDBYG',    //Redis auth认证(密钥中不能有逗号),如果相同只填一个,用英文逗号分隔
   'SESSION_REDIS_DB'     => 5,    //Redis 数据库
   */
-  'UPLOAD_PATH'          => 'Public/Uploads/',
 
   'SWOOLE_PORT'          => 3333,
 
@@ -58,7 +57,7 @@ return [
   'REDIS_DBNAME'         => 5,
 
   'SERVER_NAME'          => 'https://autest.loc',
-  'PARALLEL_TASKS'       => 2,
+  'PARALLEL_TASKS'       => 3,
 
   /*ldap配置*/
   'LDAP_ENABLED'         => 0, //1为开启，0为关闭

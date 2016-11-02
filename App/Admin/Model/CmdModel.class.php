@@ -3,28 +3,6 @@ namespace Admin\Model;
 use Think\Model;
 
 class CmdModel {
-    /* 添加执行记录 */
-    public function addExecHistory($td, $is_succ, $msg, $response = null) {
-        tasklog('执行' . ($is_succ ? '成功' : ('失败:' . $msg)), $is_succ ? 'INFO' : 'ERROR');
-
-        M('ExecHistory')->where(['id' => $td['id']])->setField([
-            'status'        => $is_succ ? 2 : 3,
-            'exec_end_time' => date("Y-m-d H:i:s"),
-            'exec_content'  => json_encode([
-                'is_success' => $is_succ,
-                'msg'        => $msg,
-                'content'    => [
-                    'IP'   => $td['ip'] ?? '',
-                    'port' => $td['port'] ?? '',
-                    'arc'  => $td['arc'] ?? '',
-                    'StatusCode' => $response ? $response->getStatusCode() : '',
-                    'Header'     => $response ? $response->getRawHeader() : '',
-                    'Content'    => $response ? $response->getContent() : ''
-                ]
-            ], JSON_UNESCAPED_UNICODE)
-        ]);
-    }
-
     /* 增加用例组用例的执行记录 */
     public function addGroupSingleExecHistory($td, $is_succ, $msg, $http = null) {
         tasklog('组单例执行' . ($is_succ ? '成功' : ('失败:' . $msg)), $is_succ ? 'INFO' : 'ERROR');

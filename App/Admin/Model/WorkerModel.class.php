@@ -27,14 +27,12 @@ class WorkerModel {
                 return $serv->close($fd);
             }
 
-            $secs = strtotime($runAt) - time();
+            $secs = $runAt - time();
             tasklog('RUNAT:' . $runAt . ', SECS:' . $secs);
             if ($secs < 10) {
                 $serv->send($fd, json_encode([ 'isSuccess' => false, 'msg' => '时间设置不合法(>当前时间+10秒)']));
                 return $serv->close($fd);
             }
-
-            $taskData['secs'] = $secs < 5 ? 5 : $secs;
 
             return  $serv->task(json_encode($taskData));
         }
@@ -72,17 +70,18 @@ class WorkerModel {
 
     public function onWorkerStart($serv, $fd) {
         if (!$serv->taskworker) {
-            /*启动定时扫描任务*/
-            $serv->tick(10000, function() use ($serv, $mdl, $fd) {
+            //扫描pending.case
+            $serv->tick(10000, function() use ($serv, $fd) {
                 $redis = REDIS();
                 $cases = $redis->sMembers('pending.case'); 
-                $l = !empty($cases) ? count($cases) : 0;
-                $l = min($l, C('PARALLEL_TASKS'));
+                $tl = !empty($cases) ? count($cases) : 0;
+                $vl = min($l, C('PARALLEL_TASKS'));
+                $rt = 0;
 
                 //运行中的机器
                 $runningMachines = [];
 
-                for ($x = 0; $x < $l; $x++) {
+                for ($x = 0; $x < $tl && $rt < $vl; $x++) {
                     $taskData = json_decode($cases[$x], true);
                     $machine = $taskData['ip'];
 
@@ -91,12 +90,49 @@ class WorkerModel {
                         if ($taskData['type'] == 'PEND') {
                             $runningMachines[] = $machine;
                             $serv->task(json_encode($taskData));
+                            $rt++;
                         }
                         //不是PEND类型的任务将被移出
                         else $this->removePendingCase($cases[$x]);
                     }
                 }
             });
+
+            //扫描任务队列
+            $serv->tick(30000, function() use ($serv, $fd) {
+                $redis = REDIS();
+                $tasks = M('Task')->limit(0, 10)->select();    
+
+                $tl = count($tasks);
+                $vl = min($tl, C('PARALLEL_TASKS'));
+
+                $rt = 0;
+                $runningMachines = [];
+
+                for ($x = 0; $x < $tl && $rt < $vl; $x++) {
+                    $task = $tasks[$x];
+                    if (!$task['run_at'] || !$task['ip']) {
+                        continue;
+                    }
+
+                    $machine = $task['ip'];
+
+                    //不重复执行相同机器的任务
+                    if ($machine && 
+                        !in_array($machine, $runningMachines) && 
+                        ($task['run_at'] < time() || ($task['run_at'] - time() <= 30))  &&
+                        !$redis->sIsMember('working.machine', $machine))
+                    {
+
+                        $task['type'] = 'TASK';
+                        $task['isgroup'] = 2;
+                        $runningMachines[] = $machine;
+                        $serv->task(json_encode($task));
+                        $rt++;
+                    }
+                }
+            });
+
         }
     }
 }
