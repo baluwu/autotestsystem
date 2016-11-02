@@ -51,7 +51,6 @@ class Redis extends Cache {
       $this->handler->auth($this->options['auth']);
     }
     $this->switchDB(isset($options['dbname']) ? intval($options['dbname']) : 0);
-
   }
 
   /**
@@ -464,16 +463,22 @@ class Redis extends Cache {
     $this->switchDB($dbname);
     return $this->handler->sismember($this->formatKey($key), $this->formatValue($value));
   }
+  /**
+   * 获取所有成员
+   */
+  public function sMembers($key, $dbname = null) {
+    $this->switchDB($dbname);
+    return $this->handler->sGetMembers($this->formatKey($key));
+  }
 
   /**
    * 删除 member元素
    */
   public function sRemove($key, $value, $dbname = null) {
-    $this->switchDB($dbname);
-    return $this->handler->sRemove($this->formatKey($key), $this->formatValue($value));
+      $this->switchDB($dbname);
+      tasklog('SREMOVE:' . $this->formatKey($key) . '#' . $this->formatValue($value));
+    return $this->handler->sRem($this->formatKey($key), $this->formatValue($value));
   }
-
-
 
   //----------------------------------------------------通用方法---------------------------------------------------
   /**
