@@ -14,6 +14,8 @@ CREATE TABLE `sys_audio_uploads` (
 ALTER TABLE `sys_exec_history`
 ADD COLUMN `exec_type` tinyint(2) NULL DEFAULT 1 COMMENT '执行类型 1 正常执行 2 编辑用例执行自检测' ;
 
+ALTER TABLE `rokid_ats`.`sys_exec_history` ADD COLUMN `ver` VARCHAR(20) NULL COMMENT '版本' AFTER `exec_plan_time`, ADD COLUMN `description` VARCHAR(255) NULL COMMENT '注释' AFTER `ver`; 
+
 CREATE TABLE `sys_manage_group_classify` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自动编号',
   `pid` int(10) NOT NULL COMMENT '父分类ID',
