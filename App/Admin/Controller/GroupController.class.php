@@ -22,6 +22,7 @@ class GroupController extends AuthController {
     ];
 
     public function getList() {
+        //var_dump(I('get.classify'));exit;
         if (!IS_AJAX) $this->error('非法操作！');
         $Group = D('Group');
         $order = [

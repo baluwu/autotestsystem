@@ -2,8 +2,11 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
+    var classify = '';
     var ztreeClick = function(event, treeId, treeNode, clickFlag) {
-      window.location.href = '/Group/index/classify/'+treeNode.id;
+      //window.location.href = '/Group/index/classify/'+treeNode.id;
+      classify = treeNode.id;
+      //TableDatatablesAjax.init();
     }
 
 	var setting = {
@@ -37,7 +40,6 @@ jQuery(document).ready(function () {
     };
 
     var handleRecords = function () {
-
       var grid = new Datatable();
 
       grid.init({
@@ -59,7 +61,8 @@ jQuery(document).ready(function () {
                 url: CONFIG['MODULE'] + '/Group/Remove',
                 type: 'POST',
                 data: {
-                  ids: $(this).data('id')
+                  ids: $(this).data('id'),
+                  classify:classify,
                 },
                 beforeSend: function () {
 
@@ -109,6 +112,7 @@ jQuery(document).ready(function () {
           "ajax": {
             "url": CONFIG['MODULE'] + '/Group/getList', // ajax source
           },
+          classify:104,
           keys: true,
           columns: [
             {
