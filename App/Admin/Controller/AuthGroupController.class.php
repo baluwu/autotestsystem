@@ -50,6 +50,15 @@ class AuthGroupController extends AuthController {
      	return $this->ajaxReturn($AuthGroup->getAuth(I('post.id')));
      }
 
+	//保存用户分组分类
+	public function save_classify()
+	{
+		if(!IS_AJAX) $this->error('非法操作！');
+		$classify_str = I('get.classify_str', '');
+		$group_id = I('get.group_id', '');
+		return $this->ajaxReturn(D('AuthGroup')->saveClassifyData($group_id, $classify_str));
+	}
+
 
 }
 ?>

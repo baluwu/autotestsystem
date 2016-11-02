@@ -111,4 +111,9 @@ class AuthGroupModel extends Model {
         }
         return fmt_tree_data($ret);
     }
+
+    public function saveClassifyData($groupid, $classify_str)
+    {
+        return $this->where(array('id'=>$groupid))->save(array('classify'=>$classify_str));
+    }
 }

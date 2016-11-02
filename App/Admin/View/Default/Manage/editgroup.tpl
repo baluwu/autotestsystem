@@ -97,7 +97,7 @@
             <div class="row">
               <div class="col-md-12">
 
-                <form class="form-horizontal form-row-seperated" action="/Manage/edit" method="post" id="atsform">
+                <form class="form-horizontal form-row-seperated" action="" method="post" id="atsform">
                   <input type="hidden" name="id" value="{$user.id}"/>
 
                   <div class="portlet  light portlet-fit portlet-datatable bordered">
@@ -172,7 +172,7 @@
                         <div class="row">
                           <div class="col-md-offset-2 col-md-10">
 
-                            <button type="submit" name="submit" value="Save" class="btn btn-success">
+                            <button id="submit_save" type="button" value="Save" class="btn btn-success">
                               <i class="fa fa-check"></i> Save & Return List
                             </button>
                             <a href="/Manage/index" class="btn dark btn-secondary-outline">

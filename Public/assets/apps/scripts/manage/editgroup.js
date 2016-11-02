@@ -42,6 +42,17 @@ jQuery(document).ready(function () {
 
   $.fn.zTree.init($("#treeDemo"), setting);
 
+  $('#submit_save').on('click', function(){
+    var ck_t = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes();
+    var ck_t_id = [];
+    $.each(ck_t, function(i){
+      ck_t_id[ck_t_id.length] = ck_t[i]['id'];
+    });
+    var classify_str = ck_t_id.join(',');
+    $.get('/AuthGroup/save_classify', {'classify_str':classify_str,'group_id':group_id}, function(o){
+    }, 'json');
+  });
+
 
   var validates= function () {
 
