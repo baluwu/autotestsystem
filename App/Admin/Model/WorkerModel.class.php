@@ -63,7 +63,8 @@ class WorkerModel {
             $this->removePendingCase($taskData['src_string']);
         }
 
-        if ($type == 'IMME') {
+        if ($type == 'IMME' || $type == 'TIMER') {
+            unset($data['data']);
             $serv->send($taskData['fd'], json_encode($data));
             $serv->close($taskData['fd']);
         }

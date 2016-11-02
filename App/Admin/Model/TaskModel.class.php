@@ -85,6 +85,7 @@ class TaskModel {
 
                 $ret['isSuccess'] = $r['isSuccess'];
                 $ret['execResult'] = $r['execResult'] ? $r['execResult'] : '';
+                $ret['msg'] = $r['msg'];
 
                 if ($type == 'PEND') {
                     $ret['remove_pend'] = true;
@@ -129,52 +130,55 @@ class TaskModel {
     }
 
     private function startExecSingle($taskData, $thisData) {
-        tasklog('开始执行用例[' . $thisData['name'] . ']');
+        tasklog('开始执行用例[' . json_encode($thisData) . ']');
 
         $ret = ['isSuccess' => false, 'data' => $taskData, 'msg' => ''];
         $type = $thisData['nlp'] ? 'NLP' : 'ASR';
 
         $postParms = [];
-        /* NLP */
-        if ($type == 'NLP') { $postParms['asrToNlp'] = $thisData['nlp']; } 
-        /* ASR */
-        else if ($type == 'ASR') 
-        {
-            $arc = $thisData['arc'];
-            tasklog('arc:' . ABS_ROOT . $arc, 'INFO');
 
-            $postParms['voiceUrl'] = 'http://192.168.1.12:8090' . $arc;
-            //$postParms['voiceUrl'] = C('SERVER_NAME') . $arc;
-            $postParms['asrVoiceInject'] = $thisData['name'];
+        do {
+            /* NLP */
+            if ($type == 'NLP') { $postParms['asrToNlp'] = $thisData['nlp']; } 
+            /* ASR */
+            else if ($type == 'ASR') 
+            {
+                $arc = $thisData['arc'];
+                tasklog('arc:' . ABS_ROOT . $arc, 'INFO');
 
-            if (!file_exists(ABS_ROOT . $arc)) {
-                $ret['msg'] = 'asr文件不存在';
+                $postParms['voiceUrl'] = 'http://192.168.1.12:8090' . $arc;
+                //$postParms['voiceUrl'] = $_SERVER['SERVER_NAME'] . $arc;
+                $postParms['asrVoiceInject'] = $thisData['name'];
+
+                if (!file_exists(ABS_ROOT . $arc)) {
+                    $ret['msg'] = 'asr文件不存在';
+                    return $ret;
+                }
+            }
+
+            $url = 'http://' . $taskData['ip'] . ':' . $taskData['port'] .
+                ($type == 'NLP' ? '/asrToNlp' : '/asrVoiceInject');
+
+            $response = $this->getHttpClient()->post($url, $postParms);
+
+            if (!$response->isOk()) {
+                $ret['msg'] = 'HTTP请求失败';
                 return $ret;
             }
-        }
 
-        $url = 'http://' . $taskData['ip'] . ':' . $taskData['port'] .
-            ($type == 'NLP' ? '/asrToNlp' : '/asrVoiceInject');
+            tasklog('机器响应:' . $response);
+            $resData = contentAsArray($response);
 
-        $response = $this->getHttpClient()->post($url, $postParms);
+            if (empty($resData)) {
+                $ret['msg'] = '请求数据错误';
+                return $ret;
+            }
 
-        if (!$response->isOk()) {
-            $ret['msg'] = 'HTTP请求失败';
-            return $ret;
-        }
-
-        tasklog('机器响应:' . $response);
-        $resData = contentAsArray($response);
-
-        if (empty($resData)) {
-            $ret['msg'] = '请求数据错误';
-            return $ret;
-        }
-
-        if (!judged_all($resData, $thisData['validates'])) {
-            $ret['msg'] = '判定条件不通过';
-            return $ret;
-        }
+            if (!judged_all($resData, $thisData['validates'])) {
+                $ret['msg'] = '判定条件不通过';
+                return $ret;
+            }
+        } while (1);
 
         return [ 'isSuccess' => true, 'data' => $taskData, 'execResult' => $response ];
     }
@@ -197,8 +201,9 @@ class TaskModel {
             $taskData['single_id'] = $groupSingleData[$key]['id'];
 
             $thisData = $this->initExecSingle($taskData, $thisData);
-            $isSucc = $this->startExecSingle($taskData, $thisData)['isSuccess'];
-            if ($isSuccess && !$isSucc) {
+            $execResult = $this->startExecSingle($taskData, $thisData);
+            tasklog('Exec Group Single: '. json_encode($execResult));
+            if ($isSuccess && !$execResult['isSuccess']) {
                 $isSuccess = false;
             }
 

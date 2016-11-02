@@ -44,7 +44,7 @@ class CmdController extends Controller {
         /*single*/
         $taskData = [
             'isgroup'     => 0,
-            'mid'         => 61,
+            'mid'         => 47,
             'uid'         => 1,
             'ip'          => '192.168.1.6',//ip必须真实存在
             'port'        => '8080',
