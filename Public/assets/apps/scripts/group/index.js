@@ -3,7 +3,7 @@
  */
 jQuery(document).ready(function () {
     var ztreeClick = function(event, treeId, treeNode, clickFlag) {
-      console.log("[ onClick ]&nbsp;&nbsp;clickFlag = " + clickFlag + " (" + (clickFlag===1 ? "普通选中": (clickFlag===0 ? "<b>取消选中</b>" : "<b>追加选中</b>")) + ")")
+      window.location.href = '/Group/index/classify/'+treeNode.id;
     }
 
 	var setting = {

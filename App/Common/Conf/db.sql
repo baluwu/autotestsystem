@@ -33,4 +33,7 @@ INSERT INTO `sys_manage_group_classify` VALUES ('5', '4', '随意勾选 2-1', '2
 INSERT INTO `sys_manage_group_classify` VALUES ('6', '4', '随意勾选 2-2', '2016-10-30 22:14:08');
 
 ALTER TABLE `sys_auth_group`
-ADD COLUMN `classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户组分类';
+ADD COLUMN `classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用例组分类，逗号隔开';
+
+ALTER TABLE `sys_group`
+`classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用例组分类，逗号隔开' ,
