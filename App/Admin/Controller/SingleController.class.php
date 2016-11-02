@@ -78,7 +78,6 @@ class SingleController extends AuthController {
             if (session('admin')['group_id'] !=1 && $groupData['uid'] != session('admin')['id']) {
                 $this->error('非法参数');
             }
-            $this->assign('gid', $tid);
             $single = D('GroupSingle');
             $data = $single->getSingle($id);
 
@@ -101,10 +100,46 @@ class SingleController extends AuthController {
             //dump($singleData);exit;
             $this->assign('data', $singleData);
         }
+        $this->assign('gid', $tid);
         $priveGroup =D('Group')->getList('','','','',true);
         $this->assign('group', $priveGroup);
         $this->assign('from', $from);
         $this->display();
+    }
+
+    //编辑上下一条
+    public function editPreOrNext($tid=0,$id,$from=0,$type="pre"){
+        if($type == "pre"){
+            $comp = "lt";
+            $order = "id desc";
+        }else{
+            $comp = "gt";
+            $order = "id asc";
+        }
+        if(!empty($tid)){
+            $single = D('GroupSingle')->where(array(
+                "tid"=>$tid,
+                "isrecovery"=>0,
+                "id"=>array($comp,$id )
+                )
+            )->order($order)->find();
+        }else{
+            $single = D('Single')->where(array(
+                "uid"=>session('admin')['id'],
+                "isrecovery"=>0,
+                "id"=>array($comp,$id )
+                )
+            )->order($order)->find();
+        }
+        if(empty($single)){
+            if(empty($tid)){
+                 $this->redirect("/Single/index");
+            }else{
+                $this->redirect("/Group/single/tid/".$tid);
+            }
+        }else{
+            $this->redirect("Single/edit/tid/".$tid."/id/".$single['id']."/from/".$from);
+        }
     }
 
 //修改用例

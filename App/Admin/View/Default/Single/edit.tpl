@@ -131,8 +131,20 @@
                       </div>
                       <!-- END BREADCRUMBS -->
                       <div class="actions btn-set">
+                        <?php
+                          if(!empty($gid)){
+                        ?>
+                        <a href="/Group/single/tid/{$gid}" class="btn dark btn-secondary-outline">
+                        <?php
+                          }else{
+                        ?>
                         <a href="/Single/index" class="btn dark btn-secondary-outline">
-                          <i class="fa fa-angle-left"></i> Back</a>
+                        <?php  
+                          }
+                        ?>
+                        <i class="fa fa-angle-left"></i> Back</a>
+                        <a href="/Single/editPreOrNext/tid/{$gid}/id/{$data.id}/from/{$from}/type/pre" class="btn dark btn-secondary-outline">上一条</a>
+                        <a href="/Single/editPreOrNext/tid/{$gid}/id/{$data.id}/from/{$from}/type/next" class="btn dark btn-secondary-outline">下一条</a>    
                         <button type="reset" class="btn btn-secondary-outline">
                           <i class="fa fa-reply"></i> Reset
                         </button>
