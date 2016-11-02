@@ -78,7 +78,7 @@
                     <i class="fa fa-tasks"></i> 创建任务 </a>
                 </li>
               </ul>
-              <h3>用户组分类</h3>
+              <h3>用例组分类</h3>
               <ul id="treeDemo" class="ztree">
               </ul>
               </br>

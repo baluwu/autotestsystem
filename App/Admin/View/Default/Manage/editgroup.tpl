@@ -86,7 +86,7 @@
                 </li>
                 <li>
                   <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 用户组分类管理</a>
+                    <i class="fa fa-plus "></i> 用例组管理</a>
                 </li>
               </ul>
             </nav>
@@ -157,7 +157,7 @@
 
                       <div class="form-group form-md-line-input">
                         <label class="col-md-2 control-label" for="groupid">
-                          用户组分类
+                          用例组分类
                         </label>
 
                         <div class="col-md-4">

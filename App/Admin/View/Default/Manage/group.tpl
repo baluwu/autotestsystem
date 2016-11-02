@@ -84,7 +84,7 @@
                 </li>
                 <li>
                   <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 用户组分类管理</a>
+                    <i class="fa fa-plus "></i> 用例组分类管理</a>
                 </li>
               </ul>
 

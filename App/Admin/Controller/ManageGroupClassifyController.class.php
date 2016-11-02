@@ -52,6 +52,13 @@ class ManageGroupClassifyController extends AuthController {
     public function getData()
     {
         if (!IS_AJAX) $this->error('非法操作！');
+        $group_id = session('admin.group_id');
+        $ret = D('AuthGroup')->getClassifyData($group_id, true);
+        $this->ajaxReturn($ret);
+    }
+
+    public function getAllNodes()
+    {
         $ret = D('ManageGroupClassify')->getList();
         $this->ajaxReturn($ret);
     }

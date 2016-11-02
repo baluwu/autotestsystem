@@ -52,7 +52,7 @@ jQuery(document).ready(function () {
     var setting = {
       async: {
         enable: true,
-        url: '/ManageGroupClassify/getData'
+        url: '/ManageGroupClassify/getAllNodes'
       },
       view: {
         addHoverDom: addHoverDom,

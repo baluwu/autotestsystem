@@ -92,7 +92,7 @@
                 </li>
                 <li class="active">
                   <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 用户组分类管理</a>
+                    <i class="fa fa-plus "></i> 用例组分类管理</a>
                 </li>
               </ul>
 
@@ -108,7 +108,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-users font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用户组分类列表</span>
+                      <span class="caption-subject font-dark sbold uppercase">用例组分类列表</span>
                     </div>
 
                     <div class="breadcrumbs">
@@ -116,7 +116,7 @@
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">用户组分类管理</li>
+                        <li class="active">用例组分类管理</li>
                       </ol>
                     </div>
                   </div>
