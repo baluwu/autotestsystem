@@ -5,7 +5,6 @@ use Think\Model;
 class TaskModel {
     public function getWorkingMachineSize() { return REDIS()->sCard('working.machine'); }
     public function addWorkingMachine($key) { return REDIS()->sAdd('working.machine', $key); }
-    public function addPendingCase($val) { return REDIS()->sAdd('pending.case', $val); }
     public function freeWokingMachine($key) { REDIS()->sRemove('working.machine', $key); }
 
     /* 任务分发 */
@@ -41,7 +40,7 @@ class TaskModel {
         return $this->doRunTask($strTaskData, $taskData, $serv);
     }
 
-    //task type in [IMME, PEND, FORCE]
+    //task type in [IMME, TASK]
     private function doRunTask($strTaskData, $taskData, $wrapObj) {
 
         $ret = ['isSuccess' => false, 'data' => $taskData, 'msg' => ''];
@@ -55,9 +54,6 @@ class TaskModel {
                 return ;
             }
 
-            if ($type != 'PEND') {
-                $this->addPendingCase($this->setPendingType($strTaskData));
-            }
             $ret['msg'] = '已加入执行队列,稍后将执行';
             $wrapObj->finish($ret);   
             return ;
@@ -71,9 +67,6 @@ class TaskModel {
                     return ;
                 }
                 else {
-                    if ($type != 'PEND') {
-                        $this->addPendingCase($this->setPendingType($strTaskData));
-                    }
                     $ret['msg'] = '已加入执行队列,稍后将执行';
                     $wrapObj->finish($ret);
                     return ;
@@ -88,14 +81,7 @@ class TaskModel {
                 tasklog('执行结果:' . json_encode($r));
 
                 $ret['isSuccess'] = $r['isSuccess'];
-                $ret['execResult'] = $r['execResult'] ? $r['execResult'] : '';
                 $ret['msg'] = $r['msg'];
-
-                if ($type == 'PEND') {
-                    $ret['remove_pend'] = true;
-                }
-
-                //todo 写执行结果
 
                 $wrapObj->finish($ret);
                 return ;
@@ -103,22 +89,17 @@ class TaskModel {
         }
     }
 
-    private function setPendingType($strTaskData) {
-        $r = json_decode($strTaskData, true);
-        $r['type'] = 'PEND';
-        return json_encode($r);
-    }
-
     /**
      * 用例执行 用例状态 0 等待执行  1 正在执行
      * 执行状态 0 等待任务执行  1 正在执行 2 执行成功 3 执行失败
      */
     public function runSingle($taskData) {
-        $taskData['exec_start_time'] = date('Y-m-d H:i:s');
-        $history_id = $this->addExecHistory($taskData);
+        $taskData['history_id'] = $this->addExecHistory($taskData);
+        $taskData['exec_start_time'] = date('Y-h-d H:i:s');
+        tasklog('INSERT history: ' . $taskData['history_id']);
         $thisData = $this->initExecSingle($taskData, null);
         $r = $this->startExecSingle($taskData, $thisData);
-        $this->setExecHistoryResult($history_id, $taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败', $r->execResult);       
+        $this->setExecHistoryResult($taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败', $r->response);       
         return $r;
     }
 
@@ -141,9 +122,13 @@ class TaskModel {
         tasklog('开始执行用例[' . json_encode($thisData) . ']');
 
         $ret = ['isSuccess' => false, 'data' => $taskData, 'msg' => ''];
+
         $type = $thisData['nlp'] ? 'NLP' : 'ASR';
+        $taskData['single_id'] = $thisData['id'];
+        $taskData['single_exec_start_time'] = date('Y-m-d H:i:s');
 
         $postParms = [];
+        $response = null;
 
         do {
             /* NLP */
@@ -160,7 +145,7 @@ class TaskModel {
 
                 if (!file_exists(ABS_ROOT . $arc)) {
                     $ret['msg'] = 'asr文件不存在';
-                    return $ret;
+                    break;
                 }
             }
 
@@ -168,10 +153,10 @@ class TaskModel {
                 ($type == 'NLP' ? '/asrToNlp' : '/asrVoiceInject');
 
             $response = $this->getHttpClient()->post($url, $postParms);
-
+            $ret['response'] = $response;
             if (!$response->isOk()) {
                 $ret['msg'] = 'HTTP请求失败';
-                return $ret;
+                break;
             }
 
             tasklog('机器响应:' . $response);
@@ -179,16 +164,21 @@ class TaskModel {
 
             if (empty($resData)) {
                 $ret['msg'] = '请求数据错误';
-                return $ret;
+                break;
             }
 
             if (!judged_all($resData, $thisData['validates'])) {
                 $ret['msg'] = '判定条件不通过';
-                return $ret;
+                break;
             }
+
+            $ret['isSuccess'] = true;
+            break;
         } while (1);
 
-        return [ 'isSuccess' => true, 'data' => $taskData, 'execResult' => $response ];
+        $this->addGroupSingleExecHistory($taskData, $ret['isSuccess'], $ret['msg'], $ret['response']);
+
+        return $ret;
     }
 
     /* 用例组执行 */
@@ -204,20 +194,20 @@ class TaskModel {
 
         $isSuccess = true;
         $taskData['exec_start_time'] = date('Y-m-d H:i:s');
-        $history_id = $this->addExecHistory($taskData);
+        $taskData['history_id'] = $this->addExecHistory($taskData);
 
         foreach ($groupSingleData as $key => $thisData) {
             $thisData = $this->initExecSingle($taskData, $thisData);
-            $execResult = $this->startExecSingle($taskData, $thisData);
-            tasklog('Exec Group Single: '. json_encode($execResult));
-            if ($isSuccess && !$execResult['isSuccess']) {
+            $ret = $this->startExecSingle($taskData, $thisData);
+            
+            if ($isSuccess && !$ret['isSuccess']) {
                 $isSuccess = false;
             }
 
             $this->endExecSingle($taskData);
         }
 
-        $this->setExecHistoryResult($history_id, $taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败');       
+        $this->setExecHistoryResult($taskData, $isSuccess, $isSuccess ? '成功' : '失败');       
         tasklog('用例组执行完成！');
 
         return [ 'isSuccess' => $isSuccess, 'data' => $taskData ];
@@ -242,7 +232,8 @@ class TaskModel {
         $ret['isSuccess'] = true;
         $taskData['exec_start_time'] = date('Y-m-d H:i:s');
 
-        $history_id = $this->addExecHistory($taskData);
+        $taskData['history_id'] = $this->addExecHistory($taskData);
+
         foreach ($singlesData as $thisData) {
             $thisData = $this->initExecSingle($taskData, $thisData);
             $execRs = $this->startExecSingle($taskData, $thisData);
@@ -255,7 +246,7 @@ class TaskModel {
         }
 
         M('Task')->where(['id' => $taskData['id']])->delete();
-        $this->setExecHistoryResult($history_id, $taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败');       
+        $this->setExecHistoryResult($taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败');       
 
         return $ret;
     }
@@ -301,7 +292,7 @@ class TaskModel {
             'isgroup' => $td['isgroup'],
             'ip' => $td['ip'],
             'port' => $td['port'],
-            'create_time' => $td['create_time'],
+            'create_time' => date('Y-m-d H:i:s', $td['create_time']),
             'exec_start_time' => $td['exec_start_time'],
             'status' => 1,
             'exec_plan_time' => $td['run_at'] ? date('Y-m-d H:i:s', $td['run_at']) : '',
@@ -310,11 +301,15 @@ class TaskModel {
         ]);
     }
 
-    public function setExecHistoryResult($history_id, $td, $is_succ, $msg, $response = null) {
+    public function setExecHistoryResult($td, $is_succ, $msg, $response = null) {
         tasklog('执行' . ($is_succ ? '成功' : ('失败:' . $msg)), $is_succ ? 'INFO' : 'ERROR');
+
+        $history_id = $td['history_id'];
+        if (!$history_id) return;
 
         M('ExecHistory')->where(['id' => $history_id])->setField([
             'status'        => $is_succ ? 2 : 3,
+            'exec_start_time' => $td['exec_start_time'],
             'exec_end_time' => date("Y-m-d H:i:s"),
             'exec_content'  => json_encode([
                 'is_success' => $is_succ,
@@ -331,5 +326,30 @@ class TaskModel {
         ]);
     }
 
+    public function addGroupSingleExecHistory($td, $is_succ, $msg, $http = null) {
+        tasklog('组单例执行' . ($is_succ ? '成功' : ('失败:' . $msg)), $is_succ ? 'INFO' : 'ERROR');
 
+        $history_id = $td['history_id'];
+        if (!$history_id) return;
+
+        return M('GroupExecHistory')->add([
+            'exec_history_id' => $td['history_id'],
+            'group_id'        => $td['isgroup'] == 1 ? $td['mid'] : 0,
+            'single_id'       => $td['single_id'],
+            'issuccess'       => $is_succ,
+            'exec_content'    => json_encode([
+                'msg'     => $msg,
+                'content' => [
+                    'IP'   => $td['ip'] ?? '',
+                    'port' => $td['port'] ?? '',
+                    'arc'  => $td['arc'] ?? '',
+                    'StatusCode' => $http ? $http->getStatusCode() : '',
+                    'Header'     => $http ? $http->getRawHeader() : '',
+                    'Content'    => $http ? $http->getContent() : ''
+                ]
+            ], JSON_UNESCAPED_UNICODE),
+            'exec_start_time' => $td['single_exec_start_time'],
+            'exec_end_time'   => date("Y-m-d H:i:s"),
+        ]);
+    }
 }
