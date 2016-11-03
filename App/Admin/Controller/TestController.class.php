@@ -74,7 +74,7 @@ class TestController extends Controller {
             "description"=>"只是一个注释",
             'notify_email' => 'baluwu.carp@gmail.com',
             "ver"=>"1.0.1",
-            "run_at"=>date('Y-m-d H:i:s', time() + 15),
+            "run_at"=>time() + 10,
             "uid"=>"1",
             "ip"=>"192.168.1.6",
             "port"=>"8080",
@@ -82,15 +82,5 @@ class TestController extends Controller {
         ];
         $resp = SyncTask($taskData);
         DB($resp);
-    }
-
-    public function json() {
-        $r = M('ExecHistory')->select();
-
-        $r[0]['exec_content'] = json_decode($r[0]['exec_content'], true);
-        $r[1]['exec_content'] = json_decode($r[1]['exec_content'], true);
-        echo json_encode($r[1]);
-        //echo json_encode($r[1]);
-
     }
 }
