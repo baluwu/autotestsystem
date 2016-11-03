@@ -126,9 +126,11 @@ class TaskModel {
         $type = $thisData['nlp'] ? 'NLP' : 'ASR';
         $taskData['single_id'] = $thisData['id'];
         $taskData['single_exec_start_time'] = date('Y-m-d H:i:s');
+        $taskData['asr'] = $thisData['arc'];
+        $taskData['nlp'] = $thisData['nlp'];
 
         $postParms = [];
-        $response = null;
+        $resData = null;
 
         do {
             /* NLP */
@@ -153,7 +155,6 @@ class TaskModel {
                 ($type == 'NLP' ? '/asrToNlp' : '/asrVoiceInject');
 
             $response = $this->getHttpClient()->post($url, $postParms);
-            $ret['response'] = $response;
             if (!$response->isOk()) {
                 $ret['msg'] = 'HTTP请求失败';
                 break;
@@ -161,6 +162,7 @@ class TaskModel {
 
             tasklog('机器响应:' . $response);
             $resData = contentAsArray($response);
+            $ret['response'] = $resData;
 
             if (empty($resData)) {
                 $ret['msg'] = '请求数据错误';
@@ -176,7 +178,7 @@ class TaskModel {
             break;
         } while (1);
 
-        $this->addGroupSingleExecHistory($taskData, $ret['isSuccess'], $ret['msg'], $ret['response']);
+        $this->addGroupSingleExecHistory($taskData, $ret['isSuccess'], $ret['msg'], $resData);
 
         return $ret;
     }
@@ -310,23 +312,11 @@ class TaskModel {
         M('ExecHistory')->where(['id' => $history_id])->setField([
             'status'        => $is_succ ? 2 : 3,
             'exec_start_time' => $td['exec_start_time'],
-            'exec_end_time' => date("Y-m-d H:i:s"),
-            'exec_content'  => json_encode([
-                'is_success' => $is_succ,
-                'msg'        => $msg,
-                'content'    => [
-                    'IP'   => $td['ip'] ?? '',
-                    'port' => $td['port'] ?? '',
-                    'arc'  => $td['arc'] ?? '',
-                    'StatusCode' => $response ? $response->getStatusCode() : '',
-                    'Header'     => $response ? $response->getRawHeader() : '',
-                    'Content'    => $response ? $response->getContent() : ''
-                ]
-            ], JSON_UNESCAPED_UNICODE)
+            'exec_end_time' => date("Y-m-d H:i:s")
         ]);
     }
 
-    public function addGroupSingleExecHistory($td, $is_succ, $msg, $http = null) {
+    public function addGroupSingleExecHistory($td, $is_succ, $msg, $resArr) {
         tasklog('组单例执行' . ($is_succ ? '成功' : ('失败:' . $msg)), $is_succ ? 'INFO' : 'ERROR');
 
         $history_id = $td['history_id'];
@@ -342,10 +332,9 @@ class TaskModel {
                 'content' => [
                     'IP'   => $td['ip'] ?? '',
                     'port' => $td['port'] ?? '',
-                    'arc'  => $td['arc'] ?? '',
-                    'StatusCode' => $http ? $http->getStatusCode() : '',
-                    'Header'     => $http ? $http->getRawHeader() : '',
-                    'Content'    => $http ? $http->getContent() : ''
+                    'asr'  => $td['asr'] ?? '',
+                    'nlp'  => $td['nlp'] ?? '',
+                    'Content' => $resArr
                 ]
             ], JSON_UNESCAPED_UNICODE),
             'exec_start_time' => $td['single_exec_start_time'],

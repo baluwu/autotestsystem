@@ -14,9 +14,6 @@ function tasklog($msg, $lv = 'INFO') {
  * @desc 数据必须包含  id
  */
 function AddTask($taskData = []) {
-    if (!$taskData['id']) {
-        return false;
-    }
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
     if ($client->connect('127.0.0.1', C("SWOOLE_PORT"))) {
@@ -144,9 +141,6 @@ function tasking($task_id) {
  * @author chengbin
  */
 function SyncTask($taskData = []) {
-    if (!$taskData['id']) {
-        return false;
-    }
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
     if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 30)) {
