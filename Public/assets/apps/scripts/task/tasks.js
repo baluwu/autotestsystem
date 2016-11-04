@@ -58,11 +58,15 @@ jQuery(document).ready(function () {
               orderable: false
             },
             {
-              data: 'name',
+              data: 'id',
               orderable: false
             },
             {
-              data: 'run_at'
+              data: 'task_name',
+              orderable: false
+            },
+            {
+              data: 'exec_start_time'
             },
             {
               data: 'ver'
@@ -76,7 +80,7 @@ jQuery(document).ready(function () {
               orderable: false
             },
             {
-              data: 'nickname',
+              data: 'manager',
               orderable: false
             },
             {
@@ -105,25 +109,15 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return ' <span class="label label-sm label-' + (data == '公共' ? 'success' : 'info') + '">' + data + '</span>'
-              },
-              "targets": 3
-            },
-            {
-              "render": function (data, type, row) {
-                return row.nickname ? row.nickname : row.manager ? row.manager : data
-              },
-              "targets": 4
-            },
-            {
-              "render": function (data, type, row) {
-                return data == 1 ? "执行中" : "空闲";
+                  return ' <span class="label label-sm label-'
+                  + (data == 2 ? 'success' : 'danger') + '">' 
+                  + (data == 2 ? '成功' : (data==1?'执行中':'失败')) + '</span>'
               },
               "targets": 6
             },
             {
               "render": function (data, type, row) {
-                return '<a href="./execute_history_pub/tid/' + data.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
+                return '<a href="./execute_history_pub/tid/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
               },
               "targets": 9
             }

@@ -46,6 +46,30 @@ class ExecHistoryModel extends Model {
     ];
   }
 
+    //获任务列表
+  public function getTaskList($page, $rows, $order, $sort,$where=[]) {
+    $map = [];
+    foreach ($where as $key => $value) {
+        $map['e.' . $key] = $value;
+    }
+    $map['e.isgroup'] = ['eq', 2];
+	  $map['e.exec_type'] = ['eq', 1];
+    $obj = $this
+      ->field('e.id,e.task_name,e.exec_start_time,e.ver,e.description,e.status,u.manager,u.nickname')
+      ->join('e LEFT JOIN  __MANAGE__ u  ON e.uid = u.id')
+      ->where($map)
+      ->order([$order => $sort])
+      ->limit($page, $rows)
+      ->select();
+
+    $total = $this->where($map)->join('e LEFT JOIN  __MANAGE__ u  ON e.uid = u.id')->count();
+    return [
+      'recordsTotal'    => $total,
+      'recordsFiltered' => $total,
+      'data'            => $obj ? $obj : []
+    ];
+  }
+
   //执行单例
   public function ExecuteSingle($mid, $ip, $port = 8080, $exec_type = 1) {
 	if( $exec_type == 2 ) {

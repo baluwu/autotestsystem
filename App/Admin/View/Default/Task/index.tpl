@@ -285,7 +285,7 @@
 <script src="/Public/assets/apps/scripts/common.js"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="/Public/assets/apps/scripts/group/tasks.js"></script>
+<script src="/Public/assets/apps/scripts/task/tasks.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/Public/assets/layout/scripts/layout.js"></script>

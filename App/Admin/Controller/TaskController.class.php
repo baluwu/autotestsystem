@@ -11,10 +11,6 @@ class TaskController extends AuthController {
         $this->display();
     }
 
-    public function addTask(){
-        $this->display();
-    }
-
     //获取任务列表执行纪录
     static $getTasksRules = [
         'page_start'     => ['name' => 'start', 'type' => 'int', 'default' => 0, 'method' => 'post', 'desc' => '第几条记录开始'],
@@ -49,9 +45,8 @@ class TaskController extends AuthController {
             $where['create_time'] = ['elt', $this->date_to];
         }
 
-
         $execHistory = D('ExecHistory');
-        $this->ajaxReturn($execHistory->getList(0, 2, $this->page_start, $this->page_rows, $order['column'], $order['dir'], $where));
+        $this->ajaxReturn($execHistory->getTaskList($this->page_start, $this->page_rows, $order['column'], $order['dir'], $where));
     }
 
 }
