@@ -29,9 +29,10 @@ or implied, of Chas Emerick.
 */
 table.diff {
 	border-collapse:collapse;
-	//border:1px solid darkgray;
 	white-space:pre-wrap;
 	font-size: 12px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd
 }
 table.diff tr {
 	//border-bottom: 1px solid #f8f8f8;

@@ -23,6 +23,7 @@ class WorkerModel {
             }
 
             $secs = $runAt - time();
+
             if ($secs < 10) {
                 $serv->send($fd, json_encode([ 'isSuccess' => false, 'msg' => '时间设置不合法(>当前时间+10秒)']));
                 return $serv->close($fd);

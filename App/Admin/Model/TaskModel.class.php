@@ -33,7 +33,7 @@ class TaskModel {
 
             tasklog('添加任务:' . json_encode($taskData));
 
-            $serv->finish(['isSuccess' => $r ? true : false, 'msg' => '']);
+            $serv->finish(['isSuccess' => $r ? true : false, 'data' => $taskData, 'msg' => '']);
             return ;
         }
 
@@ -300,6 +300,7 @@ class TaskModel {
             'exec_plan_time' => $td['run_at'] ? date('Y-m-d H:i:s', $td['run_at']) : '',
             'ver' => $td['ver'] ? $td['ver'] : '',
             'description' => $td['description'] ? $td['description'] : '',
+            'task_name' => $td['name'] ? $td['name'] : ''
         ]);
     }
 

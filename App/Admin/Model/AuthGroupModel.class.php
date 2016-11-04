@@ -101,6 +101,7 @@ class AuthGroupModel extends Model {
         $ret = D('ManageGroupClassify')->getList();
         $classify_str = $this->where(array('id'=>$groupid))->getField('classify');
         $classify_arr = explode(',', $classify_str);
+
         if( !empty($classify_arr) && !empty($ret)) {
             foreach( $ret as $k=>$v ) {
                 if($filter && !in_array($v['id'], $classify_arr)) {
@@ -113,7 +114,7 @@ class AuthGroupModel extends Model {
                 } else {
                     $v['checked'] = false;
                 }
-            $result[] = $v;
+                $result[] = $v;
             }
         }
         //dump(fmt_tree_data($ret));exit;
