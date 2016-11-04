@@ -49,7 +49,7 @@ jQuery(document).ready(function () {
           ],
           "pageLength": 20, // default record count per page
           "ajax": {
-            "url": CONFIG['MODULE'] + '/Group/getTasks', // ajax source
+            "url": CONFIG['MODULE'] + '/Task/getTasks', // ajax source
           },
           keys: true,
           columns: [

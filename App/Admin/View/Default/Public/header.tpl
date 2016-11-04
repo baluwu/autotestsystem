@@ -151,13 +151,13 @@
                     </li>
 
                   <li
-                  <if condition="(CONTROLLER_NAME eq 'Group')">
-                    <in name="ACTION_NAME" value="tasks">
+                  <if condition="(CONTROLLER_NAME eq 'Task')">
+                    <in name="ACTION_NAME" value="index">
                       class="active open selected"
                     </in>
                   </if>
                   >
-                    <a href="/Group/tasks" class="text-uppercase"><i class="fa fa-tasks"></i> 任务管理 </a>
+                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> 任务管理 </a>
                     </li>
 
 

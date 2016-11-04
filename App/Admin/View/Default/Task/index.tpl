@@ -74,7 +74,7 @@
               <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li>
-                  <a href="./index">
+                  <a href="./addTask">
                     <i class="fa fa-plus "></i> 添加任务
                   </a>
                 </li>
