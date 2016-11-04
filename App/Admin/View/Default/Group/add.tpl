@@ -146,6 +146,19 @@
                                 </div>
                               </div>
                               <div class="form-group form-md-line-input">
+                                <label for="groupid" class="col-md-2 control-label">
+                                  <span class="required" aria-required="true"> * </span>分类
+                                </label>
+                                <div class="col-md-4">
+                                  <select name="classify" id="classify" class="form-control">
+                                  <foreach name="classify" item="iv">
+                                  <option value="{$iv.id}">{$iv.name}</option>
+                                  </foreach>
+                                  </select>
+                                  <div class="form-control-focus"></div>
+                                </div>
+                              </div> 
+                              <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label">
                                   <span class="required"> * </span>属性:
                                 </label>

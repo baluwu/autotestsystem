@@ -25,6 +25,9 @@ jQuery(document).ready(function () {
       },
       property: {
         required: true,
+      },
+      classify: {
+        required: true,
       }
     },
 
@@ -50,14 +53,11 @@ jQuery(document).ready(function () {
 
     submitHandler: function (form) {
       var form_temp=$(form).serializeArray();
-      console.log(form_temp["submit"]);
+      console.log($(form).serialize());
       $.ajax({
         url: CONFIG['MODULE'] + '/Group/addGroup',
         type: 'POST',
         data: $(form).serialize(),
-        beforeSend: function () {
-
-        },
         success: function (res, response, status) {
 
 
@@ -66,14 +66,10 @@ jQuery(document).ready(function () {
             return;
           }
 
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message:res.msg?res.msg:'未知错误！请检查内容后重新提交！',
-            container:$(".page-content-col .portlet-title"),
-            place: 'prepend',
-            closeInSeconds:1500
-          });
+          App.warning(
+            res.msg?res.msg:'未知错误！请检查内容后重新提交！',
+            $(".page-content-col .portlet-title")
+          );
 
         }
       });

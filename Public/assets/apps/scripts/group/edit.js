@@ -2,11 +2,7 @@
  * Created by andy on 16/7/8.
  */
 
-
-
 jQuery(document).ready(function () {
-
-
 
   $('#atsform').validate({
     errorElement: 'span', //default input error message container
@@ -25,13 +21,11 @@ jQuery(document).ready(function () {
         maxlength: 20,
         required: true
       },
-      property: {
-        required: true
-      }
+      property: { required: true },
+      classify: { required: true },
     },
 
     invalidHandler: function (event, validator) { //display error alert on form submit
-
       App.scrollTo($('#atsform'), -200);
     },
 
@@ -52,30 +46,22 @@ jQuery(document).ready(function () {
 
     submitHandler: function (form) {
       var form_temp = $(form).serializeArray();
-      console.log(form_temp["submit"]);
+
       $.ajax({
         url: CONFIG['MODULE'] + '/Group/updateGroup',
         type: 'POST',
         data: $(form).serialize(),
-        beforeSend: function () {
-
-        },
+        beforeSend: function () { },
         success: function (res, response, status) {
           if (res.error >= 0 ) {
             location.href='/Group/index';
             return;
           }
 
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message:res.msg?res.msg:'未知错误！请检查内容后重新提交！',
-            container:$(".page-content-col .portlet-title"),
-            place: 'prepend',
-            closeInSeconds:1500
-          });
-
-
+          App.warning(
+            res.msg?res.msg:'未知错误！请检查内容后重新提交！',
+            $(".page-content-col .portlet-title")
+          );
         }
       });
       return false;

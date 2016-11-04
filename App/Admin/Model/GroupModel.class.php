@@ -59,12 +59,13 @@ class GroupModel extends Model {
     }
 
     //新增用例组
-    public function addGroup($name, $ispublic) {
+    public function addGroup($name, $ispublic, $classify) {
         $data = [
             'uid'        => session('admin')['id'],
             'name'       => $name,
             'ispublic'   => $ispublic,
             'isrecovery' => 0,
+            'classify' => $classify
         ];
 
         if ($this->create($data)) {
@@ -78,11 +79,12 @@ class GroupModel extends Model {
     }
 
     //修改用例组
-    public function updateGroup($id, $name, $ispublic) {
+    public function updateGroup($id, $name, $ispublic, $classify) {
         $data = [
             'id'       => $id,
             'name'     => $name,
-            'ispublic' => $ispublic
+            'ispublic' => $ispublic,
+            'classify' => $classify
         ];
 
         $obj = $this->save($data);
@@ -99,7 +101,7 @@ class GroupModel extends Model {
     //获取一条数据
     public function getGroup($id) {
         return $this
-            ->field('g.id,g.name,g.ispublic,g.create_time,g.uid,u.manager,u.nickname')
+            ->field('g.id,g.name,g.ispublic,g.create_time,g.classify,g.uid,u.manager,u.nickname')
             ->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')
             ->where(['g.id' => $id])
             ->find();

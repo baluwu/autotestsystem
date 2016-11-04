@@ -55,12 +55,15 @@ class GroupController extends AuthController {
 
     //添加用例
     public function add() {
+        $classify = M('ManageGroupClassify')->where(['pid' => 0])->select();
+        $this->assign('classify', $classify);
         $this->display();
     }
 
     //新增用例组
     static $addGroupRules = [
         'groupName' => ['name' => 'name', 'type' => 'string', 'min' => 2, 'max' => 20, 'method' => 'post', 'desc' => '用例组名称'],
+        'classify'  => ['name' => 'classify', 'type' => 'int', 'method' => 'post', 'desc' => '用例组分类'],
         'ispublic'  => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
     ];
 
@@ -68,7 +71,7 @@ class GroupController extends AuthController {
         if (!IS_AJAX) $this->error('非法操作');
 
         $Group = D('Group');
-        $data = $Group->addGroup($this->groupName, $this->ispublic);
+        $data = $Group->addGroup($this->groupName, $this->ispublic, $this->classify);
         logs('group.add', $data > 0);
 
 
@@ -79,12 +82,12 @@ class GroupController extends AuthController {
         ]);
     }
 
-
     //编辑用例
     public function edit($id) {
         $Group = D('Group');
 
         $groupData = $Group->getGroup($id);
+
         if (!$groupData) {
             $this->error('该用例已被删除');
         }
@@ -93,17 +96,18 @@ class GroupController extends AuthController {
             $this->error('非法操作');
         }
 
-
+        $classify = M('ManageGroupClassify')->where(['pid' => 0])->select();
+        $this->assign('classify', $classify);
         $this->assign('data', $groupData);
         $this->display();
     }
-
 
     //修改用例组
     static $updateGroupRules = [
         'id'        => ['name' => 'id', 'type' => 'int', 'method' => 'post', 'desc' => 'id'],
         'groupName' => ['name' => 'name', 'type' => 'string', 'min' => 2, 'max' => 20, 'method' => 'post', 'desc' => '用例组名称'],
-        'ispublic'  => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
+        'classify'  => ['name' => 'classify', 'type' => 'int', 'method' => 'post', 'desc' => '分类'],
+        'ispublic'  => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性']
     ];
 
     public function updateGroup() {
@@ -126,15 +130,13 @@ class GroupController extends AuthController {
             ]);
         }
 
-
-        $data = $Group->updateGroup($this->id, $this->groupName, $this->ispublic);
+        $data = $Group->updateGroup($this->id, $this->groupName, $this->ispublic, $this->classify);
         logs('group.update', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -12,
             'data'  => $data,
             'msg'   => ''
         ]);
-
     }
 
     //删除用例组

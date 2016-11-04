@@ -55,6 +55,8 @@ CREATE TABLE `sys_task` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
-//Leader用户组
-//测试Leader用户属于该组
+-- Leader用户组
+-- 测试Leader用户属于该组
 INSERT INTO `sys_auth_group` VALUES (3,'Leader',1,'1,2,5,6,7,8,9,10,11');
+
+ALTER TABLE `rokid_ats`.`sys_group` ADD COLUMN `classify` INT(10) NOT NULL COMMENT '用例组分类' AFTER `isrecovery`;
