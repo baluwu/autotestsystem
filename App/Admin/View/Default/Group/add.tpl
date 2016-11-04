@@ -16,11 +16,9 @@
   <script src="/Public/assets/global/plugins/pace/pace.min.js"></script>
   <link href="/Public/assets/global/plugins/pace/themes/pace-theme-flash.css" rel="stylesheet" type="text/css"/>
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
-
   <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet"
-        type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
   <!-- END GLOBAL MANDATORY STYLES -->
   <!-- BEGIN PAGE LEVEL PLUGINS -->
   <link href="/Public/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css"/>
@@ -30,12 +28,7 @@
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
   <!-- END THEME GLOBAL STYLES -->
-
-
-  <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"
-        type="text/css"/>
-
-
+  <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -57,19 +50,14 @@
   <!-- BEGIN HEADER -->
   <include file="Public/header"/>
   <!-- END HEADER -->
-
-
   <div class="container-fluid">
     <div class="page-content">
-
       <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
           <!-- BEGIN PAGE SIDEBAR -->
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <!-- Collect the nav links, forms, and other content for toggling -->
               <h3>用例组管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
@@ -144,7 +132,6 @@
                           <li class="active">
                             <a href="#tab_general" data-toggle="tab"> 基础信息 </a>
                           </li>
-
                         </ul>
                         <div class="tab-content">
                           <div class="tab-pane active" id="tab_general">
@@ -153,22 +140,16 @@
                                 <label class="col-md-2 control-label" for="name">
                                   <span class="required"> * </span>名称
                                 </label>
-
                                 <div class="col-md-10">
                                   <input type="text" name="name" class="form-control" maxlength="20" id="name" placeholder="名称">
-
                                   <div class="form-control-focus"></div>
                                 </div>
                               </div>
-
-
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label">
                                   <span class="required"> * </span>属性:
                                 </label>
-
                                 <div class="col-md-10">
-
                                   <div class="md-radio-inline">
                                     <div class="md-radio">
                                       <input type="radio" id="property1" name="property" value="1" class="md-radiobtn">
@@ -178,23 +159,17 @@
                                         <span class="box"></span> 公开 </label>
                                     </div>
                                     <div class="md-radio">
-                                      <input type="radio" id="property2" name="property" value="0" class="md-radiobtn"
-                                             checked>
+                                      <input type="radio" id="property2" name="property" value="0" class="md-radiobtn" checked>
                                       <label for="property2">
                                         <span></span>
                                         <span class="check"></span>
                                         <span class="box"></span> 私有 </label>
                                     </div>
-
                                   </div>
-
                                 </div>
                               </div>
-
-
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -212,11 +187,8 @@
     <include file="Public/footer"/>
     <!-- END FOOTER -->
   </div>
-
-
 </div>
 <!-- END CONTAINER -->
-
 <!--[if lt IE 9]>
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
 <script src="/Public/assets/global/plugins/excanvas.min.js"></script>
