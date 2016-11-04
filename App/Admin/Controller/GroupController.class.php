@@ -297,6 +297,7 @@ class GroupController extends AuthController {
     public function execute_history($tid) {
         $group = D('Group');
         $groupData = $group->getGroup($tid);
+        
         if (!$groupData) {
             $this->error('参数错误');
         }
@@ -383,13 +384,13 @@ class GroupController extends AuthController {
         $this->display();
     }
 
-//  执行记录对比  
+    //  执行记录对比  
     static $execute_history_diffRules = [
         'ids' => ['name' => 'ids', 'type' => 'array','require'=>true,'format'=>'explode','separator' => ',', 'method' => 'get', 'desc' => 'history_ids'],
     ];
-    public function execute_history_diff($tid) {
 
-         if(count($this->ids) < 2){
+    public function execute_history_diff($tid) {
+        if(count($this->ids) < 2){
             $this->error('参数至少为两个！');
         }
 
@@ -402,8 +403,6 @@ class GroupController extends AuthController {
             $this->error('非法参数');
         }
         $this->assign('group', $groupData);
-
-
 
         $group = D('Group');
         $groupData = $group->getGroup($tid);

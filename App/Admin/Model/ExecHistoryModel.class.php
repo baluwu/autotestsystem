@@ -37,7 +37,6 @@ class ExecHistoryModel extends Model {
       ->limit($page, $rows)
       ->select();
 
-
     $total = $this->where($map)->join('e LEFT JOIN  __MANAGE__ u  ON e.uid = u.id')->count();
     return [
       'recordsTotal'    => $total,

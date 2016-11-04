@@ -156,21 +156,19 @@ jQuery(document).ready(function () {
 
       $("#execute_diff").on('click', function () {
         if($('.checkboxes:checked').size()<2){
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message: 'less then 2 records selected',
-            container: grid.getTableWrapper(),
-            place: 'prepend',
-            closeInSeconds:1500
-          });
+          App.warning( 'less then 2 records selected', grid.getTableWrapper());
           return false;
         }
         var _ids=[];
         $('.checkboxes:checked').each(function () {
             _ids.push($(this).val());
         });
-        $(this).attr('href','/Group/execute_history_diff/tid/'+CONFIG['ID']+'?ids=' + _ids.join(','));
+
+        if (_ids.length > 2) {
+          App.warning('You can only compare two results');
+          return false;
+        }
+        $(this).attr('href','/diff/diff/' + _ids[0] + '/' + _ids[1]);
       });
 
     };

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<head>
+<title>Diff</title>
 <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
 <link href="/Public/assets/apps/css/diffview.css" rel="stylesheet" type="text/css"/>
@@ -33,6 +35,7 @@ input[type="checkbox"] {
 li { list-style: none; }
 .list-group-item { font-weight: 700; }
 </style>
+</head>
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/beauty-json.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/diffview.js"></script>
