@@ -61,9 +61,9 @@ class WorkerModel {
     public function onWorkerStart($serv, $fd) {
         if (!$serv->taskworker) {
             //扫描任务队列
-            $serv->tick(30000, function() use ($serv, $fd) {
+            $serv->tick(10000, function() use ($serv, $fd) {
                 $redis = REDIS();
-                $tasks = M('Task')->limit(0, 10)->select();    
+                $tasks = M('Task')->order(['create_time' => 'ASC'])->limit(0, 10)->select();    
 
                 $tl = count($tasks);
                 $vl = min($tl, C('PARALLEL_TASKS'));

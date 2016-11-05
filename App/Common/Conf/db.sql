@@ -11,11 +11,6 @@ CREATE TABLE `sys_audio_uploads` (
     UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-ALTER TABLE `sys_exec_history` ADD COLUMN `exec_type` tinyint(2) NULL DEFAULT 1 COMMENT '执行类型 1 正常执行 2 编辑用例执行自检测' ;
-
-ALTER TABLE `rokid_ats`.`sys_exec_history` ADD COLUMN `ver` VARCHAR(20) NULL COMMENT '版本' AFTER `exec_plan_time`, ADD COLUMN `description` VARCHAR(255) NULL COMMENT '注释' AFTER `ver`; 
-ALTER TABLE `rokid_ats`.`sys_exec_history` ADD COLUMN `task_name` VARCHAR(255) NULL AFTER `description`; 
-
 CREATE TABLE `sys_manage_group_classify` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自动编号',
   `pid` int(10) NOT NULL COMMENT '父分类ID',
@@ -23,22 +18,6 @@ CREATE TABLE `sys_manage_group_classify` (
   `modify_time` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_manage_group_classify
--- ----------------------------
-INSERT INTO `sys_manage_group_classify` VALUES ('1', '0', '随意勾选 1', '2016-10-30 22:12:47');
-INSERT INTO `sys_manage_group_classify` VALUES ('2', '1', '随意勾选 1-1', '2016-10-30 22:13:00');
-INSERT INTO `sys_manage_group_classify` VALUES ('3', '1', '随意勾选 1-2', '2016-10-30 22:13:11');
-INSERT INTO `sys_manage_group_classify` VALUES ('4', '0', '随意勾选 2', '2016-10-30 22:13:22');
-INSERT INTO `sys_manage_group_classify` VALUES ('5', '4', '随意勾选 2-1', '2016-10-30 22:13:36');
-INSERT INTO `sys_manage_group_classify` VALUES ('6', '4', '随意勾选 2-2', '2016-10-30 22:14:08');
-
-ALTER TABLE `sys_auth_group`
-ADD COLUMN `classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用例组分类，逗号隔开';
-
-ALTER TABLE `sys_group`
-`classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用例组分类，逗号隔开';
 
 CREATE TABLE `sys_task` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -55,8 +34,20 @@ CREATE TABLE `sys_task` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
+ALTER TABLE `sys_exec_history` ADD COLUMN `exec_type` tinyint(2) NULL DEFAULT 1 COMMENT '执行类型 1 正常执行 2 编辑用例执行自检测' ;
+ALTER TABLE `rokid_ats`.`sys_exec_history` ADD COLUMN `ver` VARCHAR(20) NULL COMMENT '版本' AFTER `exec_plan_time`, ADD COLUMN `description` VARCHAR(255) NULL COMMENT '注释' AFTER `ver`; 
+ALTER TABLE `rokid_ats`.`sys_exec_history` ADD COLUMN `task_name` VARCHAR(255) NULL AFTER `description`; 
+ALTER TABLE `rokid_ats`.`sys_group` ADD COLUMN `classify` INT(10) NOT NULL COMMENT '用例组分类' AFTER `isrecovery`;
+ALTER TABLE `rokid_ats`.`sys_task` ADD INDEX `idx_ctime` (`create_time`);
+ALTER TABLE `sys_auth_group` ADD COLUMN `classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用例组分类，逗号隔开';
+ALTER TABLE `sys_group` `classify`  char(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用例组分类，逗号隔开';
+
 -- Leader用户组
 -- 测试Leader用户属于该组
-INSERT INTO `sys_auth_group` VALUES (3,'Leader',1,'1,2,5,6,7,8,9,10,11');
+INSERT INTO `sys_auth_group` VALUES (3,'Leader',1,'1,2,5,6,7,8,9,10,11','');
 
-ALTER TABLE `rokid_ats`.`sys_group` ADD COLUMN `classify` INT(10) NOT NULL COMMENT '用例组分类' AFTER `isrecovery`;
+UPDATE `sys_auth_group` SET classify=(
+    SELECT GROUP_CONCAT(id) FROM `sys_manage_group_classify`
+) WHERE id=3;
+
+

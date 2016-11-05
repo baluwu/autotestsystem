@@ -142,7 +142,7 @@ class TaskModel {
                 tasklog('arc:' . ABS_ROOT . $arc, 'INFO');
 
                 $postParms['voiceUrl'] = 'http://192.168.1.12:8090' . $arc;
-                //$postParms['voiceUrl'] = $_SERVER['SERVER_NAME'] . $arc;
+                //$postParms['voiceUrl'] = (C('USE_HTTPS') ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] . $arc;
                 $postParms['asrVoiceInject'] = $thisData['name'];
 
                 if (!file_exists(ABS_ROOT . $arc)) {
