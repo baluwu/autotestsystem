@@ -174,22 +174,18 @@ class ManageController extends AuthController {
             $order['dir'] = $getOrder[0]['dir'];
         }
 
-
         $this->ajaxReturn($AuthGroup->getList($this->page_start, $this->page_rows, $order['column'], $order['dir']));
     }
 
     public function editgroup($id)
     {
-        $Manage = D('Manage');
-        $user = $Manage->getManager($id);
-        $this->assign('user', $user);
-        $auth_group = D('AuthGroup')->getListAll();
-
+        $groupid = $id;
+        $auth_group = M('AuthGroup')->where(['id' => $groupid])->select();
         $classify = M('ManageGroupClassify')->where(['pid' => 0])->select();
 
-        $this->assign('group_id', $id);
+        $this->assign('group_id', $groupid);
+        $this->assign('group_name', $auth_group[0]['title']);
         $this->assign('classify', $classify);
-        $this->assign('auth_group', $auth_group);
         $this->display();
     }
 

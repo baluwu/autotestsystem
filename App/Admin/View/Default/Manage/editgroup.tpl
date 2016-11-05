@@ -92,7 +92,7 @@
             <div class="row">
               <div class="col-md-12">
 
-                <form class="form-horizontal form-row-seperated" action="" method="post" id="atsform" onclick="return false;">
+                <form class="form-horizontal form-row-seperated" action="" method="post" id="atsform">
                   <input type="hidden" name="id" id="id" value="{$group_id}"/>
                   <input type="hidden" name="classify_str" id="classify_str" value=""/>
 
@@ -133,17 +133,8 @@
                             用户组
                           </label>
                           <div class="col-md-4">
-                            <select class="form-control" name="groupid" readonly="readonly">
-                              <volist name="auth_group" id="auth">
-                                <if condition="$auth.id eq $user.group_id ">
-                                  <option value="{$auth.id}" selected>{$auth.title}</option>
-                                  <else/>
-                                  <option value="{$auth.id}">{$auth.title}</option>
-                                </if>
-                              </volist>
-                            </select>
-
-                            <div class="form-control-focus"></div>
+                            <span class="form-control">{$group_name}</span>
+                             <div class="form-control-focus"></div>
                           </div>
                         </div>
 
@@ -165,10 +156,12 @@
                             <span id="submit_save" class="btn btn-success">
                               <i class="fa fa-check"></i> Save & Return List
                             </span>
-                            <a href="/Manage/index" class="btn dark btn-secondary-outline"><i class="fa fa-angle-left"></i> Back</a>
+                            <a href="/Manage/group" class="btn dark btn-secondary-outline"><i class="fa fa-angle-left"></i> Back</a>
                           </div>
                         </div>
                       </div>
+
+                      <div class="form-actions">&nbsp;</div>
                     </div>
                   </div>
               </div>
