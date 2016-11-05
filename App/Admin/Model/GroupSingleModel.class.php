@@ -171,9 +171,8 @@ class GroupSingleModel extends Model {
             return $this->getError();
         }
         $sid = $this->save($data);
-
-        return $sid ? $sid : -2;
-
+        
+        return $sid >= 0 ? 1 : -2;
     }
 
     //状态修改

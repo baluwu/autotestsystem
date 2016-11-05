@@ -156,15 +156,15 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return '<div class="btn-group">\
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\
-                            操作 <span class="caret"></span>\
-                          </button>\
-                          <ul class="dropdown-menu" role="menu">\
-                            <li><a href="/Single/edit/tid/'+CONFIG['tid']+'/id/'+data.id+'">编辑</a></li>\
-                            <li><a data-toggle="confirmation" data-id="'+data.id+'" data-title="删除后不可恢复！！" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger">删除</a></li>\
-                          </ul>\
-                        </div>';
+                return '<div class="btn-group">' + 
+                          '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">' +
+                          '  操作 <span class="caret"></span>' +
+                          '</button>' +
+                          '<ul class="dropdown-menu" role="menu">' +
+                          '  <li><a href="/Single/edit/tid/'+CONFIG['tid']+'/id/'+data.id+'/from/1"'+'>编辑</a></li>' +
+                          '  <li><a data-toggle="confirmation" data-id="'+data.id+'" data-title="删除后不可恢复！！" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger">删除</a></li>'+
+                          '</ul>' +
+                        '</div>';
               },
               "targets": 5
             }

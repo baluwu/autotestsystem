@@ -121,22 +121,15 @@ jQuery(document).ready(function () {
         },
         success: function (res, response, status) {
           if (res.error >= 0) {
-            location.href='/Single/index';
+            location.href = '/Group/single/tid/' + $('[name="groupid"]').val();
             return;
           }
 
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message: res.msg?res.msg:'未知错误！请检查内容后重新提交！',
-            container:$(".page-content-col .portlet-title"),
-            place: 'prepend',
-            closeInSeconds:1500
-          });
+          App.warning( res.msg?res.msg:'未知错误！请检查内容后重新提交！', $(".page-content-col .portlet-title"));
 
         }
       });
-     return false;
+      return false;
     }
   });
 

@@ -39,6 +39,7 @@
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/apps/css/single-add.css" rel="stylesheet" type="text/css"/>
   <!-- END THEME LAYOUT STYLES -->
   <link rel="shortcut icon" href="/favicon.ico"/>
   <script>
@@ -47,6 +48,7 @@
       'MODULE': '__MODULE__',
       'INDEX': '{:U("Index/index")}',
       'ID': {$data.id},
+      'tid': {$data.tid},
       'from':{$from}
     };
   </script>
@@ -155,8 +157,6 @@
                       </div>
                     </div>
                     <div class="portlet-body">
-
-
                       <div class="tab-content">
                         <div class="tab-pane active" id="tab_general">
                           <div class="form-body">
@@ -164,11 +164,9 @@
                               <label class="col-md-2 control-label" for="mc">
                                 <span class="required"> * </span>名称
                               </label>
-
                               <div class="col-md-10">
                                 <input type="text" name="mc" class="form-control" id="mc" placeholder="名称"
                                        value="{$data.name}">
-
                                 <div class="form-control-focus"></div>
                               </div>
                             </div>
@@ -263,8 +261,6 @@
                               <div class="form-control-focus"></div>
                             </div>
                           </div>
-
-
                           <div class="form-group " id="arc_warp"
                           <if condition="($data.arc eq '')"> style="display: none"</if>
                           >
@@ -272,16 +268,97 @@
                             <span class="required"> * </span>ASR
                           </label>
 
-                          <div class="col-md-10">
-                            <input type="hidden" name="arc" value="{$data.arc}"/>
-
-                            <div id="arc_upload" class="ats-dropzone"/>
-                            <if condition="($data.arc eq '')"> 拖拽到此处上传(*.wav,*.mp3,*.amr)
-                              <else/>{$data.arc}</if>
-                          </div>
-
-                        </div>
-                      </div>
+                                <div class="col-md-10 select-audio-ctn">
+                                    <div class="selected-audio J_selected_audio">
+                                    <if condition="($data.arc neq '')"> 已选择: {$data.arc}</if>
+                                    </div>
+                                    <input type="hidden" name="arc" value="{$data.arc}" id="arc" />
+                                    <ul class="nav nav-pills J_asr_type_nav" role="tablist">
+                                        <li role="presentation" class="active" role-index="0"><a href="javascript:;">语音录制</a></li>
+                                        <li role="presentation" role-index="1"><a href="javascript:;">本地上传</a></li>
+                                        <li role="presentation" role-index="2"><a href="javascript:;">语音文件库</a></li>
+                                    </ul>
+                                    <ul class="nav">
+                                    <li class="audio-item record-item">
+                                        <div class="form-body record-form">
+                                            <div class="form-group form-md-line-input">
+                                                <label class="control-label col-md-1">
+                                                    <span class="required"> * </span>名称
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="录音文件名称">
+                                                    <div class="form-control-focus"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-md-line-input">
+                                                <div class="progress-plh">&nbsp;</div>
+                                                <div class="progress-back">
+                                                    <div class="progress-front">&nbsp;</div>
+                                                </div>
+                                                <div class="play-time">
+                                                    <div class="progress-plh">&nbsp;</div>
+                                                    <div class="J_eclipse_time">00:00:00</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-md-line-input">
+                                                <div class="col-md-12 record-ctrl">
+                                                    <span class="glyphicon glyphicon-record icon-record"></span>
+                                                    <span class="glyphicon glyphicon-play-circle icon-play"></span>
+                                                    <span class="record-btn">录音</span>
+                                                    <span class="play-btn">播放</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-md-line-input">
+                                                <div class="progress-plh">&nbsp;</div>
+                                                <div class="record-tools">
+                                                    <button type="button" class="btn btn-primary use-audio">保存并使用</button>
+                                                    <button type="button" class="btn btn-default re-record">重新录制</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="audio-item upload-item">
+                                        <div id="arc_upload" class="ats-dropzone" />
+                            			<if condition="($data.arc eq '')"> 拖拽到此处上传(*.wav,*.mp3,*.amr)
+                              			<else/>{$data.arc}</if>
+                                    </li>
+                                    <li class="audio-item lib-item">
+                                        <div class="form-group ">
+                                            <div class="col-md-12">
+                                                <table class="table table-bordered table-hover" id="audio-grid">
+                                                    <thead>
+                                                    <tr role="row" class="heading">
+                                                        <th width="50">No</th>
+                                                        <th width="360">名称</th>
+                                                        <th width="220">Date</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+                                                    <!--begin search bar-->
+                                                    <tr role="row" class="filter">
+                                                        <td></td>
+                                                        <td>
+                                                        <input type="text" class="form-control form-filter input-sm" name="search_name" id="search_name" placeholder="按名称搜索">
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                                                                <i class="fa fa-search"></i> Search
+                                                            </button>
+                                                            <button class="btn btn-sm red btn-outline filter-cancel">
+                                                                <i class="fa fa-times"></i> Reset
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <!--end search bar-->
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                              </div>
+                            </div>
                       <div class="form-group ">
                         <label class="col-md-2 control-label">
                           <span class="required"> * </span>验证规则
@@ -409,36 +486,14 @@
                           </script>
                         </div>
                       </div>
-					  
 					  <div class="form-group">
-                        <label class="col-md-2 control-label">
-                          
-                        </label>
-
-                        <div>
-						<if condition="$data.status eq '0' ">
+                        <label class="col-md-2 control-label">&nbsp;</label>
+                        <div class="col-md-10">
                             <a data-toggle="modal" data-title="{$data.name}" data-id="{$data.id}" data-status="{$data.status}" id="exec_btn" href="javascript:;" class="btn green">
                               <i class="fa fa-rotate-left"></i> 执行 </a>
-						<else />
-							<a href="javascript:;" class="btn green">
-                              <i class="fa fa-rotate-left"></i> 用例执行中 </a>
-						</if>
                         </div>
                       </div>
-					  <!--执行报告-->
-					  <div class="form-group">
-                        <label class="col-md-2 control-label">
-                          执行报告：
-                        </label>
-
-                        <div class='col-md-10'>
-						<p class="form-control-static code"></p>
-                        </div>
-                      </div>
-
-
                     </div>
-
                   </div>
               </div>
             </div>
@@ -534,6 +589,7 @@
   </form>
 </div>
 
+<audio controls="" src="" id="audio-player" style="display: none; vertical-align: middle;"></audio>
 
 <!--[if lt IE 9]>
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
@@ -553,6 +609,11 @@
 
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/Public/assets/global/plugins/datatables/datatables.min.js"></script>
+<script src="/Public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+<script src="/Public/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/Public/assets/global/scripts/datatable.js"></script>
+<script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -560,6 +621,9 @@
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/single/edit.js"></script>
+<script src="/Public/assets/apps/scripts/single/recorder.js"></script>
+<script src="/Public/assets/apps/scripts/single/recorderWorker.js"></script>
+<script src="/Public/assets/apps/scripts/single/audio_list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/Public/assets/layout/scripts/layout.js"></script>

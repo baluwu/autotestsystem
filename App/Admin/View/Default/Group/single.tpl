@@ -42,7 +42,6 @@
       'MODULE': '__MODULE__',
       'INDEX': '{:U("Index/index")}',
       'tid': {$group.id},
-
     };
   </script>
 </head>

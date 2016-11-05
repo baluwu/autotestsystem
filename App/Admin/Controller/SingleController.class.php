@@ -70,7 +70,7 @@ class SingleController extends AuthController {
         ]);
     }
 
-//编辑用例
+    //编辑用例
     public function edit($tid=0,$id,$from=0) {
         if(!empty($tid)){
             $group = D('Group');
@@ -97,7 +97,7 @@ class SingleController extends AuthController {
             if (!$singleData) {
                 $this->error('该用例已被删除');
             }
-            //dump($singleData);exit;
+    
             $this->assign('data', $singleData);
         }
         $this->assign('gid', $tid);
@@ -157,7 +157,7 @@ class SingleController extends AuthController {
 
     public function updateSingle($id,$from=0) {
         if (!IS_AJAX) $this->error('非法操作');
-        
+
         if(empty($this->groupid)){
             $this->ajaxReturn([
                 'error' => -11,
@@ -166,6 +166,7 @@ class SingleController extends AuthController {
             ]);   
         }
         $groupSingle = D('GroupSingle');
+
         if(empty($from)){ //默认编辑的是无分组的用例
             $single = D('Single');
             $singleData = $single->getSingle($id);
@@ -181,6 +182,7 @@ class SingleController extends AuthController {
             D('Single')->Remove($id);//删除原用例
         }else{
             $data = $groupSingle->getSingle($id);
+
             if (!$data) {
                 $this->ajaxReturn([
                     'error' => -11,
