@@ -144,14 +144,11 @@ function SyncTask($taskData = []) {
 
     $client = new \swoole_client(SWOOLE_SOCK_TCP);
     if ($client->connect('127.0.0.1', C("SWOOLE_PORT"), 30)) {
-
-
         $client->send(@json_encode($taskData, true));
 		$info = $client->recv();
         tasklog('客户端任务返回数据:' . $info);
 
         $client->close();
-
         return $info;
     }
 

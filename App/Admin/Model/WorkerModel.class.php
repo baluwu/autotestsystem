@@ -50,7 +50,7 @@ class WorkerModel {
         if ($data['free_machine']) {
             $this->freeWokingMachine($taskData['ip']);
         }
-
+        tasklog('TASK-TYPE:' . $type);
         if ($type == 'IMME' || $type == 'TIMER') {
             unset($data['data']);
             $serv->send($taskData['fd'], json_encode($data));

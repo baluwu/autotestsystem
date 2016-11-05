@@ -347,13 +347,13 @@ jQuery(document).ready(function () {
   //执行，用户可以为此次执行添加注释，此时的执行，不记录结果到数据库，而是将结果返回到页面，这是一个阻塞的执行过程
   var $modal_exec = $('#exec');
   $('body').on('click', '#exec_btn', function () {
-	var el = $(this);
-	if (el.data('status') == 1)return;
-	$modal_exec.find('.currName').text(el.data('title'));
-	$modal_exec.find('[name="id"]').val(el.data('id'));
-	$modal_exec.find('.tips').html("");
-	$modal_exec.modal();
-   });
+      var el = $(this);
+      if (el.data('status') == 1)return;
+      $modal_exec.find('.currName').text(el.data('title'));
+      //$modal_exec.find('[name="id"]').val(el.data('id'));
+      $modal_exec.find('.tips').html("");
+      $modal_exec.modal();
+  });
    
    $("#exec form").validate({
         errorElement: 'span', 
@@ -369,15 +369,12 @@ jQuery(document).ready(function () {
             error.insertAfter(element); 
           }
         },
-
         highlight: function (element) {
           $(element).closest('.form-group').addClass('has-error'); 
         },
-
         unhighlight: function (element) { 
           $(element).closest('.form-group').removeClass('has-error'); 
         },
-
         success: function (label) {
           label.closest('.form-group').removeClass('has-error'); 
         },
@@ -405,32 +402,20 @@ jQuery(document).ready(function () {
             url: CONFIG['MODULE'] + '/Single/ExecuteSingle',
             type: 'POST',
             data: $(form).serialize(),
-            beforeSend: function () {
-
-            },
+            beforeSend: function () {},
             success: function (res, response, status) {
               $modal_exec.modal('hide');
               App.unblockUI($modal_exec);
               if (res.error < 0) {
-                App.notification({
-                  type: 'danger',
-                  icon: 'warning',
-                  message: '执行失败' + res.msg,
-                  container: $(".page-content-col .portlet-title"),
-                  place: 'prepend',
-                  closeInSeconds: 1.5
-                });
-                return;
+                return App.warning( 'Excute fail, Error: ' + res.msg);
               }
 
-              App.notification({
-                type: 'success',
-                icon: 'success',
-                message: '执行成功',
-                container: $(".page-content-col .portlet-title"),
-                place: 'prepend',
-                closeInSeconds: 1.5
-              });
+              r = JSON.parse(res.data);
+              if (r && !r.isSucess) {
+                return App.warning( 'Excute fail, Error: ' + r.msg);
+              }
+
+              App.ok('执行成功, 返回数据:' + res.data);
             },
             error: function () {
               App.unblockUI($modal_exec);
@@ -439,15 +424,4 @@ jQuery(document).ready(function () {
           return false;
         }
       });
-      $modal_exec.on('click', '.btn.exec_ok', function () {
-        //$modal_exec.modal('loading');
-        //setTimeout(function(){
-        //  $modal_exec
-        //    .modal('loading')
-        //    .find('.modal-body .tips')
-        //    .html('<div class="alert alert-info fade in">' +
-        //    'success!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-        //    '</div>');
-        //}, 1000);
-      });
-});
+  });

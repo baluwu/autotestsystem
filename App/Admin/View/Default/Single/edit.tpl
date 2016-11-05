@@ -76,10 +76,10 @@
               <!-- Collect the nav links, forms, and other content for toggling -->
               <h3>用例管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
-                <li class="active">
+                <!--<li class="active">
                   <a href="/Single/index">
                     <i class="fa fa-object-ungroup"></i> 用例列表 </a>
-                </li>
+                </li>-->
                 <li>
                   <a href="/Single/recycle">
                     <i class="fa fa-recycle "></i> 回收站 </a>
@@ -145,8 +145,11 @@
                           }
                         ?>
                         <i class="fa fa-angle-left"></i> Back</a>
-                        <a href="/Single/editPreOrNext/tid/{$gid}/id/{$data.id}/from/{$from}/type/pre" class="btn dark btn-secondary-outline">上一条</a>
-                        <a href="/Single/editPreOrNext/tid/{$gid}/id/{$data.id}/from/{$from}/type/next" class="btn dark btn-secondary-outline">下一条</a>    
+                        <a href="/Single/editPreOrNext/tid/{$gid}/id/{$data.id}/from/{$from}/type/pre" class="btn dark btn-secondary-outline">Prev</a>
+                        <a href="/Single/editPreOrNext/tid/{$gid}/id/{$data.id}/from/{$from}/type/next" class="btn dark btn-secondary-outline">Next</a>    
+                        <button type="reset" class="btn btn-secondary-outline btn-success" id="exec_btn">
+                          <i class="fa fa-rotate-left"></i> Execute
+                        </button>
                         <button type="reset" class="btn btn-secondary-outline">
                           <i class="fa fa-reply"></i> Reset
                         </button>
@@ -486,13 +489,6 @@
                           </script>
                         </div>
                       </div>
-					  <div class="form-group">
-                        <label class="col-md-2 control-label">&nbsp;</label>
-                        <div class="col-md-10">
-                            <a data-toggle="modal" data-title="{$data.name}" data-id="{$data.id}" data-status="{$data.status}" id="exec_btn" href="javascript:;" class="btn green">
-                              <i class="fa fa-rotate-left"></i> 执行 </a>
-                        </div>
-                      </div>
                     </div>
                   </div>
               </div>
@@ -525,21 +521,8 @@
     <div class="modal-body">
       <div class="tips"></div>
 
-      <input type="hidden" name="id" value=""/>
+      <input type="hidden" name="id" id="id" value="{$data.id}"/>
 	  <input type="hidden" name="exec_type" value="2"/>
-
-
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label">
-
-        </label>
-
-        <div class="col-md-10">
-          当前执行用例:<span class="currName"></span>
-        </div>
-      </div>
-
-
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>IP

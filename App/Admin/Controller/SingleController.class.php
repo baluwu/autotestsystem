@@ -596,19 +596,13 @@ class SingleController extends AuthController {
 
     public function ExecuteSingle() {
         if (!IS_AJAX) $this->ajaxReturn("非法操作！");
-        $single = D('Single');
+        $single = D('GroupSingle');
         $singleData = $single->getSingle($this->id);
-        if (!$singleData['ispublic'] && $singleData['uid'] != session('admin')['id']) {
-            $this->ajaxReturn([
-                'error' => -10,
-                'data'  => '',
-                'msg'   => '非法参数'
-            ]);
-        }
 
         $excuteAr = D('ExecHistory');
-		$exec_type = I('post.exec_type', 1);
-        $data = $excuteAr->ExecuteSingle($this->id, $this->ip, $this->port, $exec_type);
+        $exec_type = I('post.exec_type', 1);
+
+        $data = $excuteAr->ExecuteSingle($this->id, $this->ip, $this->port, 2);
         logs('single.execute', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -11,
