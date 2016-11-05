@@ -66,7 +66,7 @@
               <h3>任务管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
-                  <a href="./tasks">
+                  <a href="./index">
                     <i class="fa fa-object-group"></i> 任务列表 </a>
                 </li>
               </ul>

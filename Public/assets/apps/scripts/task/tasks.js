@@ -117,7 +117,7 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return '<a href="./execute_history_pub/tid/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
+                return '<a href="./execute_history/tid/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
               },
               "targets": 9
             }
@@ -158,123 +158,33 @@ jQuery(document).ready(function () {
       //grid.setAjaxParam("customActionType", "group_action");
       //grid.getDataTable().ajax.reload();
       //grid.clearAjaxParams();
-    };
 
-    var exec = function () {
-      var $modal_exec = $('#exec');
-
-      $('body').on('click', '.exec_btn', function () {
-        var el = $(this);
-        if (el.data('status') == 1)return;
-        $modal_exec.find('.currName').text(el.data('title'));
-        $modal_exec.find('[name="id"]').val(el.data('id'));
-        $modal_exec.find('.tips').html("");
-        $modal_exec.modal();
-      });
-
-      $("#exec form").validate({
-        errorElement: 'span', //default input error message container
-        errorClass: 'help-block help-block-error', // default input error message class
-        focusInvalid: false, // do not focus the last invalid input
-        ignore: "", // validate all fields including form hidden input
-        errorPlacement: function (error, element) {
-          if (element.is(':checkbox')) {
-            error.insertAfter(element.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline"));
-          } else if (element.is(':radio')) {
-            error.insertAfter(element.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline"));
-          } else {
-            error.insertAfter(element); // for other inputs, just perform default behavior
-          }
-        },
-
-        highlight: function (element) { // hightlight error inputs
-          $(element)
-            .closest('.form-group').addClass('has-error'); // set error class to the control group
-        },
-
-        unhighlight: function (element) { // revert the change done by hightlight
-          $(element)
-            .closest('.form-group').removeClass('has-error'); // set error class to the control group
-        },
-
-        success: function (label) {
-          label
-            .closest('.form-group').removeClass('has-error'); // set success class to the control group
-        },
-        rules: {
-          ip: {
-            minlength: 7,
-            maxlength: 20,
-            required: true
-          },
-          port: {
-            minlength: 1,
-            maxlength: 6,
-            number: true
-          }
-        },
-        submitHandler: function (form) {
-          App.blockUI({
-            message: '执行中....',
-            target: $modal_exec,
-            overlayColor: 'none',
-            cenrerY: true,
-            boxed: true
-          });
-          $.ajax({
-            url: CONFIG['MODULE'] + '/Group/Execute',
-            type: 'POST',
-            data: $(form).serialize(),
-            beforeSend: function () {
-
-            },
-            success: function (res, response, status) {
-              $modal_exec.modal('hide');
-              App.unblockUI($modal_exec);
-              if (res.error < 0) {
-                App.notification({
-                  type: 'danger',
-                  icon: 'warning',
-                  message: '执行失败' + res.msg,
-                  container: $(".page-content-col .portlet-title"),
-                  place: 'prepend',
-                  closeInSeconds: 1.5
-                });
-                return;
-              }
-
-              App.notification({
-                type: 'success',
-                icon: 'success',
-                message: '执行成功',
-                container: $(".page-content-col .portlet-title"),
-                place: 'prepend',
-                closeInSeconds: 1.5
-              });
-
-            },
-            error: function () {
-              App.unblockUI($modal_exec);
-            }
-          });
+      $("#execute_diff").on('click', function () {
+        if($('.checkboxes:checked').size()<2){
+          App.warning( 'less then 2 records selected', grid.getTableWrapper());
           return false;
         }
+        var _ids=[];
+        $('.checkboxes:checked').each(function () {
+            _ids.push($(this).val());
+        });
+
+        if (_ids.length > 2) {
+          App.warning('You can only compare two results');
+          return false;
+        }
+        $(this).attr('href','/diff/diff/' + _ids[0] + '/' + _ids[1]);
       });
     };
-    return {
 
+    return {
       //main function to initiate the module
       init: function () {
-
         initPickers();
         handleRecords();
-        exec();
       }
-
     };
-
   }();
-
 
   TableDatatablesAjax.init();
 });
