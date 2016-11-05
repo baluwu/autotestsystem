@@ -8,7 +8,6 @@ class ManageController extends AuthController {
         $this->display();
     }
 
-
     //获取管理员列表
     static $getListRules = [
         'order'           => ['name' => 'order', 'type' => 'array', 'format' => 'json', 'method' => 'post', 'desc' => '排序'],
@@ -186,7 +185,10 @@ class ManageController extends AuthController {
         $this->assign('user', $user);
         $auth_group = D('AuthGroup')->getListAll();
 
+        $classify = M('ManageGroupClassify')->where(['pid' => 0])->select();
+
         $this->assign('group_id', $id);
+        $this->assign('classify', $classify);
         $this->assign('auth_group', $auth_group);
         $this->display();
     }
@@ -200,10 +202,18 @@ class ManageController extends AuthController {
         $this->ajaxReturn($ret);
     }
 
-    //获取一条数据
-//    public function getManager() {
-//        if (!IS_AJAX) $this->error('非法操作！');
-//        $Manage = D('Manage');
-//        $this->ajaxReturn($Manage->getManager(I('post.id')));
-//    }
+    public function saveGroupClassify() {
+        $gid = I('post.id');
+        $classify_str = I('post.classify_str');
+        
+        if (!$gid) {
+            E('参数非法');
+        }
+
+        $r = M('AuthGroup')->where(['id' => $gid])->save([
+            'classify' => $classify_str
+        ]);
+
+        $this->ajaxReturn($r >= 0 ? true : false);
+    }
 }

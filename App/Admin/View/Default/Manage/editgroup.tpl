@@ -29,8 +29,6 @@
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
   <!-- END THEME GLOBAL STYLES -->
-
-
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -53,11 +51,8 @@
   <!-- BEGIN HEADER -->
   <include file="Public/header"/>
   <!-- END HEADER -->
-
-
   <div class="container-fluid">
     <div class="page-content">
-
       <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
@@ -82,7 +77,7 @@
               <ul class="nav navbar-nav">
                 <li class="active">
                   <a href="/Manage/group">
-                    <i class="fa fa-plus "></i> 用户组管理</a>
+                    <i class="fa fa-plus "></i>用户组分类授权</a>
                 </li>
                 <li>
                   <a href="/ManageGroupClassify/index">
@@ -97,13 +92,14 @@
             <div class="row">
               <div class="col-md-12">
 
-                <form class="form-horizontal form-row-seperated" action="" method="post" id="atsform">
-                  <input type="hidden" name="id" value="{$user.id}"/>
+                <form class="form-horizontal form-row-seperated" action="" method="post" id="atsform" onclick="return false;">
+                  <input type="hidden" name="id" id="id" value="{$group_id}"/>
+                  <input type="hidden" name="classify_str" id="classify_str" value=""/>
 
                   <div class="portlet  light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
                       <div class="caption">
-                        <i class="fa fa-plus"></i> 编辑用户分组
+                        <i class="fa fa-plus"></i> 用户组分类授权
                       </div>
                       <!-- BEGIN BREADCRUMBS -->
                       <div class="breadcrumbs">
@@ -132,13 +128,10 @@
 
                     </div>
                     <div class="portlet-body">
-
-
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="groupid">
                             用户组
                           </label>
-
                           <div class="col-md-4">
                             <select class="form-control" name="groupid" readonly="readonly">
                               <volist name="auth_group" id="auth">
@@ -166,26 +159,20 @@
                       </div>
 
                       </div>
-
-
                       <div class="form-actions">
                         <div class="row">
                           <div class="col-md-offset-2 col-md-10">
-
-                            <button id="submit_save" type="button" value="Save" class="btn btn-success">
+                            <span id="submit_save" class="btn btn-success">
                               <i class="fa fa-check"></i> Save & Return List
-                            </button>
-                            <a href="/Manage/index" class="btn dark btn-secondary-outline">
-                              <i class="fa fa-angle-left"></i> Back</a>
-
-
+                            </span>
+                            <a href="/Manage/index" class="btn dark btn-secondary-outline"><i class="fa fa-angle-left"></i> Back</a>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
               </div>
-
+              <BR />
               </form>
             </div>
           </div>
