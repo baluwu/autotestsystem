@@ -77,20 +77,13 @@
 
                 <div class="portlet-body list">
                   <p class="margin-bottom-10 tooltips" data-original-title="名称"><i class="fa fa-object-group"></i>{$group.name}</p>
-
                   <p class="margin-bottom-10 tooltips" data-original-title="属性"><i class="fa fa-gg"></i><if condition="($group.ispublic eq 1)">公有<else />私有</if></p>
-
                   <p class="margin-bottom-10 tooltips" data-original-title="所属用户"><i class="fa fa-user"></i>{$group.nickname}<if condition="($group.nickname eq null) OR ($group.nickname eq '') ">{$group.nickname} </if></p>
-
                   <p class="margin-bottom-10 tooltips" data-original-title="创建时间"><i class="fa fa-calendar font-blue"></i>
                     {$group.create_time|strtotime|date="Y-m-d",###}
-
                   </p>
-
                 </div>
               </div>
-
-
               <h3>用例管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
@@ -147,31 +140,23 @@
                   </div>
                   <div class="portlet-body">
                     <div class="table-container">
-
                       <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
                         <thead>
                         <tr role="row" class="heading">
-                          <th width="2%">
-                            ID
-                          </th>
+                          <th width="2%"> ID </th>
                           <th width="10%"> 名称</th>
                           <th width="20%"> NLP/ASR</th>
                           <th width="20%"> 规则</th>
                           <th width="20%"> 创建时间</th>
                           <th width="20%"> 操作</th>
                         </tr>
-
                         <tr role="row" class="filter">
                           <td></td>
                           <td>
-                            <input type="text" class="form-control form-filter input-sm" name="search_single_name"
-                                   placeholder="按名称搜索"></td>
+                            <input type="text" class="form-control form-filter input-sm" name="search_single_name" placeholder="按名称搜索"></td>
                           <td>
-                            <input type="text" class="form-control form-filter input-sm" name="search_single_nlp"
-                                   placeholder="按NLP搜索">
+                            <input type="text" class="form-control form-filter input-sm" name="search_single_nlp" placeholder="按NLP搜索">
                           </td>
-
-
                           <td>
                           </td>
                           <td>
@@ -181,7 +166,6 @@
                               <input type="text" class="input-sm form-control form-filter" name="date_to" placeholder="To"/>
                             </div>
                           </td>
-
                           <td>
                               <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
                                 <i class="fa fa-search"></i> Search
