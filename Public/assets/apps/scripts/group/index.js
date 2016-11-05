@@ -273,35 +273,20 @@ jQuery(document).ready(function () {
             url: CONFIG['MODULE'] + '/Group/Execute',
             type: 'POST',
             data: $(form).serialize(),
-            beforeSend: function () {
-
-            },
+            beforeSend: function () {},
             success: function (res, response, status) {
               $modal_exec.modal('hide');
 
               App.unblockUI($modal_exec);
               if (res.error < 0) {
-                App.notification({
-                  type: 'danger',
-                  icon: 'warning',
-                  message: '执行失败' + res.msg,
-                  container: $(".page-content-col .portlet-title"),
-                  place: 'prepend',
-                  closeInSeconds: 1.5
-                });
-                return;
+                return App.warning('Execute fail, Error: ' + res.msg);
               }
 
-
-              App.notification({
-                type: 'success',
-                icon: 'success',
-                message: '执行成功',
-                container: $(".page-content-col .portlet-title"),
-                place: 'prepend',
-                closeInSeconds: 1.5
-              });
-
+              var r = res.data && JSON.parse(res.data);
+              if (r && !r.isSucess) {
+                return App.warning('Execute fail, Error: ' + r.msg);
+              }
+              App.warning('执行成功');
             },
             error: function () {
               App.unblockUI($modal_exec);
@@ -312,17 +297,12 @@ jQuery(document).ready(function () {
       });
     };
     return {
-
-      //main function to initiate the module
       init: function () {
-
         initPickers();
         handleRecords();
         exec();
       }
-
     };
-
   }();
 
 

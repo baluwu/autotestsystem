@@ -121,28 +121,30 @@ class ExecHistoryModel extends Model {
 
   //执行组单例
   public function ExecuteGroup($tid, $ip, $port) {
-    $idsAr = explode(',', $tid);
-    $row = 0;
-    foreach ($idsAr as $value) {
-      $status = M('group')->where(['id' => $value])->getField('status');
-      if ($status == 1) continue;
-      $data = [
-        'isgroup'     => 1,
-        'mid'         => $value,
-        'uid'         => session('admin')['id'],
-        'ip'          => $ip,
-        'port'        => $port,
-        'create_time' => REQUEST_TIME
-      ];
+      $idsAr = explode(',', $tid);
+      $ret = [];
+      foreach ($idsAr as $value) {
+          $n_single = M('GroupSingle')->where(['tid' => $value])->count();
+          if ($n_single == 0) {
+              $temp['isSuccess'] = false;
+              $temp['msg'] = '用例组 ' . $value . ' 无用例';
+              $ret[] = json_encode($temp);
+              continue;
+          }
+          $data = [
+              'isgroup'     => 1,
+              'mid'         => $value,
+              'uid'         => session('admin')['id'],
+              'ip'          => $ip,
+              'port'        => $port,
+              'create_time' => time(),
+              'type' => 'IMME'
+          ];
 
-      $row = $this->add($data);
-      if ($row) {
-        $data['id'] = $row;
-        AddTask($data);
+          $ret[] = SyncTask($data);
       }
-    }
 
-    return $row;
+      return $ret;
   }
 
   public function GetById($id,$isgroup=0) {

@@ -198,6 +198,7 @@ class TaskModel {
         $taskData['exec_start_time'] = date('Y-m-d H:i:s');
         $taskData['history_id'] = $this->addExecHistory($taskData);
 
+        $msg = [];
         foreach ($groupSingleData as $key => $thisData) {
             $thisData = $this->initExecSingle($taskData, $thisData);
             $ret = $this->startExecSingle($taskData, $thisData);
@@ -206,13 +207,15 @@ class TaskModel {
                 $isSuccess = false;
             }
 
+            $msg[] = $ret['msg'];
+
             $this->endExecSingle($taskData);
         }
 
         $this->setExecHistoryResult($taskData, $isSuccess, $isSuccess ? '成功' : '失败');       
         tasklog('用例组执行完成！');
 
-        return [ 'isSuccess' => $isSuccess, 'data' => $taskData ];
+        return [ 'isSuccess' => $isSuccess, 'data' => $taskData, 'msg' => implode('#', array_unique($msg)) ];
     }
 
     public function runTask($taskData) {
