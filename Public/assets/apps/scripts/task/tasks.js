@@ -117,7 +117,7 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return '<a href="./execute_history/tid/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
+                return '<a href="./execute_history_show/id/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
               },
               "targets": 9
             }
