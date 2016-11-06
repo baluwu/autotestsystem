@@ -13,25 +13,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
-
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-
   <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-  <!-- END GLOBAL MANDATORY STYLES -->
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
   <link href="/Public/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>  <!-- END PAGE LEVEL PLUGINS -->
-  <!-- BEGIN THEME GLOBAL STYLES -->
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
-  <!-- END THEME GLOBAL STYLES -->
-  <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-  <!-- END THEME LAYOUT STYLES -->
   <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico"/>
   <script>
@@ -42,47 +33,23 @@
     };
   </script>
 </head>
-<!-- END HEAD -->
-
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
-<!-- BEGIN CONTAINER -->
 <div class="wrapper">
-  <!-- BEGIN HEADER -->
   <include file="Public/header"/>
-  <!-- END HEADER -->
-
-
   <div class="container-fluid">
     <div class="page-content">
-
-      <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
-          <!-- BEGIN PAGE SIDEBAR -->
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <h3>用例组管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
-                  <a href="./index">
-                    <i class="fa fa-object-group"></i> 用例组列表 </a>
+                    <a href="./index"> <i class="fa fa-object-group"></i> 用例组列表 </a>
+                    <ul id="treeDemo" class="ztree" style="padding: 10px;"></ul>
                 </li>
-                <li>
-                  <a href="./recycle">
-                    <i class="fa fa-recycle "></i> 回收站 </a>
-                </li>
-                <li>
-                  <a href="./addTask">
-                    <i class="fa fa-tasks"></i> 创建任务 </a>
-                </li>
+                <li> <a href="./addTask"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
+                <li> <a href="./recycle"> <i class="fa fa-recycle "></i> 回收站 </a> </li>
               </ul>
-              <h3>用例组分类</h3>
-              <ul id="treeDemo" class="ztree">
-              </ul>
-              </br>
-              <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li>
                   <a href="/Single/add">
@@ -94,7 +61,6 @@
                     <i class="fa fa-plus "></i> 添加用例组
                   </a>
                 </li>
-
               </ul>
             </nav>
           </div>
@@ -281,7 +247,6 @@
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
 <script src="/Public/assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
-<!-- BEGIN CORE PLUGINS -->
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="/Public/assets/global/plugins/js.cookie.min.js"></script>
@@ -290,7 +255,6 @@
 <script src="/Public/assets/global/plugins/jquery.blockui.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
  <script src="/Public/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script> <!-- END CORE PLUGINS -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="/Public/assets/global/plugins/datatables/datatables.min.js"></script>
 <script src="/Public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
@@ -299,24 +263,13 @@
 <script src="/Public/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-
 <script type="text/javascript" src="/Public/assets/global/plugins/ztree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="/Public/assets/global/plugins/ztree/js/jquery.ztree.excheck.js"></script>
-
-<!-- END PAGE LEVEL PLUGINS -->
-
-<!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/common.js"></script>
-<!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/group/index.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/Public/assets/layout/scripts/layout.js"></script>
 <script src="/Public/assets/layout/scripts/quick-sidebar.js"></script>
-<!-- END THEME LAYOUT SCRIPTS -->
 </body>
-
 </html>
 
 
