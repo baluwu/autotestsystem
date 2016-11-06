@@ -49,7 +49,7 @@ class ManageGroupClassifyController extends AuthController {
     }
 
     //初始化节点
-    public function getData()
+    public function getData($group = 0)
     {
         if (!IS_AJAX) $this->error('非法操作！');
         $group_id = session('admin.group_id');

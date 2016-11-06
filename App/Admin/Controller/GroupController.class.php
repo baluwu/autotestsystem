@@ -1058,5 +1058,4 @@ class GroupController extends AuthController {
         $this->assign('execute_data', $data);
         $this->display();
     }
-
 }

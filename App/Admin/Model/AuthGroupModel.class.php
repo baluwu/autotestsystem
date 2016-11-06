@@ -117,7 +117,7 @@ class AuthGroupModel extends Model {
                 $result[] = $v;
             }
         }
-        //dump(fmt_tree_data($ret));exit;
+
         return fmt_tree_data($result);
     }
 

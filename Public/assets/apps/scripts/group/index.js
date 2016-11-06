@@ -2,34 +2,31 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
-    var classify = '';
-    var ztreeClick = function(event, treeId, treeNode, clickFlag) {
-      //window.location.href = '/Group/index/classify/'+treeNode.id;
-      classify = treeNode.id;
-      //TableDatatablesAjax.init();
-    }
+  var classify = '';
+  var ztreeClick = function(event, treeId, treeNode, clickFlag) {
+    classify = treeNode.id;
+  }
 
 	var setting = {
       async: {
         enable: true,
-        url: '/ManageGroupClassify/getData'
+        url: '/ManageGroupClassify/getData/group/1'
       },
-		data: {
-			simpleData: {
-				enable: true
-			}
-		},
-        callback:{
-          onClick:ztreeClick
+      data: {
+        simpleData: {
+          enable: true
         }
+      },
+      callback:{
+        onClick:ztreeClick
+      }
 	};
 
-    $.fn.zTree.init($("#treeDemo"), setting);
+  $.fn.zTree.init($("#treeDemo"), setting);
 		
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
-      //init date pickers
       $('#datepicker').datepicker({
         rtl: App.isRTL(),
         orientation: "bottom auto",
@@ -44,16 +41,9 @@ jQuery(document).ready(function () {
 
       grid.init({
         src: $("#datatable_ajax"),
-        onSuccess: function (grid, response) {
-          // grid:        grid object
-          // response:    json object of server side ajax response
-          // execute some code after table records loaded
-        },
-        onError: function (grid) {
-          // execute some code on network or other general error
-        },
+        onSuccess: function (grid, response) {},
+        onError: function (grid) { },
         onDataLoad: function (grid) {
-          // execute some code on ajax data load
           $('[data-toggle="confirmation"]').each(function () {
             $(this).confirmation();
             $(this).on('confirmed.bs.confirmation', function () {
@@ -95,22 +85,15 @@ jQuery(document).ready(function () {
           });
         },
         loadingMessage: 'Loading...',
-        dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
-
-          // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-          // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
-          // So when dropdowns used the scrollable div should be removed.
-          //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-
-          "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
+        dataTable: {
+          "bStateSave": true, 
           "lengthMenu": [
             [10, 20, 50, 100, 150, -1],
-            [10, 20, 50, 100, 150, "All"] // change per page values here
+            [10, 20, 50, 100, 150, "All"] 
           ],
-          "pageLength": 20, // default record count per page
+          "pageLength": 20, 
           "ajax": {
-            "url": CONFIG['MODULE'] + '/Group/getList', // ajax source
+            "url": CONFIG['MODULE'] + '/Group/getList', 
           },
           classify:104,
           keys: true,
@@ -170,7 +153,6 @@ jQuery(document).ready(function () {
           ]
         }
       });
-
 
       // handle group actionsubmit button click
       grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {

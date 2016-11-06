@@ -32,7 +32,7 @@
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
   <!-- END THEME LAYOUT STYLES -->
-  <link rel="stylesheet" href="/Public/assets/global/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico"/>
   <script>
     var CONFIG = {
