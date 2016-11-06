@@ -297,19 +297,102 @@ jQuery(document).ready(function () {
         }
       });
     };
+
+    var createTask = function () {
+      var $modal_exec = $('#J_task_single');
+      $('.J_add_task').click(function() {
+        var group_ids = getCheckedGroupId(); 
+        App.ok('已选择' + group_ids);   
+
+        var el = $(this);
+        //if (el.data('status') == 1)return;
+        $modal_exec.find('.currName').text(el.data('title'));
+        $modal_exec.find('[name="id"]').val(el.data('id'));
+        $modal_exec.find('.tips').html("");
+        $modal_exec.modal();
+      });
+
+      $("#J_task_single form").validate({
+        errorElement: 'span', 
+        errorClass: 'help-block help-block-error', 
+        focusInvalid: false, 
+        ignore: "", 
+        errorPlacement: function (error, element) {
+          if (element.is(':checkbox')) {
+            error.insertAfter(element.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline"));
+          } else if (element.is(':radio')) {
+            error.insertAfter(element.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline"));
+          } else {
+            error.insertAfter(element); 
+          }
+        },
+        highlight: function (element) {
+          $(element).closest('.form-group').addClass('has-error'); 
+        },
+        unhighlight: function (element) { 
+          $(element).closest('.form-group').removeClass('has-error'); 
+        },
+        success: function (label) {
+          label.closest('.form-group').removeClass('has-error'); 
+        },
+        rules: {
+          ip: {
+            minlength: 7,
+            maxlength: 20,
+            required: true
+          },
+          port: {
+            minlength: 1,
+            maxlength: 6,
+            number: true
+          }
+        },
+        submitHandler: function (form) {
+          App.blockUI({
+            message: '执行中....',
+            target: $modal_exec,
+            overlayColor: 'none',
+            cenrerY: true,
+            boxed: true
+          });
+          $.ajax({
+            url: CONFIG['MODULE'] + '/Task/add',
+            type: 'POST',
+            data: $(form).serialize(),
+            beforeSend: function () {},
+            success: function (res, response, status) {
+              $modal_exec.modal('hide');
+
+              App.unblockUI($modal_exec);
+              if (res.error < 0) {
+                return App.warning('Execute fail, Error: ' + res.msg);
+              }
+
+              var r = res.data && JSON.parse(res.data);
+              if (r && !r.isSucess) {
+                return App.warning('Execute fail, Error: ' + r.msg);
+              }
+              App.warning('执行成功');
+            },
+            error: function () {
+              App.unblockUI($modal_exec);
+            }
+          });
+          return false;
+        }
+      });
+    };
     return {
       init: function () {
         initPickers();
         handleRecords();
         exec();
+        createTask();
       }
     };
   }();
 
   TableDatatablesAjax.init();
 
-  $('.J_add_task').click(function() {
-    var group_ids = getCheckedGroupId(); 
-    App.ok('已选择' + group_ids);   
-  });
+  $("#run_at").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
 });
