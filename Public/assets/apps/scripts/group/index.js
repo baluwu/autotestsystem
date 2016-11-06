@@ -2,30 +2,35 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
+  var grid = new Datatable();
   var classify = '';
   var ztreeClick = function(event, treeId, treeNode, clickFlag) {
     classify = treeNode.id;
   }
 
+  function reloadGrid(cls_id) {
+    grid.setAjaxParam("classify_id", cls_id);
+    grid.getDataTable().ajax.reload();
+    grid.clearAjaxParams();
+  }
+
   var setting = {
-      check: {
-        enable: true
-      },
+      check: { enable: true },
       async: {
         enable: true,
         url: '/ManageGroupClassify/getData/group/1'
       },
       data: {
-        simpleData: {
-          enable: true
-        }
+        simpleData: { enable: true }
       },
       callback:{
         onClick:ztreeClick,
         beforeClick: function(treeId, treeNode) {
           var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-            if (treeNode.isParent) {
+          if (treeNode.isParent) {
             zTree.expandNode(treeNode);
+
+            reloadGrid(treeNode.id);
             return false;
           }
         }
@@ -47,7 +52,6 @@ jQuery(document).ready(function () {
     };
 
     var handleRecords = function () {
-      var grid = new Datatable();
 
       grid.init({
         src: $("#datatable_ajax"),

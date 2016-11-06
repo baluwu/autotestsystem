@@ -49,6 +49,10 @@ class GroupController extends AuthController {
         } else if ($this->date_to) {
             $where['create_time'] = ['elt', $this->date_to];
         }
+
+        if (I('post.classify_id')) {
+            $where['classify'] = I('post.classify_id');
+        }
         $this->ajaxReturn($Group->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where));
     }
 
