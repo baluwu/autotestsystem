@@ -7,7 +7,10 @@ jQuery(document).ready(function () {
     classify = treeNode.id;
   }
 
-	var setting = {
+  var setting = {
+      check: {
+        enable: true
+      },
       async: {
         enable: true,
         url: '/ManageGroupClassify/getData/group/1'
@@ -18,7 +21,14 @@ jQuery(document).ready(function () {
         }
       },
       callback:{
-        onClick:ztreeClick
+        onClick:ztreeClick,
+        beforeClick: function(treeId, treeNode) {
+          var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            if (treeNode.isParent) {
+            zTree.expandNode(treeNode);
+            return false;
+          }
+        }
       }
 	};
 

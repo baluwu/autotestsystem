@@ -102,6 +102,9 @@ class AuthGroupModel extends Model {
         $classify_str = $this->where(array('id'=>$groupid))->getField('classify');
         $classify_arr = explode(',', $classify_str);
 
+        $groups = M('Group')->where(['classify' => ['IN', $classify_str] ])->select();
+        $groups = arrayGroup($groups, 'classify');
+
         if( !empty($classify_arr) && !empty($ret)) {
             foreach( $ret as $k=>$v ) {
                 if($filter && !in_array($v['id'], $classify_arr)) {
@@ -109,12 +112,19 @@ class AuthGroupModel extends Model {
                     continue;
                 }
 
-                if(in_array($v['id'], $classify_arr)) {
-                    $v['checked'] = true;
-                } else {
-                    $v['checked'] = false;
-                }
+                $v['checked'] = false;
+
+                $classify_groups = $groups[$v['id']];
+
                 $result[] = $v;
+                if (!empty($classify_groups)) {
+                    foreach ($classify_groups as $k => &$iv) {
+                        $iv['id'] = $v['id'] . $k;
+                        $iv['pid'] = $v['id'];
+
+                        $result[] = $iv;                        
+                    }
+                }
             }
         }
 
@@ -123,7 +133,6 @@ class AuthGroupModel extends Model {
 
     public function saveClassifyData()
     {
-        DB(I('post.groupid'), $classify_str);
         return $this->where(array('id'=>$groupid))->save(array('classify'=>$classify_str));
     }
 }

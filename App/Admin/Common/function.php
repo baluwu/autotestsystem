@@ -119,11 +119,23 @@ function fmt_tree_data ( $data, $def = array() )
         return $data;
     }
 
-    $open = isset($def['open']) ? $def['open'] : true;
     foreach( $data as &$v ) {
         $v['pId'] = $v['pid'];
-        $v['open'] = $open;
+        $v['open'] = false;
     }
 
     return $data;
 }
+
+function arrayGroup($arr, $key) {
+    $result = FALSE;
+    foreach ($arr as $val) {
+        if (isset($val[$key]) && isset($result[$val[$key]])) {
+            $result[$val[$key]][] = $val;
+        }
+        else $result[$val[$key]] = [$val];
+    }
+
+    return $result;
+}
+
