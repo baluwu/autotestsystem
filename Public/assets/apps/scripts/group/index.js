@@ -8,6 +8,17 @@ jQuery(document).ready(function () {
     classify = treeNode.id;
   }
 
+  function getCheckedGroupId() {
+    var ck_t = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes();
+    var ck_t_id = [];
+    $.each(ck_t, function(i, el){
+      if (!el.isParent) {
+        ck_t_id[ck_t_id.length] = el['id'];
+      }
+    });
+    return ck_t_id.join(',');
+  }
+
   function reloadGrid(cls_id) {
     grid.setAjaxParam("classify_id", cls_id);
     grid.getDataTable().ajax.reload();
@@ -217,33 +228,27 @@ jQuery(document).ready(function () {
       });
 
       $("#exec form").validate({
-        errorElement: 'span', //default input error message container
-        errorClass: 'help-block help-block-error', // default input error message class
-        focusInvalid: false, // do not focus the last invalid input
-        ignore: "", // validate all fields including form hidden input
+        errorElement: 'span', 
+        errorClass: 'help-block help-block-error', 
+        focusInvalid: false, 
+        ignore: "", 
         errorPlacement: function (error, element) {
           if (element.is(':checkbox')) {
             error.insertAfter(element.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline"));
           } else if (element.is(':radio')) {
             error.insertAfter(element.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline"));
           } else {
-            error.insertAfter(element); // for other inputs, just perform default behavior
+            error.insertAfter(element); 
           }
         },
-
-        highlight: function (element) { // hightlight error inputs
-          $(element)
-            .closest('.form-group').addClass('has-error'); // set error class to the control group
+        highlight: function (element) {
+          $(element).closest('.form-group').addClass('has-error'); 
         },
-
-        unhighlight: function (element) { // revert the change done by hightlight
-          $(element)
-            .closest('.form-group').removeClass('has-error'); // set error class to the control group
+        unhighlight: function (element) { 
+          $(element).closest('.form-group').removeClass('has-error'); 
         },
-
         success: function (label) {
-          label
-            .closest('.form-group').removeClass('has-error'); // set success class to the control group
+          label.closest('.form-group').removeClass('has-error'); 
         },
         rules: {
           ip: {
@@ -301,6 +306,10 @@ jQuery(document).ready(function () {
     };
   }();
 
-
   TableDatatablesAjax.init();
+
+  $('.J_add_task').click(function() {
+    var group_ids = getCheckedGroupId(); 
+    App.ok('已选择' + group_ids);   
+  });
 });

@@ -47,7 +47,7 @@
                     <a href="./index"> <i class="fa fa-object-group"></i> 用例组列表 </a>
                     <ul id="treeDemo" class="ztree" style="padding: 10px;"></ul>
                 </li>
-                <li> <a href="./addTask"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
+                <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
                 <li> <a href="./recycle"> <i class="fa fa-recycle "></i> 回收站 </a> </li>
               </ul>
               <ul class="nav navbar-nav">
@@ -181,21 +181,14 @@
   <form action="#" >
     <div class="modal-body">
       <div class="tips"></div>
-
       <input type="hidden" name="id" value=""/>
-
-
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label">
-
         </label>
-
         <div class="col-md-10">
           当前执行用例组:<span class="currName"></span>
         </div>
       </div>
-
-
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>IP
@@ -215,9 +208,6 @@
           <div class="form-control-focus"> </div>
         </div>
       </div>
-
-
-
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="port">
           <span class="required"> * </span>Port
