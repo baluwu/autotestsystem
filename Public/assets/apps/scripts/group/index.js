@@ -209,10 +209,6 @@ jQuery(document).ready(function () {
           });
         }
       });
-
-      //grid.setAjaxParam("customActionType", "group_action");
-      //grid.getDataTable().ajax.reload();
-      //grid.clearAjaxParams();
     };
 
     var exec = function () {
@@ -302,14 +298,39 @@ jQuery(document).ready(function () {
       var $modal_exec = $('#J_task_single');
       $('.J_add_task').click(function() {
         var group_ids = getCheckedGroupId(); 
-        App.ok('已选择' + group_ids);   
 
-        var el = $(this);
-        //if (el.data('status') == 1)return;
-        $modal_exec.find('.currName').text(el.data('title'));
-        $modal_exec.find('[name="id"]').val(el.data('id'));
-        $modal_exec.find('.tips').html("");
-        $modal_exec.modal();
+        $.ajax({
+          'url': '/Group/getSingleByGroupId',
+          'method': 'POST',
+          'data': { group_ids: group_ids },
+          'type': 'JSON',
+          'success': function(r) {
+            var body = [];
+
+            if (!r.data || !r.data.length) {
+              return App.warning('无用例');
+            }
+
+            if (r.data.length > 100) {
+              return App.warning('已超出任务用例数最大限制: 100');
+            }
+
+            $.each(r.data, function(i, el) {
+              var tr = '<tr>';
+              tr += '<td><input type="checkbox" checked class="single-ckbx" data-sid="' + el.id + '" /></td>' + '<td>' + el.id + '</td><td>' + el.name + '</td><td>' + el.nlp + el.arc + '</td>'
+              tr += '</tr>';
+
+              body.push(tr);
+            });
+
+            $('#J_task_single_bd').html(body.join(''));
+            var el = $(this);
+            $modal_exec.find('.currName').text(el.data('title'));
+            $modal_exec.find('[name="id"]').val(el.data('id'));
+            $modal_exec.find('.tips').html("");
+            $modal_exec.modal();
+          }
+        });
       });
 
       $("#J_task_single form").validate({
@@ -348,6 +369,18 @@ jQuery(document).ready(function () {
           }
         },
         submitHandler: function (form) {
+          var single_ids = [];
+
+          $('.single-ckbx:checked').each(function(i, el) {
+            single_ids.push($(el).attr('data-sid')); 
+          });
+
+          if (single_ids.length == 0) {
+            return App.warning('未选择用例');
+          }
+
+          $('#J_single_ids').val(single_ids.join(','));
+
           App.blockUI({
             message: '执行中....',
             target: $modal_exec,
@@ -355,6 +388,7 @@ jQuery(document).ready(function () {
             cenrerY: true,
             boxed: true
           });
+
           $.ajax({
             url: CONFIG['MODULE'] + '/Task/add',
             type: 'POST',
@@ -364,15 +398,11 @@ jQuery(document).ready(function () {
               $modal_exec.modal('hide');
 
               App.unblockUI($modal_exec);
-              if (res.error < 0) {
-                return App.warning('Execute fail, Error: ' + res.msg);
+              if (res.error) {
+                return App.warning('Add Task fail, Error: ' + res.msg);
               }
 
-              var r = res.data && JSON.parse(res.data);
-              if (r && !r.isSucess) {
-                return App.warning('Execute fail, Error: ' + r.msg);
-              }
-              App.warning('执行成功');
+              App.ok('Add task success!');
             },
             error: function () {
               App.unblockUI($modal_exec);

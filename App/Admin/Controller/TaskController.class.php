@@ -65,4 +65,47 @@ class TaskController extends AuthController {
         $this->display();
     }
 
+    public function add() {
+        $task_name = I('post.name');
+        $run_at = I('post.run_at');
+        $single_ids = I('post.single_ids');
+        $ver = I('post.ver');
+        $ip = I('post.ip');
+
+        if (!$single_ids || !$task_name || !$ver || !$ip || !$run_at) {
+            return $this->ajaxReturn(['error' => true, 'msg' => '参数非法']);
+        }
+
+        $now = time();
+        $at = strtotime($run_at);
+        if ($at < $now ||  $at - $now < 10) {
+            return $this->ajaxReturn([ 'error' => true, 'msg' => '运行时间至少需大于当前时间10秒' ]);
+        }
+
+        $port = I('post.port');
+        $taskData = [
+            "isgroup" => 2,
+            'name' => $task_name,
+            "type"=>"TIMER",
+            "mid"=>$single_ids,
+            'description' => I('post.description'),
+            'notify_email' => I('post.notify_email'),
+            "ver"=>$ver,
+            "run_at"=>$at,
+            'uid' => session('admin')['id'],
+            'ip' => $ip,
+            'port' => $port ? $port : '8080',
+            "create_time"=>time()
+        ];
+
+        $resp = SyncTask($taskData);
+
+        $resp = json_decode($resp, true);
+
+        $is_error = $resp && $resp['isSuccess'] ? false : true;
+        return $this->ajaxReturn([
+            'error' => $is_error,
+            'msg' => $resp ? $resp['msg'] : ''
+        ]);
+    }
 }

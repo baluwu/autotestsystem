@@ -24,7 +24,7 @@ CREATE TABLE `sys_task` (
     `name` varchar(50) DEFAULT NULL COMMENT '任务名称',
     `ver` varchar(20) NOT NULL COMMENT '版本',
     `description` varchar(255) DEFAULT NULL COMMENT '注释',
-    `mid` varchar(255) DEFAULT NULL COMMENT '用例ids',
+    `mid` varchar(512) DEFAULT NULL COMMENT '用例ids',
     `run_at` int(11) unsigned NOT NULL COMMENT '运行时间',
     `notify_email` varchar(128) DEFAULT NULL COMMENT '通知邮件',
     `ip` varchar(20) NOT NULL,

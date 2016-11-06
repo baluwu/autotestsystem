@@ -33,6 +33,7 @@
       'INDEX': '{:U("Index/index")}',
     };
   </script>
+  <style>.col-md-8 { padding: 0 !important; }</style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
 <div class="wrapper">
@@ -65,28 +66,22 @@
               </ul>
             </nav>
           </div>
-          <!-- END PAGE SIDEBAR -->
           <div class="page-content-col">
-            <!-- BEGIN PAGE BASE CONTENT -->
             <div class="row">
               <div class="col-md-12">
-                <!-- Begin: life time stats -->
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-object-group font-dark"></i>
                       <span class="caption-subject font-dark sbold uppercase">用例组管理</span>
                     </div>
-                    <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
-
                       <ol class="breadcrumb">
                         <li>
                           <a href="/Index">Home</a>
                         </li>
                         <li class="active">用例组管理</li>
                       </ol>
-                      <!-- Sidebar Toggle Button -->
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
                         <span class="sr-only">Toggle navigation</span>
                             <span class="toggle-icon">
@@ -95,23 +90,16 @@
                                 <span class="icon-bar"></span>
                             </span>
                       </button>
-                      <!-- Sidebar Toggle Button -->
                     </div>
-                    <!-- END BREADCRUMBS -->
                   </div>
                   <div class="portlet-body">
                     <div class="table-container">
-
                       <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
                         <thead>
                         <tr role="row" class="heading">
-                          <th width="2%">
-                           ID
-                          </th>
+                          <th width="2%"> ID </th>
                           <th width="20%"> 名称</th>
-
                           <th width="5%"> 属性</th>
-
                           <th width="15%"> 创建时间</th>
                           <td>状态<i class="fa fa-info-circle tooltips" data-original-title="执行中的用例，请等待执行完成后在执行"></i></td>
                           <th width="40%"> 操作</th>
@@ -240,6 +228,7 @@
     <h4 class="modal-title">创建任务</h4>
   </div>
   <form action="#" >
+    <input type="hidden" id="J_single_ids" name="single_ids" />
     <div class="modal-body">
       <div class="tips"></div>
       <div class="form-group form-md-line-input">
@@ -251,36 +240,38 @@
           <div class="form-control-focus"> </div>
         </div>
       </div>
-
       <div class="form-group form-md-line-input">
         <label class="col-md-3 control-label" for="ip">
           <span class="required">*</span>执行时间
         </label>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="run_at" placeholder="执行时间" name="run_at" required data-tabindex="1">
+          <input type="text" class="form-control" id="run_at" placeholder="2016-10-11 12:08:08" name="run_at" required data-tabindex="1">
           <div class="form-control-focus"> </div>
         </div>
       </div>
-
       <div class="form-group form-md-line-input">
         <label class="col-md-3 control-label" for="ip">
           <span class="required">*</span>版本号
         </label>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="ver" placeholder="版本号" name="ver" required data-tabindex="1">
+          <input type="text" class="form-control" id="ver" placeholder="1.0.1" name="ver" required data-tabindex="1">
           <div class="form-control-focus"> </div>
         </div>
       </div>
-
       <div class="form-group form-md-line-input">
         <label class="col-md-3 control-label" for="ip"> 注释 </label>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="description" placeholder="版本号" name="description" required data-tabindex="1">
+          <input type="text" class="form-control" id="description" placeholder="Description" name="description" data-tabindex="1">
           <div class="form-control-focus"> </div>
         </div>
       </div>
-
-
+      <div class="form-group form-md-line-input">
+        <label class="col-md-3 control-label" for="ip"> 通知邮箱 </label>
+        <div class="col-md-8 input-group has-success" id="emailwarp">
+            <input type="text" class="form-control" id="notify_email" name="notify_email" autocomplete="off" placeholder="Email Address"><span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+            <div class="form-control-focus"></div>
+        </div>
+      </div>
       <div class="form-group form-md-line-input">
         <label class="col-md-3 control-label" for="ip">
           <span class="required">*</span>IP
@@ -301,9 +292,7 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="port">
-          <span class="required"> * </span>Port
-        </label>
+        <label class="col-md-3 control-label" for="port"> Port </label>
         <div class="col-md-8">
           <input type="text" name="port" class="form-control" id="port" list="port_data" placeholder="8080" data-tabindex="2">
           <datalist id="port_data">
@@ -314,6 +303,22 @@
           </datalist>
           <div class="form-control-focus"></div>
         </div>
+      </div>
+      <br />
+      <div class="portlet-body">
+          <div class="table-container">
+              <table class="table table-striped table-bordered table-hover table-checkable" id="J_task_singles">
+              <thead>
+              <tr role="row" class="heading">
+              <th></th>
+              <th width=5%"> ID </th>
+              <th width="45%"> 名称</th>
+              <th width="45%"> NLP/ASR</th>
+              </tr>
+              </thead>
+              <tbody id="J_task_single_bd"></tbody>
+              </table>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>

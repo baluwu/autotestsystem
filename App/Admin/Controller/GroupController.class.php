@@ -1062,4 +1062,15 @@ class GroupController extends AuthController {
         $this->assign('execute_data', $data);
         $this->display();
     }
+
+    public function getSingleByGroupId() {
+        $group_ids = I('post.group_ids');
+        $r = M('GroupSingle')->where([ 'tid' => [ 'IN', $group_ids ] ])->select();
+        
+        $this->ajaxReturn([
+            'error' => false,
+            'data'  => $r,
+            'msg'   => ''
+        ]);
+    }
 }
