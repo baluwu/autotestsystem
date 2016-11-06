@@ -50,6 +50,7 @@ class GroupModel extends Model {
                 $obj[$key]['ispublic'] = '公共';
             }
         }
+
         $total = $this->where($map)->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')->count();
         return [
             'recordsTotal'    => $total,

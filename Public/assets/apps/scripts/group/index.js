@@ -3,24 +3,20 @@
  */
 jQuery(document).ready(function () {
   var grid = new Datatable();
-  var classify = '';
-  var ztreeClick = function(event, treeId, treeNode, clickFlag) {
-    classify = treeNode.id;
-  }
 
   function getCheckedGroupId() {
     var ck_t = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes();
     var ck_t_id = [];
     $.each(ck_t, function(i, el){
       if (!el.isParent) {
-        ck_t_id[ck_t_id.length] = el['id'];
+        ck_t_id[ck_t_id.length] = el['group_id'];
       }
     });
     return ck_t_id.join(',');
   }
 
-  function reloadGrid(cls_id) {
-    grid.setAjaxParam("classify_id", cls_id);
+  function reloadGrid(group_id) {
+    grid.setAjaxParam("group_id", group_id);
     grid.getDataTable().ajax.reload();
     grid.clearAjaxParams();
   }
@@ -35,15 +31,19 @@ jQuery(document).ready(function () {
         simpleData: { enable: true }
       },
       callback:{
-        onClick:ztreeClick,
+        onCheck: function(treeId, treeNode) {
+            var gids = getCheckedGroupId();
+            reloadGrid(gids);
+        },
         beforeClick: function(treeId, treeNode) {
           var zTree = $.fn.zTree.getZTreeObj("treeDemo");
           if (treeNode.isParent) {
             zTree.expandNode(treeNode);
-
-            reloadGrid(treeNode.id);
-            return false;
           }
+          var gids = getCheckedGroupId();
+          //zTree.checkNode(treeNode, !treeNode.checked, true);
+          //reloadGrid(gids);
+          return false;
         }
       }
 	};

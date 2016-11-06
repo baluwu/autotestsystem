@@ -119,6 +119,7 @@ class AuthGroupModel extends Model {
                 $result[] = $v;
                 if (!empty($classify_groups)) {
                     foreach ($classify_groups as $k => &$iv) {
+                        $iv['group_id'] = $iv['id'];
                         $iv['id'] = $v['id'] . $k;
                         $iv['pid'] = $v['id'];
 
