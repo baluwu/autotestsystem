@@ -11,41 +11,37 @@ class ManageGroupClassifyController extends AuthController {
     public function addNode()
     {
         if (!IS_AJAX) $this->error('非法操作！');
-        $treeNode = I('get.treeNode', '');
         $data = array(
-            'pid'=>$treeNode['pId'],
-            'name'=>$treeNode['name'],
-            'modify_time'=>date('Y-m-d H:i:s'),
+            'pid'=>0,
+            'name'=>I('get.name'),
+            'modify_time'=>date('Y-m-d H:i:s')
         );
-        D('ManageGroupClassify')->addData($data);
-        $this->ajaxReturn($treeNode);
+        M('ManageGroupClassify')->add($data);
+        $this->ajaxReturn(['error' => false, 'msg' => '']);
     }
 
     public function delNode()
     {
         if (!IS_AJAX) $this->error('非法操作！');
-        $treeNode = I('get.treeNode', '');
-        $id = isset($treeNode['id'])?$treeNode['id']:null;
+        $id = I('get.id');
         if( $id == null ) {
             $this->error('ID错误！');
         }
-        D('ManageGroupClassify')->delData($id);
-        $this->ajaxReturn($treeNode);
+        D('ManageGroupClassify')->where(['id' => $id])->delete();
+        $this->ajaxReturn(['error' => false, 'msg' => '']);
     }
 
     public function editNode()
     {
         if (!IS_AJAX) $this->error('非法操作！');
-        $treeNode = I('get.treeNode', '');
-        $id = $treeNode['id'];
+        $id = intval(I('get.id'));
+        $name = I('get.name');
         $data = array(
-            'id'=>$id,
-            'pid'=>$treeNode['pId'],
-            'name'=>$treeNode['name'],
+            'name'=>$name,
             'modify_time'=>date('Y-m-d H:i:s')
         );
-        D('ManageGroupClassify')->saveData($id, $data);
-        $this->ajaxReturn($treeNode);
+        D('ManageGroupClassify')->where(['id' => $id])->save($data);
+        $this->ajaxReturn(['error' => false, 'msg' => '']);
     }
 
     //初始化节点

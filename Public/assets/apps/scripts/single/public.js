@@ -5,7 +5,6 @@ jQuery(document).ready(function () {
     var TableDatatablesAjax = function () {
 
       var initPickers = function () {
-        //init date pickers
         $('#datepicker').datepicker({
           rtl: App.isRTL(),
           orientation: "bottom auto",
@@ -22,33 +21,22 @@ jQuery(document).ready(function () {
             grid.init({
                 src: $("#datatable_ajax"),
                 onSuccess: function (grid, response) {
-                    // grid:        grid object
-                    // response:    json object of server side ajax response
-                    // execute some code after table records loaded
                 },
                 onError: function (grid) {
-                    // execute some code on network or other general error
                 },
                 onDataLoad: function (grid) {
 
                 },
                 loadingMessage: 'Loading...',
-                dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
-
-                    // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-                    // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
-                    // So when dropdowns used the scrollable div should be removed.
-                    //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-
-                    "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
+                dataTable: { 
+                    "bStateSave": true, 
                     "lengthMenu": [
                         [10, 20, 50, 100, 150, -1],
-                        [10, 20, 50, 100, 150, "All"] // change per page values here
+                        [10, 20, 50, 100, 150, "All"] 
                     ],
-                    "pageLength": 20, // default record count per page
+                    "pageLength": 20, 
                     "ajax": {
-                        "url": CONFIG['MODULE'] + '/Single/getListPub', // ajax source
+                        "url": CONFIG['MODULE'] + '/Single/getListPub',
                     },
                     keys: true,
                     columns: [
@@ -136,15 +124,8 @@ jQuery(document).ready(function () {
                       },
                         {
                             "render": function (data, type, row) {
-                                  return '<div class="btn-group">\
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\
-                                        操作 <span class="caret"></span>\
-                                    </button>\
-                                    <ul class="dropdown-menu" role="menu">\
-                                        <li><a  data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '" data-status="' + row.status + '"  '+(row.status==1?'disabled':'')+'   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a></li>\
-                                        <li><a href="./execute_history_pub/id/' + row.id + '"  class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a></li>\
-                                    </ul>\
-                                    </div>';
+                                  return '<a  data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '" data-status="' + row.status + '"  '+(row.status==1?'disabled':'')+'   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a>';
+                                    
                             },
                             "targets": 7
                         }
@@ -218,33 +199,19 @@ jQuery(document).ready(function () {
                         url: CONFIG['MODULE'] + '/Single/ExecuteSingle',
                         type: 'POST',
                         data: $(form).serialize(),
-                        beforeSend: function () {
-
-                        },
                         success: function (res, response, status) {
                           App.unblockUI($modal_exec);
                             $modal_exec.modal('hide');
                             if (res.error < 0) {
-                                App.notification({
-                                    type: 'danger',
-                                    icon: 'warning',
-                                    message: '执行失败' + res.msg,
-                                    container: $(".page-content-col .portlet-title"),
-                                    place: 'prepend',
-                                    closeInSeconds: 1.5
-                                });
-                                return;
+                                return App.warning( 'Excute fail, Error: ' + res.msg );
                             }
 
-                            App.notification({
-                                type: 'success',
-                                icon: 'success',
-                                message: '执行成功',
-                                container: $(".page-content-col .portlet-title"),
-                                place: 'prepend',
-                                closeInSeconds: 1.5
-                            });
+                            r = JSON.parse(res.data);
+                            if (!r || (r && !r.isSucess)) {
+                              return App.warning( 'Excute fail, Error: ' + (r && r.msg));
+                            }
 
+                            App.ok('执行成功, 返回数据:' + res.data.toString());
                         },
                       error: function () {
                         App.unblockUI($modal_exec);
@@ -253,18 +220,7 @@ jQuery(document).ready(function () {
                     return false;
                 }
             });
-            $modal_exec.on('click', '.btn.exec_ok', function () {
-                //$modal_exec.modal('loading');
-                //setTimeout(function(){
-                //  $modal_exec
-                //    .modal('loading')
-                //    .find('.modal-body .tips')
-                //    .html('<div class="alert alert-info fade in">' +
-                //    'success!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                //    '</div>');
-                //}, 1000);
-            });
-
+            
             // handle group actionsubmit button click
             grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
 
@@ -294,25 +250,16 @@ jQuery(document).ready(function () {
                     });
                 }
             });
-
-            //grid.setAjaxParam("customActionType", "group_action");
-            //grid.getDataTable().ajax.reload();
-            //grid.clearAjaxParams();
         };
 
         return {
-
-            //main function to initiate the module
             init: function () {
 
                 initPickers();
                 handleRecords();
             }
-
         };
-
     }();
-
 
     TableDatatablesAjax.init();
 });

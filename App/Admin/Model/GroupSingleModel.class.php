@@ -115,10 +115,12 @@ class GroupSingleModel extends Model {
     }
 
     //新增组用例
-    public function addSingle($name, $tid, $type_switch, $nlp, $arc, $v1, $dept, $v2) {
+    public function addSingle($name, $ispublic, $tid, $type_switch, $nlp, $arc, $v1, $dept, $v2) {
         $data = [
             'name' => $name,
             'tid'  => $tid,
+            'ispublic' => $ispublic,
+            'uid' => session('admin')['id']
         ];
         if ($type_switch) {
             $data['arc'] = $arc;
@@ -136,7 +138,6 @@ class GroupSingleModel extends Model {
         }
         return $this->getError();
     }
-
 
     //获取一条数据
     public function getSingle($id) {

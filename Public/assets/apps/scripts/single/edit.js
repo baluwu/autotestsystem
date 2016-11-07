@@ -411,8 +411,8 @@ jQuery(document).ready(function () {
               }
 
               r = JSON.parse(res.data);
-              if (r && !r.isSucess) {
-                return App.warning( 'Excute fail, Error: ' + r.msg);
+              if (!r || (r && !r.isSucess)) {
+                return App.warning( 'Excute fail, Error: ' + (r && r.msg));
               }
 
               App.ok('执行成功, 返回数据:' + res.data);

@@ -55,14 +55,9 @@ class SingleController extends AuthController {
             ]);   
         }
 
-        //R7：创建用例，指定用例组
         $single = D('GroupSingle');
-        $data = $single->addSingle($this->singleName, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
+        $data = $single->addSingle($this->singleName, $this->ispublic, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
 
-        //$single = D('Single');
-        //$data = $single->addSingle($this->singleName, $this->ispublic, $this->type_switch, $this->nlp, $this->arc, //$this->v1, $this->dept, $this->v2);
-
-        logs('single.add', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -12,
             'data'  => $data,
@@ -407,8 +402,7 @@ class SingleController extends AuthController {
         $this->display();
     }
 
-
-//获取用例列表
+    //获取用例列表
     static $getListRules = [
         'order'       => ['name' => 'order', 'type' => 'array', 'format' => 'json', 'method' => 'post', 'desc' => '排序'],
         'search_type' => ['name' => 'search_single_type', 'type' => 'string', 'method' => 'post', 'desc' => '属性'],
@@ -506,8 +500,19 @@ class SingleController extends AuthController {
         $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where, 1));
     }
 
+    static $getListPubRules = [
+        'order'       => ['name' => 'order', 'type' => 'array', 'format' => 'json', 'method' => 'post', 'desc' => '排序'],
+        'search_type' => ['name' => 'search_single_type', 'type' => 'string', 'method' => 'post', 'desc' => '属性'],
+        'search_name' => ['name' => 'search_single_name', 'type' => 'string', 'method' => 'post', 'desc' => '用例名称'],
+        'search_nlp'  => ['name' => 'search_single_nlp', 'type' => 'string', 'method' => 'post', 'desc' => 'NLP名称'],
+        'date_from'   => ['name' => 'date_from', 'type' => 'date', 'format' => 'Y-m-d H:i:s', 'method' => 'post', 'desc' => '开始时间'],
+        'date_to'     => ['name' => 'date_to', 'type' => 'date', 'format' => 'Y-m-d H:i:s', 'method' => 'post', 'desc' => '结束时间'],
+        'page_start'  => ['name' => 'start', 'type' => 'int', 'default' => 0, 'method' => 'post', 'desc' => '第几条记录开始'],
+        'page_rows'   => ['name' => 'length', 'type' => 'int', 'default' => 20, 'method' => 'post', 'desc' => '输出多少条记录'],
+        'isAll'       => ['name' => 'all', 'type' => 'boolean', 'default' => false, 'method' => 'post', 'desc' => '是否输出所有记录'],
+    ];
 
-//获取公共用例列表
+    //获取公共用例列表
     public function getListPub() {
         if (!IS_AJAX) $this->error('非法操作！');
         $single = D('Single');

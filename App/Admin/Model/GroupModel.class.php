@@ -21,13 +21,16 @@ class GroupModel extends Model {
 
     //用例组列表
     public function getList($order, $sort, $page, $rows, $all = false, $where = [], $isrecovery = 0) {
+        $allow_group_ids = $this->getAllowGroupIds();
         if ($all) {
             return $this->field('g.id,g.name,g.ispublic,u.manager,u.nickname')
-                        ->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')
-                        ->order('g.ispublic asc')
-                        ->select();
+                ->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')
+                ->where(['g.id' => ['IN', $allow_group_ids]])
+                ->order('g.ispublic asc')
+                ->select();
         }
         $map = [];
+        $map['g.id'] = ['IN', $allow_group_ids];
         foreach ($where as $key => $value) {
             $map['g.' . $key] = $value;
         }
@@ -36,7 +39,7 @@ class GroupModel extends Model {
         $map['g.isrecovery'] = ['eq', $isrecovery];
 
         $obj = $this
-            ->field('g.id,g.name,g.ispublic,g.create_time,g.uid,g.status,u.manager,u.nickname')
+            ->field('g.id,g.name,g.ispublic,g.create_time,g.uid, 0 as status,u.manager,u.nickname')
             ->join('g LEFT JOIN  __MANAGE__ u  ON g.uid = u.id')
             ->where($map)
             ->order([$order => $sort])
@@ -127,4 +130,17 @@ class GroupModel extends Model {
         return $this->where(['id' => $id])->setField($data);
     }
 
+    public function getAllowGroupIds() {
+        $group_id = session('admin')['group_id'];
+        $classify = M('AuthGroup')->where(['id' => $group_id])->select();
+        $classify_ids = $classify[0]['classify'];
+
+        $group_ids = M('Group')->field('id')->where(['classify' => ['IN', $classify_ids]])->select();
+
+        $temp = [];
+        foreach ($group_ids as $v) {
+            $temp[] = $v['id'];
+        }
+        return implode(',', $temp);
+    }
 }

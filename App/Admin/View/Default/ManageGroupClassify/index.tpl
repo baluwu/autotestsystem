@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>用户分组分类管理 | 自动化测试系统</title>
+  <title>项目管理 | 自动化测试系统</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -36,12 +36,14 @@
   <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-
-  <link rel="stylesheet" href="/Public/assets/global/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <!-- END THEME LAYOUT STYLES -->
   <link rel="shortcut icon" href="/favicon.ico"/>
   <style type="text/css">
-    .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+    .ztree * {
+        font-size: 18px;
+        font-weight: 700;
+    }
   </style>
   <script>
     var CONFIG = {
@@ -92,7 +94,7 @@
                 </li>
                 <li class="active">
                   <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 用例组分类管理</a>
+                    <i class="fa fa-plus "></i> 项目管理</a>
                 </li>
               </ul>
 
@@ -108,7 +110,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-users font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用例组分类列表</span>
+                      <span class="caption-subject font-dark sbold uppercase">项目</span>
                     </div>
 
                     <div class="breadcrumbs">
@@ -116,36 +118,44 @@
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">用例组分类管理</li>
+                        <li class="active">项目管理</li>
                       </ol>
                     </div>
                   </div>
                   <div class="portlet-body">
                     <div class="table-container">
-                      <ul id="treeDemo" class="ztree">
-                      </ul>
+
+                      <div class="form-group form-md-line-input">
+                      <div class="col-md-1">
+                        <input type="text" name="project" class="form-control" id="project" autocomplete="off" placeholder="项目名称" required="true" aria-required="true">
+                      </div>
+                      <div class="col-md-1">
+                        <button class="btn btn-primary" id="J_add">添加</button>
+                      </div>
+                      </div>
+                      <br />
+                      <ul id="treeDemo" class="ztree"> </ul>
+
                     </div>
                   </div>
                 </div>
-                <!-- End: life time stats -->
               </div>
             </div>
-            <!-- END PAGE BASE CONTENT -->
           </div>
         </div>
       </div>
-      <!-- END SIDEBAR CONTENT LAYOUT -->
     </div>
-    <!-- BEGIN FOOTER -->
     <include file="Public/footer"/>
-    <!-- END FOOTER -->
   </div>
-
-
 </div>
-<!-- END CONTAINER -->
 
-
+<div id="J_del_alert" class="modal fade" tabindex="-1" data-focus-on="input:first">
+    <div class="modal-body"> 删除项目后, 项目下所有用例组和用例将不可见, 确定么? </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+        <button type="button" id="J_do_del" class="btn green exec_ok">Ok</button>
+    </div>
+</div>
 <!--[if lt IE 9]>
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
 <script src="/Public/assets/global/plugins/excanvas.min.js"></script>

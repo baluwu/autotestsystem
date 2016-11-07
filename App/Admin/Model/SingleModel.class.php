@@ -24,11 +24,25 @@ class SingleModel extends Model {
     public function getList($order, $sort, $page, $rows, $all = false, $where = [], $isrecovery = 0,$ispublic=null) {
         if ($all) {
             return $this
-                    ->field('s.id,s.name,u.manager,u.nickname')
-                    ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
-                    ->select();
+                ->field('s.id,s.name,u.manager,u.nickname')
+                ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
+                ->select();
         }
+
+        $group_id = session('admin')['group_id'];
+        $classify = M('AuthGroup')->where(['id' => $group_id])->select();
+        $classify_ids = $classify[0]['classify'];
+
+        $group_ids = M('Group')->field('id')->where(['classify' => ['IN', $classify_ids]])->select();
+
+        $temp = [];
+        foreach ($group_ids as $v) {
+            $temp[] = $v['id'];
+        }
+        $group_ids_str = implode(',', $temp);
+
         $map = [];
+        $map['s.tid'] = ['IN', $group_ids_str];
         foreach ($where as $key => $value) {
             $map['s.' . $key] = $value;
         }
@@ -41,15 +55,13 @@ class SingleModel extends Model {
 
         $map['s.isrecovery'] = ['eq', $isrecovery];
 
-
-        $obj = $this
-            ->field('s.id,s.uid,s.name,s.ispublic,s.create_time,s.nlp,s.arc,s.isrecovery,s.validates,s.status,u.manager,u.nickname')
+        $obj = M('GroupSingle')
+            ->field('s.id,s.uid,s.name,s.ispublic,s.create_time,s.nlp,s.arc,s.isrecovery,s.validates, 0 as status,u.manager,u.nickname')
             ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
             ->where($map)
             ->order([$order => $sort])
             ->limit($page, $rows)
             ->select();
-
 
         //转换属性及规则
         if ($obj) foreach ($obj as $k => $v) {
@@ -59,7 +71,7 @@ class SingleModel extends Model {
             $obj[$k]['short_nlp'] = mb_substr($v['nlp'],0,10,"utf-8")."...";
             $obj[$k]['short_arc'] = mb_substr($v['arc'],0,10,"utf-8")."...";
         }
-        $total = $this->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();
+        $total = M('GroupSingle')->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();
 
         return [
             'recordsTotal'    => $total,
