@@ -3,7 +3,6 @@
  */
 jQuery(document).ready(function () {
   var beforeExpand = function(){
-    zTree.expandAll(true);
   }
   var newCount = 1;
   var className = "dark";
