@@ -16,9 +16,10 @@ class TaskController extends AuthController {
         'page_start'     => ['name' => 'start', 'type' => 'int', 'default' => 0, 'method' => 'post', 'desc' => '第几条记录开始'],
         'page_rows'      => ['name' => 'length', 'type' => 'int', 'default' => 20, 'method' => 'post', 'desc' => '输出多少条记录'],
         'order'          => ['name' => 'order', 'type' => 'array', 'format' => 'json', 'method' => 'post', 'desc' => '排序'],
-        'search_ip_name' => ['name' => 'search_single_name', 'type' => 'string', 'method' => 'post', 'desc' => 'ip'],
+        'search_name' => ['name' => 'search_name', 'type' => 'string', 'method' => 'post', 'desc' => '任务名称'],
         'date_from'      => ['name' => 'date_from', 'type' => 'date', 'format' => 'Y-m-d H:i:s', 'method' => 'post', 'desc' => '开始时间'],
         'date_to'        => ['name' => 'date_to', 'type' => 'date', 'format' => 'Y-m-d H:i:s', 'method' => 'post', 'desc' => '结束时间'],
+        'search_ver'        => ['name' => 'search_ver', 'type' => 'string','method' => 'post', 'desc' => '任务版本'],
     ];
     //获取任务列表
     public function getTasks(){
@@ -35,7 +36,7 @@ class TaskController extends AuthController {
             $order['dir'] = $getOrder[0]['dir'];
         }
         $where = [];
-        if ($this->search_ip_name) $where['e.exec_content'] = ['like', '%' . $this->search_ip_name . '%'];
+        if ($this->search_name) $where['task_name'] = ['like', '%' . $this->search_name . '%'];
 
         if ($this->date_from && $this->date_to) {
             $where['create_time'] = [['egt', $this->date_from], ['elt', $this->date_to]];
@@ -44,6 +45,7 @@ class TaskController extends AuthController {
         } else if ($this->date_to) {
             $where['create_time'] = ['elt', $this->date_to];
         }
+        if ($this->search_ver) $where['ver'] = ['like', '%' . $this->search_ver . '%'];
 
         $execHistory = D('ExecHistory');
         $this->ajaxReturn($execHistory->getTaskList($this->page_start, $this->page_rows, $order['column'], $order['dir'], $where));

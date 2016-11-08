@@ -161,7 +161,9 @@
                             </div>
                           </td>
                           <td>
-                            </td>
+                          <input type="text" class="form-control form-filter input-sm" name="search_ver"
+                                   placeholder="按版本号搜索">
+                          </td>
                           <td></td>
                           <td></td>
                           <td></td>
