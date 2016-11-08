@@ -426,15 +426,13 @@ jQuery(document).ready(function () {
   TableDatatablesAjax.init();
 
   $("#run_at").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
-  $('.group-ckbx').click(function() {
+  $('body').on('click', '.group-ckbx', function() {
     var isCheck = $(this).is(':checked');
-    console.log(isCheck);
-    $('.single-ckbx').each(function(i, el){
-       if (isCheck) {
-         $(el).attr('checked', true);    
-       }
-       else 
-         $(el).removeAttr('checked');    
-    });    
+    $('.single-ckbx').each(function(i, el) {
+      var iCk = $(el).is(':checked');
+      if (isCheck != iCk) {
+        $(el).trigger('click');
+      }
+    });
   })
 });
