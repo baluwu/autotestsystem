@@ -317,6 +317,7 @@ jQuery(document).ready(function () {
 
             $.each(r.data, function(i, el) {
               var tr = '<tr>';
+              
               tr += '<td><input type="checkbox" checked class="single-ckbx" data-sid="' + el.id + '" /></td>' + '<td>' + el.id + '</td><td>' + el.name + '</td><td>' + el.nlp + el.arc + '</td>'
               tr += '</tr>';
 
@@ -328,7 +329,7 @@ jQuery(document).ready(function () {
             $modal_exec.find('.currName').text(el.data('title'));
             $modal_exec.find('[name="id"]').val(el.data('id'));
             $modal_exec.find('.tips').html("");
-            $modal_exec.modal();
+            $modal_exec.modal({'width': 1024});
           }
         });
       });
@@ -425,4 +426,15 @@ jQuery(document).ready(function () {
   TableDatatablesAjax.init();
 
   $("#run_at").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
+  $('.group-ckbx').click(function() {
+    var isCheck = $(this).is(':checked');
+    console.log(isCheck);
+    $('.single-ckbx').each(function(i, el){
+       if (isCheck) {
+         $(el).attr('checked', true);    
+       }
+       else 
+         $(el).removeAttr('checked');    
+    });    
+  })
 });

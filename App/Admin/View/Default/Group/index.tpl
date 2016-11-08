@@ -222,17 +222,17 @@
   </form>
 </div>
 
-<div id="J_task_single" class="modal fade" tabindex="-1" data-focus-on="input:first">
+<div id="J_task_single" class="modal modal-dialog" tabindex="-1" data-focus-on="input:first" style="width: 1000px;">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
     <h4 class="modal-title">创建任务</h4>
   </div>
-  <form action="#" >
+  <form action="#" class="form-horizontal form-row-seperated" >
     <input type="hidden" id="J_single_ids" name="single_ids" />
     <div class="modal-body">
       <div class="tips"></div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="ip">
+        <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>名称
         </label>
         <div class="col-md-8">
@@ -241,7 +241,7 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="ip">
+        <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>执行时间
         </label>
         <div class="col-md-8">
@@ -250,7 +250,7 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="ip">
+        <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>版本号
         </label>
         <div class="col-md-8">
@@ -259,21 +259,21 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="ip"> 注释 </label>
+        <label class="col-md-2 control-label" for="ip"> 注释 </label>
         <div class="col-md-8">
           <input type="text" class="form-control" id="description" placeholder="Description" name="description" data-tabindex="1">
           <div class="form-control-focus"> </div>
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="ip"> 通知邮箱 </label>
+        <label class="col-md-2 control-label" for="ip"> 通知邮箱 </label>
         <div class="col-md-8 input-group has-success" id="emailwarp">
             <input type="text" class="form-control" id="notify_email" name="notify_email" autocomplete="off" placeholder="Email Address"><span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
             <div class="form-control-focus"></div>
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="ip">
+        <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>IP
         </label>
         <div class="col-md-8">
@@ -292,7 +292,7 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-3 control-label" for="port"> Port </label>
+        <label class="col-md-2 control-label" for="port"> Port </label>
         <div class="col-md-8">
           <input type="text" name="port" class="form-control" id="port" list="port_data" placeholder="8080" data-tabindex="2">
           <datalist id="port_data">
@@ -304,22 +304,30 @@
           <div class="form-control-focus"></div>
         </div>
       </div>
-      <br />
-      <div class="portlet-body">
-          <div class="table-container">
-              <table class="table table-striped table-bordered table-hover table-checkable" id="J_task_singles">
-              <thead>
-              <tr role="row" class="heading">
-              <th></th>
-              <th width=5%"> ID </th>
-              <th width="45%"> 名称</th>
-              <th width="45%"> NLP/ASR</th>
-              </tr>
-              </thead>
-              <tbody id="J_task_single_bd"></tbody>
-              </table>
-          </div>
+      <div class="form-group form-md-line-input">
+        <label class="col-md-2 control-label" for="port"> 用例选择 </label>
+        <div class="col-md-8">
+            <div class="portlet-body">
+              <div class="table-container">
+                  <table class="table table-striped table-bordered table-hover table-checkable" id="J_task_singles">
+                  <thead>
+                  <tr role="row" class="heading">
+                  <th>
+                  <input type="checkbox" checked class="group-ckbx" />
+                  </th>
+                  <th width=5%"> ID </th>
+                  <th width="45%"> 名称</th>
+                  <th width="45%"> NLP/ASR</th>
+                  </tr>
+                  </thead>
+                  <tbody id="J_task_single_bd"></tbody>
+                  </table>
+              </div>
+            </div>
+            <div class="form-control-focus"></div>
+        </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
         <button type="submit" class="btn green exec_ok">Ok</button>
