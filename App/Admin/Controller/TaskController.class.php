@@ -67,6 +67,7 @@ class TaskController extends AuthController {
         $this->display();
     }
 
+    //该方法为无用方法
     public function add() {
         $task_name = I('post.name');
         $run_at = I('post.run_at');
