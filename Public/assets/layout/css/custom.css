@@ -4,8 +4,8 @@
   padding: 15px;
 }
 .page-content-row .page-sidebar{
-  width: 220px;
-  min-width: 220px;
+  width: 260px;
+  min-width: 260px;
 }
 @media (max-width: 991px){
   .page-content-row .page-sidebar{ width: auto;}

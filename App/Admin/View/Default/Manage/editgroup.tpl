@@ -15,25 +15,16 @@
   <meta content="andy" name="author"/>
   <script src="/Public/assets/global/plugins/pace/pace.min.js"></script>
   <link href="/Public/assets/global/plugins/pace/themes/pace-theme-flash.css" rel="stylesheet" type="text/css"/>
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-
   <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-  <!-- END GLOBAL MANDATORY STYLES -->
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
   <link href="/Public/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
-  <!-- END PAGE LEVEL PLUGINS -->
-  <!-- BEGIN THEME GLOBAL STYLES -->
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
-  <!-- END THEME GLOBAL STYLES -->
-  <!-- BEGIN THEME LAYOUT STYLES -->
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-  <link rel="stylesheet" href="/Public/assets/global/plugins/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-  <!-- END THEME LAYOUT STYLES -->
+  <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico"/>
   <script>
     var CONFIG = {
@@ -43,24 +34,15 @@
     };
   </script>
 </head>
-<!-- END HEAD -->
-
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
-<!-- BEGIN CONTAINER -->
 <div class="wrapper">
-  <!-- BEGIN HEADER -->
   <include file="Public/header"/>
-  <!-- END HEADER -->
   <div class="container-fluid">
     <div class="page-content">
-      <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
-          <!-- BEGIN PAGE SIDEBAR -->
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <!-- Collect the nav links, forms, and other content for toggling -->
               <h3>用户管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
@@ -71,20 +53,17 @@
                   <a href="/Manage/add">
                     <i class="fa fa-user-plus "></i> 添加用户</a>
                 </li>
-
               </ul>
               <h3>用户组管理</h3>
               <ul class="nav navbar-nav">
                 <li class="active">
                   <a href="/Manage/group">
-                    <i class="fa fa-plus "></i>用户组分类授权</a>
+                    <i class="fa fa-plus "></i>用户组项目授权</a>
                 </li>
               </ul>
             </nav>
           </div>
-          <!-- END PAGE SIDEBAR -->
           <div class="page-content-col">
-            <!-- BEGIN PAGE BASE CONTENT -->
             <div class="row">
               <div class="col-md-12">
 

@@ -6,7 +6,6 @@
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
-<!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
   <title>用例组管理 | 自动化测试系统</title>
@@ -19,7 +18,7 @@
   <link href="/Public/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>  <!-- END PAGE LEVEL PLUGINS -->
+  <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
@@ -47,23 +46,16 @@
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
                     <a href="./index"> <i class="fa fa-object-group"></i> 用例组列表 </a>
-                    <ul id="treeDemo" class="ztree" style="padding: 10px;"></ul>
+                    <ul id="J_ztree" class="ztree" style="padding: 10px;"></ul>
                 </li>
+                <li> <a href="javascript:;" id="J_add_project"> <i class="fa fa-plus "></i> 添加项目 </a> </li>
                 <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
-                <li> <a href="./recycle"> <i class="fa fa-recycle "></i> 回收站 </a> </li>
               </ul>
               <ul class="nav navbar-nav">
-                <li>
-                  <a href="/Single/add">
-                    <i class="fa fa-plus "></i> 添加用例
-                  </a>
-                </li>
-                <li>
-                  <a href="./add">
-                    <i class="fa fa-plus "></i> 添加用例组
-                  </a>
-                </li>
+                <li> <a href="/Single/add"> <i class="fa fa-plus "></i> 添加用例 </a> </li>
+                <li> <a href="./add"> <i class="fa fa-plus "></i> 添加用例组 </a> </li>
               </ul>
+              <ul class="nav navbar-nav"> <li> <a href="./recycle"> <i class="fa fa-recycle "></i> 回收站 </a> </li> </ul>
             </nav>
           </div>
           <div class="page-content-col">
@@ -108,10 +100,7 @@
                         <tr role="row" class="filter">
                           <td></td>
                           <td>
-                            <input type="text" class="form-control form-filter input-sm" name="search_name"
-                                   placeholder="按名称搜索"></td>
-
-
+                            <input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="按名称搜索"></td>
                           <td>
                             <select name="search_type" class="form-control form-filter input-sm">
                               <option value="all">属性</option>
@@ -143,25 +132,15 @@
                     </div>
                   </div>
                 </div>
-                <!-- End: life time stats -->
               </div>
             </div>
-            <!-- END PAGE BASE CONTENT -->
           </div>
         </div>
       </div>
-      <!-- END SIDEBAR CONTENT LAYOUT -->
     </div>
-    <!-- BEGIN FOOTER -->
     <include file="Public/footer"/>
-    <!-- END FOOTER -->
   </div>
-
-
-
 </div>
-<!-- END CONTAINER -->
-
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -347,7 +326,7 @@
 <script src="/Public/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/Public/assets/global/plugins/jquery.blockui.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
- <script src="/Public/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script> <!-- END CORE PLUGINS -->
+ <script src="/Public/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
 <script src="/Public/assets/global/plugins/datatables/datatables.min.js"></script>
 <script src="/Public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
@@ -357,10 +336,10 @@
 <script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/Public/assets/global/plugins/ztree/js/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="/Public/assets/global/plugins/ztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/Public/assets/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js"></script>
 <script src="/Public/assets/apps/scripts/common.js"></script>
 <script src="/Public/assets/apps/scripts/group/index.js"></script>
+<script src="/Public/assets/apps/scripts/group/casetree.js"></script>
 <script src="/Public/assets/layout/scripts/layout.js"></script>
 <script src="/Public/assets/layout/scripts/quick-sidebar.js"></script>
 </body>

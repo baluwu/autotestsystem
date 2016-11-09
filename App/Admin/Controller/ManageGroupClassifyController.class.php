@@ -11,13 +11,16 @@ class ManageGroupClassifyController extends AuthController {
     public function addNode()
     {
         if (!IS_AJAX) $this->error('非法操作！');
+        $pid = intval(I('get.pid'));
+        $nextId =  $this->nextId($pid);
         $data = array(
-            'pid'=>0,
+            'id' => $nextId,
+            'pid' => $pid,
             'name'=>I('get.name'),
             'modify_time'=>date('Y-m-d H:i:s')
         );
         M('ManageGroupClassify')->add($data);
-        $this->ajaxReturn(['error' => false, 'msg' => '']);
+        $this->ajaxReturn(['error' => false, 'msg' => '', 'data' => $nextId]);
     }
 
     public function delNode()
@@ -59,5 +62,8 @@ class ManageGroupClassifyController extends AuthController {
         $this->ajaxReturn($ret);
     }
 
-
+    public function nextId() {
+        $nextId = M('ManageGroupClassify')->max('id');
+        return $nextId ? $nextId + 1 : 1;
+    }
 }

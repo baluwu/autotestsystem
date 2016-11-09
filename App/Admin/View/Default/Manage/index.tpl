@@ -85,13 +85,7 @@
                   <a href="/Manage/group">
                     <i class="fa fa-plus "></i> 用户组管理</a>
                 </li>
-                <li>
-                  <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 项目管理</a>
-                </li>
-
               </ul>
-
             </nav>
           </div>
           <!-- END PAGE SIDEBAR -->

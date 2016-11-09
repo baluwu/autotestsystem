@@ -98,38 +98,27 @@ class AuthGroupModel extends Model {
     public function getClassifyData($groupid, $filter = false)
     {
         $result = array();
-        $ret = D('ManageGroupClassify')->getList();
         $classify_str = $this->where(array('id'=>$groupid))->getField('classify');
         $classify_arr = explode(',', $classify_str);
 
-        $groups = M('Group')->where(['classify' => ['IN', $classify_str] ])->select();
-        $groups = arrayGroup($groups, 'classify');
+        $project = M('ManageGroupClassify')->where(['id' => ['IN', $classify_str]])->select();
+        $model = M('ManageGroupClassify')->where(['pid' => ['IN', $classify_str]])->select();
 
-        if( !empty($classify_arr) && !empty($ret)) {
-            foreach( $ret as $k=>$v ) {
-                if($filter && !in_array($v['id'], $classify_arr)) {
-                    unset($ret[$k]);
-                    continue;
-                }
+        $model_ids = [];
+        foreach ($model as $md) {
+            $project[] = $md;
+            $model_ids[] = $md['id'];
+        }
 
-                $v['checked'] = false;
-
-                $classify_groups = $groups[$v['id']];
-
-                $result[] = $v;
-                if (!empty($classify_groups)) {
-                    foreach ($classify_groups as $k => &$iv) {
-                        $iv['group_id'] = $iv['id'];
-                        $iv['id'] = $v['id'] . $k;
-                        $iv['pid'] = $v['id'];
-
-                        $result[] = $iv;                        
-                    }
-                }
+        if (!empty($model_ids)) {
+            $group = M('ManageGroupClassify')->where(['pid' => ['IN', $model_ids]])->select();
+            foreach ($group as &$gp) {
+                $gp['group_id'] = $gp['id'];
+                $project[] = $gp;
             }
         }
 
-        return fmt_tree_data($result);
+        return empty($project) ? [] : $project;
     }
 
     public function saveClassifyData()

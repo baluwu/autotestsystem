@@ -3,53 +3,8 @@
  */
 jQuery(document).ready(function () {
   var grid = new Datatable();
+  window.grid = grid;
 
-  function getCheckedGroupId() {
-    var ck_t = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes();
-    var ck_t_id = [];
-    $.each(ck_t, function(i, el){
-      if (!el.isParent) {
-        ck_t_id[ck_t_id.length] = el['group_id'];
-      }
-    });
-    return ck_t_id.join(',');
-  }
-
-  function reloadGrid(group_id) {
-    grid.setAjaxParam("group_id", group_id);
-    grid.getDataTable().ajax.reload();
-    grid.clearAjaxParams();
-  }
-
-  var setting = {
-      check: { enable: true },
-      async: {
-        enable: true,
-        url: '/ManageGroupClassify/getData/group/1'
-      },
-      data: {
-        simpleData: { enable: true }
-      },
-      callback:{
-        onCheck: function(treeId, treeNode) {
-            var gids = getCheckedGroupId();
-            reloadGrid(gids);
-        },
-        beforeClick: function(treeId, treeNode) {
-          var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-          if (treeNode.isParent) {
-            zTree.expandNode(treeNode);
-          }
-          var gids = getCheckedGroupId();
-          //zTree.checkNode(treeNode, !treeNode.checked, true);
-          //reloadGrid(gids);
-          return false;
-        }
-      }
-	};
-
-  $.fn.zTree.init($("#treeDemo"), setting);
-		
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
@@ -179,7 +134,6 @@ jQuery(document).ready(function () {
         }
       });
 
-      // handle group actionsubmit button click
       grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
         e.preventDefault();
         var action = $(".table-group-action-input", grid.getTableWrapper());
@@ -295,46 +249,7 @@ jQuery(document).ready(function () {
     };
 
     var createTask = function () {
-      var $modal_exec = $('#J_task_single');
-      $('.J_add_task').click(function() {
-        var group_ids = getCheckedGroupId(); 
-
-        $.ajax({
-          'url': '/Group/getSingleByGroupId',
-          'method': 'POST',
-          'data': { group_ids: group_ids },
-          'type': 'JSON',
-          'success': function(r) {
-            var body = [];
-
-            if (!r.data || !r.data.length) {
-              return App.warning('无用例');
-            }
-
-            if (r.data.length > 100) {
-              return App.warning('已超出任务用例数最大限制: 100');
-            }
-
-            $.each(r.data, function(i, el) {
-              var tr = '<tr>';
-              
-              tr += '<td><input type="checkbox" checked class="single-ckbx" data-sid="' + el.id + '" /></td>' + '<td>' + el.id + '</td><td>' + el.name + '</td><td>' + el.nlp + el.arc + '</td>'
-              tr += '</tr>';
-
-              body.push(tr);
-            });
-
-            $('#J_task_single_bd').html(body.join(''));
-            var el = $(this);
-            $modal_exec.find('.currName').text(el.data('title'));
-            $modal_exec.find('[name="id"]').val(el.data('id'));
-            $modal_exec.find('.tips').html("");
-            $modal_exec.modal({'width': 1024});
-          }
-        });
-      });
-
-      $("#J_task_single form").validate({
+        $("#J_task_single form").validate({
         errorElement: 'span', 
         errorClass: 'help-block help-block-error', 
         focusInvalid: false, 

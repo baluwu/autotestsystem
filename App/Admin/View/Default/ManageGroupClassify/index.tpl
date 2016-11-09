@@ -53,78 +53,31 @@
     };
   </script>
 </head>
-<!-- END HEAD -->
-
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
-<!-- BEGIN CONTAINER -->
 <div class="wrapper">
-  <!-- BEGIN HEADER -->
   <include file="Public/header"/>
-  <!-- END HEADER -->
-
-
   <div class="container-fluid">
     <div class="page-content">
-
-      <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
-          <!-- BEGIN PAGE SIDEBAR -->
-          <div class="page-sidebar">
-            <nav class="navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <h3>用户管理</h3>
-              <ul class="nav navbar-nav margin-bottom-35">
-                <li>
-                  <a href="/Manage/index">
-                    <i class="fa fa-users"></i> 用户列表 </a>
-                </li>
-                <li>
-                  <a href="/Manage/add">
-                    <i class="fa fa-user-plus "></i> 添加用户</a>
-                </li>
-
-              </ul>
-              <h3>用户组管理</h3>
-              <ul class="nav navbar-nav">
-                <li>
-                  <a href="/Manage/group">
-                    <i class="fa fa-plus "></i> 用户组管理</a>
-                </li>
-                <li class="active">
-                  <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 项目管理</a>
-                </li>
-              </ul>
-
-            </nav>
-          </div>
-          <!-- END PAGE SIDEBAR -->
-          <div class="page-content-col">
-            <!-- BEGIN PAGE BASE CONTENT -->
+        <div class="page-content-col">
             <div class="row">
               <div class="col-md-12">
-                <!-- Begin: life time stats -->
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-users font-dark"></i>
                       <span class="caption-subject font-dark sbold uppercase">项目</span>
                     </div>
-
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
-                        <li>
-                          <a href="/Index">Home</a>
-                        </li>
+                        <li> <a href="/Index">Home</a> </li>
                         <li class="active">项目管理</li>
                       </ol>
                     </div>
                   </div>
                   <div class="portlet-body">
                     <div class="table-container">
-
                       <div class="form-group form-md-line-input">
                       <div class="col-md-1">
                         <input type="text" name="project" class="form-control" id="project" autocomplete="off" placeholder="项目名称" required="true" aria-required="true">

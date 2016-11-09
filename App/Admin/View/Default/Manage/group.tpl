@@ -48,22 +48,13 @@
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
 <!-- BEGIN CONTAINER -->
 <div class="wrapper">
-  <!-- BEGIN HEADER -->
   <include file="Public/header"/>
-  <!-- END HEADER -->
-
-
   <div class="container-fluid">
     <div class="page-content">
-
-      <!-- BEGIN SIDEBAR CONTENT LAYOUT -->
       <div class="page-content-container">
         <div class="page-content-row">
-          <!-- BEGIN PAGE SIDEBAR -->
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <!-- Collect the nav links, forms, and other content for toggling -->
               <h3>用户管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
@@ -82,12 +73,7 @@
                   <a href="/Manage/group">
                     <i class="fa fa-plus "></i> 用户组管理</a>
                 </li>
-                <li>
-                  <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 用例组分类管理</a>
-                </li>
               </ul>
-
             </nav>
           </div>
           <!-- END PAGE SIDEBAR -->
