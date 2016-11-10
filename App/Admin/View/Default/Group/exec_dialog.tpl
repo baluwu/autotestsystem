@@ -6,15 +6,9 @@
   <form action="#" >
     <div class="modal-body">
       <div class="tips"></div>
-      <input type="hidden" name="id" value=""/>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label">
-        </label>
-        <div class="col-md-10">
-          当前执行用例组:<span class="currName"></span>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
+        <input type="hidden" name="id" value=""/>
+        <input type="hidden" name="type" value=""/>
+        <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="ip">
           <span class="required">*</span>IP
         </label>
@@ -35,9 +29,8 @@
       </div>
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="port">
-          <span class="required"> * </span>Port
+          Port
         </label>
-
         <div class="col-md-10">
           <input type="text" name="port" class="form-control" id="port" list="port_data" placeholder="8080" data-tabindex="2">
           <datalist id="port_data">

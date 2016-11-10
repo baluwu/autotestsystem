@@ -1,5 +1,6 @@
 /**
  * Created by andy on 16/7/8.
+ * W.G modified at 16/10/11
  */
 jQuery(document).ready(function () {
   var grid = new Datatable();
@@ -31,51 +32,30 @@ jQuery(document).ready(function () {
     };
 
     var handleRecords = function () {
-
       grid.init({
         src: $("#datatable_ajax"),
         onSuccess: function (grid, response) {},
         onError: function (grid) { },
-        onDataLoad: function (grid) {
-          $('[data-toggle="confirmation"]').each(function () {
-            $(this).confirmation();
-            $(this).on('confirmed.bs.confirmation', function () {
-              $.ajax({
-                url: '/Single/Remove',
-                type: 'POST',
-                data: {
-                  ids: $(this).data('id')
-                },
-                success: function (res, response, status) {
-                  if (res.error < 0) {
-                    return App.warning( '删除失败' + res.msg, $(".page-content-col .portlet-title"));
-                  }
-                  App.warning('删除成功', $(".page-content-col .portlet-title"));
-                  $('.filter-submit').trigger('click');
-                }
-              });
-            });
-          });
-        },
+        onDataLoad: function (grid) {},
         loadingMessage: 'Loading...',
         dataTable: {
           "bStateSave": true, 
           "lengthMenu": [
-            [10, 20, 50, -1],
-            [10, 20, 50, "All"] 
+            [10, 20, 50],
+            [10, 20, 50]
           ],
           "pageLength": 20, 
-          "ajax": { "url": '/Single/getList', "type": 'POST', data: { group_ids: 0 } },
+          "ajax": { "url": '/Single/getList' },
           keys: true,
           columns: [
             { data: 'id', orderable: false },
             { data: 'name', orderable: false },
             { data: 'nlp', orderable: false },
-            { data: 'nickname' },
             { data: 'create_time'},
+            { data: 'nickname', orderable: false },
             { class: "action-control", orderable: false, data: null, defaultContent: "" }
           ],
-          "order": [ [4, "desc"] ],
+          "order": [ [3, "desc"] ],
           "columnDefs": [
             {
               "render": function (data, type, row) {
@@ -84,58 +64,28 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return '<span class="label label-' + (row.nlp ? 'default' : 'info') + '">' + (row.nlp ? 'NLP' : 'ASR') + '</span>';
+                return '<span class="label label-' + (row.nlp ? 'success' : 'info') + '">' + (row.nlp ? 'NLP' : 'ASR') + '</span>';
               }, "targets": 2
             },
             {
               "render": function (data, type, row) {
-                return "<span title='"+row.nickname+"'>"+row.nickname+"</span>";
+                return row.create_time;
               }, "targets": 3
             },
             {
               "render": function (data, type, row) {
-                return "<span title='"+row.create_time+"'>"+row.create_time+"</span>";
+                return "<span title='"+row.nickname+"'>"+row.nickname+"</span>";
               }, "targets": 4
             },
             {
               "render": function (data, type, row) {
-                return '<a href="javascript:;"><i class="fa fa-repeat"></i></a>' + 
-                  '<a href="javascript:;"><i class="fa fa-times"></i></a>' + 
-                  '<a href="javascript:;"><i class="fa fa-edit"></i></a>' + 
-                  '<a href="javascript:;"><i class="fa fa-search"></i></a>';
-                /*
-                  '<div class="btn-group">\
-                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\
-                        操作 <span class="caret"></span>\
-                      </button>\
-                      <ul class="dropdown-menu" role="menu">\
-                        <li><a href="./edit/id/' + row.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i>编辑</a></li>\
-                        <li><a   data-toggle="confirmation" data-id="' + row.id + '" data-title="删除后不可恢复！！" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5"> <i class="fa fa-remove"></i>删除</a></li>\
-                        <li><a  data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '"  data-status="' + row.status + '"  ' + (row.status == 1 ? 'disabled' : '') + '  class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i>执行</a></li>\
-                        <li><a href="./execute_history/id/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i>执行记录</a></li>\
-                      </ul>\
-                    </div>';
-                    */
+                return '<a href="javascript:;" data-id="' + row.id + '" data-name="' + row.short_name + '" class="J_play_single"><i class="glyphicon glyphicon-play"></i></a>' + 
+                  '<a href="javascript:;" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' + 
+                  '<a href="/Single/edit/id/"' + row.id + ' target="_balnk"><i class="glyphicon glyphicon-pencil"></i></a>';
               },
               "targets": 5
             }
           ]
-        }
-      });
-
-      grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
-        e.preventDefault();
-        var action = $(".table-group-action-input", grid.getTableWrapper());
-        if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
-          grid.setAjaxParam("customActionType", "group_action");
-          grid.setAjaxParam("customActionName", action.val());
-          grid.setAjaxParam("id", grid.getSelectedRows());
-          grid.getDataTable().ajax.reload();
-          grid.clearAjaxParams();
-        } else if (action.val() == "") {
-          App.warning( 'Please select an action', grid.getTableWrapper());
-        } else if (grid.getSelectedRowsCount() === 0) {
-          App.warning( 'No record selected', grid.getTableWrapper());
         }
       });
     };
@@ -144,8 +94,6 @@ jQuery(document).ready(function () {
       var $modal_exec = $('#exec');
 
       $('body').on('click', '.exec_btn', function () {
-        var el = $(this);
-        if (el.data('status') == 1)return;
         $modal_exec.find('.currName').text(el.data('title'));
         $modal_exec.find('[name="id"]').val(el.data('id'));
         $modal_exec.find('.tips').html("");
@@ -196,10 +144,9 @@ jQuery(document).ready(function () {
             boxed: true
           });
           $.ajax({
-            url: CONFIG['MODULE'] + '/Group/Execute',
+            url: '/Group/Execute',
             type: 'POST',
             data: $(form).serialize(),
-            beforeSend: function () {},
             success: function (res, response, status) {
               $modal_exec.modal('hide');
 
@@ -324,5 +271,59 @@ jQuery(document).ready(function () {
         $(el).trigger('click');
       }
     });
-  })
+  });
+
+  function setCaseType() {
+    var case_type = 'all';
+    var is_nlp_checked = $('.type-nlp').hasClass('btn-success');
+    var is_asr_checked = $('.type-asr').hasClass('btn-info');
+    if (is_nlp_checked && !is_asr_checked) case_type = 'nlp';
+    if (!is_nlp_checked && is_asr_checked) case_type = 'asr';
+    $('#J_case_type').val(case_type);
+  }
+
+  $('.type-nlp').click(function() {
+    var self = $(this),
+      subling = $('.type-asr'),
+      is_checked = !self.hasClass('btn-default');
+      is_subling_checked = !subling.hasClass('btn-default');
+
+    var addCls = is_checked ? 'btn-default' : 'btn-success';
+    var rmCls = is_checked ? 'btn-success' : 'btn-default';
+    self.removeClass(rmCls).addClass(addCls);
+    if (is_subling_checked) {
+      subling.removeClass('btn-info btn-success').addClass('btn-default');
+    }
+    setCaseType();
+  });
+
+  $('.type-asr').click(function() {
+    var self = $(this),
+      subling = $('.type-nlp'),
+      is_checked = !self.hasClass('btn-default');
+      is_subling_checked = !subling.hasClass('btn-default');
+
+    var addCls = is_checked ? 'btn-default' : 'btn-info';
+    var rmCls = is_checked ? 'btn-info' : 'btn-default';
+    self.removeClass(rmCls).addClass(addCls);
+    if (is_subling_checked) {
+      subling.removeClass('btn-info btn-success').addClass('btn-default');
+    }
+    setCaseType();
+  });
+
+  $('.type-nlp, .type-asr').click(function() {
+    $('.filter-submit').trigger('click');
+  });
+
+  $('body').on('click', '.J_play_single', function() {
+    var self = $(this);
+    $('#exec').modal();
+    $('#exec').on('shown.bs.modal', function () {
+      $(this).find('.modal-title').text('执行用例[' + self.attr('data-name') + ']');
+      $(this).find('[name="id"]').val(self.attr('data-id'));
+      $(this).find('[name="type"]').val('single');
+      $(this).find('.tips').html("");
+    })
+  }); 
 });

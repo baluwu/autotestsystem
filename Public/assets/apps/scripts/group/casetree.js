@@ -22,8 +22,7 @@ $(function() {
 
   function reloadGrid(group_ids) {
     grid.setAjaxParam('group_ids', group_ids);
-    grid.getDataTable().ajax.reload();
-    grid.clearAjaxParams();
+    $('.filter-submit').trigger('click');
   }
 
   function addHoverDom(treeId, treeNode) {
@@ -46,9 +45,14 @@ $(function() {
       return false;
     });
 
-
     treeNode.level == 2 && $("#execBtn_"+tid).bind("click", function(){
       $('#exec').modal();
+      $('#exec').on('shown.bs.modal', function () {
+        $(this).find('.modal-title').text('执行用例组[' + treeNode.name + ']');
+        $(this).find('[name="id"]').val(treeNode.id);
+        $(this).find('[name="type"]').val('group');
+        $(this).find('.tips').html("");
+      })
       return false;
     });
 
@@ -175,6 +179,10 @@ $(function() {
 
     $.fn.zTree.destroy('J_ztree');
     loadTree();
+  });
+
+  $('.type-nlp, type-asr').click(function(){
+    
   });
 
   loadTree();

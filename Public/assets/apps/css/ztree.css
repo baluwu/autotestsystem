@@ -86,19 +86,22 @@ background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif"
 .ztree li span.button.add:hover {
     background-position: -168px 0;
 }
-.ztree li span.button.exec {
-    font: normal normal normal 13px/1 FontAwesome;
+.ztree li span.exec {
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
     background: none;
     border: 1px solid #aaa;
-    height: 17px;
-    line-height: 18px;
-    width: 18px;
     padding-left: 2px;
+    height: 17px;
+    line-height: 15px;
+    width: 17px;
     color: #888;
-    margin: -2px 1px 0 0;
+    margin: -3px 1px 0 0;
+    -webkit-font-smoothing: antialiased;
 }
-.ztree li span.button.exec:before {
-    content: "\f0e2";
+.ztree li span.exec:before {
+    content: "\e072";
 }
 .ztree li span.button.exec:hover {
     color: rgb(22, 158, 224);

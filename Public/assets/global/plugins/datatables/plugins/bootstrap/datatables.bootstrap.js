@@ -8,7 +8,7 @@ $.extend(true, $.fn.dataTable.defaults, {
             "previous": 'Prev',
             "next": 'Next',
             "page": "Page",
-            "pageOf": "of"
+            "pageOf": "Of"
         }
     },
     "pagingType": "bootstrap_number"
@@ -332,7 +332,7 @@ $.extend($.fn.dataTableExt.oPagination, {
             };
 
             $(nPaging).append(
-                '<div class="pagination-panel"> ' + (oLang.page ? oLang.page : '') + ' ' +
+                '<div class="pagination-panel">' + (oLang.page ? oLang.page : '') + ' ' +
                 '<a href="#" class="btn btn-sm default prev disabled"><i class="fa fa-angle-left"></i></a>' +
                 '<input type="text" class="pagination-panel-input form-control input-sm input-inline input-mini" maxlenght="5" style="text-align:center; margin: 0 5px;">' +
                 '<a href="#" class="btn btn-sm default next disabled"><i class="fa fa-angle-right"></i></a> ' +

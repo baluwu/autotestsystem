@@ -22,10 +22,7 @@ class SingleModel extends Model {
 
 
     public function getList($order, $sort, $page, $rows, $where = []) {
-
-        $group_ids =  $where['group_ids'] ? $where['group_ids'] : 0;
-
-        if (!$group_ids) {
+        if (!isset($where['tid'])) {
             $user_group_id = session('admin')['group_id'];
             $project_ids = M('AuthGroup')->where(['id' => $user_group_id])->getField('project_ids');
             
@@ -37,11 +34,10 @@ class SingleModel extends Model {
             }
         }
 
-        $map['s.tid'] = ['IN', $group_ids];
         foreach ($where as $key => $value) {
             $map['s.' . $key] = $value;
         }
-
+        
         $obj = M('GroupSingle')
             ->field('s.id,s.uid,s.name,s.create_time,s.nlp,s.arc,u.manager,u.nickname')
             ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
@@ -52,11 +48,9 @@ class SingleModel extends Model {
 
         //转换属性及规则
         if ($obj) foreach ($obj as $k => $v) {
-            $obj[$k]['validates'] = unserialize($v['validates']);
-            $obj[$k]['ispublic'] = ($obj[$k]['ispublic'] == 1) ? '公共' : '私有';
-            $obj[$k]['short_name'] = mb_substr($v['name'],0,10,"utf-8")."...";
-            $obj[$k]['short_nlp'] = mb_substr($v['nlp'],0,10,"utf-8")."...";
-            $obj[$k]['short_arc'] = mb_substr($v['arc'],0,10,"utf-8")."...";
+            $obj[$k]['short_name'] = mb_substr($v['name'],0,20,"utf-8") . (strlen($v['name']) > 20 ? '...' : '');
+            //$obj[$k]['short_nlp'] = mb_substr($v['nlp'],0,20,"utf-8")."...";
+            //$obj[$k]['short_arc'] = mb_substr($v['arc'],0,20,"utf-8")."...";
         }
         $total = M('GroupSingle')->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();
 

@@ -26,13 +26,34 @@
   <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico"/>
   <style>
-  .btn-group button, .btn-group .dropdown-menu { width: 300px; text-align: left; font-size: 16px !important; }
-  .btn-group .dropdown-menu { max-height: 420px; overflow: auto; }
-  .btn-group button { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;    }
-  .btn-group button .caret { position: absolute; right: 10px; top: 45%; }
+  .nav .btn-group button, .btn-group .dropdown-menu { width: 300px; text-align: left; font-size: 16px !important; font-weight: 400; }
+  .nav .btn-group .dropdown-menu { max-height: 420px; overflow: auto; }
+  .nav .btn-group button { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;    }
+  .nav .btn-group button .caret { position: absolute; right: 10px; top: 45%; }
+  table .btn-group-xs .btn { padding: 0 5px; outline: none; margin-right: 0; }
   .ztree { margin: 5px 0 5px -16px; min-height: 360px; }
-  .filter-submit, .filter-cancel { font-size: 22px; vertical-align: middle; margin: 6px -6px 0 0; }
+  .filter-submit, .filter-cancel { font-size: 16px; vertical-align: middle; margin: 6px -6px 0 0; }
   .action-control .fa { font-size: 22px; vertical-align: middle; margin: -4px 2px 0 0;}
+  table.dataTable thead th, table.dataTable thead td { border-bottom: none; }
+  .portlet > .portlet-title { margin-bottom: 0; }
+  .portlet.light.portlet-fit > .portlet-body { padding: 0; }
+  .table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { 
+      border-right: none; 
+      border-left: none;
+  }
+  .portlet.light.portlet-datatable.portlet-fit > .portlet-body { padding: 0 0 8px 0 }
+  .page-content-row .page-content-col { padding-left: 15px; }
+  .dataTables_extended_wrapper div.dataTables_paginate { margin: 10px 0 0 10px !important; }
+  .dataTables_extended_wrapper .seperator { padding: 0 8px; }
+  .btn:not(.md-skip).btn-sm { padding: 2px 8px; } 
+  .input-sm, select.input-sm { padding: 2px 8px; height: 25px; }
+  .input-daterange .input-group-addon { padding: 1px 5px; }
+  .input-name { width: 200px; }
+  .glyphicon { margin-right: 5px; }
+  #datatable_ajax { border-top: none; }
+  #datatable_ajax span.label-info, #datatable_ajax span.label-success { padding: 3px 20px; }
+  #datepicker { width: 250px; }
+  .col-sm-12 { padding-left: 30px; }
   </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
@@ -90,16 +111,21 @@
                         <tr role="row" class="heading">
                           <th width="5%"> ID </th>
                           <th width="25%"> 名称</th>
-                          <th width="5%"> 类型</th>
+                          <th width="15%"> 类型</th>
+                          <th width="20%"> 创建时间</th>
                           <th width="20%"> 创建人</th>
-                          <th width="35%"> 创建时间</th>
-                          <th width="150px"> 操作</th>
+                          <th width="15%"> 操作</th>
                         </tr>
                         <tr role="row" class="filter">
                           <td></td>
-                          <td> <input type="text" class="form-control form-filter input-sm" name="search_single_name" placeholder="按名称搜索"></td> 
-                          <td> <input type="text" class="form-control form-filter input-sm" name="search_single_nlp" placeholder="NLP/ASR"> </td>
-                          <td></td>
+                          <td> <input type="text" class="form-control form-filter input-sm input-name" name="search_single_name" placeholder="按名称搜索"></td> 
+                          <td>
+                              <input type="hidden" class="form-filter" name="case_type" id="J_case_type" value="all" />
+                              <div class="btn-group btn-group-xs">
+                                  <button type="button" class="btn btn-default type-nlp">NLP</button>
+                                  <button type="button" class="btn btn-default type-asr">ASR</button>
+                              </div>
+                          </td>
                           <td>
                             <div class="input-daterange input-group" id="datepicker">
                               <input type="text" class="input-sm form-control form-filter" name="date_from" placeholder="From"/>
@@ -107,9 +133,10 @@
                               <input type="text" class="input-sm form-control form-filter" name="date_to" placeholder="To"/>
                             </div>
                           </td>
+                          <td></td>
                           <td>
-                            <a href="javascript:;"><i class="fa fa-search filter-submit"></i></a>
-                            <a href="javascript:;"><i class="fa fa-times filter-cancel"></i></a>
+                            <a href="javascript:;"><i class="glyphicon glyphicon-search filter-submit" title="Search"></i></a>
+                            <a href="javascript:;"><i class="glyphicon glyphicon-ban-circle filter-cancel" title="Reset"></i></a>
                           </td>
                         </tr>
                         </thead>

@@ -48,8 +48,8 @@ var Datatable = function () {
             "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
 
             // data tables spesific
-            "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
-            "info": "<span class='seperator'>|</span>总共  _TOTAL_ 记录",
+            "lengthMenu": "<span class='seperator'>|</span>View _MENU_ Records",
+            "info": "<span class='seperator'>|</span>Total _TOTAL_ Records",
             "infoEmpty": "No records found to show",
             "emptyTable": "No data available in table",
             "zeroRecords": "No matching records found",
@@ -59,7 +59,7 @@ var Datatable = function () {
               "last": "Last",
               "first": "First",
               "page": "Page",
-              "pageOf": "of"
+              "pageOf": "Of"
             }
           },
 

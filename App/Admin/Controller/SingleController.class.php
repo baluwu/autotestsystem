@@ -417,20 +417,19 @@ class SingleController extends AuthController {
         'order'       => ['name' => 'order', 'type' => 'array', 'format' => 'json', 'method' => 'post', 'desc' => '排序'],
         'search_type' => ['name' => 'search_single_type', 'type' => 'string', 'method' => 'post', 'desc' => '属性'],
         'search_name' => ['name' => 'search_single_name', 'type' => 'string', 'method' => 'post', 'desc' => '用例名称'],
-        'search_nlp'  => ['name' => 'search_single_nlp', 'type' => 'string', 'method' => 'post', 'desc' => 'NLP名称'],
+        'case_type'  => ['name' => 'case_type', 'type' => 'string', 'method' => 'post', 'desc' => '类型'],
         'date_from'   => ['name' => 'date_from', 'type' => 'date', 'format' => 'Y-m-d H:i:s', 'method' => 'post', 'desc' => '开始时间'],
         'date_to'     => ['name' => 'date_to', 'type' => 'date', 'format' => 'Y-m-d H:i:s', 'method' => 'post', 'desc' => '结束时间'],
         'page_start'  => ['name' => 'start', 'type' => 'int', 'default' => 0, 'method' => 'post', 'desc' => '第几条记录开始'],
         'page_rows'   => ['name' => 'length', 'type' => 'int', 'default' => 20, 'method' => 'post', 'desc' => '输出多少条记录'],
         'isAll'       => ['name' => 'all', 'type' => 'boolean', 'default' => false, 'method' => 'post', 'desc' => '是否输出所有记录'],
-        'group_ids'       => ['name' => 'group_ids', 'type' => 'string', 'default' => 0, 'method' => 'post', 'desc' => '用例组ids'],
     ];
 
     public function getList() {
         if (!IS_AJAX) $this->error('非法操作！');
         $single = D('Single');
         $order = [
-            'list'   => ['id', 'name', 'nlp', 'validates', 'create_time'],
+            'list'   => ['id', 'name', 'nlp', 'create_time', 'nickname' ],
             'column' => 'create_time',
             'dir'    => "desc"
         ];
@@ -444,7 +443,10 @@ class SingleController extends AuthController {
         $where = [];
 
         if ($this->search_name) $where['name'] = ['like', '%' . $this->search_name . '%'];
-        if ($this->search_nlp) $where['nlp'] = ['like', '%' . $this->search_nlp . '%'];
+        if ($this->case_type && $this->case_type != 'all') {
+            if ($this->case_type == 'nlp') $where['nlp'] = ['exp', ' IS NOT NULL AND nlp <> \'\'  '];
+            else $where['arc'] = ['exp', ' IS NOT NULL AND arc <> \'\' '];
+        }
 
         if ($this->date_from && $this->date_to) {
             $where['create_time'] = [['egt', $this->date_from], ['elt', $this->date_to]];
@@ -454,11 +456,12 @@ class SingleController extends AuthController {
             $where['create_time'] = ['elt', $this->date_to];
         }
 
-        if ($this->group_ids) {
+        $group_ids = I('post.group_ids', 0);
+        if ($group_ids) {
             $where['tid'] = ['IN', $group_ids];
         }
 
-        $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where));
+        $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $where));
     }
 
     //获取删除的用例列表
