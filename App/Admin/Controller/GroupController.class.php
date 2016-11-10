@@ -6,6 +6,17 @@ namespace Admin\Controller;
 class GroupController extends AuthController {
     //显示用户用例
     public function index() {
+        $allowProjectIds = M('AuthGroup')->where(['id' => session('admin')['group_id'] ])->getField('project_ids');
+        $projects = [];
+        if ($allowProjectIds) {
+            $projects = M('ManageGroupClassify')->field('id, name')->where(
+                'pid=0 AND (id IN(' . $allowProjectIds . ') OR uid=' . session('admin')['id'] . ')' 
+            )->select();
+        }
+
+        $this->assign('projects', $projects);
+        $this->assign('firstname', !empty($projects) ? $projects[0]['name'] : '暂无项目');
+        $this->assign('project_id', !empty($projects) ? $projects[0]['id'] : 0);
         $this->display();
     }
 

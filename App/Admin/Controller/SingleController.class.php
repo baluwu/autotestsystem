@@ -11,18 +11,28 @@ class SingleController extends AuthController {
     }
 
     //添加用例
-    public function add($tid = 0) {
-        $priveGroup = D('Group')->getList('','','','',true);
-        $this->assign('group', $priveGroup);
-        $this->assign('gid', $tid);     
+    public function add() {
+        $group_id = intval(I('get.group_id'));
+
+        $group = M('ManageGroupClassify')->field('pid,name')->where(['id' => $group_id])->find();
+        if (!$group) { $this->error('用例组不存在', '#'); }
+        $this->assign('group_name', $group['name']);
+
+        $model = M('ManageGroupClassify')->field('pid,name')->where(['id' => $group['pid']])->find();
+        if (!$model) { $this->error('模块不存在', '#'); }
+        $this->assign('model_name', $model['name']);
+
+        $project = M('ManageGroupClassify')->where(['id' => $model['pid']])->getField('name');
+        if (!$project) { $this->error('项目不存在', '#'); }
+        $this->assign('project_name', $project);
+
+        $this->assign('group_id', $group_id);     
         $this->display();
     }
 
     static $addSingleRules = [
         'singleName'  => ['name' => 'mc', 'type' => 'string', 'min' => 2, 'max' => 100, 'method' => 'post', 'desc' => '用例名称'],
         'groupid'    => ['name' => 'groupid', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
-        'ispublic'    => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
-        'type_switch' => ['name' => 'type_switch', 'type' => 'string', 'method' => 'post', 'desc' => '类型'],
         'nlp'         => ['name' => 'nlp', 'type' => 'string', 'method' => 'post', 'desc' => 'NLP'],
         'arc'         => ['name' => 'arc', 'type' => 'string', 'method' => 'post', 'desc' => 'ARC'],
         'v1'          => ['name' => 'v1', 'type' => 'array', 'max' => 100, 'method' => 'post', 'desc' => '验证规则key'],
@@ -56,7 +66,7 @@ class SingleController extends AuthController {
         }
 
         $single = D('GroupSingle');
-        $data = $single->addSingle($this->singleName, $this->ispublic, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
+        $data = $single->addSingle($this->singleName, $this->groupid, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
 
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -12,
@@ -413,13 +423,14 @@ class SingleController extends AuthController {
         'page_start'  => ['name' => 'start', 'type' => 'int', 'default' => 0, 'method' => 'post', 'desc' => '第几条记录开始'],
         'page_rows'   => ['name' => 'length', 'type' => 'int', 'default' => 20, 'method' => 'post', 'desc' => '输出多少条记录'],
         'isAll'       => ['name' => 'all', 'type' => 'boolean', 'default' => false, 'method' => 'post', 'desc' => '是否输出所有记录'],
+        'group_ids'       => ['name' => 'group_ids', 'type' => 'string', 'default' => 0, 'method' => 'post', 'desc' => '用例组ids'],
     ];
 
     public function getList() {
         if (!IS_AJAX) $this->error('非法操作！');
         $single = D('Single');
         $order = [
-            'list'   => ['id', 'name', 'nlp', 'ispublic', 'validates', 'create_time'],
+            'list'   => ['id', 'name', 'nlp', 'validates', 'create_time'],
             'column' => 'create_time',
             'dir'    => "desc"
         ];
@@ -431,12 +442,8 @@ class SingleController extends AuthController {
         }
 
         $where = [];
-        if (in_array($this->search_type, ['public', 'self'])) {
-            $where['ispublic'] = ($this->search_type == 'public' ? 1 : 0);
-        }
 
         if ($this->search_name) $where['name'] = ['like', '%' . $this->search_name . '%'];
-
         if ($this->search_nlp) $where['nlp'] = ['like', '%' . $this->search_nlp . '%'];
 
         if ($this->date_from && $this->date_to) {
@@ -447,8 +454,11 @@ class SingleController extends AuthController {
             $where['create_time'] = ['elt', $this->date_to];
         }
 
-        $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where));
+        if ($this->group_ids) {
+            $where['tid'] = ['IN', $group_ids];
+        }
 
+        $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where));
     }
 
     //获取删除的用例列表
@@ -481,14 +491,8 @@ class SingleController extends AuthController {
         }
 
         $where = [];
-        if (in_array($this->search_type, ['public', 'self'])) {
-            $where['ispublic'] = ($this->search_type == 'public' ? 1 : 0);
-        }
-
         if ($this->search_name) $where['name'] = ['like', '%' . $this->search_name . '%'];
-
         if ($this->search_nlp) $where['nlp'] = ['like', '%' . $this->search_nlp . '%'];
-
         if ($this->date_from && $this->date_to) {
             $where['create_time'] = [['egt', $this->date_from], ['elt', $this->date_to]];
         } else if ($this->date_from) {

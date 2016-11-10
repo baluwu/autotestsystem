@@ -25,14 +25,15 @@
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico"/>
-  <script>
-    var CONFIG = {
-      'ROOT': '__ROOT__',
-      'MODULE': '__MODULE__',
-      'INDEX': '{:U("Index/index")}',
-    };
-  </script>
-  <style>.col-md-8 { padding: 0 !important; }</style>
+  <style>
+  .btn-group button, .btn-group .dropdown-menu { width: 300px; text-align: left; font-size: 16px !important; }
+  .btn-group .dropdown-menu { max-height: 420px; overflow: auto; }
+  .btn-group button { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;    }
+  .btn-group button .caret { position: absolute; right: 10px; top: 45%; }
+  .ztree { margin: 5px 0 5px -16px; min-height: 360px; }
+  .filter-submit, .filter-cancel { font-size: 22px; vertical-align: middle; margin: 6px -6px 0 0; }
+  .action-control .fa { font-size: 22px; vertical-align: middle; margin: -4px 2px 0 0;}
+  </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
 <div class="wrapper">
@@ -45,17 +46,25 @@
             <nav class="navbar" role="navigation">
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
-                    <a href="./index"> <i class="fa fa-object-group"></i> 用例组列表 </a>
-                    <ul id="J_ztree" class="ztree" style="padding: 10px;"></ul>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="J_project_id" data-id="{$project_id}">
+                        <i class="fa fa-cubes font-light"></i>
+                        <span id="J_project_title">{$firstname}</span><span class="caret"></span></button>
+                        <ul class="dropdown-menu J_project_menu" role="menu">
+                            <foreach name='projects' item='item'>
+                            <li>
+                            <a href="javascript:;" data-id="{$item.id}"> <i class="fa fa-cubes font-dark"></i> {$item.name}</a></li>
+                            </foreach>
+                        </ul>
+                    </div>
+                    <ul id="J_ztree" class="ztree"></ul>
                 </li>
                 <li> <a href="javascript:;" id="J_add_project"> <i class="fa fa-plus "></i> 添加项目 </a> </li>
                 <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
               </ul>
               <ul class="nav navbar-nav">
                 <li> <a href="/Single/add"> <i class="fa fa-plus "></i> 添加用例 </a> </li>
-                <li> <a href="./add"> <i class="fa fa-plus "></i> 添加用例组 </a> </li>
               </ul>
-              <ul class="nav navbar-nav"> <li> <a href="./recycle"> <i class="fa fa-recycle "></i> 回收站 </a> </li> </ul>
             </nav>
           </div>
           <div class="page-content-col">
@@ -64,24 +73,14 @@
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                   <div class="portlet-title">
                     <div class="caption">
-                      <i class="fa fa-object-group font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用例组管理</span>
+                      <i class="fa fa-object-ungroup font-dark"></i>
+                      <span class="caption-subject font-dark sbold uppercase">用例管理</span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
-                        <li>
-                          <a href="/Index">Home</a>
-                        </li>
-                        <li class="active">用例组管理</li>
+                        <li> <a href="/Index">Home</a> </li>
+                        <li class="active">用例管理</li>
                       </ol>
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
-                        <span class="sr-only">Toggle navigation</span>
-                            <span class="toggle-icon">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </span>
-                      </button>
                     </div>
                   </div>
                   <div class="portlet-body">
@@ -89,26 +88,18 @@
                       <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
                         <thead>
                         <tr role="row" class="heading">
-                          <th width="2%"> ID </th>
-                          <th width="20%"> 名称</th>
-                          <th width="5%"> 属性</th>
-                          <th width="15%"> 创建时间</th>
-                          <td>状态<i class="fa fa-info-circle tooltips" data-original-title="执行中的用例，请等待执行完成后在执行"></i></td>
-                          <th width="40%"> 操作</th>
+                          <th width="5%"> ID </th>
+                          <th width="25%"> 名称</th>
+                          <th width="5%"> 类型</th>
+                          <th width="20%"> 创建人</th>
+                          <th width="35%"> 创建时间</th>
+                          <th width="150px"> 操作</th>
                         </tr>
-
                         <tr role="row" class="filter">
                           <td></td>
-                          <td>
-                            <input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="按名称搜索"></td>
-                          <td>
-                            <select name="search_type" class="form-control form-filter input-sm">
-                              <option value="all">属性</option>
-                              <option value="public">公共</option>
-                              <option value="self">私有</option>
-
-                            </select></td>
-
+                          <td> <input type="text" class="form-control form-filter input-sm" name="search_single_name" placeholder="按名称搜索"></td> 
+                          <td> <input type="text" class="form-control form-filter input-sm" name="search_single_nlp" placeholder="NLP/ASR"> </td>
+                          <td></td>
                           <td>
                             <div class="input-daterange input-group" id="datepicker">
                               <input type="text" class="input-sm form-control form-filter" name="date_from" placeholder="From"/>
@@ -116,14 +107,9 @@
                               <input type="text" class="input-sm form-control form-filter" name="date_to" placeholder="To"/>
                             </div>
                           </td>
-                          <td></td>
                           <td>
-                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                              <i class="fa fa-search"></i> Search
-                            </button>
-                            <button class="btn btn-sm red btn-outline filter-cancel">
-                              <i class="fa fa-times"></i> Reset
-                            </button>
+                            <a href="javascript:;"><i class="fa fa-search filter-submit"></i></a>
+                            <a href="javascript:;"><i class="fa fa-times filter-cancel"></i></a>
                           </td>
                         </tr>
                         </thead>
@@ -141,180 +127,9 @@
     <include file="Public/footer"/>
   </div>
 </div>
-<div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例组执行</h4>
-  </div>
-  <form action="#" >
-    <div class="modal-body">
-      <div class="tips"></div>
-      <input type="hidden" name="id" value=""/>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label">
-        </label>
-        <div class="col-md-10">
-          当前执行用例组:<span class="currName"></span>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>IP
-        </label>
-        <div class="col-md-10">
-          <input type="text" class="form-control" id="ip" list="ip_data" placeholder="192.168.19.10" name="ip" required data-tabindex="1">
-          <datalist id="ip_data">
-            <option value="192.168.19.10">
-            <option value="192.168.1.10">
-            <option value="192.168.2.10">
-            <option value="192.168.3.10">
-            <option value="192.168.4.10">
-            <option value="192.168.5.10">
-            <option value="192.168.6.10">
-            <option value="192.168.7.10">
-          </datalist>
-          <div class="form-control-focus"> </div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="port">
-          <span class="required"> * </span>Port
-        </label>
-
-        <div class="col-md-10">
-          <input type="text" name="port" class="form-control" id="port" list="port_data" placeholder="8080" data-tabindex="2">
-          <datalist id="port_data">
-            <option value="80">
-            <option value="8080">
-            <option value="8090">
-            <option value="8001">
-          </datalist>
-          <div class="form-control-focus"></div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
-        <button type="submit" class="btn green exec_ok">Ok</button>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div id="J_task_single" class="modal modal-dialog" tabindex="-1" data-focus-on="input:first" style="width: 1000px;">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">创建任务</h4>
-  </div>
-  <form action="#" class="form-horizontal form-row-seperated" >
-    <input type="hidden" id="J_single_ids" name="single_ids" />
-    <div class="modal-body">
-      <div class="tips"></div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>名称
-        </label>
-        <div class="col-md-8">
-          <input type="text" class="form-control" id="name" placeholder="任务名称" name="name" required data-tabindex="1">
-          <div class="form-control-focus"> </div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>执行时间
-        </label>
-        <div class="col-md-8">
-          <input type="text" class="form-control" id="run_at" placeholder="2016-10-11 12:08:08" name="run_at" required data-tabindex="1">
-          <div class="form-control-focus"> </div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>版本号
-        </label>
-        <div class="col-md-8">
-          <input type="text" class="form-control" id="ver" placeholder="1.0.1" name="ver" required data-tabindex="1">
-          <div class="form-control-focus"> </div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip"> 注释 </label>
-        <div class="col-md-8">
-          <input type="text" class="form-control" id="description" placeholder="Description" name="description" data-tabindex="1">
-          <div class="form-control-focus"> </div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip"> 通知邮箱 </label>
-        <div class="col-md-8 input-group has-success" id="emailwarp">
-            <input type="text" class="form-control" id="notify_email" name="notify_email" autocomplete="off" placeholder="Email Address"><span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
-            <div class="form-control-focus"></div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>IP
-        </label>
-        <div class="col-md-8">
-          <input type="text" class="form-control" id="ip" list="ip_data" placeholder="192.168.19.10" name="ip" required data-tabindex="1">
-          <datalist id="ip_data">
-            <option value="192.168.19.10">
-            <option value="192.168.1.10">
-            <option value="192.168.2.10">
-            <option value="192.168.3.10">
-            <option value="192.168.4.10">
-            <option value="192.168.5.10">
-            <option value="192.168.6.10">
-            <option value="192.168.7.10">
-          </datalist>
-          <div class="form-control-focus"> </div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="port"> Port </label>
-        <div class="col-md-8">
-          <input type="text" name="port" class="form-control" id="port" list="port_data" placeholder="8080" data-tabindex="2">
-          <datalist id="port_data">
-            <option value="80">
-            <option value="8080">
-            <option value="8090">
-            <option value="8001">
-          </datalist>
-          <div class="form-control-focus"></div>
-        </div>
-      </div>
-      <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="port"> 用例选择 </label>
-        <div class="col-md-8">
-            <div class="portlet-body">
-              <div class="table-container">
-                  <table class="table table-striped table-bordered table-hover table-checkable" id="J_task_singles">
-                  <thead>
-                  <tr role="row" class="heading">
-                  <th>
-                  <input type="checkbox" checked class="group-ckbx" />
-                  </th>
-                  <th width=5%"> ID </th>
-                  <th width="45%"> 名称</th>
-                  <th width="45%"> NLP/ASR</th>
-                  </tr>
-                  </thead>
-                  <tbody id="J_task_single_bd"></tbody>
-                  </table>
-              </div>
-            </div>
-            <div class="form-control-focus"></div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
-        <button type="submit" class="btn green exec_ok">Ok</button>
-      </div>
-    </div>
-  </form>
-</div>
-
+<include file="Group/exec_dialog"/>
+<include file="Group/create_task_dialog"/>
+<include file="Group/create_project_dialog"/>
 <!--[if lt IE 9]>
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
 <script src="/Public/assets/global/plugins/excanvas.min.js"></script>
@@ -344,5 +159,3 @@
 <script src="/Public/assets/layout/scripts/quick-sidebar.js"></script>
 </body>
 </html>
-
-

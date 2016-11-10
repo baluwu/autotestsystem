@@ -12,11 +12,14 @@ class ManageGroupClassifyController extends AuthController {
     {
         if (!IS_AJAX) $this->error('非法操作！');
         $pid = intval(I('get.pid'));
+        $lv = intval(I('get.lv'));
         $nextId =  $this->nextId($pid);
         $data = array(
             'id' => $nextId,
             'pid' => $pid,
-            'name'=>I('get.name'),
+            'uid' => session('admin')['id'],
+            'name'=> I('get.name'),
+            'level' => $lv,
             'modify_time'=>date('Y-m-d H:i:s')
         );
         M('ManageGroupClassify')->add($data);
@@ -47,12 +50,10 @@ class ManageGroupClassifyController extends AuthController {
         $this->ajaxReturn(['error' => false, 'msg' => '']);
     }
 
-    //初始化节点
-    public function getData($group = 0)
+    public function getProjectData()
     {
         if (!IS_AJAX) $this->error('非法操作！');
-        $group_id = session('admin.group_id');
-        $ret = D('AuthGroup')->getClassifyData($group_id, true);
+        $ret = D('ManageGroupClassify')->getProjectData(I('get.project_id'));
         $this->ajaxReturn($ret);
     }
 

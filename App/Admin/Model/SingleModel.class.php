@@ -21,42 +21,29 @@ class SingleModel extends Model {
 
 
 
-    public function getList($order, $sort, $page, $rows, $all = false, $where = [], $isrecovery = 0,$ispublic=null) {
-        if ($all) {
-            return $this
-                ->field('s.id,s.name,u.manager,u.nickname')
-                ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
-                ->select();
+    public function getList($order, $sort, $page, $rows, $where = []) {
+
+        $group_ids =  $where['group_ids'] ? $where['group_ids'] : 0;
+
+        if (!$group_ids) {
+            $user_group_id = session('admin')['group_id'];
+            $project_ids = M('AuthGroup')->where(['id' => $user_group_id])->getField('project_ids');
+            
+            if (!empty($project_ids)) {
+                $model_ids = M('ManageGroupClassify')->where(['pid' => [ 'IN', $project_ids]])->getField('id', true);
+                if (!empty($model_ids)) {
+                    $group_ids = M('ManageGroupClassify')->where(['pid' => ['IN', $model_ids]])->getField('id', true);
+                }
+            }
         }
 
-        $group_id = session('admin')['group_id'];
-        $classify = M('AuthGroup')->where(['id' => $group_id])->select();
-        $classify_ids = $classify[0]['classify'];
-
-        $group_ids = M('Group')->field('id')->where(['classify' => ['IN', $classify_ids]])->select();
-
-        $temp = [];
-        foreach ($group_ids as $v) {
-            $temp[] = $v['id'];
-        }
-        $group_ids_str = implode(',', $temp);
-
-        $map = [];
-        $map['s.tid'] = ['IN', $group_ids_str];
+        $map['s.tid'] = ['IN', $group_ids];
         foreach ($where as $key => $value) {
             $map['s.' . $key] = $value;
         }
 
-        if ($ispublic !== null) {
-            $map['s.ispublic'] = $ispublic;
-        } else {
-            $map['s.uid'] = ['eq', session('admin')['id']];
-        }
-
-        $map['s.isrecovery'] = ['eq', $isrecovery];
-
         $obj = M('GroupSingle')
-            ->field('s.id,s.uid,s.name,s.ispublic,s.create_time,s.nlp,s.arc,s.isrecovery,s.validates, 0 as status,u.manager,u.nickname')
+            ->field('s.id,s.uid,s.name,s.create_time,s.nlp,s.arc,u.manager,u.nickname')
             ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
             ->where($map)
             ->order([$order => $sort])

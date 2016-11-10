@@ -88,49 +88,28 @@
               </ul>
             </nav>
           </div>
-          <!-- END PAGE SIDEBAR -->
           <div class="page-content-col">
-            <!-- BEGIN PAGE BASE CONTENT -->
             <div class="row">
               <div class="col-md-12">
-                <!-- Begin: life time stats -->
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-object-ungroup font-dark"></i>
                       <span class="caption-subject font-dark sbold uppercase">用例管理</span>
                     </div>
-                    <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
-                        <li>
-                          <a href="/Index">Home</a>
-                        </li>
-
+                        <li> <a href="/Index">Home</a> </li>
                         <li class="active">用例管理</li>
                       </ol>
-                      <!-- Sidebar Toggle Button -->
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
-                        <span class="sr-only">Toggle navigation</span>
-                            <span class="toggle-icon">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </span>
-                      </button>
-                      <!-- Sidebar Toggle Button -->
                     </div>
-                    <!-- END BREADCRUMBS -->
                   </div>
                   <div class="portlet-body">
                     <div class="table-container">
-
                       <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
                         <thead>
                         <tr role="row" class="heading">
-                          <th width="2%">
-                            ID
-                          </th>
+                          <th width="2%"> ID </th>
                           <th width="10%"> 名称</th>
                           <th width="20%"> NLP/ASR</th>
                           <th width="7%"> 属性</th>

@@ -5,6 +5,19 @@ jQuery(document).ready(function () {
   var grid = new Datatable();
   window.grid = grid;
 
+  function getTree() { return $.fn.zTree.getZTreeObj("J_ztree"); }
+  function getCheckedGroupId() {
+    var ck_t = getTree().getCheckedNodes();
+    var ck_t_id = [];
+    $.each(ck_t, function(i, el){
+      if (el.level==2) {
+        ck_t_id[ck_t_id.length] = el['group_id'];
+      }
+    });
+
+    return ck_t_id.join(',');
+  }
+
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
@@ -28,36 +41,16 @@ jQuery(document).ready(function () {
             $(this).confirmation();
             $(this).on('confirmed.bs.confirmation', function () {
               $.ajax({
-                url: CONFIG['MODULE'] + '/Group/Remove',
+                url: '/Single/Remove',
                 type: 'POST',
                 data: {
-                  ids: $(this).data('id'),
-                  classify:classify,
-                },
-                beforeSend: function () {
-
+                  ids: $(this).data('id')
                 },
                 success: function (res, response, status) {
                   if (res.error < 0) {
-                    App.notification({
-                      type: 'danger',
-                      icon: 'warning',
-                      message: '删除失败' + res.msg,
-                      container: $(".page-content-col .portlet-title"),
-                      place: 'prepend',
-                      closeInSeconds: 1.5
-                    });
-                    return;
+                    return App.warning( '删除失败' + res.msg, $(".page-content-col .portlet-title"));
                   }
-
-                  App.notification({
-                    type: 'success',
-                    icon: 'success',
-                    message: '删除成功',
-                    container: $(".page-content-col .portlet-title"),
-                    place: 'prepend',
-                    closeInSeconds: 1.5
-                  });
+                  App.warning('删除成功', $(".page-content-col .portlet-title"));
                   $('.filter-submit').trigger('click');
                 }
               });
@@ -68,65 +61,61 @@ jQuery(document).ready(function () {
         dataTable: {
           "bStateSave": true, 
           "lengthMenu": [
-            [10, 20, 50, 100, 150, -1],
-            [10, 20, 50, 100, 150, "All"] 
+            [10, 20, 50, -1],
+            [10, 20, 50, "All"] 
           ],
           "pageLength": 20, 
-          "ajax": {
-            "url": CONFIG['MODULE'] + '/Group/getList', 
-          },
-          classify:104,
+          "ajax": { "url": '/Single/getList', "type": 'POST', data: { group_ids: 0 } },
           keys: true,
           columns: [
-            {
-              data: 'id',
-              orderable: false
-            },
-            {
-              data: 'name',
-              orderable: false
-            },
-            {
-              data: 'ispublic'
-            },
-
-            {data: 'create_time'},
-            {
-              data: 'status',
-              orderable: false
-            },
-            {
-              class: "action-control",
-              orderable: false,
-              data: null,
-              defaultContent: ""
-            },
+            { data: 'id', orderable: false },
+            { data: 'name', orderable: false },
+            { data: 'nlp', orderable: false },
+            { data: 'nickname' },
+            { data: 'create_time'},
+            { class: "action-control", orderable: false, data: null, defaultContent: "" }
           ],
-          "order": [
-            [3, "desc"]
-          ],
+          "order": [ [4, "desc"] ],
           "columnDefs": [
             {
               "render": function (data, type, row) {
-                return ' <span class="label label-sm label-' + (data == '公共' ? 'success' : 'info') + '">' + data + '</span>'
-              },
-              "targets": 2
+                return "<span title='"+row.name+"'>"+row.short_name+"</span>";
+              }, "targets": 1
             },
             {
               "render": function (data, type, row) {
-                return data == 1 ? "执行中" : "空闲";
-              },
-              "targets": 4
+                return '<span class="label label-' + (row.nlp ? 'default' : 'info') + '">' + (row.nlp ? 'NLP' : 'ASR') + '</span>';
+              }, "targets": 2
             },
             {
               "render": function (data, type, row) {
-
-                return '<a href="./edit/id/' + row.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 编辑 </a>'
-                  + '<a data-toggle="confirmation" data-id="' + row.id + '" data-title="删除后不可恢复！！" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5"> <i class="fa fa-remove"></i> 删除 </a>'
-                  + '<a  href="./single/tid/' + row.id + '" class="btn blue btn-sm btn-outline margin-bottom-5"> <i class="fa fa-object-ungroup"></i> 用例管理 </a>'
-                  + '<a data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '"  data-status="' + row.status + '"  ' + (row.status == 1 ? 'disabled' : '') + '   class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 执行 </a>'
-                  + '<a href="./execute_history/tid/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 执行记录 </a>';
-
+                return "<span title='"+row.nickname+"'>"+row.nickname+"</span>";
+              }, "targets": 3
+            },
+            {
+              "render": function (data, type, row) {
+                return "<span title='"+row.create_time+"'>"+row.create_time+"</span>";
+              }, "targets": 4
+            },
+            {
+              "render": function (data, type, row) {
+                return '<a href="javascript:;"><i class="fa fa-repeat"></i></a>' + 
+                  '<a href="javascript:;"><i class="fa fa-times"></i></a>' + 
+                  '<a href="javascript:;"><i class="fa fa-edit"></i></a>' + 
+                  '<a href="javascript:;"><i class="fa fa-search"></i></a>';
+                /*
+                  '<div class="btn-group">\
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\
+                        操作 <span class="caret"></span>\
+                      </button>\
+                      <ul class="dropdown-menu" role="menu">\
+                        <li><a href="./edit/id/' + row.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i>编辑</a></li>\
+                        <li><a   data-toggle="confirmation" data-id="' + row.id + '" data-title="删除后不可恢复！！" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5"> <i class="fa fa-remove"></i>删除</a></li>\
+                        <li><a  data-toggle="modal" data-title="' + row.name + '" data-id="' + row.id + '"  data-status="' + row.status + '"  ' + (row.status == 1 ? 'disabled' : '') + '  class="exec_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i>执行</a></li>\
+                        <li><a href="./execute_history/id/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i>执行记录</a></li>\
+                      </ul>\
+                    </div>';
+                    */
               },
               "targets": 5
             }
@@ -144,23 +133,9 @@ jQuery(document).ready(function () {
           grid.getDataTable().ajax.reload();
           grid.clearAjaxParams();
         } else if (action.val() == "") {
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message: 'Please select an action',
-            container: grid.getTableWrapper(),
-            place: 'prepend',
-            closeInSeconds: 1.5
-          });
+          App.warning( 'Please select an action', grid.getTableWrapper());
         } else if (grid.getSelectedRowsCount() === 0) {
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message: 'No record selected',
-            container: grid.getTableWrapper(),
-            place: 'prepend',
-            closeInSeconds: 1.5
-          });
+          App.warning( 'No record selected', grid.getTableWrapper());
         }
       });
     };

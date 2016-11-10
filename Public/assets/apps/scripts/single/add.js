@@ -36,15 +36,10 @@ jQuery(document).ready(function () {
         if( $("#validates_table tbody tr").size()>1){
           $(this).parents('tr').remove();
         }
-
       });
     };
 
-    return {
-      init: function () {
-        addEvet();
-      }
-    };
+    return { init: function () { addEvet(); } };
   }();
 
   $("input[name='type_switch']").on('switchChange.bootstrapSwitch', function () {
@@ -52,10 +47,10 @@ jQuery(document).ready(function () {
   });
 
   $('#atsform').validate({
-    errorElement: 'span', //default input error message container
-    errorClass: 'help-block help-block-error', // default input error message class
-    focusInvalid: false, // do not focus the last invalid input
-    ignore: "",  // validate all fields including form hidden input
+    errorElement: 'span', 
+    errorClass: 'help-block help-block-error', 
+    focusInvalid: false, 
+    ignore: "",  
     messages: {
       select_multi: {
         maxlength: jQuery.validator.format("Max {0} items allowed for selection"),
@@ -68,65 +63,36 @@ jQuery(document).ready(function () {
         maxlength: 100,
         required: true
       },
-      property: {
-        required: true,
-      },
-      nlp: {
-        required:"#type_switch:not(:checked)",
-      },
-      arc: {
-        required:"#type_switch:checked",
-      },
-      'v1[]': {
-        required: true,
-        maxlength: 100,
-      },
-      'v2[]': {
-        required: true,
-        maxlength: 20,
-      },
-      'dept[]': {
-        required: true,
-      },
+      property: { required: true, },
+      nlp: { required:"#type_switch:not(:checked)", },
+      arc: { required:"#type_switch:checked", },
+      'v1[]': { required: true, maxlength: 100, },
+      'v2[]': { required: true, maxlength: 20, },
+      'dept[]': { required: true },
     },
-
-    invalidHandler: function (event, validator) { //display error alert on form submit
+    invalidHandler: function (event, validator) { 
       App.scrollTo($('#atsform'), -200);
     },
-
-    highlight: function (element) { // hightlight error inputs
-      $(element)
-        .closest('.form-group').addClass('has-error'); // set error class to the control group
+    highlight: function (element) { 
+      $(element).closest('.form-group').addClass('has-error'); 
     },
-
-    unhighlight: function (element) { // revert the change done by hightlight
-      $(element)
-        .closest('.form-group').removeClass('has-error'); // set error class to the control group
+    unhighlight: function (element) { 
+      $(element) .closest('.form-group').removeClass('has-error'); 
     },
-
     success: function (label) {
-      label
-        .closest('.form-group').removeClass('has-error'); // set success class to the control group
+      label.closest('.form-group').removeClass('has-error'); 
     },
-
     submitHandler: function (form) {
       var form_temp=$(form).serializeArray();
-      
       $.ajax({
-        url: CONFIG['MODULE'] + '/Single/addSingle',
+        url: '/Single/addSingle',
         type: 'POST',
         data: $(form).serialize(),
-        beforeSend: function () {
-
-        },
         success: function (res, response, status) {
           if (res.error >= 0) {
-            location.href = '/Group/single/tid/' + $('[name="groupid"]').val();
-            return;
+            return App.ok('添加成功');
           }
-
-          App.warning( res.msg?res.msg:'未知错误！请检查内容后重新提交！', $(".page-content-col .portlet-title"));
-
+          App.warning( res.msg ? res.msg:'未知错误！请检查内容后重新提交！', $(".page-content-col .portlet-title"));
         }
       });
       return false;

@@ -12,46 +12,45 @@ $(function() {
     var ck_t = getTree().getCheckedNodes();
     var ck_t_id = [];
     $.each(ck_t, function(i, el){
-      if (!el.isParent) {
+      if (el.level==2) {
         ck_t_id[ck_t_id.length] = el['group_id'];
       }
     });
+
     return ck_t_id.join(',');
   }
 
-  function reloadGrid(group_id) {
-    grid.setAjaxParam("group_id", group_id);
+  function reloadGrid(group_ids) {
+    grid.setAjaxParam('group_ids', group_ids);
     grid.getDataTable().ajax.reload();
     grid.clearAjaxParams();
   }
 
   function addHoverDom(treeId, treeNode) {
-    if (treeNode.group_id || treeNode.level == 2) return true;
     var tid = treeNode.tId;
     var sObj = $("#" + tid + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+tid).length>0) return;
 
     var addStr = 
+      (treeNode.level == 2 ? "<span class='button exec' id='execBtn_" + tid + "'></span>" : '') +
       "<span class='button add' id='addBtn_" + tid + "'></span>";
     
     sObj.after(addStr);
 
     $("#addBtn_"+tid).bind("click", function(){
-      addNode(treeNode);
+      if (treeNode.level == 2) {
+        /*add single*/
+        window.open('/Single/add/group_id/' + treeNode.id, '_BLANK');
+      }
+      else addNode(treeNode);
       return false;
     });
 
-    /*
-    $("#removeBtn_"+tid).bind("click", function(){
-      $.get('/ManageGroupClassify/delNode/id/'+treeNode.id, {}, function(o) {}, 'json');
-      return false;
-    });
 
-    $("#editBtn_"+tid).bind("click", function(){
-      $.get('/ManageGroupClassify/editNode/id/'+treeNode.id+'/name/'+treeNode.name, {}, function(o){}, 'json');
+    treeNode.level == 2 && $("#execBtn_"+tid).bind("click", function(){
+      $('#exec').modal();
       return false;
     });
-    */
 
     return true;
   }
@@ -59,28 +58,30 @@ $(function() {
   function removeHoverDom(treeId, treeNode) {
     var tid = treeNode.tId;
     $("#addBtn_"+tid).unbind().remove();
-    $("#editBtn_"+tid).unbind().remove();
-    $("#removeBtn_"+tid).unbind().remove();
+    $("#execBtn_"+tid).unbind().remove();
   }
 
   function onRename(event, treeId, treeNode) {
     $.get('/ManageGroupClassify/editNode/id/'+treeNode.id+'/name/'+treeNode.name, {}, function(o){}, 'json');
+    return false;
   }
 
   function onRemove(event, treeId, treeNode) {
     $.get('/ManageGroupClassify/delNode/id/'+treeNode.id, {}, function(o) {}, 'json');
   }
-
+  
   var setting = {
       check: { enable: true },
       async: {
         enable: true,
-        url: '/ManageGroupClassify/getData/group/1'
+        url: function() {
+          return '/ManageGroupClassify/getProjectData/project_id/' + $('#J_project_id').attr('data-id');
+        }
       },
       view: {
         addHoverDom: addHoverDom,
         removeHoverDom: removeHoverDom,
-        dblClickExpand: true,
+        dblClickExpand: false,
         selectedMulti: true
       },
       data: { simpleData: { enable: true, idKey: "id", pIdKey: "pid", rootPId: 0} },
@@ -89,23 +90,16 @@ $(function() {
         onRename: onRename,
         onRemove: onRemove,
         onCheck: function(treeId, treeNode) {
-            var gids = getCheckedGroupId();
-            reloadGrid(gids);
+          var gids = getCheckedGroupId();
+          reloadGrid(gids);
         },
+        beforeDbClick: function() { return false },
         beforeClick: function(treeId, treeNode) {
-          /*
-          var zTree = $.fn.zTree.getZTreeObj("J_ztree");
-          if (treeNode.isParent) {
-            zTree.expandNode(treeNode);
-          }
-          return false;
-          */
+          getTree().checkNode(treeNode, !treeNode.checked, true, true);
           return false;
         }
       }
 	};
-
-  $.fn.zTree.init($("#J_ztree"), setting);
 
   $('.J_add_task').click(function() {
     var $modal_exec = $('#J_task_single');
@@ -137,25 +131,51 @@ $(function() {
         });
 
         $('#J_task_single_bd').html(body.join(''));
-        var el = $(this);
-        $modal_exec.find('.currName').text(el.data('title'));
-        $modal_exec.find('[name="id"]').val(el.data('id'));
-        $modal_exec.find('.tips').html("");
         $modal_exec.modal({'width': 1024});
       }
     });
   });
 
   $('#J_add_project').click(function() {
-    addNode(0);
+    $('#J_create_project').modal();
+    $('body').on('click', '#J_create_project_ok', function() {
+      var name = $('#J_project_name').val();
+      if ('' == name) return App.warning('项目名称不能为空',$('#J_project_name'));
+      $.get('/ManageGroupClassify/addNode/pid/0/name/'+name, {}, function(o){ 
+        window.location.reload();
+      }, 'json');
+    });
   });
 
   function addNode(parentNode, dftName) {
     var pid = parentNode ? parentNode.id : 0;
-    $.get('/ManageGroupClassify/addNode/pid/'+pid+'/name/'+(dftName || 'Node Name'), {}, function(o){ 
+    var lv = parentNode ? parentNode.level + 1 : 0;
+    $.get('/ManageGroupClassify/addNode/pid/'+pid+'/lv/'+lv+'/name/'+(dftName || 'Node Name'), {}, function(o){ 
       if (o && o.data) {
           getTree().addNodes(parentNode || null, {id: o.data, pid: pid, name: dftName || "Node Name"});
       }
     }, 'json');
   }
+
+  function loadTree() {
+    var project_id = $('#J_project_id').attr('data-id');
+    if (!project_id) return ;
+    $.fn.zTree.init($("#J_ztree"), setting);
+    //getTree().expandNode(zTree.getNodeByParam("id", project_id));
+  }
+
+  $('.J_project_menu a').click(function() {
+    var project_id = $(this).attr('data-id'),
+        projectObj = $('#J_project_id'),
+        titleObj = $('#J_project_title');
+
+    if (projectObj.attr('data-id') == project_id) return ;
+    projectObj.attr('data-id', project_id);
+    titleObj.text($(this).text());
+
+    $.fn.zTree.destroy('J_ztree');
+    loadTree();
+  });
+
+  loadTree();
 });

@@ -44,18 +44,6 @@ class GroupSingleModel extends Model {
             $map['g.' . $key] = $value;
         }
 
-        if ($ispublic !== null) {
-            $map['g.ispublic'] = $ispublic;
-        } else {
-            $map['g.tid'] = ['eq', session('admin')['id']];
-        }
-
-
-        $map['g.tid'] = ['eq', $tid];
-
-        //回收标志
-        $map['g.isrecovery'] = ['eq', $isrecovery];
-
         $obj = $this
             ->field('g.id,g.tid,g.name,g.nlp,g.arc,g.validates,g.create_time,u.manager,u.nickname')
             ->join('g LEFT JOIN  __MANAGE__ u  ON g.tid = u.id')
@@ -63,7 +51,6 @@ class GroupSingleModel extends Model {
             ->order([$order => $sort])
             ->limit($page, $rows)
             ->select();
-
 
         if ($obj) foreach ($obj as $key => $value) {
             $obj[$key]['validates'] = unserialize($value['validates']);
@@ -115,18 +102,13 @@ class GroupSingleModel extends Model {
     }
 
     //新增组用例
-    public function addSingle($name, $ispublic, $tid, $type_switch, $nlp, $arc, $v1, $dept, $v2) {
+    public function addSingle($name, $tid, $nlp, $arc, $v1, $dept, $v2) {
         $data = [
             'name' => $name,
             'tid'  => $tid,
-            'ispublic' => $ispublic,
             'uid' => session('admin')['id']
         ];
-        if ($type_switch) {
-            $data['arc'] = $arc;
-        } else {
-            $data['nlp'] = $nlp;
-        }
+        $data['arc'] = $arc ? $arc : $nlp;
 
         $data['validates'] = serialize($this->getVali($v1, $dept, $v2));
 

@@ -4,8 +4,8 @@
   padding: 15px;
 }
 .page-content-row .page-sidebar{
-  width: 260px;
-  min-width: 260px;
+  width: 300px;
+  min-width: 300px;
 }
 @media (max-width: 991px){
   .page-content-row .page-sidebar{ width: auto;}
@@ -25,12 +25,7 @@
     width: auto;
   }
 }
-.breadcrumbs{
-  margin-bottom: 0 !important;
-  padding:4px 0 4px 10px !important;
-}
-
-
+.breadcrumbs{ }
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   background-color:transparent !important;
 }
@@ -47,4 +42,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   width: 1.25rem;
   margin-right: 1rem;
 }
+.portlet.light > .portlet-title { height: 40px; min-height: 40px; max-height: 40px; }
+.portlet.light > .portlet-title > .caption > i { margin-top: 8px; }
+.portlet.light > .portlet-title > .caption { padding: 0; line-height: 28px; }
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { padding: 6px 8px; }
 
