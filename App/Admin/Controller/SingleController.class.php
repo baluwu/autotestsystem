@@ -43,17 +43,11 @@ class SingleController extends AuthController {
     public function addSingle() {
         if (!IS_AJAX) $this->error("非法操作！");
 
-        if ($this->type_switch) {
-            if (!$this->arc) $this->ajaxReturn([
+        if (!$this->arc && !$this->nlp) {
+            $this->ajaxReturn([
                 'error' => -10,
                 'data'  => '',
-                'msg'   => 'arc为空'
-            ]);
-        } else if (!$this->nlp) {
-            $this->ajaxReturn([
-                'error' => -11,
-                'data'  => '',
-                'msg'   => 'nlp为空'
+                'msg'   => 'NLP或ASR参数为空'
             ]);
         }
 
@@ -76,39 +70,19 @@ class SingleController extends AuthController {
     }
 
     //编辑用例
-    public function edit($tid=0,$id,$from=0) {
-        if(!empty($tid)){
-            $group = D('Group');
-            $groupData = $group->getGroup($tid);
-            if (session('admin')['group_id'] !=1 && $groupData['uid'] != session('admin')['id']) {
-                $this->error('非法参数');
-            }
-            $single = D('GroupSingle');
-            $data = $single->getSingle($id);
+    public function edit($id) {
 
-            if (!$data) {
-                $this->GroupSingle('该用例已被删除');
-            }
-            if ($data['tid'] != $tid) {
-                $this->GroupSingle('非法参数');
-            }
-            $this->assign('data', $data);    
-        }else{
-            $single = D('Single');
-            $singleData = $single->getSingle($id);
-            if (session('admin')['group_id'] !=1 && $singleData['uid'] != session('admin')['id']) {
-                $this->error('非法参数');
-            }
-            if (!$singleData) {
-                $this->error('该用例已被删除');
-            }
-    
-            $this->assign('data', $singleData);
+        $data = M('GroupSingle')->where(['id'=>intval($id)])->find();
+        if (!$data) {
+            $this->GroupSingle('该用例已被删除');
         }
-        $this->assign('gid', $tid);
-        $priveGroup =D('Group')->getList('','','','',true);
-        $this->assign('group', $priveGroup);
-        $this->assign('from', $from);
+
+        if (session('admin')['group_id'] !=1 && $data['uid'] != session('admin')['id']) {
+            $this->error('非法参数');
+        }
+
+        $data['validates'] = unserialize($data['validates']);
+        $this->assign('data', $data);    
         $this->display();
     }
 
@@ -206,15 +180,15 @@ class SingleController extends AuthController {
         ]);
     }
 
-//删除用例
+    //删除用例
     static $RemoveRules = [
-        'ids' => ['name' => 'ids', 'type' => 'int', 'method' => 'post', 'desc' => 'ids'],
+        'id' => ['name' => 'id', 'type' => 'int', 'method' => 'post', 'desc' => 'id'],
     ];
 
     public function Remove() {
         if (!IS_AJAX) $this->error('非法操作！');
-        $single = D('Single');
-        $singleData = $single->getSingle("$this->ids");
+        $single = M('GroupSingle');
+        $singleData = $single->where(['id' => $this->id])->find();
         if ($singleData['uid'] != session('admin')['id']) {
             $this->ajaxReturn([
                 'error' => -10,
@@ -222,7 +196,7 @@ class SingleController extends AuthController {
                 'msg'   => '非法参数'
             ]);
         }
-        $data = $single->Remove("$this->ids");
+        $data = $single->where(['id' => $this->id])->delete();
 
         logs('single.remove', $data > 0);
         $this->ajaxReturn([

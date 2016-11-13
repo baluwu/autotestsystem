@@ -28,30 +28,36 @@ $(function() {
   function addHoverDom(treeId, treeNode) {
     var tid = treeNode.tId;
     var sObj = $("#" + tid + "_span");
+    var showExecBtn = treeNode.level == 2;
     if (treeNode.editNameFlag || $("#addBtn_"+tid).length>0) return;
 
     var addStr = 
-      (treeNode.level == 2 ? "<span class='button exec' id='execBtn_" + tid + "'></span>" : '') +
+      (showExecBtn ? "<span class='button exec' id='execBtn_" + tid + "'></span>" : '') +
       "<span class='button add' id='addBtn_" + tid + "'></span>";
     
     sObj.after(addStr);
 
     $("#addBtn_"+tid).bind("click", function(){
       if (treeNode.level == 2) {
-        /*add single*/
-        window.open('/Single/add/group_id/' + treeNode.id, '_BLANK');
+        window.open('/Group/add/group_id/' + treeNode.id, '_BLANK');
       }
       else addNode(treeNode);
       return false;
     });
 
-    treeNode.level == 2 && $("#execBtn_"+tid).bind("click", function(){
+    showExecBtn && $("#execBtn_"+tid).bind("click", function(){
       $('#exec').modal();
       $('#exec').on('shown.bs.modal', function () {
-        $(this).find('.modal-title').text('执行用例组[' + treeNode.name + ']');
-        $(this).find('[name="id"]').val(treeNode.id);
-        $(this).find('[name="type"]').val('group');
-        $(this).find('.tips').html("");
+        var self = $(this);
+        self.find('.modal-title').text('执行用例组 [' + treeNode.name + ']');
+        self.find('[name="id"]').val(treeNode.id);
+        self.find('[name="type"]').val('group');
+        self.find('.tips').html("");
+
+        self.find('#interval').val(Cookies.get('interval') || '1');
+        self.find('.form-interval').show();
+        self.find('#ip').val(Cookies.get('IP') || '');
+        self.find('#port').val(Cookies.get('port') || '8080');
       })
       return false;
     });

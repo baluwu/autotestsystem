@@ -63,7 +63,6 @@ jQuery(document).ready(function () {
         maxlength: 100,
         required: true
       },
-      property: { required: true, },
       nlp: { required:"#type_switch:not(:checked)", },
       arc: { required:"#type_switch:checked", },
       'v1[]': { required: true, maxlength: 100, },

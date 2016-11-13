@@ -61,7 +61,7 @@ class SingleModel extends Model {
         ];
     }
 
-//获取数据总数
+    //获取数据总数
     public function countData($where = []) {
         return $this->where($where)->count();
 
@@ -85,7 +85,7 @@ class SingleModel extends Model {
     }
 
     //新增用例
-    public function addSingle($mc, $property, $type_switch, $nlp, $arc, $v1, $dept, $v2) {
+    public function addSingle($mc, $nlp, $arc, $v1, $dept, $v2) {
         $data = [
             'uid'      => session('admin')['id'],
             'name'     => $mc,

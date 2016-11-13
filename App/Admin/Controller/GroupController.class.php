@@ -67,12 +67,25 @@ class GroupController extends AuthController {
         $this->ajaxReturn($Group->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where));
     }
 
-
     //添加用例
     public function add() {
-        $classify = M('ManageGroupClassify')->where(['pid' => 0])->select();
-        $this->assign('classify', $classify);
+        $group_id = intval(I('get.group_id'));
+
+        $group = M('ManageGroupClassify')->field('pid,name')->where(['id' => $group_id])->find();
+        if (!$group) { $this->error('用例组不存在', '#'); }
+        $this->assign('group_name', $group['name']);
+
+        $model = M('ManageGroupClassify')->field('pid,name')->where(['id' => $group['pid']])->find();
+        if (!$model) { $this->error('模块不存在', '#'); }
+        $this->assign('model_name', $model['name']);
+
+        $project = M('ManageGroupClassify')->where(['id' => $model['pid']])->getField('name');
+        if (!$project) { $this->error('项目不存在', '#'); }
+        $this->assign('project_name', $project);
+
+        $this->assign('group_id', $group_id);     
         $this->display();
+
     }
 
     //新增用例组
@@ -99,21 +112,17 @@ class GroupController extends AuthController {
 
     //编辑用例
     public function edit($id) {
-        $Group = D('Group');
-
-        $groupData = $Group->getGroup($id);
-
-        if (!$groupData) {
-            $this->error('该用例已被删除');
+        $data = M('GroupSingle')->where(['id'=>intval($id)])->find();
+        if (!$data) {
+            $this->GroupSingle('该用例已被删除');
         }
 
-        if (session('admin')['group_id'] !=1 && $groupData['uid'] != session('admin')['id']) {
-            $this->error('非法操作');
+        if (session('admin')['group_id'] !=1 && $data['uid'] != session('admin')['id']) {
+            $this->error('非法参数');
         }
 
-        $classify = M('ManageGroupClassify')->where(['pid' => 0])->select();
-        $this->assign('classify', $classify);
-        $this->assign('data', $groupData);
+        $data['validates'] = unserialize($data['validates']);
+        $this->assign('data', $data);    
         $this->display();
     }
 

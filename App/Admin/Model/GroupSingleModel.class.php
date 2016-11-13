@@ -108,7 +108,8 @@ class GroupSingleModel extends Model {
             'tid'  => $tid,
             'uid' => session('admin')['id']
         ];
-        $data['arc'] = $arc ? $arc : $nlp;
+        $data['arc'] = $arc;
+        $data['nlp'] = $nlp;
 
         $data['validates'] = serialize($this->getVali($v1, $dept, $v2));
 

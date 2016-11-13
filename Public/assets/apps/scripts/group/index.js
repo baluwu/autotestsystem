@@ -36,7 +36,24 @@ jQuery(document).ready(function () {
         src: $("#datatable_ajax"),
         onSuccess: function (grid, response) {},
         onError: function (grid) { },
-        onDataLoad: function (grid) {},
+        onDataLoad: function (grid) {
+          $('.J_remove_single').confirmation();
+          $('.J_remove_single').on('confirmed.bs.confirmation', function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: '/Single/Remove',
+                type: 'POST',
+                data: { id: id },
+                success: function (res, response, status) {
+                  if (res.error < 0) {
+                    return App.warning( '删除失败' + res.msg, $(".page-content-col .portlet-title"));
+                  }
+                  App.ok( '删除成功', $(".page-content-col .portlet-title"));
+                  $('.filter-submit').trigger('click');
+                }
+              });
+          });
+        },
         loadingMessage: 'Loading...',
         dataTable: {
           "bStateSave": true, 
@@ -80,8 +97,8 @@ jQuery(document).ready(function () {
             {
               "render": function (data, type, row) {
                 return '<a href="javascript:;" data-id="' + row.id + '" data-name="' + row.short_name + '" class="J_play_single"><i class="glyphicon glyphicon-play"></i></a>' + 
-                  '<a href="javascript:;" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' + 
-                  '<a href="/Single/edit/id/"' + row.id + ' target="_balnk"><i class="glyphicon glyphicon-pencil"></i></a>';
+                '<a data-toggle="confirmation" data-id="' + row.id + '" data-title="删除后不可恢复, 要继续么?" data-btn-ok-label="OK" data-btn-cancel-label="NO" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' +
+                '<a href="/Group/edit/id/' + row.id + '" target="_blank"><i class="glyphicon glyphicon-pencil"></i></a>';
               },
               "targets": 5
             }
@@ -92,13 +109,6 @@ jQuery(document).ready(function () {
 
     var exec = function () {
       var $modal_exec = $('#exec');
-
-      $('body').on('click', '.exec_btn', function () {
-        $modal_exec.find('.currName').text(el.data('title'));
-        $modal_exec.find('[name="id"]').val(el.data('id'));
-        $modal_exec.find('.tips').html("");
-        $modal_exec.modal();
-      });
 
       $("#exec form").validate({
         errorElement: 'span', 
@@ -136,15 +146,12 @@ jQuery(document).ready(function () {
           }
         },
         submitHandler: function (form) {
-          App.blockUI({
-            message: '执行中....',
-            target: $modal_exec,
-            overlayColor: 'none',
-            cenrerY: true,
-            boxed: true
-          });
+          App.blockUI({ message: '执行中....', target: $modal_exec, overlayColor: 'none', cenrerY: true, boxed: true });
+
+          var exec_type = $('#exec').find('[name="type"]').val();
+
           $.ajax({
-            url: '/Group/Execute',
+            url: exec_type == 'group' ? '/Group/Execute' : '/Single/Execute',
             type: 'POST',
             data: $(form).serialize(),
             success: function (res, response, status) {
@@ -159,12 +166,18 @@ jQuery(document).ready(function () {
               if (r && !r.isSucess) {
                 return App.warning('Execute fail, Error: ' + r.msg);
               }
+
               App.warning('执行成功');
             },
             error: function () {
               App.unblockUI($modal_exec);
             }
           });
+
+          Cookies.set('IP', form.ip.value);
+          Cookies.set('port', form.port.value);
+          Cookies.set('interval', form.interval.value);
+
           return false;
         }
       });
@@ -317,13 +330,20 @@ jQuery(document).ready(function () {
   });
 
   $('body').on('click', '.J_play_single', function() {
-    var self = $(this);
+    var that = $(this);
     $('#exec').modal();
     $('#exec').on('shown.bs.modal', function () {
-      $(this).find('.modal-title').text('执行用例[' + self.attr('data-name') + ']');
-      $(this).find('[name="id"]').val(self.attr('data-id'));
-      $(this).find('[name="type"]').val('single');
-      $(this).find('.tips').html("");
+      var self = $(this);
+      self.find('.modal-title').text('执行用例 [' + that.attr('data-name') + ']');
+      self.find('.form-interval').hide();
+      self.find('[name="id"]').val(that.attr('data-id'));
+      self.find('[name="type"]').val('single');
+      self.find('.tips').html("");
+
+      self.find('#interval').val(Cookies.get('interval') || '1')
+      self.find('.form-interval').hide();
+      self.find('#ip').val(Cookies.get('IP') || '');
+      self.find('#port').val(Cookies.get('port') || '8080');
     })
   }); 
 });

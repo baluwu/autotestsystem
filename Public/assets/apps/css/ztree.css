@@ -8,8 +8,8 @@
  *
  * -------------------------------------*/
 
-.ztree * {padding:0; margin:0; font-size:12px; font-weight:400; font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif}
-.ztree {margin:0; padding:5px; color:#333}
+.ztree * {padding:0; margin:0; font-size:13px; font-weight:600; color: #333; font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif}
+.ztree {margin:0; padding:5px; }
 .ztree li{padding:0; margin:0; list-style:none; line-height:21px; text-align:left; white-space:nowrap; outline:0}
 .ztree li ul{ margin:0; padding:0 0 0 18px}
 .ztree li ul.line{ background:url(./img/line_conn.png) 0 0 repeat-y;}
@@ -54,9 +54,9 @@ background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif"
 
 .ztree li span.button.switch {width:21px; height:21px}
 //.ztree li span.button.root_open{background-position:-92px -54px}
-.ztree li span.button.root_open{ background: none; }
+.ztree li span.button.root_open{ display: none; }
 //.ztree li span.button.root_close{background-position:-74px -54px}
-.ztree li span.button.root_close{ background: none; }
+.ztree li span.button.root_close{ display: none; }
 .ztree li span.button.roots_open{background-position: -105px 0;}
 .ztree li span.button.roots_close{background-position: -126px 0;}
 .ztree li span.button.center_open{background-position: -105px -21px;}
@@ -92,13 +92,12 @@ background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif"
     font-weight: 400;
     background: none;
     border: 1px solid #aaa;
-    padding-left: 2px;
+    padding-left: 1px;
     height: 17px;
     line-height: 15px;
     width: 17px;
     color: #888;
-    margin: -3px 1px 0 0;
-    -webkit-font-smoothing: antialiased;
+    margin: -1px 1px 0 4px;
 }
 .ztree li span.exec:before {
     content: "\e072";
@@ -116,4 +115,4 @@ span.tmpzTreeMove_arrow {width:16px; height:21px; display: inline-block; padding
 background-position:-168px -84px; background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif")}
 
 ul.ztree.zTreeDragUL {margin:0; padding:0; position:absolute; width:auto; height:auto;overflow:hidden; background-color:#cfcfcf; border:1px #00B83F dotted; opacity:0.8; filter:alpha(opacity=80)}
-  .zTreeMask {z-index:10000; background-color:#cfcfcf; opacity:0.0; filter:alpha(opacity=0); position:absolute} } } } }
+  .zTreeMask {z-index:10000; background-color:#cfcfcf; opacity:0.0; filter:alpha(opacity=0); position:absolute}

@@ -1,4 +1,5 @@
-.glyphicon { font-size: 32px;}
+.action-control .glyphicon { margin: -5px 0 0 -1px; vertical-align: middle; font-size: 18px; }
+.popover .glyphicon { margin: -5px 0 0 -1px !important; }
 .progress-plh { width: 4%; padding-left: 15px; float: left; }
 .progress-back {
     width: 45%;
@@ -28,9 +29,11 @@
 .record-ctrl span.icon-record {
     top: 0;
     left: 57px;
+    font-size: 32px;
 }
 .record-ctrl span.icon-play {
     top: 0; left: 128px;
+    font-size: 32px;
 }
 .record-ctrl span.record-btn {
     top: 32px;
@@ -44,6 +47,11 @@
 }
 .record-tools { float: left; width: 45%; text-align: right; }
 .nav li.upload-item, .nav li.lib-item { display: none; }
-.audio-ctn { float: left; padding: 1px 4px; }
+.audio-ctn { float: left; padding: 0; margin: 0; max-height: 30px; width: 160px; }
 .select-audio-ctn { position: relative; }
 .selected-audio { position: absolute; top: 5px; right: 20px; height: 30px; line-height: 30px; color: #009dc7; }
+.col-md-offset-2 { padding-left: 25px; }
+.popover > .popover-title { font-size: 14px; }
+.popover > .popover-content { text-align: right; }
+.popover .popover-content .btn { padding: 3px 6px; }
+.portlet.light.portlet-datatable.portlet-fit > .portlet-body { padding-top: 15px; }

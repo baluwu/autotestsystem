@@ -81,9 +81,8 @@ jQuery(document).ready(function () {
             render: function (data, type, row) {
               return [
                 '<div class="audio-ctn"><audio controls="true" src="' + data.path + '" style="width: 160px"></audio></div>',
-                '<a data-toggle="confirmation" data-id="' + data.id + '" data-title="删除后不可恢复！！" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5" data-original-title="" title=""> <i class="fa fa-remove"></i> 删除 </a>',
-                '<a data-title="图片搜索" data-id="' + data.id + '" data-name="' + data.name + '" data-path="' + data.path + '" class="use_btn btn yellow btn-sm btn-outline margin-bottom-5"> <i class="fa fa-rotate-left"></i> 使用 </a>'
-
+                '<a data-toggle="confirmation" data-id="' + data.id + '" data-btn-ok-label="OK" data-btn-ok-class="btn-info" data-btn-cancel-label="No" data-btn-cancel-class="btn-default" title="Are you sure to remove?"> <i class="glyphicon glyphicon-remove-circle"></i></a>',
+                '<a title="Use audio" class="use_btn" data-id="' + data.id + '" data-name="' + data.name + '" data-path="' + data.path + '"><i class="glyphicon glyphicon-ok-circle"></i></a>'
               ].join('');
             },
             targets: 3

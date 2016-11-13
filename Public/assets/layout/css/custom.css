@@ -34,16 +34,44 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   background-color: #27282E;
   color: #fff;
 }
-.portlet-body.list{
 
-}
 .portlet-body.list p{}
 .portlet-body.list p i{
   width: 1.25rem;
   margin-right: 1rem;
 }
-.portlet.light > .portlet-title { height: 40px; min-height: 40px; max-height: 40px; }
-.portlet.light > .portlet-title > .caption > i { margin-top: 8px; }
-.portlet.light > .portlet-title > .caption { padding: 0; line-height: 28px; }
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { padding: 6px 8px; }
 
+/*W.G Add*/
+.nav .btn-group button, .btn-group .dropdown-menu { width: 300px; text-align: left; font-size: 16px !important; font-weight: 400; }
+.nav .btn-group .dropdown-menu { max-height: 420px; overflow: auto; }
+.nav .btn-group button { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;    }
+.nav .btn-group button .caret { position: absolute; right: 10px; top: 45%; }
+table .btn-group-xs .btn { padding: 0 5px; outline: none; margin-right: 0; }
+.ztree { margin: 5px 0 5px -16px; min-height: 360px; }
+.filter-submit, .filter-cancel { font-size: 16px; vertical-align: middle; }
+.action-control .fa { font-size: 22px; vertical-align: middle; margin: -4px 2px 0 0;}
+table.dataTable thead th, table.dataTable thead td { border-bottom: none; }
+.portlet.light > .portlet-title { margin-bottom: 0; height: 40px; min-height: 40px; }
+.portlet.light > .portlet-title > .caption { padding: 6px 0; }
+.portlet.light.portlet-fit > .portlet-body { padding: 0; }
+.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { 
+    border-right: none; 
+    border-left: none;
+    vertical-align: middle;
+    padding: 2px 3px;
+    height: 34px;
+    line-height: 34px;
+}
+.portlet.light.portlet-datatable.portlet-fit > .portlet-body { padding: 0 0 8px 0 }
+.page-content-row .page-content-col { padding-left: 15px; }
+.dataTables_extended_wrapper div.dataTables_paginate { margin: 10px 0 0 10px !important; }
+.dataTables_extended_wrapper .seperator { padding: 0 8px; }
+.btn:not(.md-skip).btn-sm { padding: 2px 8px; } 
+.input-sm, select.input-sm { padding: 2px 8px; height: 25px; width: 160px; }
+select.input-sm { padding: 2px 8px; height: 25px; width: 60px; }
+.input-daterange .input-group-addon { padding: 1px 5px; }
+.input-name { width: 200px; }
+.glyphicon { margin-right: 5px; vertical-align: middle; font-size: 16px; }
+.breadcrumbs { margin-bottom: 0; }
+.portlet.light.portlet-datatable.portlet-fit > .portlet-body { }
+.popover .popover-content .glyphicon { vertical-align: top; font-size: 14px; }

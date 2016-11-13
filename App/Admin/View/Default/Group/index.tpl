@@ -26,34 +26,20 @@
   <link rel="stylesheet" href="/Public/assets/apps/css/ztree.css" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico"/>
   <style>
-  .nav .btn-group button, .btn-group .dropdown-menu { width: 300px; text-align: left; font-size: 16px !important; font-weight: 400; }
-  .nav .btn-group .dropdown-menu { max-height: 420px; overflow: auto; }
-  .nav .btn-group button { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;    }
-  .nav .btn-group button .caret { position: absolute; right: 10px; top: 45%; }
-  table .btn-group-xs .btn { padding: 0 5px; outline: none; margin-right: 0; }
-  .ztree { margin: 5px 0 5px -16px; min-height: 360px; }
-  .filter-submit, .filter-cancel { font-size: 16px; vertical-align: middle; margin: 6px -6px 0 0; }
-  .action-control .fa { font-size: 22px; vertical-align: middle; margin: -4px 2px 0 0;}
-  table.dataTable thead th, table.dataTable thead td { border-bottom: none; }
-  .portlet > .portlet-title { margin-bottom: 0; }
-  .portlet.light.portlet-fit > .portlet-body { padding: 0; }
-  .table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { 
-      border-right: none; 
-      border-left: none;
-  }
-  .portlet.light.portlet-datatable.portlet-fit > .portlet-body { padding: 0 0 8px 0 }
-  .page-content-row .page-content-col { padding-left: 15px; }
-  .dataTables_extended_wrapper div.dataTables_paginate { margin: 10px 0 0 10px !important; }
-  .dataTables_extended_wrapper .seperator { padding: 0 8px; }
-  .btn:not(.md-skip).btn-sm { padding: 2px 8px; } 
-  .input-sm, select.input-sm { padding: 2px 8px; height: 25px; }
-  .input-daterange .input-group-addon { padding: 1px 5px; }
-  .input-name { width: 200px; }
-  .glyphicon { margin-right: 5px; }
   #datatable_ajax { border-top: none; }
   #datatable_ajax span.label-info, #datatable_ajax span.label-success { padding: 3px 20px; }
   #datepicker { width: 250px; }
+  .form-horizontal .form-group.form-md-line-input .input-group {
+      padding-left: 15px;
+      padding-right: 15px; 
+  }
   .col-sm-12 { padding-left: 30px; }
+  .ztree { margin-top: 16px; }
+  #J_add_project {
+    margin: 10px 15px 0 7px;
+    float: right;
+    font-size: 12px;
+  }
   </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
@@ -69,8 +55,9 @@
                 <li class="active">
                     <div class="btn-group">
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="J_project_id" data-id="{$project_id}">
-                        <i class="fa fa-cubes font-light"></i>
-                        <span id="J_project_title">{$firstname}</span><span class="caret"></span></button>
+                            <i class="fa fa-cubes font-light"></i>
+                            <span id="J_project_title">{$firstname}</span><span class="caret"></span>
+                        </button>
                         <ul class="dropdown-menu J_project_menu" role="menu">
                             <foreach name='projects' item='item'>
                             <li>
@@ -78,13 +65,10 @@
                             </foreach>
                         </ul>
                     </div>
+                    <p class="navbar-text" id="J_add_project"><a href="javascript:;" class="navbar-link"><i class="fa fa-plus"></i>添加项目</a></p>
                     <ul id="J_ztree" class="ztree"></ul>
                 </li>
-                <li> <a href="javascript:;" id="J_add_project"> <i class="fa fa-plus "></i> 添加项目 </a> </li>
                 <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
-              </ul>
-              <ul class="nav navbar-nav">
-                <li> <a href="/Single/add"> <i class="fa fa-plus "></i> 添加用例 </a> </li>
               </ul>
             </nav>
           </div>
@@ -168,7 +152,7 @@
 <script src="/Public/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/Public/assets/global/plugins/jquery.blockui.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
- <script src="/Public/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+<script src="/Public/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
 <script src="/Public/assets/global/plugins/datatables/datatables.min.js"></script>
 <script src="/Public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
