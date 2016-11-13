@@ -51,14 +51,13 @@ class TaskController extends AuthController {
         $this->ajaxReturn($execHistory->getTaskList($this->page_start, $this->page_rows, $order['column'], $order['dir'], $where));
     }
 
-
     //执行记录查看
     public function execute_history_show($id) {
         $ExecHistory = D('ExecHistory');
         $data = $ExecHistory->GetById($id, 2);
 
         if ($data['uid'] != session('admin')['id']) {
-                $this->error('非法参数');
+            $this->error('非法参数');
         }
         $this->assign('data', $data);
         $ExecHistoryRs = D('GroupExecHistory');

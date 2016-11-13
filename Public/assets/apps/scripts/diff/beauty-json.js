@@ -1,6 +1,6 @@
 
 
-    window.TAB = '    ';
+window.TAB = '    ';
 
     function IsArray(obj) { return Object.prototype.toString.call(obj) === '[object Array]'; }
 
@@ -8,10 +8,11 @@
         var html = "";
 
         try {
-            var str = (typeof json_str === 'object') ? json_str : JSON.parse(json_str);
-            
-            html = ProcessObject(str, 0, false, false, false);
-			return html;
+            //var str = (typeof json_str === 'object') ? json_str : JSON.parse(json_str);
+            if(json_str == "") json_str = "\"\"";
+            var obj = eval("[" + json_str + "]");
+            html = ProcessObject(obj, 0, false, false, false);
+            return html;
             el.innerHTML = ('<PRE class="CodeContainer">' + html + '</PRE>');
         } catch(e) {
             console.dir(e);
