@@ -17,6 +17,7 @@ $(function() {
       }
     });
 
+    if (ck_t_id.length == 0) return '-1';
     return ck_t_id.join(',');
   }
 
@@ -124,7 +125,7 @@ $(function() {
         var body = [];
 
         if (!r.data || !r.data.length) {
-          return App.warning('无用例');
+          return App.warning('没有选择任何用例, 无法创建任务!');
         }
 
         if (r.data.length > 100) {
@@ -141,7 +142,12 @@ $(function() {
         });
 
         $('#J_task_single_bd').html(body.join(''));
-        $modal_exec.modal({'width': 1024});
+
+        $modal_exec.find('#interval').val(Cookies.get('interval') || '1')
+        $modal_exec.find('#ip').val(Cookies.get('IP') || '');
+        $modal_exec.find('#port').val(Cookies.get('port') || '8080');
+
+        $modal_exec.modal({'width': 800});
       }
     });
   });

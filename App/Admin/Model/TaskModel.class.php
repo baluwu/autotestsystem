@@ -28,6 +28,7 @@ class TaskModel {
                 'notify_email' => $taskData['notify_email'],
                 'create_time' => $taskData['create_time'],
                 'ip' => $taskData['ip'],
+                'interval' => $taskData['interval'],
                 'port' => $taskData['port'] ? $taskData['port'] : '8080'
             ]);
 

@@ -40,6 +40,7 @@
     float: right;
     font-size: 12px;
   }
+  .case-list { display: none; }
   </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">

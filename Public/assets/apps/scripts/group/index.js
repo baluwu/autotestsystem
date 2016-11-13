@@ -167,7 +167,7 @@ jQuery(document).ready(function () {
                 return App.warning('Execute fail, Error: ' + r.msg);
               }
 
-              App.warning('执行成功');
+              App.ok('执行成功');
             },
             error: function () {
               App.unblockUI($modal_exec);
@@ -222,12 +222,14 @@ jQuery(document).ready(function () {
         submitHandler: function (form) {
           var single_ids = [];
 
+          $modal_exec = $('#J_task_single');
+
           $('.single-ckbx:checked').each(function(i, el) {
             single_ids.push($(el).attr('data-sid')); 
           });
 
           if (single_ids.length == 0) {
-            return App.warning('未选择用例');
+            return App.warning('请选择用例');
           }
 
           $('#J_single_ids').val(single_ids.join(','));
@@ -241,7 +243,7 @@ jQuery(document).ready(function () {
           });
 
           $.ajax({
-            url: CONFIG['MODULE'] + '/Task/add',
+            url: '/Task/add',
             type: 'POST',
             data: $(form).serialize(),
             beforeSend: function () {},
@@ -346,4 +348,8 @@ jQuery(document).ready(function () {
       self.find('#port').val(Cookies.get('port') || '8080');
     })
   }); 
+
+  $('.J_view_cases').click(function() {
+    $('.case-list').toggle();
+  });
 });

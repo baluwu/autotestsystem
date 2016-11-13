@@ -1,7 +1,7 @@
 <div id="J_task_single" class="modal modal-dialog" tabindex="-1" data-focus-on="input:first" style="width: 1000px;">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">创建任务</h4>
+    <h4 class="modal-title"><i class="fa fa-tasks"></i> 创建任务</h4>
   </div>
   <form action="#" class="form-horizontal form-row-seperated" >
     <input type="hidden" id="J_single_ids" name="single_ids" />
@@ -81,8 +81,28 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="port"> 用例选择 </label>
+        <label class="col-md-2 control-label" for="interval"> Interval </label>
         <div class="col-md-9">
+          <input type="text" name="interval" class="form-control" id="interval" list="interval_data" placeholder="1 Min" data-tabindex="3">
+          <datalist id="interval_data">
+            <option value="1">
+            <option value="2">
+            <option value="3">
+            <option value="4">
+            <option value="5">
+          </datalist>
+          <div class="form-control-focus"></div>
+        </div>
+      </div>
+      <div class="modal-footer col-md-11">
+            <button type="button" class="btn btn-default J_view_cases">查看用例</button>
+            <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+            <button type="submit" class="btn green exec_ok">确定</button>
+        </div>
+      </div>
+
+      <div class="col-md-12 case-list">
+        <div class="col-md-12">
             <div class="portlet-body">
               <div class="table-container">
                   <table class="table table-striped table-bordered table-hover table-checkable" id="J_task_singles">
@@ -104,10 +124,7 @@
         </div>
       </div>
 
-      <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
-        <button type="submit" class="btn green exec_ok">Ok</button>
-      </div>
+
     </div>
   </form>
 </div>

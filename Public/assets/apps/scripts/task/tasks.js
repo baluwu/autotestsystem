@@ -5,7 +5,6 @@ jQuery(document).ready(function () {
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
-      //init date pickers
       $('#datepicker').datepicker({
         rtl: App.isRTL(),
         orientation: "bottom auto",
@@ -21,82 +20,29 @@ jQuery(document).ready(function () {
 
       grid.init({
         src: $("#datatable_ajax"),
-        onSuccess: function (grid, response) {
-          // grid:        grid object
-          // response:    json object of server side ajax response
-          // execute some code after table records loaded
-        },
-        onError: function (grid) {
-          // execute some code on network or other general error
-        },
-        onDataLoad: function (grid) {
-          // execute some code on ajax data load
-
-        },
+        onError: function (grid) { },
+        onDataLoad: function (grid) { },
         loadingMessage: 'Loading...',
-        dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
-
-          // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-          // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
-          // So when dropdowns used the scrollable div should be removed.
-          //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-
-          "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
+        dataTable: {
+          "bStateSave": true, 
           "lengthMenu": [
             [10, 20, 50, 100, 150, -1],
-            [10, 20, 50, 100, 150, "All"] // change per page values here
+            [10, 20, 50, 100, 150, "All"] 
           ],
-          "pageLength": 20, // default record count per page
-          "ajax": {
-            "url": CONFIG['MODULE'] + '/Task/getTasks', // ajax source
-          },
+          "pageLength": 20, 
+          "ajax": { "url": '/Task/getTasks' },
           keys: true,
           columns: [
-            {
-              data: 'id',
-              orderable: false
-            },
-            {
-              data: 'id',
-              orderable: false
-            },
-            {
-              data: 'task_name',
-              orderable: false
-            },
-            {
-              data: 'exec_start_time'
-            },
-            {
-              data: 'ver'
-            },
-            {
-              data: 'description',
-              orderable: false
-            },
-            {
-              data: 'status',
-              orderable: false
-            },
-            {
-              data: 'manager',
-              orderable: false
-            },
-            {
-              data: 'nickname',
-              orderable: false
-            },
-            {
-              class: "action-control",
-              orderable: false,
-              data: null,
-              defaultContent: ""
-            }
+            { data: 'id', orderable: false },
+            { data: 'id', orderable: false },
+            { data: 'task_name', orderable: false },
+            { data: 'exec_start_time' },
+            { data: 'ver' },
+            { data: 'description', orderable: false },
+            { data: 'nickname', orderable: false },
+            { class: "action-control", orderable: false, data: null, defaultContent: "" }
           ],
-          "order": [
-            [2, "desc"]
-          ],
+          "order": [ [2, "desc"] ],
           "columnDefs": [
             {
               "render": function (data, type, row) {
@@ -109,24 +55,14 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                  return ' <span class="label label-sm label-'
-                  + (data == 2 ? 'success' : 'danger') + '">' 
-                  + (data == 2 ? '成功' : (data==1?'执行中':'失败')) + '</span>'
+                return '<a title="查看结果" target="_blank" href="./execute_history_show/id/' + row.id + '" class=""> <i class="fa fa-history"></i></a>';
               },
-              "targets": 6
-            },
-            {
-              "render": function (data, type, row) {
-                return '<a href="./execute_history_show/id/' + row.id + '" class="btn green-jungle btn-sm btn-outline margin-bottom-5"> <i class="fa fa-history"></i> 查看结果 </a>';
-              },
-              "targets": 9
+              "targets": 7
             }
           ]
         }
       });
 
-
-      // handle group actionsubmit button click
       grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
         e.preventDefault();
         var action = $(".table-group-action-input", grid.getTableWrapper());
@@ -137,27 +73,11 @@ jQuery(document).ready(function () {
           grid.getDataTable().ajax.reload();
           grid.clearAjaxParams();
         } else if (action.val() == "") {
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message: 'Please select an action',
-            container: grid.getTableWrapper(),
-            place: 'prepend'
-          });
+          App.warning( 'Please select an action', grid.getTableWrapper());
         } else if (grid.getSelectedRowsCount() === 0) {
-          App.notification({
-            type: 'danger',
-            icon: 'warning',
-            message: 'No record selected',
-            container: grid.getTableWrapper(),
-            place: 'prepend'
-          });
+          App.warning( 'No record selected', grid.getTableWrapper());
         }
       });
-
-      //grid.setAjaxParam("customActionType", "group_action");
-      //grid.getDataTable().ajax.reload();
-      //grid.clearAjaxParams();
 
       $("#execute_diff").on('click', function () {
         if($('.checkboxes:checked').size()<2){
@@ -178,7 +98,6 @@ jQuery(document).ready(function () {
     };
 
     return {
-      //main function to initiate the module
       init: function () {
         initPickers();
         handleRecords();

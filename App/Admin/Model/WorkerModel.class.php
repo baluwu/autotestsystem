@@ -90,6 +90,7 @@ class WorkerModel {
                         $task['isgroup'] = 2;
                         $runningMachines[] = $machine;
                         $serv->task(json_encode($task));
+                        sleep($task['interval']);
                         $rt++;
                     }
                 }

@@ -1,7 +1,7 @@
 /* here you can put your own css to customize and override the theme */
 .padding-lt-0{padding-left: 0 !important;}
 .page-content{
-  padding: 15px;
+  padding: 25px 25px 10px 10px
 }
 .page-content-row .page-sidebar{
   width: 300px;
