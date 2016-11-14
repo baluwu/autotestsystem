@@ -132,13 +132,13 @@ class GroupSingleModel extends Model {
 
 
     //修改组用例
-    public function updateSingle($id, $name_edit, $type_switch, $nlp_edit, $arc_edit, $v1_edit, $dept_edit, $v2_edit,$tid=0) {
+    public function updateSingle($id, $type, $name_edit, $nlp_edit, $arc_edit, $v1_edit, $dept_edit, $v2_edit, $tid) {
         $data = [
             'id'   => $id,
             'name' => $name_edit
         ];
 
-        if ($type_switch) {
+        if ($type == 'ASR') {
             $data['arc'] = $arc_edit;
             $data['nlp'] = NULL;
         } else {

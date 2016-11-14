@@ -125,4 +125,27 @@ class AuthGroupModel extends Model {
     {
         return $this->where(array('id'=>$groupid))->save(array('classify'=>$classify_str));
     }
+
+    public function getAllowedProjectIds() {
+        return $this->where(['id' => session('admin')['group_id']])->getField('project_ids');
+    }
+
+    public function getAllowedModelIds($projectIds) {
+        return M('ManageGroupClassify')->where(['pid' => ['IN', $projectIds], 'level' => 1])->getField('id', true);
+    }
+
+    public function getAllowedGroupIds($modelIds) {
+        return M('ManageGroupClassify')->where(['pid' => ['IN', $modelIds], 'level' => 2])->getField('id', true);
+    }
+
+    public function getGroupIds() {
+        $pro_ids = $this->getAllowedProjectIds();
+
+        if (!$pro_ids) return 0;
+
+        $model_ids = $this->getAllowedModelIds($pro_ids);
+
+        if (!$model_ids) return 0;
+        return $this->getAllowedGroupIds(implode(',', $model_ids));
+    }
 }

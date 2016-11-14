@@ -87,7 +87,7 @@ class SingleController extends AuthController {
     }
 
     //编辑上下一条
-    public function editPreOrNext($tid=0,$id,$from=0,$type="pre"){
+    public function editPreOrNext($id,$type="pre"){
         if($type == "pre"){
             $comp = "lt";
             $order = "id desc";
@@ -95,29 +95,20 @@ class SingleController extends AuthController {
             $comp = "gt";
             $order = "id asc";
         }
-        if(!empty($tid)){
-            $single = D('GroupSingle')->where(array(
-                "tid"=>$tid,
-                "isrecovery"=>0,
-                "id"=>array($comp,$id )
-                )
-            )->order($order)->find();
-        }else{
-            $single = D('Single')->where(array(
-                "uid"=>session('admin')['id'],
-                "isrecovery"=>0,
-                "id"=>array($comp,$id )
-                )
-            )->order($order)->find();
-        }
+
+        $allowed_group_ids = D('AuthGroup')->getGroupIds();
+
+        if (!$allowed_group_ids) $this->redirect("Group/index");
+
+        $single = D('GroupSingle')->where([
+            'id' => array($comp, $id),
+            'tid' => ['IN', $allowed_group_ids]
+        ])->order($order)->find();
+
         if(empty($single)){
-            if(empty($tid)){
-                 $this->redirect("/Single/index");
-            }else{
-                $this->redirect("/Group/single/tid/".$tid);
-            }
+            $this->redirect("Group/index");
         }else{
-            $this->redirect("Single/edit/tid/".$tid."/id/".$single['id']."/from/".$from);
+            $this->redirect("Group/edit/id/".$single['id']);
         }
     }
 
@@ -125,8 +116,6 @@ class SingleController extends AuthController {
     static $updateSingleRules = [
         'singleName'  => ['name' => 'mc', 'type' => 'string', 'min' => 2, 'max' => 100, 'method' => 'post', 'desc' => '用例名称'],
         'groupid'    => ['name' => 'groupid', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
-        'ispublic'    => ['name' => 'property', 'type' => 'int', 'method' => 'post', 'desc' => '属性'],
-        'type_switch' => ['name' => 'type_switch', 'type' => 'string', 'method' => 'post', 'desc' => '类型'],
         'nlp'         => ['name' => 'nlp', 'type' => 'string', 'method' => 'post', 'desc' => 'NLP'],
         'arc'         => ['name' => 'arc', 'type' => 'string', 'method' => 'post', 'desc' => 'ARC'],
         'v1'          => ['name' => 'v1', 'type' => 'array', 'max' => 100, 'method' => 'post', 'desc' => '验证规则key'],
@@ -134,7 +123,7 @@ class SingleController extends AuthController {
         'v2'          => ['name' => 'v2', 'type' => 'array', 'max' => 20, 'method' => 'post', 'desc' => '验证规则value']
     ];
 
-    public function updateSingle($id,$from=0) {
+    public function updateSingle() {
         if (!IS_AJAX) $this->error('非法操作');
 
         if(empty($this->groupid)){
@@ -146,33 +135,20 @@ class SingleController extends AuthController {
         }
         $groupSingle = D('GroupSingle');
 
-        if(empty($from)){ //默认编辑的是无分组的用例
-            $single = D('Single');
-            $singleData = $single->getSingle($id);
-            if (!empty($singleData) && $singleData['uid'] != session('admin')['id']) {
-                $this->ajaxReturn([
-                    'error' => -10,
-                    'data'  => '',
-                    'msg'   => '非法参数'
-                ]);
-            }
-            //编辑原来没有绑定分组的用例，做分组用例插入
-            $data = $groupSingle->addSingle($this->singleName, $this->groupid, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2);
-            D('Single')->Remove($id);//删除原用例
-        }else{
-            $data = $groupSingle->getSingle($id);
+        $id = intval(I('post.id', 0));
+        $data = $groupSingle->getSingle($id);
+        $type = I('post.type_switch') ? 'ASR' : 'NLP';
 
-            if (!$data) {
-                $this->ajaxReturn([
-                    'error' => -11,
-                    'data'  => '',
-                    'msg'   => '该用例已被删除'
-                ]);
-            }
-            $data = $groupSingle->updateSingle($id, $this->singleName, $this->type_switch, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2,$this->groupid);
-        } 
+        if (!$data) {
+            $this->ajaxReturn([
+                'error' => -11,
+                'data'  => '',
+                'msg'   => '该用例已被删除'
+            ]);
+        }
+
+        $data = $groupSingle->updateSingle($id, $type, $this->singleName, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2,$this->groupid);
        
-        logs('single.update', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -11,
             'data'  => $data,

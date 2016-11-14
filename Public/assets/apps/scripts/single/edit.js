@@ -54,10 +54,10 @@ jQuery(document).ready(function () {
   });
 
   $('#atsform').validate({
-    errorElement: 'span', //default input error message container
-    errorClass: 'help-block help-block-error', // default input error message class
-    focusInvalid: false, // do not focus the last invalid input
-    ignore: "",  // validate all fields including form hidden input
+    errorElement: 'span',
+    errorClass: 'help-block help-block-error', 
+    focusInvalid: false, 
+    ignore: "",  
     messages: {
       select_multi: {
         maxlength: jQuery.validator.format("Max {0} items allowed for selection"),
@@ -109,16 +109,14 @@ jQuery(document).ready(function () {
     },
 
     submitHandler: function (form) {
-
       $.ajax({
-        url: CONFIG['MODULE'] + '/Single/updateSingle/id/'+CONFIG['ID']+'/from/'+CONFIG['from'],
+        url: '/Single/updateSingle',
         type: 'POST',
         data: $(form).serialize(),
         beforeSend: function () {},
         success: function (res, response, status) {
           if (res.error >= 0) {
-            location.href = '/Group/single/tid/' + CONFIG.tid;
-            return;
+            return App.ok('修改成功!');
           }
 
           App.warning( res.msg?res.msg:'未知错误！请检查内容后重新提交！', $(".page-content-col .portlet-title"));
@@ -347,11 +345,11 @@ jQuery(document).ready(function () {
   //执行，用户可以为此次执行添加注释，此时的执行，不记录结果到数据库，而是将结果返回到页面，这是一个阻塞的执行过程
   var $modal_exec = $('#exec');
   $('body').on('click', '#exec_btn', function () {
-      var el = $(this);
-      if (el.data('status') == 1)return;
-      $modal_exec.find('.currName').text(el.data('title'));
-      //$modal_exec.find('[name="id"]').val(el.data('id'));
+      $modal_exec.find('[name="id"]').val($('#id').val());
       $modal_exec.find('.tips').html("");
+      $modal_exec.find('#ip').val(Cookies.get('IP') || '');
+      $modal_exec.find('#port').val(Cookies.get('port') || '8080');
+
       $modal_exec.modal();
   });
    
@@ -398,6 +396,9 @@ jQuery(document).ready(function () {
             cenrerY: true,
             boxed: true
           });
+
+          Cookies.set('IP', $modal_exec.find('#ip').val());
+          Cookies.set('port', $modal_exec.find('#port').val());
           $.ajax({
             url: CONFIG['MODULE'] + '/Single/ExecuteSingle',
             type: 'POST',
