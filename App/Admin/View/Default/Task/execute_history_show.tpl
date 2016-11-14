@@ -36,6 +36,7 @@
   .String { color: #007777; font-weight: 400; }
   .Boolean { color: #0000FF; font-weight: 400; }
   .Number { color: #AA00AA; font-weight: 400; }
+  .control-label {color: #666; overflow: hidden; }
   </style>
   <script type="text/javascript" src="/Public/assets/apps/scripts/diff/beauty-json.js"></script>
   </head>
@@ -51,8 +52,8 @@
             <div class="portlet mt-element-ribbon light portlet-fit bordered">
                 <div class="portlet-title">
                   <div class="caption">
-                    <i class="fa fa-object-group font-green"></i>
-                    <span class="caption-subject font-green bold uppercase">任务信息</span>
+                    <i class="fa fa-object-group font-dark sbold"></i>
+                    <span class="caption-subject uppercase font-dark sbold">任务信息</span>
                   </div>
                 </div>
                 <div class="portlet-body list">
@@ -90,22 +91,14 @@
                       <div class="form-group">
                           <div class="col-sm-3 control-label">任务名称: <code>{$data.task_name}</code></div>
                           <div class="col-sm-3 control-label">版本: <code>{$data.ver}</code></div>
-                          <div class="col-sm-6 control-label"></div>
-                      </div>
-                      <div class="form-group">
                           <div class="col-sm-3 control-label">IP Addr: <code>{$data.ip}</code></div>
                           <div class="col-sm-3 control-label">Port: <code>{$data.port}</code></div>
-                          <div class="col-sm-6 control-label"></div>
                       </div>
                       <div class="form-group">
                           <div class="col-sm-3 control-label">创建时间: {$data.create_time}</div>
                           <div class="col-sm-3 control-label">计划执行时间: {$data.exec_plan_time}</div>
-                          <div class="col-sm-6 control-label"></div>
-                      </div>
-                      <div class="form-group">
-                          <div class="col-sm-3 control-label">执行开始时间: {$data.exec_start_time}</div>
-                          <div class="col-sm-3 control-label">执行结束时间: {$data.exec_end_time}</div>
-                          <div class="col-sm-6 control-label"></div>
+                          <div class="col-sm-3 control-label">开始时间: {$data.exec_start_time}</div>
+                          <div class="col-sm-3 control-label">结束时间: {$data.exec_end_time}</div>
                       </div>
                       <div class="form-group">
                           <div class="col-sm-12 control-label">备注: <code><if condition="($data.description neq '')">{$data.description}<else />无</if></code></div>
@@ -136,13 +129,16 @@
                                           <div class="col-sm-6 control-label"></div>
                                       </div>
                                       <div class="form-group">
-                                          <div class="col-sm-3 control-label">执行开始时间: {$d.exec_start_time}</div>
-                                          <div class="col-sm-3 control-label">执行结束时间: {$d.exec_end_time}</div>
+                                          <div class="col-sm-3 control-label">开始时间: {$d.exec_start_time}</div>
+                                          <div class="col-sm-3 control-label">结束时间: {$d.exec_end_time}</div>
                                           <div class="col-sm-6 control-label"></div>
                                       </div>
                                       <div class="form-group">
+                                          <div class="col-sm-12 control-label"><if condition="$d.arc neq ''"><audio controls src="{$d.arc}"><else />nlp: {$d.nlp}</if></div>
+                                      </div>
+                                      <div class="form-group">
                                           <div class="col-sm-12 control-label">
-                                          明细:<pre class="exec-dt" data-json='{$d.exec_content}'></script></pre>
+                                            <pre class="exec-dt" data-json='{$d.exec_content}'></script></pre>
                                           </div>
                                       </div>
                                   </div>
