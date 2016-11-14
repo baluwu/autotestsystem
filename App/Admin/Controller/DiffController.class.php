@@ -34,7 +34,6 @@ class DiffController extends Controller{
                 //$res['exec_content'] = json_decode($res['exec_content'], true);
                 unset($res['id']);
                 unset($res['exec_history_id']);
-                $res['issuccess'] = $res['issuccess'] ? '成功' : '失败';
                 $single_ids[] = $res['single_id'];
                 
                 $data['bd'][$k][$ikey] = $res;

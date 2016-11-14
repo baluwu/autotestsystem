@@ -92,14 +92,26 @@ $(function() {
             $(this).attr('data-value', '1');
         }
     });   
+
+    $('.exec-rs').each(function(i, el) {
+        var self = $(this);
+
+        var is_succ = self.attr('data-rs') == '1';
+
+        if (is_succ) self.addClass('label-success').html('Succ');
+        else self.addClass('label-danger').html('Fail');
+    });
 })
 </script>
 
 <body>
-<div class="container hd list-group-item active">任务名: {$data.hd.left.task_name}, 版本: {$data.hd.left.ver}
+<div class="container hd list-group-item active">
+    <i class="fa fa-tasks"></i> {$data.hd.left.task_name} &nbsp; <i class="fa fa-gg"></i> {$data.hd.left.ver}
+    <!--
     <span class="badge">
         <i>{$data.hd.left.status}</i> / <i>{$data.hd.right.status}</i>
     </span>
+    -->
 </div>
 <div class="container">
 <ul class="list-group">
@@ -108,8 +120,10 @@ $(function() {
         <div data-left-json='{$it.exec_content}' data-right-json='{$right_bd[$sid].exec_content}' class="list-group-item list-group-hd" onclick="toggleDetail(this, {$sid})"
             data-left-time="{$it.exec_start_time}" data-right-time="{$right_bd[$sid].exec_start_time}">
             <i class="fa fa-cube"></i>
-            {$it.path}
-            <span class="badge"><i>{$it.issuccess}</i> / <i>{$right_bd[$sid].issuccess}</i></span></div>
+            {$it.path}&nbsp;
+            <span class="exec-rs label" data-rs="{$it.issuccess}"></span>
+            <span class="exec-rs label" data-rs="{$right_bd[$sid].issuccess}"></span>
+        </div>
         <div class="list-group-bd" class="J_diff_view" style="display: none"></div>
     </li>
     </foreach>
