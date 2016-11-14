@@ -3,17 +3,11 @@ namespace Admin\Controller;
 use Think\Controller;
 
 class DiffController extends Controller{
-    public function diff() {
-        $pams = explode('/', $_SERVER['PATH_INFO']);
+    public function diff($left, $right) {
 
-        if (count($pams) != 4) {
-            E('常数错误');
-        }
-
-        list(, , $id1, $id2) = $pams;
+        $id1 = intval($left);
+        $id2 = intval($right);
         $single_ids = [];
-        $id1 = addslashes($id1);
-        $id2 = addslashes($id2);
 
         $data = [ 'bd' => [], 'hd' => [] ];
 
@@ -37,7 +31,7 @@ class DiffController extends Controller{
 
             $data['bd'][$k] = [];
             foreach ($details as $ikey => &$res) {
-                $res['exec_content'] = json_decode($res['exec_content'], true);
+                //$res['exec_content'] = json_decode($res['exec_content'], true);
                 unset($res['id']);
                 unset($res['exec_history_id']);
                 $res['issuccess'] = $res['issuccess'] ? '成功' : '失败';
@@ -56,23 +50,19 @@ class DiffController extends Controller{
         $single_ids = array_unique($single_ids);
 
         $single_names = [];
+        $single_path_info = [];
+
         if (!empty($single_ids)) {
             $single_names = M('GroupSingle')->field('id, name')->where(['id' => ['IN', $single_ids]])->select();
             $single_names = self::arrayKeyReplace($single_names, 'id');
-        }
 
-        $group_names = [];
-        if (!empty($single_ids)) {
-            $tba = C('DB_PREFIX') . 'group_single';
-            $tbb = C('DB_PREFIX') . 'group';
-            $sql = "SELECT a.id id, b.`name` name FROM `{$tba}` a JOIN `{$tbb}` b on a.tid=b.id WHERE a.id IN(" . implode(',', $single_ids) . ")";
-            $group_names = M()->query($sql);
-            $group_names = self::arrayKeyReplace($group_names, 'id');
+            $single_path_info = D('ManageGroupClassify')->getSinglePathInfo($single_ids);
         }
 
         foreach ($data['bd'] as $key => &$lists) {
             foreach($lists as $sid => &$single) {
-                $path = ['path' => $group_names[$sid]['name'] . ' / ' . $single_names[$sid]['name'] ];
+                $single_name = $single_names[$sid]['name'];
+                $path = ['path' => $single_path_info[$sid] . ' / ' . $single_name, 'name' => $single_name ];
                 $single = array_merge($path, $single);
                 unset($single['single_id']);
                 unset($single['group_id']);
@@ -81,7 +71,7 @@ class DiffController extends Controller{
 
         $this->assign('data', $data);
         $this->assign('right_bd', $data['bd']['right']);
-        $this->assign('data_string', json_encode($data));
+        //$this->assign('data_string', json_encode($data));
 		$this->display();
     }
 
@@ -95,6 +85,4 @@ class DiffController extends Controller{
 
         return $result;
     }
-
-
 }

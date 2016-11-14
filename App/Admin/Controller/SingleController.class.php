@@ -407,10 +407,37 @@ class SingleController extends AuthController {
         }
 
         $group_ids = I('post.group_ids', 0);
-        if ($group_ids) {
-            $where['tid'] = ['IN', $group_ids];
+        $project_id = I('post.project_id', 0);
+
+        if (!$project_id) {
+            $this->ajaxReturn(["recordsTotal" => 0, "recordsFiltered" => 0, "data" => []]);
         }
 
+        $gid = session('admin')['group_id'];
+        $is_admin = $gid == 1 || $gid == 2;
+        $group_ids_arr = explode(',', $group_ids);
+
+        if ($is_admin) {
+            if($group_ids) {
+                $where['tid'] = ['IN', $group_ids];
+            }
+            else if ($project_id) {
+                $allow_group_ids = D('AuthGroup')->getGroupIds($project_id);
+                $where['tid'] = ['IN', implode(',', $allow_group_ids)];
+            }
+        }
+        else {
+            $allow_group_ids = D('AuthGroup')->getGroupIds($project_id);
+
+            if (!$allow_group_ids) {
+                $this->ajaxReturn(["recordsTotal" => 0, "recordsFiltered" => 0, "data" => []]);
+            }
+
+            $temp = array_intersect($allow_group_ids, $group_ids_arr);
+
+            $where['tid'] = ['IN', implode(',', $temp)];
+        }
+        
         $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $where));
     }
 

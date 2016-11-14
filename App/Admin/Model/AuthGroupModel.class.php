@@ -138,12 +138,18 @@ class AuthGroupModel extends Model {
         return M('ManageGroupClassify')->where(['pid' => ['IN', $modelIds], 'level' => 2])->getField('id', true);
     }
 
-    public function getGroupIds() {
+    public function getGroupIds($project_id = 0) {
         $pro_ids = $this->getAllowedProjectIds();
 
         if (!$pro_ids) return 0;
 
-        $model_ids = $this->getAllowedModelIds($pro_ids);
+        if ($project_id && !in_array($project_id, explode(',', $pro_ids))) {
+            return 0;
+        }
+
+        $allow_pro_ids = $project_id ? $project_id : $pro_ids;
+
+        $model_ids = $this->getAllowedModelIds($allow_pro_ids);
 
         if (!$model_ids) return 0;
         return $this->getAllowedGroupIds(implode(',', $model_ids));

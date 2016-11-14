@@ -55,4 +55,46 @@ class ManageGroupClassifyModel extends Model {
 
         return empty($project) ? [] : $project;
     }
+
+    public function getSinglePathInfo($single_ids) {
+        $ret = [];
+
+        $single_ids_str = implode(',', $single_ids);
+
+        $single_group = M('GroupSingle')->where(['id' => ['IN', $single_ids_str]])->getField('id,tid');
+    
+        if (!$single_group) return $ret;
+
+        $group_ids = implode(',', $single_group);
+        $group_names = $this->where(['id' => ['IN', $group_ids]])->getField('id,name');
+
+        $group_model = $this->where(['id' => ['IN', $group_ids]])->getField('id,pid');
+        if (!$group_model) return $ret;
+
+        $model_ids = implode(',', $group_model);
+        $model_names = $this->where(['id' => $model_ids])->getField('id,name');
+
+        $model_project = $this->where(['id' => ['IN', $model_ids]])->getField('id,pid');
+        if (!$model_project) return $ret;
+
+        $project_ids = implode(',', $model_project);
+        $project_names = $this->where(['id' => ['IN', $project_ids]])->getField('id,name');
+
+        foreach ($single_ids as $sid) {
+            $path = '';
+
+            $group_id = $single_group[$sid];
+            $group_name = $group_names[$group_id];
+
+            $model_id = $group_model[$group_id];
+            $model_name = $model_names[$model_id];
+
+            $project_id = $model_project[$model_id];
+            $project_name = $project_names[$project_id];
+
+            $ret[$sid] = $project_name . ' / ' . $model_name . ' / ' . $group_name;
+        }       
+        
+        return $ret;
+    }
 }

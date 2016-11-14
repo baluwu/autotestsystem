@@ -2,6 +2,7 @@
 <head>
 <title>Diff</title>
 <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
 <link href="/Public/assets/apps/css/diffview.css" rel="stylesheet" type="text/css"/>
 <style>
@@ -42,8 +43,6 @@ li { list-style: none; }
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/difflib.js"></script>
 <script>
 
-var data = JSON.parse('{$data_string}');
-
 function diffUsingJS(viewType, diffoutputdiv, left, right, l_title, r_title) {
 	"use strict";
 	var byId = function (id) { return document.getElementById(id); },
@@ -69,10 +68,11 @@ function toggleDetail(self, sid) {
   var view = $(self).next();
   view.toggle();
 
-  var s1 = JSON.stringify(data['bd']['left'][sid]);
-  var s2 = JSON.stringify(data['bd']['right'][sid]);
-  var t1 = data['bd']['left'][sid]['exec_start_time'];
-  var t2 = data['bd']['right'][sid]['exec_start_time'];
+  self = $(self);
+  var s1 = self.attr('data-left-json');
+  var s2 = self.attr('data-right-json');
+  var t1 = self.attr('data-left-time');
+  var t2 = self.attr('data-right-time');
   
   var b1 = beautyJson(s1);
   var b2 = beautyJson(s2);
@@ -82,17 +82,16 @@ function toggleDetail(self, sid) {
 
 $(function() {
     $('#toggle-diff').click(function() {
-            var t = $(this).attr('data-value');
-            if (t == '1') {
-                $('tr').not('.diff-row').hide();
-                $(this).attr('data-value', '2');
-            }
-            else {
-                $('tr').not('.diff-row').show();   
-                $(this).attr('data-value', '1');
-            }
+        var t = $(this).attr('data-value');
+        if (t == '1') {
+            $('tr').not('.diff-row').hide();
+            $(this).attr('data-value', '2');
         }
-    );   
+        else {
+            $('tr').not('.diff-row').show();   
+            $(this).attr('data-value', '1');
+        }
+    });   
 })
 </script>
 
@@ -106,7 +105,10 @@ $(function() {
 <ul class="list-group">
     <foreach name="data.bd.left" item="it" key="sid">
     <li>
-        <div class="list-group-item list-group-hd" onclick="toggleDetail(this, {$sid})">{$it.path}
+        <div data-left-json='{$it.exec_content}' data-right-json='{$right_bd[$sid].exec_content}' class="list-group-item list-group-hd" onclick="toggleDetail(this, {$sid})"
+            data-left-time="{$it.exec_start_time}" data-right-time="{$right_bd[$sid].exec_start_time}">
+            <i class="fa fa-cube"></i>
+            {$it.path}
             <span class="badge"><i>{$it.issuccess}</i> / <i>{$right_bd[$sid].issuccess}</i></span></div>
         <div class="list-group-bd" class="J_diff_view" style="display: none"></div>
     </li>

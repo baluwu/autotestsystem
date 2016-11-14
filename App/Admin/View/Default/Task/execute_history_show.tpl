@@ -120,21 +120,19 @@
                               <div id="collapse{$i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                   <div class="panel-body">
                                       <div class="form-group">
-                                          <div class="col-sm-3 control-label">用例名称: <code>{$d.name}</code></div>
-                                          <div class="col-sm-3 control-label">类型: 
+                                          <div class="col-sm-6 control-label">路径: <code>{$d.path}</code></div>
+                                          <div class="col-sm-6 control-label">类型: 
                                             <if condition="($d.nlp neq '')"><span class="label label-info">NLP</span><else />
                                             <span class="label label-primary">ASR</span>
                                             </if>
                                           </div>
-                                          <div class="col-sm-6 control-label"></div>
                                       </div>
                                       <div class="form-group">
-                                          <div class="col-sm-3 control-label">开始时间: {$d.exec_start_time}</div>
-                                          <div class="col-sm-3 control-label">结束时间: {$d.exec_end_time}</div>
-                                          <div class="col-sm-6 control-label"></div>
+                                          <div class="col-sm-6 control-label">开始时间: {$d.exec_start_time}</div>
+                                          <div class="col-sm-6 control-label">结束时间: {$d.exec_end_time}</div>
                                       </div>
                                       <div class="form-group">
-                                          <div class="col-sm-12 control-label"><if condition="$d.arc neq ''"><audio controls src="{$d.arc}"><else />nlp: {$d.nlp}</if></div>
+                                          <div class="col-sm-12 control-label"><if condition="$d.arc neq ''"><audio controls src="{$d.arc}"><else />nlp: <code>{$d.nlp}</code></if></div>
                                       </div>
                                       <div class="form-group">
                                           <div class="col-sm-12 control-label">

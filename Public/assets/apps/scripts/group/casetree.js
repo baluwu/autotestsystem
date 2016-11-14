@@ -22,6 +22,8 @@ $(function() {
   }
 
   function reloadGrid(group_ids) {
+    var project_id = $('#J_project_id').attr('data-id');
+    grid.setAjaxParam('project_id', project_id);
     grid.setAjaxParam('group_ids', group_ids);
     $('.filter-submit').trigger('click');
   }
@@ -174,10 +176,8 @@ $(function() {
   }
 
   function loadTree() {
-    var project_id = $('#J_project_id').attr('data-id');
-    if (!project_id) return ;
     $.fn.zTree.init($("#J_ztree"), setting);
-    //getTree().expandNode(zTree.getNodeByParam("id", project_id));
+    reloadGrid(0);
   }
 
   $('.J_project_menu a').click(function() {
@@ -190,11 +190,8 @@ $(function() {
     titleObj.text($(this).text());
 
     $.fn.zTree.destroy('J_ztree');
-    loadTree();
-  });
 
-  $('.type-nlp, type-asr').click(function(){
-    
+    loadTree();
   });
 
   loadTree();

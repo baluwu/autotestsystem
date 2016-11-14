@@ -93,7 +93,7 @@ jQuery(document).ready(function () {
           App.warning('You can only compare two results');
           return false;
         }
-        $(this).attr('href','/diff/diff/' + _ids[0] + '/' + _ids[1]);
+        $(this).attr('href','/diff/diff/left/' + _ids[0] + '/right/' + _ids[1]);
       });
     };
 

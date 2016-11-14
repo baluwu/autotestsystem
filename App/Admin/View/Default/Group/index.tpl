@@ -34,13 +34,14 @@
       padding-right: 15px; 
   }
   .col-sm-12 { padding-left: 30px; }
-  .ztree { margin-top: 16px; }
+  .ztree { margin-top: 12px; }
   #J_add_project {
     margin: 10px 15px 0 7px;
     float: right;
     font-size: 12px;
   }
   .case-list { display: none; }
+  .tree-ctn { width: 300px; overflow: hidden;}
   </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
@@ -52,7 +53,7 @@
         <div class="page-content-row">
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <ul class="nav navbar-nav margin-bottom-35">
+              <ul class="nav navbar-nav margin-bottom-35 tree-ctn">
                 <li class="active">
                     <div class="btn-group">
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="J_project_id" data-id="{$project_id}">
