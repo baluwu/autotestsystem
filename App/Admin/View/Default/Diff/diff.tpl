@@ -98,8 +98,8 @@ $(function() {
 
         var is_succ = self.attr('data-rs') == '1';
 
-        if (is_succ) self.addClass('label-success').html('Succ');
-        else self.addClass('label-danger').html('Fail');
+        if (is_succ) self.addClass('label-success').html('成功');
+        else self.addClass('label-danger').html('失败');
     });
 })
 </script>
