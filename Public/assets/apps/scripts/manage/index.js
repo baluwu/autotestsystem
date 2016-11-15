@@ -18,16 +18,9 @@ jQuery(document).ready(function () {
 
       grid.init({
         src: $("#datatable_ajax"),
-        onSuccess: function (grid, response) {
-          // grid:        grid object
-          // response:    json object of server side ajax response
-          // execute some code after table records loaded
-        },
-        onError: function (grid) {
-          // execute some code on network or other general error
-        },
+        onSuccess: function (grid, response) { },
+        onError: function (grid) { },
         onDataLoad: function (grid) {
-          //data-toggle="confirmation"
           $('[data-toggle="confirmation"]').each(function () {
             $(this).confirmation();
             var act=$(this).data('action');
@@ -66,22 +59,15 @@ jQuery(document).ready(function () {
           });
         },
         loadingMessage: 'Loading...',
-        dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
-
-          // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-          // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
-          // So when dropdowns used the scrollable div should be removed.
-          //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-
-          "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
+        dataTable: { 
+          "bStateSave": true, 
           "lengthMenu": [
             [10, 20, 50, 100, 150, -1],
-            [10, 20, 50, 100, 150, "All"] // change per page values here
+            [10, 20, 50, 100, 150, "All"] 
           ],
-          "pageLength": 20, // default record count per page
+          "pageLength": 20, 
           "ajax": {
-            "url": CONFIG['MODULE'] + '/Manage/getList', // ajax source
+            "url": CONFIG['MODULE'] + '/Manage/getList',
           },
           keys: true,
           columns: [
@@ -129,31 +115,26 @@ jQuery(document).ready(function () {
           "columnDefs": [
             {
               "render": function (data, type, row) {
-                //return data?data:' '
                 return ' <span class="label label-sm label-' + (data ? 'success' : 'info') + '">' + (data ? "Y" : "N") + '</span>'
               },
               "targets": 0
             },
             {
               "render": function (data, type, row) {
-                //tooltips" data-original-title="属性"
                 return ' <img src="'+row.headImg+'" width="30">' + data
               },
               "targets": 1
             },
             {
               "render": function (data, type, row) {
-                //return data?data:' '
                 return ' <span class="label label-sm label-' + (data==0 ? 'success' : 'warning') + '">' + (data==0 ? "Y" : "N") + '</span>'
               },
               "targets": 8
             },
             {
               "render": function (data, type, row) {
-
-                return '<a href="./edit/id/' + data.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 编辑 </a>'
-                  +(row.isrecovery==0? '<a   data-toggle="confirmation" data-action="Remove" data-id="' + data.id + '" data-title="禁用后账号无法登陆" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn red btn-sm btn-outline margin-bottom-5"> <i class="fa fa-remove"></i> 禁用 </a>':'<a data-action="Restore"   data-toggle="confirmation" data-id="' + data.id + '" data-title="确定激活该用户?" data-btn-ok-label="Continue" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger" class="btn green btn-sm btn-outline margin-bottom-5"> <i class="fa fa-check"></i> 激活 </a>');
-
+                  return (row.isrecovery==0? '<a   data-toggle="confirmation" data-action="Remove" data-id="' + data.id + '" data-title="禁用后账号无法登陆" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-remove"></i></a>':'<a data-action="Restore"   data-toggle="confirmation" data-id="' + data.id + '" data-title="确定激活该用户?" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-check"></i> 激活 </a>') +
+                '<a href="./edit/id/' + data.id + '" class=""><i class="fa fa-edit"></i></a>'
               },
               "targets": 9
             }
@@ -191,25 +172,21 @@ jQuery(document).ready(function () {
           });
         }
       });
-
-      //grid.setAjaxParam("customActionType", "group_action");
-      //grid.getDataTable().ajax.reload();
-      //grid.clearAjaxParams();
     };
 
     return {
-
-      //main function to initiate the module
       init: function () {
-
         initPickers();
         handleRecords();
       }
-
     };
 
   }();
 
+  $('[name="search_username"], [name="search_name"]').keyup(function (e) {
+    var k = e.keyCode || event.keyCode;
+    k == 13 && $('.filter-submit').trigger('click');
+  });
 
   TableDatatablesAjax.init();
 });

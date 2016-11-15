@@ -139,3 +139,13 @@ function arrayGroup($arr, $key) {
     return $result;
 }
 
+function canModify($id) {
+    $group_id = session('admin')['group_id'];
+    $is_super =  $group_id == 1;
+    if ($is_super) return true;
+
+    $uid = session('admin')['id'];
+    $item_uid = M('ManageGroupClassify')->where(['id' => $id])->getField('uid');
+
+    return $uid == $item_uid;
+}

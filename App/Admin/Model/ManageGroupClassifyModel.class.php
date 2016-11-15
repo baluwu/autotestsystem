@@ -56,7 +56,7 @@ class ManageGroupClassifyModel extends Model {
         return empty($project) ? [] : $project;
     }
 
-    public function getSinglePathInfo($single_ids) {
+    public function getSinglePathInfo($single_ids, $full_path = true) {
         $ret = [];
 
         $single_ids_str = implode(',', $single_ids);
@@ -91,8 +91,10 @@ class ManageGroupClassifyModel extends Model {
 
             $project_id = $model_project[$model_id];
             $project_name = $project_names[$project_id];
-
-            $ret[$sid] = $project_name . ' / ' . $model_name . ' / ' . $group_name;
+            if ($full_path) {
+                $ret[$sid] = $project_name . ' / ' . $model_name . ' / ' . $group_name;
+            }
+            else $ret[$sid] = ['project' => $project_name, 'model' => $model_name, 'group' => $group_name];
         }       
         
         return $ret;

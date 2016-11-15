@@ -14,9 +14,8 @@ body { margin-top: 20px; }
 .container { position: relative; }
 .ckbox {
     position: absolute;
-    top: 5px; right: 22px;
+    top: 34px; right: 22px;
     font-size: 12px;
-    color: #666;
     font-weight: 400;
 }
 .hd {
@@ -25,16 +24,28 @@ body { margin-top: 20px; }
     padding: 30px 16px !important;
 }
 .container {
-    padding: 25px 0;
+    padding: 0 0 10px 0;
 	margin: 0 auto;
     background: #fff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 5px 2px rgba(22,44,66,.1);
 }
 input[type="checkbox"] {
     vertical-align: top;
-    margin-top: 1px;
+    margin: 2px 2px 0 2px;
 }
 li { list-style: none; }
 .list-group-item { font-weight: 700; }
+.hidden { display: none; }
+.dataTable tr td.diff-ctn { padding: 0; }
+.dataTable tr td, .dataTable tr th {
+    border-left: none !important; 
+    border-right: none !important; 
+}
+.diff { width: 100%; }
+.table-striped>tbody>tr.odd { background-color: #fbfcfd;    }
+.table-striped>tbody>tr.even { background-color: #fff;    }
 </style>
 </head>
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
@@ -65,8 +76,9 @@ function diffUsingJS(viewType, diffoutputdiv, left, right, l_title, r_title) {
 }
 
 function toggleDetail(self, sid) {
-  var view = $(self).next();
-  view.toggle();
+  var view = $(self).next().find('.diff-ctn');
+  if (view.hasClass('hidden')) view.removeClass('hidden');
+  else view.addClass('hidden');
 
   self = $(self);
   var s1 = self.attr('data-left-json');
@@ -101,33 +113,38 @@ $(function() {
         if (is_succ) self.addClass('label-success').html('成功');
         else self.addClass('label-danger').html('失败');
     });
+
+    $('.delay-row').each(function(i, el) {
+        if (0 == i % 2) $(el).addClass('odd'); 
+        else $(el).addClass('even');
+    });
 })
 </script>
 
 <body>
 <div class="container hd list-group-item active">
-    <i class="fa fa-tasks"></i> {$data.hd.left.task_name} &nbsp; <i class="fa fa-gg"></i> {$data.hd.left.ver}
-    <!--
-    <span class="badge">
-        <i>{$data.hd.left.status}</i> / <i>{$data.hd.right.status}</i>
-    </span>
-    -->
+{$data.hd.left.task_name} <i class="fa  fa-arrows-h"></i> {$data.hd.right.task_name}
+<div class="ckbox"><input id="toggle-diff" type="checkbox" data-value="1" /><label for="toggle-diff">去相同项</label></div>
 </div>
 <div class="container">
-<ul class="list-group">
+<table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" role="grid" aria-describedby="">
+<thead>
+<tr role="row" class="heading">
+	<th width="50%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="用例">用例名称</th>
+	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.left.task_name}">{$data.hd.left.task_name} - {$data.hd.left.ver}</th>
+	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.right.task_name}">{$data.hd.right.task_name} - {$data.hd.right.ver}</th>
+</tr>
+</thead>
+<tbody>
     <foreach name="data.bd.left" item="it" key="sid">
-    <li>
-        <div data-left-json='{$it.exec_content}' data-right-json='{$right_bd[$sid].exec_content}' class="list-group-item list-group-hd" onclick="toggleDetail(this, {$sid})"
+	<tr role="row" class="delay-row" data-left-json='{$it.exec_content}' data-right-json='{$right_bd[$sid].exec_content}' class="list-group-item list-group-hd" onclick="toggleDetail(this, {$sid})"
             data-left-time="{$it.exec_start_time}" data-right-time="{$right_bd[$sid].exec_start_time}">
-            <i class="fa fa-cube"></i>
-            {$it.path}&nbsp;
-            <span class="exec-rs label" data-rs="{$it.issuccess}"></span>
-            <span class="exec-rs label" data-rs="{$right_bd[$sid].issuccess}"></span>
-        </div>
-        <div class="list-group-bd" class="J_diff_view" style="display: none"></div>
-    </li>
+		<td> <i class="fa fa-cube"></i>  {$it.path} </td>
+        <td>  <span class="exec-rs label" data-rs="{$it.issuccess}"></span> </td>
+        <td>  <span class="exec-rs label" data-rs="{$right_bd[$sid].issuccess}"></span> </td>
+	</tr>
+    <tr> <td colspan="3" class="diff-ctn hidden"></td> </tr>
     </foreach>
-</ul>
-<div class="ckbox"><input id="toggle-diff" type="checkbox" data-value="1" /><label for="toggle-diff">去相同项</label></div>
+</table>
 </body>
 </html>

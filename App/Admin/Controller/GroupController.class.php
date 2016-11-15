@@ -122,7 +122,9 @@ class GroupController extends AuthController {
         }
 
         $data['validates'] = unserialize($data['validates']);
+        $path = D('ManageGroupClassify')->getSinglePathInfo([$id], false);
         $this->assign('data', $data);    
+        $this->assign('path', $path[$id]);    
         $this->display();
     }
 

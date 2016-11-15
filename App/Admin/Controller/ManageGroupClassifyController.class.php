@@ -3,6 +3,7 @@ namespace Admin\Controller;
 
 //用户组分类控制器
 class ManageGroupClassifyController extends AuthController {
+    
     //用户组分类
     public function index() {
         $this->display();
@@ -28,8 +29,11 @@ class ManageGroupClassifyController extends AuthController {
 
     public function delNode()
     {
-        if (!IS_AJAX) $this->error('非法操作！');
         $id = I('get.id');
+
+        if (!IS_AJAX) $this->error('非法操作！');
+        if (!canModify($id)) $this->error('无权限！');
+
         if( $id == null ) {
             $this->error('ID错误！');
         }
@@ -39,8 +43,9 @@ class ManageGroupClassifyController extends AuthController {
 
     public function editNode()
     {
-        if (!IS_AJAX) $this->error('非法操作！');
         $id = intval(I('get.id'));
+        if (!IS_AJAX) $this->error('非法操作！');
+        if (!canModify($id)) $this->error('无权限！');
         $name = I('get.name');
         $data = array(
             'name'=>$name,

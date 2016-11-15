@@ -37,6 +37,7 @@
   .Boolean { color: #0000FF; font-weight: 400; }
   .Number { color: #AA00AA; font-weight: 400; }
   .control-label {color: #666; overflow: hidden; }
+  .mbadge { float: right; }
   </style>
   <script type="text/javascript" src="/Public/assets/apps/scripts/diff/beauty-json.js"></script>
   </head>
@@ -60,7 +61,7 @@
                   <p class="margin-bottom-10 tooltips" data-original-title="名称"><i class="fa fa-object-group"></i>{$data.task_name}</p>
                   <p class="margin-bottom-10 tooltips" data-original-title="版本"><i class="fa fa-gg"></i>{$data.ver}</p>
                   <p class="margin-bottom-10 tooltips" data-original-title="所属用户"><i class="fa fa-user"></i>{$data.nickname}<if condition="($data.nickname eq null) OR ($data.nickname eq '') ">{$data.nickname} </if></p>
-                  <p class="margin-bottom-10 tooltips" data-original-title="创建时间"><i class="fa fa-calendar font-blue"></i>{$data.create_time|strtotime|date="Y-m-d",###}</p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="创建时间"><i class="fa fa-calendar font-blue"></i>{$data.create_time|strtotime|date="Y-m-d H:i:s",###}</p>
                 </div>
               </div>
               <h3>任务管理</h3>
@@ -104,7 +105,6 @@
                           <div class="col-sm-12 control-label">备注: <code><if condition="($data.description neq '')">{$data.description}<else />无</if></code></div>
                       </div>
                       <br />
-
                       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                           <foreach name="ExecHistory" item="d" key="i" >
                           <div class="panel panel-default">
@@ -113,8 +113,8 @@
                                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$i}" aria-expanded="true" aria-controls="collapseOne">
                                       <i class="fa fa-cube"></i>
                                       <span class="case-name">{$d.name}</span>
-                                      <span class="label <if condition='($d.issuccess eq 1)'>label-success<else />label-danger</if>"><if condition="($d.issuccess eq 1)">成功<else />失败</if></span>
                                       </a>
+                                      <span class="mbadge label <if condition='($d.issuccess eq 1)'>label-success<else />label-danger</if>"><if condition="($d.issuccess eq 1)">成功<else />失败</if></span>
                                   </h4>
                               </div>
                               <div id="collapse{$i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
