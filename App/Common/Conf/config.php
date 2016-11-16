@@ -69,4 +69,13 @@ return [
   'LDAP_BN'              => 'cn=hejun,ou=socialpark,ou=customers,dc=rokid,dc=com',
   'LDAP_PASS'            => 'nbWH!79*RY', //ldap密码
 
+  //邮件系统默认配置
+  "MAIL_CONFIG"          => [
+    'host'        =>  'webmail.rokid.com',//邮件服务器
+    'username'    =>  'bms@rokid.com',//邮件服务器用户
+    'password'    =>  'by4-Wm3-h2T-shK',//邮件服务器用户密码
+    'from'        =>  'bms@rokid.com',//邮件发送帐号
+    'fromName'    =>  'bms@Rokid',//邮件发送帐号名
+    'sign'        =>  '<br/><br/>请不要回复此邮件，谢谢！<br/><br/>-- bms@Rokid ',
+  ],
 ];
