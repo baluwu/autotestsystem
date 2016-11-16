@@ -2,7 +2,8 @@
 <head>
 <title>Diff</title>
 <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
 <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
 <link href="/Public/assets/apps/css/diffview.css" rel="stylesheet" type="text/css"/>
 <style>
@@ -12,11 +13,16 @@ body { margin-top: 20px; }
 .Boolean { color: #0000FF; font-weight: 400; }
 .Number { color: #AA00AA; font-weight: 400; }
 .container { position: relative; }
-.ckbox {
-    position: absolute;
-    top: 34px; right: 22px;
-    font-size: 12px;
-    font-weight: 400;
+.checkbox {
+    text-align: right;
+    padding: 4px 10px 0;
+    margin: 0;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+.checkbox .mt-checkbox {
+    padding-left: 18px;
+    color: #666;
 }
 .hd {
     color: #fff;
@@ -42,10 +48,24 @@ li { list-style: none; }
 .dataTable tr td, .dataTable tr th {
     border-left: none !important; 
     border-right: none !important; 
+    color: #333;
+    cursor: pointer;
 }
 .diff { width: 100%; }
+.diff-ctn { padding-bottom: 20px; }
 .table-striped>tbody>tr.odd { background-color: #fbfcfd;    }
 .table-striped>tbody>tr.even { background-color: #fff;    }
+.author { display: none; }
+.diff>thead>tr { display: none; }
+.no-padding { padding: 0 !important; position: relative; }
+.no-padding * {
+    font-size: 12px;
+}
+table.diff tbody td { padding-top: 0; }
+.container.hd { margin-top: 20px; }
+.table thead tr th { font-weight: 400; }
+.checkboxes { margin-left: -15px !important; }
+.label:not(.md-skip) { font-weight: 400; border-radius: 10px; }
 </style>
 </head>
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
@@ -76,7 +96,7 @@ function diffUsingJS(viewType, diffoutputdiv, left, right, l_title, r_title) {
 }
 
 function toggleDetail(self, sid) {
-  var view = $(self).next().find('.diff-ctn');
+  var view = $(self).next();
   if (view.hasClass('hidden')) view.removeClass('hidden');
   else view.addClass('hidden');
 
@@ -89,22 +109,10 @@ function toggleDetail(self, sid) {
   var b1 = beautyJson(s1);
   var b2 = beautyJson(s2);
   
-  diffUsingJS(0, view.get(0), b1, b2, t1, t2);
+  diffUsingJS(0, view.find('.diff-ctn').get(0), b1, b2, t1, t2);
 }
 
 $(function() {
-    $('#toggle-diff').click(function() {
-        var t = $(this).attr('data-value');
-        if (t == '1') {
-            $('tr').not('.diff-row').hide();
-            $(this).attr('data-value', '2');
-        }
-        else {
-            $('tr').not('.diff-row').show();   
-            $(this).attr('data-value', '1');
-        }
-    });   
-
     $('.exec-rs').each(function(i, el) {
         var self = $(this);
 
@@ -118,19 +126,32 @@ $(function() {
         if (0 == i % 2) $(el).addClass('odd'); 
         else $(el).addClass('even');
     });
+
+    $('.toggle-diff').click(function() {
+        var ck_box = $(this).prev();
+        var tr = ck_box.parent().next().find('tbody tr').not('diff-row');
+        console.log(ck_box.attr('value'));
+        if ('0' == ck_box.attr('value')) {
+            ck_box.attr('value', '1');
+            tr.hide();
+        }
+        else {
+            ck_box.attr('value', '0');
+            tr.show();
+        }
+    });
 })
 </script>
 
 <body>
 <div class="container hd list-group-item active">
 {$data.hd.left.task_name} <i class="fa  fa-arrows-h"></i> {$data.hd.right.task_name}
-<div class="ckbox"><input id="toggle-diff" type="checkbox" data-value="1" /><label for="toggle-diff">去相同项</label></div>
 </div>
 <div class="container">
 <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" role="grid" aria-describedby="">
 <thead>
 <tr role="row" class="heading">
-	<th width="50%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="用例">用例名称</th>
+	<th width="50%" align="left" class="sorting_disabled" rowspan="1" colspan="1" aria-label="用例">用例</th>
 	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.left.task_name}">{$data.hd.left.task_name} - {$data.hd.left.ver}</th>
 	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.right.task_name}">{$data.hd.right.task_name} - {$data.hd.right.ver}</th>
 </tr>
@@ -139,11 +160,19 @@ $(function() {
     <foreach name="data.bd.left" item="it" key="sid">
 	<tr role="row" class="delay-row" data-left-json='{$it.exec_content}' data-right-json='{$right_bd[$sid].exec_content}' class="list-group-item list-group-hd" onclick="toggleDetail(this, {$sid})"
             data-left-time="{$it.exec_start_time}" data-right-time="{$right_bd[$sid].exec_start_time}">
-		<td> <i class="fa fa-cube"></i>  {$it.path} </td>
-        <td>  <span class="exec-rs label" data-rs="{$it.issuccess}"></span> </td>
-        <td>  <span class="exec-rs label" data-rs="{$right_bd[$sid].issuccess}"></span> </td>
+		<td><i class="fa fa-cube"></i>  {$it.path} </td>
+        <td><span class="exec-rs label" data-rs="{$it.issuccess}"></span> </td>
+        <td><span class="exec-rs label" data-rs="{$right_bd[$sid].issuccess}"></span> </td>
 	</tr>
-    <tr> <td colspan="3" class="diff-ctn hidden"></td> </tr>
+    <tr class="hidden">
+        <td colspan="3" class="no-padding">
+            <div class="col-sm-12 control-label checkbox">
+                <input type="checkbox" class="checkboxes" value="0" id="ck-box-{$sid}">
+                <label for="ck-box-{$sid}" class="toggle-diff">去相同项</label>
+            </div>
+            <div class="diff-ctn"></div>
+        </td> 
+    </tr>
     </foreach>
 </table>
 </body>
