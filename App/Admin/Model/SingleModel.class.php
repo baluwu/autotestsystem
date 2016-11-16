@@ -8,18 +8,13 @@ class SingleModel extends Model {
 
     //自动验证
     protected $_validate = [
-        //-1,'名称长度不合法！'
         ['name', '/^[^@]{2,100}$/i', '名称长度不合法！', self::EXISTS_VALIDATE],
-        //-5,'帐号被占用！'
-//    ['name', '', -5, self::EXISTS_VALIDATE, 'unique', self::MODEL_INSERT],
     ];
 
     //用户表自动完成
     protected $_auto = [
         ['create_time', 'time', self::MODEL_INSERT, 'function'],
     ];
-
-
 
     public function getList($order, $sort, $page, $rows, $where = []) {
         if (!isset($where['tid'])) {
@@ -179,5 +174,35 @@ class SingleModel extends Model {
 
     public function setfields($id, $data = []) {
         return $this->where(['id' => $id])->setField($data);
+    }
+
+    public function canAddSingle($group_id) {
+        $sess = session('admin');
+        $ug_id = $sess['group_id'];
+
+        if ($ug_id == 1) return true;
+
+        $mdl = M('ManageGroupClassify');
+
+        /*检查用例组*/
+        $grp = $mdl->where(['id' => $group_id])->find();
+        if (!$grp) return false;
+        if ($grp['uid'] == $sess['id']) return true;
+
+        /*检查模块*/
+        $model = $mdl->where(['id' => $grp['pid']])->find();
+        if (!$model) return false;
+        if ($model['uid'] == $sess['id']) return true;
+
+        /*检查项目*/
+        $project = $mdl->where(['id' => $model['pid']])->find();
+        if (!$project) return false;
+        if ($project['uid'] == $sess['id']) return true;
+
+        /*检查项目授权*/
+        $allowPids = M('AuthGroup')->where(['id' => $ug_id])->getField('project_ids');
+        $allowPids = explode(',', $allowPids);
+
+        return in_array($project['id'], $allowPids);
     }
 }

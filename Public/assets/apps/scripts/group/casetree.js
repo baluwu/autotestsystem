@@ -74,13 +74,44 @@ $(function() {
     $("#execBtn_"+tid).unbind().remove();
   }
 
-  function onRename(event, treeId, treeNode) {
-    $.get('/ManageGroupClassify/editNode/id/'+treeNode.id+'/name/'+treeNode.name, {}, function(o){}, 'json');
-    return false;
+  function beforeRemove(treeId, treeNode) {
+
+    var ret = true;
+    $.ajax({
+      url: '/ManageGroupClassify/delNode/id/'+treeNode.id,
+      type: 'GET',
+      dataType: 'JSON',
+      async: false,
+      success: function(r) {
+        if (r.error) {
+          ret = false;
+          return App.warning(r.msg || '未知错误');
+        }
+      }
+    });
+    
+    return ret;
   }
 
-  function onRemove(event, treeId, treeNode) {
-    $.get('/ManageGroupClassify/delNode/id/'+treeNode.id, {}, function(o) {}, 'json');
+  function beforeRename(treeId, treeNode, newName, isCancel) {
+    if (isCancel) return true;
+
+    var ret = true;
+    $.ajax({
+      url: '/ManageGroupClassify/editNode/id/'+treeNode.id+'/name/'+newName,
+      type: 'GET',
+      dataType: 'JSON',
+      async: false,
+      success: function(r) {
+        if (r.error) {
+          ret = false;
+          getTree().cancelEditName(treeNode.name);
+          return App.warning(r.msg || '未知错误');
+        }
+      }
+    });
+
+    return ret;
   }
   
   var setting = {
@@ -100,8 +131,8 @@ $(function() {
       data: { simpleData: { enable: true, idKey: "id", pIdKey: "pid", rootPId: 0} },
       edit: { enable: true, editNameSelectAll: true },
       callback:{
-        onRename: onRename,
-        onRemove: onRemove,
+        beforeRemove: beforeRemove,
+        beforeRename: beforeRename,
         onCheck: function(treeId, treeNode) {
           var gids = getCheckedGroupId();
           reloadGrid(gids);

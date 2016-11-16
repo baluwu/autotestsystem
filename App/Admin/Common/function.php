@@ -149,3 +149,19 @@ function canModify($id) {
 
     return $uid == $item_uid;
 }
+
+function canModifySingle($id) {
+    $group_id = session('admin')['group_id'];
+    $is_super =  $group_id == 1;
+    if ($is_super) return true;
+
+    $uid = session('admin')['id'];
+    $item_uid = M('GroupSingle')->where(['id' => $id])->getField('uid');
+
+    return $uid == $item_uid;
+}
+
+function isSuper() { return session('admin')['group_id'] == 1; }
+function isLeader() { return session('admin')['group_id'] == 3; }
+
+

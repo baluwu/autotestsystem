@@ -32,7 +32,7 @@ class ManageGroupClassifyController extends AuthController {
         $id = I('get.id');
 
         if (!IS_AJAX) $this->error('非法操作！');
-        if (!canModify($id)) $this->error('无权限！');
+        if (!canModify($id)) $this->ajaxReturn(['error' => true, 'msg' => '无权操作', 'code' => -1]);
 
         if( $id == null ) {
             $this->error('ID错误！');
@@ -45,7 +45,7 @@ class ManageGroupClassifyController extends AuthController {
     {
         $id = intval(I('get.id'));
         if (!IS_AJAX) $this->error('非法操作！');
-        if (!canModify($id)) $this->error('无权限！');
+        if (!canModify($id)) $this->ajaxReturn(['error' => true, 'msg' => '无权操作', 'code' => -1]);
         $name = I('get.name');
         $data = array(
             'name'=>$name,

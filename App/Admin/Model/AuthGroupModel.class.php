@@ -126,8 +126,20 @@ class AuthGroupModel extends Model {
         return $this->where(array('id'=>$groupid))->save(array('classify'=>$classify_str));
     }
 
-    public function getAllowedProjectIds() {
-        return $this->where(['id' => session('admin')['group_id']])->getField('project_ids');
+    public function getAllowedProjectIds($project_id) {
+        $sess = session('admin');
+        $ug_id = $sess['group_id'];
+
+        if ($ug_id == 1 || $ug_id == 3) {
+            return $project_id;
+        }
+
+        $ownPids = M('ManageGroupClassify')->where(['uid' => $sess['id'], 'level' => 0])->getField('id', true);
+        $allowPidsStr = $this->where(['id' => $ug_id])->getField('project_ids');
+        $allowPids = explode(',', $allowPidsStr);
+
+        $enablePids = array_unique(array_merge($ownPids, $allowPids));
+        return $project_id && in_array($project_id, $enablePids) ? $project_id : $enablePids;
     }
 
     public function getAllowedModelIds($projectIds) {
@@ -139,17 +151,11 @@ class AuthGroupModel extends Model {
     }
 
     public function getGroupIds($project_id = 0) {
-        $pro_ids = $this->getAllowedProjectIds();
+        $pro_ids = $this->getAllowedProjectIds($project_id);
 
-        if (!$pro_ids) return 0;
+        if (empty($pro_ids)) return 0;
 
-        if ($project_id && !in_array($project_id, explode(',', $pro_ids))) {
-            return 0;
-        }
-
-        $allow_pro_ids = $project_id ? $project_id : $pro_ids;
-
-        $model_ids = $this->getAllowedModelIds($allow_pro_ids);
+        $model_ids = $this->getAllowedModelIds($pro_ids);
 
         if (!$model_ids) return 0;
         return $this->getAllowedGroupIds(implode(',', $model_ids));

@@ -43,12 +43,12 @@ class SingleController extends AuthController {
     public function addSingle() {
         if (!IS_AJAX) $this->error("非法操作！");
 
+        if (!D('Single')->canAddSingle($this->groupid)) {
+            $this->ajaxReturn([ 'error' => -10, 'data'  => '', 'msg' => '无权限' ]);
+        }
+
         if (!$this->arc && !$this->nlp) {
-            $this->ajaxReturn([
-                'error' => -10,
-                'data'  => '',
-                'msg'   => 'NLP或ASR参数为空'
-            ]);
+            $this->ajaxReturn([ 'error' => -10, 'data'  => '', 'msg'   => 'NLP或ASR参数为空' ]);
         }
 
         if(empty($this->groupid)){
@@ -128,26 +128,18 @@ class SingleController extends AuthController {
     public function updateSingle() {
         if (!IS_AJAX) $this->error('非法操作');
 
-        if(empty($this->groupid)){
-            $this->ajaxReturn([
-                'error' => -11,
-                'data'  => '',
-                'msg'   => '请选择用例分组'
-            ]);   
-        }
         $groupSingle = D('GroupSingle');
 
         $id = intval(I('post.id', 0));
         $data = $groupSingle->getSingle($id);
-        $type = I('post.type_switch') ? 'ASR' : 'NLP';
 
-        if (!$data) {
-            $this->ajaxReturn([
-                'error' => -11,
-                'data'  => '',
-                'msg'   => '该用例已被删除'
-            ]);
+        if (!$data) { $this->ajaxReturn([ 'error' => -11, 'data' => '', 'msg' => '该用例已被删除' ]); }
+        
+        if (!isSuper() && session('admin')['id'] != $data['uid']) {
+            $this->ajaxReturn([ 'error' => -11, 'data' => '', 'msg' => '无权操作' ]);
         }
+
+        $type = I('post.type_switch') ? 'ASR' : 'NLP';
 
         $data = $groupSingle->updateSingle($id, $type, $this->singleName, $this->nlp, $this->arc, $this->v1, $this->dept, $this->v2,$this->groupid);
        
@@ -165,18 +157,18 @@ class SingleController extends AuthController {
 
     public function Remove() {
         if (!IS_AJAX) $this->error('非法操作！');
+        if (!canModifySingle($this->id)) {
+            $this->ajaxReturn([ 'error' => -12, 'data' => '', 'msg' => '无权限' ]);
+        }
+
         $single = M('GroupSingle');
         $singleData = $single->where(['id' => $this->id])->find();
         if ($singleData['uid'] != session('admin')['id']) {
-            $this->ajaxReturn([
-                'error' => -10,
-                'data'  => '',
-                'msg'   => '非法参数'
-            ]);
+            $this->ajaxReturn([ 'error' => -10, 'data' => '', 'msg' => '非法参数' ]);
         }
+
         $data = $single->where(['id' => $this->id])->delete();
 
-        logs('single.remove', $data > 0);
         $this->ajaxReturn([
             'error' => $data > 0 ? 0 : -11,
             'data'  => $data,
@@ -379,7 +371,7 @@ class SingleController extends AuthController {
 
     public function getList() {
         if (!IS_AJAX) $this->error('非法操作！');
-        $single = D('Single');
+        
         $order = [
             'list'   => ['id', 'name', 'nlp', 'create_time', 'nickname' ],
             'column' => 'create_time',
@@ -416,7 +408,7 @@ class SingleController extends AuthController {
         }
 
         $gid = session('admin')['group_id'];
-        $is_admin = $gid == 1 || $gid == 2;
+        $is_admin = $gid == 1 || $gid == 3;
         $group_ids_arr = explode(',', $group_ids);
 
         if ($is_admin) {
@@ -435,12 +427,14 @@ class SingleController extends AuthController {
                 $this->ajaxReturn(["recordsTotal" => 0, "recordsFiltered" => 0, "data" => []]);
             }
 
-            $temp = array_intersect($allow_group_ids, $group_ids_arr);
+            if ($group_ids) {
+                $allow_group_ids = array_intersect($allow_group_ids, $group_ids_arr);
+            }
 
-            $where['tid'] = ['IN', implode(',', $temp)];
+            $where['tid'] = ['IN', implode(',', $allow_group_ids)];
         }
         
-        $this->ajaxReturn($single->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $where));
+        $this->ajaxReturn(D('Single')->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $where));
     }
 
     //获取删除的用例列表

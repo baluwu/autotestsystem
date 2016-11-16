@@ -6,13 +6,26 @@ namespace Admin\Controller;
 class GroupController extends AuthController {
     //显示用户用例
     public function index() {
-        $allowProjectIds = M('AuthGroup')->where(['id' => session('admin')['group_id'] ])->getField('project_ids');
-        $projects = [];
-        if ($allowProjectIds) {
-            $projects = M('ManageGroupClassify')->field('id, name')->where(
-                'pid=0 AND (id IN(' . $allowProjectIds . ') OR uid=' . session('admin')['id'] . ')' 
-            )->select();
+        $where = ['level' => 0];
+
+        $sess = session('admin');
+        $user_group_id = $sess['group_id'];
+
+        if ($user_group_id != 1 && $user_group_id != 3) {
+            /* 管理员配置允许访问的项目 */
+            $allowProjectIds = M('AuthGroup')->where(['id' => $user_group_id])->getField('project_ids');
+            $allowProjectIdsArr = explode(',', $allowProjectIds);
+            /* 当前用户自己创建的项目 */
+            $ownProjectIdsArr = M('ManageGroupClassify')->where(['uid' => $sess['id'], 'level' => 0])->getField('id', true);
+
+            $enableProjectIdsArr = array_merge($allowProjectIdsArr, $ownProjectIdsArr);
+
+            if (!empty($enableProjectIdsArr)) {
+                $where['id'] = ['IN', $enableProjectIdsArr];
+            }
         }
+
+        $projects = M('ManageGroupClassify')->field('id, name')->where($where)->select();
 
         $this->assign('projects', $projects);
         $this->assign('firstname', !empty($projects) ? $projects[0]['name'] : '暂无项目');
@@ -33,7 +46,6 @@ class GroupController extends AuthController {
     ];
 
     public function getList() {
-        //var_dump(I('get.classify'));exit;
         if (!IS_AJAX) $this->error('非法操作！');
         $Group = D('Group');
         $order = [
@@ -117,7 +129,7 @@ class GroupController extends AuthController {
             $this->GroupSingle('该用例已被删除');
         }
 
-        if (session('admin')['group_id'] !=1 && $data['uid'] != session('admin')['id']) {
+        if (!isSuper() && !isLeader() && $data['uid'] != session('admin')['id']) {
             $this->error('非法参数');
         }
 
