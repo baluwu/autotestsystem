@@ -152,4 +152,26 @@ class Tool {
         }
         return $dev;
     }
+
+    /**
+     *发送邮件
+     *$addresses 邮件接收方地址
+     *$title 邮件标题
+     *$content 邮件内容
+     *$isHtml 邮件格式
+     *$mail_config 邮件服务配置
+     */
+    public static function mail($addresses, $title, $content, $isHtml = TRUE,$mail_config=[]){
+        if(empty($mail_config)) {
+            $mail_config = C('MAIL_CONFIG');
+        }
+        vendor('PHPMailer.PHPMailerLite');
+        $mailer = new \PHPMailerLite($mail_config);
+        $result = $mailer->send($addresses, $title, $content,$isHtml);
+        if($result){
+            return $result;
+        }else{
+            return $mail->ErrorInfo;
+        }
+    }
 }
