@@ -43,7 +43,7 @@ $(function() {
 
     $("#addBtn_"+tid).bind("click", function(){
       if (treeNode.level == 2) {
-        window.open('/Group/add/group_id/' + treeNode.id, '_BLANK');
+        window.open('/Group/add/group_id/' + treeNode.id, '_blank');
       }
       else addNode(treeNode);
       return false;
@@ -116,14 +116,6 @@ $(function() {
     $("#execBtn_"+tid).unbind().remove();
   }
 
-  function beforeRemove(treeId, treeNode) {
-        /*
-    var ret = true;
-        return ret;
-    */
-    return false;
-  }
-
   function beforeRename(treeId, treeNode, newName, isCancel) {
     if (isCancel) return true;
 
@@ -160,9 +152,8 @@ $(function() {
         selectedMulti: true
       },
       data: { simpleData: { enable: true, idKey: "id", pIdKey: "pid", rootPId: 0} },
-      //edit: { enable: true, editNameSelectAll: false },
+      edit: { enable: true, editNameSelectAll: false, showRemoveBtn: false },
       callback:{
-        beforeRemove: beforeRemove,
         beforeRename: beforeRename,
         onCheck: function(treeId, treeNode) {
           var gids = getCheckedGroupId();
@@ -186,14 +177,14 @@ $(function() {
       'data': { group_ids: group_ids },
       'type': 'JSON',
       'success': function(r) {
-        var body = [];
+        var body = [], single_ids = [];
 
         if (!r.data || !r.data.length) {
           return App.warning('没有选择任何用例, 无法创建任务!');
         }
 
-        if (r.data.length > 100) {
-          return App.warning('已超出任务用例数最大限制: 100');
+        if (r.data.length > 500) {
+          return App.warning('已超出任务用例数最大限制: 500');
         }
 
         $.each(r.data, function(i, el) {
@@ -203,9 +194,11 @@ $(function() {
           tr += '</tr>';
 
           body.push(tr);
+          single_ids.push(el.id);
         });
-
-        $('#J_task_single_bd').html(body.join(''));
+        
+        $('#J_single_ids').val(single_ids.join(','));
+        //$('#J_task_single_bd').html(body.join(''));
 
         $modal_exec.find('#interval').val(Cookies.get('interval') || '1')
         $modal_exec.find('#ip').val(Cookies.get('IP') || '');
@@ -231,9 +224,10 @@ $(function() {
     var pid = parentNode ? parentNode.id : 0;
     var lv = parentNode ? parentNode.level + 1 : 0;
     $.get('/ManageGroupClassify/addNode/pid/'+pid+'/lv/'+lv+'/name/'+(dftName || 'Node Name'), {}, function(o){ 
-      if (o && o.data) {
+      if (o && !o.error) {
           getTree().addNodes(parentNode || null, {id: o.data, pid: pid, name: dftName || "Node Name"});
       }
+      else App.warning(o.msg);
     }, 'json');
   }
 

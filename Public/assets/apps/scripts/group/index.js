@@ -72,7 +72,7 @@ jQuery(document).ready(function () {
             { data: 'nickname', orderable: false },
             { class: "action-control", orderable: false, data: null, defaultContent: "" }
           ],
-          "order": [ [3, "desc"] ],
+          "order": [ [4, "desc"] ],
           "columnDefs": [
             {
               "render": function (data, type, row) {
@@ -87,12 +87,12 @@ jQuery(document).ready(function () {
             {
               "render": function (data, type, row) {
                 return row.create_time;
-              }, "targets": 3
+              }, "targets": 4
             },
             {
               "render": function (data, type, row) {
                 return "<span title='"+row.nickname+"'>"+row.nickname+"</span>";
-              }, "targets": 4
+              }, "targets": 3
             },
             {
               "render": function (data, type, row) {
@@ -220,10 +220,11 @@ jQuery(document).ready(function () {
           }
         },
         submitHandler: function (form) {
-          var single_ids = [];
+          //var single_ids = [];
 
           $modal_exec = $('#J_task_single');
-
+          
+          /*
           $('.single-ckbx:checked').each(function(i, el) {
             single_ids.push($(el).attr('data-sid')); 
           });
@@ -233,6 +234,11 @@ jQuery(document).ready(function () {
           }
 
           $('#J_single_ids').val(single_ids.join(','));
+          */
+
+          if ($('#J_single_ids').val() == '') {
+            return App.warning('未选择用例');
+          }
 
           App.blockUI({
             message: '执行中....',

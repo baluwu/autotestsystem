@@ -23,8 +23,8 @@ class ManageGroupClassifyController extends AuthController {
             'level' => $lv,
             'modify_time'=>date('Y-m-d H:i:s')
         );
-        M('ManageGroupClassify')->add($data);
-        $this->ajaxReturn(['error' => false, 'msg' => '', 'data' => $nextId]);
+        $r = M('ManageGroupClassify')->add($data);
+        $this->ajaxReturn(['error' => !$r, 'msg' => $r ? '' : '无法添加(不能重名)', 'data' => $nextId]);
     }
 
     public function delNode()

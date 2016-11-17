@@ -95,12 +95,12 @@
         </div>
       </div>
       <div class="modal-footer col-md-11">
-            <button type="button" class="btn btn-default J_view_cases">查看用例</button>
+            <!--<button type="button" class="btn btn-default J_view_cases">查看用例</button>-->
             <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
             <button type="submit" class="btn green exec_ok">确定</button>
         </div>
       </div>
-
+      <!--
       <div class="col-md-12 case-list">
         <div class="col-md-12">
             <div class="portlet-body">
@@ -123,8 +123,7 @@
             <div class="form-control-focus"></div>
         </div>
       </div>
-
-
+      -->
     </div>
   </form>
 </div>

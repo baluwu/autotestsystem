@@ -26,6 +26,14 @@
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/apps/css/single-add.css" rel="stylesheet" type="text/css"/>
   <link rel="shortcut icon" href="/favicon.ico"/>
+  <style>
+  .portlet.light.portlet-fit > .portlet-body { padding: 10px 20px; }
+  .glyphicon { vertical-align: top; font-size: 12px; }
+  .prev-next {
+    display: inline-block;
+  }
+  .prev-next i { color: #666; }
+  </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
 <div class="wrapper">
@@ -34,6 +42,29 @@
     <div class="page-content">
       <div class="page-content-container">
         <div class="page-content-row">
+          <div class="page-sidebar">
+            <nav class="navbar" role="navigation">
+                <div class="portlet mt-element-ribbon light portlet-fit bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cube font-dark"></i>
+                            <span class="caption-subject uppercase font-dark">用例信息</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body list">
+                        <p class="margin-bottom-10 tooltips" data-original-title="项目"><i class="fa fa-cubes"></i>{$project_name}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="模块"><i class="fa fa-cube"></i>{$model_name}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="用例组"><i class="fa fa-object-group"></i>{$group_name}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="创建人"><i class="fa fa-user"></i>{$user}</p>
+                    </div>
+                </div>
+                <h3>任务管理</h3>
+                <ul class="nav navbar-nav margin-bottom-35">
+                    <li class="active"> <a href="/Task/index"> <i class="fa fa-object-ungroup"></i> 任务列表 </a> </li>
+                </ul>
+            </nav>
+          </div>
+
           <div class="page-content-col">
             <div class="row">
               <div class="col-md-12">
@@ -43,9 +74,7 @@
                     <div class="portlet-title">
                       <div class="caption">
                       <i class="fa fa-plus font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">
-                      {$project_name} / {$model_name} / {$group_name} 
-                      </span>
+                      <span class="caption-subject font-dark sbold uppercase">添加用例</span>
                       </div> 
                       <div class="breadcrumbs">
                         <ol class="breadcrumb">

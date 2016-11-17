@@ -107,7 +107,7 @@ class TaskController extends AuthController {
         $is_error = $resp && $resp['isSuccess'] ? false : true;
         return $this->ajaxReturn([
             'error' => $is_error,
-            'msg' => $resp ? $resp['msg'] : ''
+            'msg' => $resp ? $resp['msg'] : '后端服务异常'
         ]);
     }
 }

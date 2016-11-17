@@ -90,15 +90,17 @@ class GroupController extends AuthController {
 
         $group = M('ManageGroupClassify')->field('pid,name')->where(['id' => $group_id])->find();
         if (!$group) { $this->error('用例组不存在', '#'); }
-        $this->assign('group_name', $group['name']);
+        $this->assign('group_name', truncate($group['name']));
 
         $model = M('ManageGroupClassify')->field('pid,name')->where(['id' => $group['pid']])->find();
         if (!$model) { $this->error('模块不存在', '#'); }
-        $this->assign('model_name', $model['name']);
+        $this->assign('model_name', truncate($model['name']));
 
         $project = M('ManageGroupClassify')->where(['id' => $model['pid']])->getField('name');
         if (!$project) { $this->error('项目不存在', '#'); }
-        $this->assign('project_name', $project);
+        $this->assign('project_name', truncate($project));
+
+        $this->assign('user', session('admin')['nickname']);
 
         $this->assign('group_id', $group_id);     
         $this->display();

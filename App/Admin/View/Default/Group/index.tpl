@@ -34,7 +34,7 @@
       padding-right: 15px; 
   }
   .col-sm-12 { padding-left: 30px; }
-  .ztree { margin-top: 2px; padding: 5px 0 5px 0; }
+  .ztree { margin-top: 2px; padding: 5px 0 60px 0; }
   #J_add_project {
     margin: 8px 12px 0 0;
     float: right;
@@ -102,8 +102,8 @@
                           <th width="5%"> ID </th>
                           <th width="25%"> 名称</th>
                           <th width="15%"> 类型</th>
-                          <th width="20%"> 创建时间</th>
                           <th width="20%"> 创建人</th>
+                          <th width="20%"> 创建时间</th>
                           <th width="15%"> 操作</th>
                         </tr>
                         <tr role="row" class="filter">
@@ -116,6 +116,7 @@
                                   <button type="button" class="btn btn-default type-asr">ASR</button>
                               </div>
                           </td>
+                          <td></td>
                           <td>
                             <div class="input-daterange input-group" id="datepicker">
                               <input type="text" class="input-sm form-control form-filter" name="date_from" placeholder="From"/>
@@ -123,7 +124,6 @@
                               <input type="text" class="input-sm form-control form-filter" name="date_to" placeholder="To"/>
                             </div>
                           </td>
-                          <td></td>
                           <td>
                             <a href="javascript:;"><i class="glyphicon glyphicon-search filter-submit" title="Search"></i></a>
                             <a href="javascript:;"><i class="glyphicon glyphicon-ban-circle filter-cancel" title="Reset"></i></a>

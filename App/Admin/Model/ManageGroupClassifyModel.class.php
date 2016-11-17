@@ -102,9 +102,9 @@ class ManageGroupClassifyModel extends Model {
             $project_id = $model_project[$model_id];
             $project_name = $project_names[$project_id];
             if ($full_path) {
-                $ret[$sid] = $project_name . ' / ' . $model_name . ' / ' . $group_name;
+                $ret[$sid] = truncate($project_name) . '/' . truncate($model_name) . '/' . truncate($group_name);
             }
-            else $ret[$sid] = ['project' => $project_name, 'model' => $model_name, 'group' => $group_name];
+            else $ret[$sid] = ['project' => truncate($project_name), 'model' => truncate($model_name), 'group' => truncate($group_name)];
         }       
         
         return $ret;

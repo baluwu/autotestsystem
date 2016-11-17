@@ -61,7 +61,7 @@ class DiffController extends Controller{
         foreach ($data['bd'] as $key => &$lists) {
             foreach($lists as $sid => &$single) {
                 $single_name = $single_names[$sid]['name'];
-                $path = ['path' => $single_path_info[$sid] . ' / ' . $single_name, 'name' => $single_name ];
+                $path = ['path' => $single_path_info[$sid] . '/' . truncate($single_name), 'name' => truncate($single_name) ];
                 $single = array_merge($path, $single);
                 unset($single['single_id']);
                 unset($single['group_id']);

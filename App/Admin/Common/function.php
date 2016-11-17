@@ -163,5 +163,7 @@ function canModifySingle($id) {
 
 function isSuper() { return session('admin')['group_id'] == 1; }
 function isLeader() { return session('admin')['group_id'] == 3; }
-
+function truncate($str, $len = 16) {
+    return (strlen($str) <= $len) ? $str : (mb_substr($str, 0, $len, 'utf8') . '..');
+}
 
