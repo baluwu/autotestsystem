@@ -37,8 +37,11 @@ class ManageGroupClassifyController extends AuthController {
         if( $id == null ) {
             $this->error('ID错误！');
         }
-        D('ManageGroupClassify')->where(['id' => $id])->delete();
-        $this->ajaxReturn(['error' => false, 'msg' => '']);
+
+        $mdl = D('ManageGroupClassify');
+        $r = $mdl->removeNode($id);
+
+        $this->ajaxReturn(['error' => !$r, 'msg' => '']);
     }
 
     public function editNode()

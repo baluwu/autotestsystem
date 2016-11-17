@@ -96,20 +96,20 @@ function diffUsingJS(viewType, diffoutputdiv, left, right, l_title, r_title) {
 }
 
 function toggleDetail(self, sid) {
-  var view = $(self).next();
-  if (view.hasClass('hidden')) view.removeClass('hidden');
-  else view.addClass('hidden');
+    var view = $(self).next();
+    if (view.hasClass('hidden')) view.removeClass('hidden');
+    else view.addClass('hidden');
 
-  self = $(self);
-  var s1 = self.attr('data-left-json');
-  var s2 = self.attr('data-right-json');
-  var t1 = self.attr('data-left-time');
-  var t2 = self.attr('data-right-time');
-  
-  var b1 = beautyJson(s1);
-  var b2 = beautyJson(s2);
-  
-  diffUsingJS(0, view.find('.diff-ctn').get(0), b1, b2, t1, t2);
+    self = $(self);
+    var s1 = self.attr('data-left-json');
+    var s2 = self.attr('data-right-json');
+    var t1 = self.attr('data-left-time');
+    var t2 = self.attr('data-right-time');
+
+    var b1 = beautyJson(s1);
+    var b2 = beautyJson(s2);
+
+    diffUsingJS(0, view.find('.diff-ctn').get(0), b1, b2, t1, t2);
 }
 
 $(function() {
@@ -127,10 +127,9 @@ $(function() {
         else $(el).addClass('even');
     });
 
-    $('.toggle-diff').click(function() {
-        var ck_box = $(this).prev();
-        var tr = ck_box.parent().next().find('tbody tr').not('diff-row');
-        console.log(ck_box.attr('value'));
+    function aux_toggle_diff(ck_box) {
+        var tr = ck_box.parent().next().find('tbody tr').not('.diff-row');
+
         if ('0' == ck_box.attr('value')) {
             ck_box.attr('value', '1');
             tr.hide();
@@ -139,6 +138,11 @@ $(function() {
             ck_box.attr('value', '0');
             tr.show();
         }
+    }
+
+    $('.toggle-diff').click(function() {
+        var ck_box = $(this);
+        aux_toggle_diff(ck_box);
     });
 })
 </script>
@@ -167,8 +171,7 @@ $(function() {
     <tr class="hidden">
         <td colspan="3" class="no-padding">
             <div class="col-sm-12 control-label checkbox">
-                <input type="checkbox" class="checkboxes" value="0" id="ck-box-{$sid}">
-                <label for="ck-box-{$sid}" class="toggle-diff">去相同项</label>
+                <label for="ck-box-{$sid}" class="toggle-diff" value="0" title="去相同项"><i class="fa fa-exchange"></i></label>
             </div>
             <div class="diff-ctn"></div>
         </td> 

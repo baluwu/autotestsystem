@@ -6804,7 +6804,8 @@ Customized Bootstrap Popover
 
 .popover .arrow,
 .popover .arrow:after {
-  display: none !important; }
+  /*display: none !important;*/
+}
 
 /***
 Portlets

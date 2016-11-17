@@ -31,15 +31,24 @@ class ManageGroupClassifyModel extends Model {
         return $this->add($data);
     }
 
+    private function truncate($str) {
+        $len = strlen($str);
+        if ($len <= 16) return $str;
+        return mb_substr($str, 0, 16, 'utf-8') . '..';
+    }
+
     public function getProjectData($project_id) {
         $result = array();
 
         $project = M('ManageGroupClassify')->field('id,name,pid')->where(['id' => $project_id])->select();
+        $project[0]['name'] = $this->truncate($project[0]['name']);
+
         if (!empty($project)) {
             $project[0]['open'] = true;
             $model = M('ManageGroupClassify')->field('id,name,pid')->where(['pid' => $project_id])->select();
             $model_ids = [];
             foreach ($model as $md) {
+                $md['name'] = $this->truncate($md['name']);
                 $project[] = $md;
                 $model_ids[] = $md['id'];
             }
@@ -48,6 +57,7 @@ class ManageGroupClassifyModel extends Model {
                 $group = M('ManageGroupClassify')->where(['pid' => ['IN', implode(',', $model_ids)]])->select();
                 foreach ($group as &$gp) {
                     $gp['group_id'] = $gp['id'];
+                    $gp['name'] = $this->truncate($gp['name']);
                     $project[] = $gp;
                 }
             }
@@ -98,5 +108,41 @@ class ManageGroupClassifyModel extends Model {
         }       
         
         return $ret;
+    }
+
+    public function removeNode($id) {
+        $classify = $this->where(['id' => $id])->find();
+
+        if (!$classify) return false;
+
+        $lv = $classify['level'];
+        $remove_ids = [$id];
+
+        if ($lv == 0) {
+            $model_ids = $this->where(['pid' => $id])->getField('id', true);
+            if (!$model_ids) $model_ids = [];
+            $remove_ids = array_merge($remove_ids, $model_ids);
+            $lv = 11;
+        }
+
+        if ($lv == 1 || $lv == 11) {
+            $group_ids = $this->where(
+                [ 'pid' => $lv == 1 ? $id : ['IN', $model_ids] ]
+            )->getField('id', true);
+            if (!$group_ids) $group_ids = [];
+            $remove_ids = array_merge($remove_ids, $group_ids);
+
+            $lv = 22;
+        }
+        
+        if ($lv == 2 || $lv == 22) {
+            M('GroupSingle')->where(
+                [ 'tid' => $lv == 2 ? $id : ['IN', $group_ids] ]
+            )->delete();
+        }
+
+        $this->where([ 'id' => [ 'IN', $remove_ids ] ])->delete();
+
+        return true;
     }
 }

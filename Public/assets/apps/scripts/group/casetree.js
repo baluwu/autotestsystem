@@ -12,7 +12,7 @@ $(function() {
     var ck_t = getTree().getCheckedNodes();
     var ck_t_id = [];
     $.each(ck_t, function(i, el){
-      if (el.level==2) {
+      if (el.level==2 && el.group_id) {
         ck_t_id[ck_t_id.length] = el['group_id'];
       }
     });
@@ -35,8 +35,9 @@ $(function() {
     if (treeNode.editNameFlag || $("#addBtn_"+tid).length>0) return;
 
     var addStr = 
-      (showExecBtn ? "<span class='button exec' id='execBtn_" + tid + "'></span>" : '') +
-      "<span class='button add' id='addBtn_" + tid + "'></span>";
+      "<span class='button add' id='addBtn_" + tid + "'></span>" + 
+      "<span class='button remove' id='removeBtn_" + tid + "'></span>" +
+      (showExecBtn ? "<span class='button exec' id='execBtn_" + tid + "'></span>" : '');
     
     sObj.after(addStr);
 
@@ -46,6 +47,46 @@ $(function() {
       }
       else addNode(treeNode);
       return false;
+    });
+
+    var cld = treeNode.children;
+
+    var rmBtn = $('#removeBtn_' + tid);
+    rmBtn.attr('title', '将删除当前节点及其子节点(包含用例), 继续么?');
+    rmBtn.confirmation({
+      placement: 'bottom',
+      btnOkLabel: 'OK',
+      btnCancelLabel: 'NO',
+      onConfirm: function(e) {
+        var cld = treeNode.children;
+        if (cld && cld.length > 0) {
+          $('#' + tid).find('.popover').hide();
+          rmBtn.confirmation('destroy');
+          return App.warning('子节点不为空, 无法删除');
+        }
+
+        var removed = false;
+        $.ajax({
+          url: '/ManageGroupClassify/delNode/id/'+treeNode.id,
+          type: 'GET',
+          dataType: 'JSON',
+          async: false,
+          success: function(r) {
+            if (r.error) {
+              return App.warning(r.msg || '未知错误');
+            }
+            removed = true;
+          }
+        });
+
+        removed && getTree().removeNode(treeNode, false);
+        $('#' + tid).find('.popover').hide();
+        rmBtn.confirmation('destroy');
+      },
+      onCancel: function(e) {
+        $('#' + tid).find('.popover').hide();
+        rmBtn.confirmation('destroy');
+      }
     });
 
     showExecBtn && $("#execBtn_"+tid).bind("click", function(){
@@ -71,26 +112,16 @@ $(function() {
   function removeHoverDom(treeId, treeNode) {
     var tid = treeNode.tId;
     $("#addBtn_"+tid).unbind().remove();
+    $("#removeBtn_"+tid).unbind().remove();
     $("#execBtn_"+tid).unbind().remove();
   }
 
   function beforeRemove(treeId, treeNode) {
-
+        /*
     var ret = true;
-    $.ajax({
-      url: '/ManageGroupClassify/delNode/id/'+treeNode.id,
-      type: 'GET',
-      dataType: 'JSON',
-      async: false,
-      success: function(r) {
-        if (r.error) {
-          ret = false;
-          return App.warning(r.msg || '未知错误');
-        }
-      }
-    });
-    
-    return ret;
+        return ret;
+    */
+    return false;
   }
 
   function beforeRename(treeId, treeNode, newName, isCancel) {
@@ -129,7 +160,7 @@ $(function() {
         selectedMulti: true
       },
       data: { simpleData: { enable: true, idKey: "id", pIdKey: "pid", rootPId: 0} },
-      edit: { enable: true, editNameSelectAll: true },
+      //edit: { enable: true, editNameSelectAll: false },
       callback:{
         beforeRemove: beforeRemove,
         beforeRename: beforeRename,
@@ -139,7 +170,7 @@ $(function() {
         },
         beforeDbClick: function() { return false },
         beforeClick: function(treeId, treeNode) {
-          getTree().checkNode(treeNode, !treeNode.checked, true, true);
+          //treeNode && getTree().checkNode(treeNode, !treeNode.checked, true, true);
           return false;
         }
       }

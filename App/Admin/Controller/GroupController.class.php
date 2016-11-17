@@ -27,6 +27,11 @@ class GroupController extends AuthController {
 
         $projects = M('ManageGroupClassify')->field('id, name')->where($where)->select();
 
+        foreach ($projects as &$p) {
+            if (strlen($p['name']) > 22) {
+                $p['name'] = mb_substr($p['name'], 0, 22, 'utf8') . '..';
+            }
+        } 
         $this->assign('projects', $projects);
         $this->assign('firstname', !empty($projects) ? $projects[0]['name'] : '暂无项目');
         $this->assign('project_id', !empty($projects) ? $projects[0]['id'] : 0);

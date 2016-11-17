@@ -34,11 +34,13 @@
       padding-right: 15px; 
   }
   .col-sm-12 { padding-left: 30px; }
-  .ztree { margin-top: 12px; }
+  .ztree { margin-top: 2px; padding: 5px 0 5px 0; }
   #J_add_project {
-    margin: 10px 15px 0 7px;
+    margin: 8px 12px 0 0;
     float: right;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 9999;
   }
   .case-list { display: none; }
   .tree-ctn { width: 300px; overflow: hidden;}
@@ -67,7 +69,9 @@
                             </foreach>
                         </ul>
                     </div>
-                    <p class="navbar-text" id="J_add_project"><a href="javascript:;" class="navbar-link"><i class="fa fa-plus"></i>添加项目</a></p>
+                    <p class="navbar-text" id="J_add_project" title="添加项目">
+                        <a href="javascript:;" class="navbar-link"><i class="fa fa-plus"></i></a>
+                    </p>
                     <ul id="J_ztree" class="ztree"></ul>
                 </li>
                 <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>

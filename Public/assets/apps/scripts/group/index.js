@@ -97,7 +97,7 @@ jQuery(document).ready(function () {
             {
               "render": function (data, type, row) {
                 return '<a href="javascript:;" data-id="' + row.id + '" data-name="' + row.short_name + '" class="J_play_single"><i class="glyphicon glyphicon-play"></i></a>' + 
-                '<a data-toggle="confirmation" data-id="' + row.id + '" data-title="删除后不可恢复, 要继续么?" data-btn-ok-label="OK" data-btn-cancel-label="NO" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' +
+                '<a data-toggle="confirmation" data-placement="top" data-id="' + row.id + '" data-title="删除后不可恢复, 要继续么?" data-btn-ok-label="OK" data-btn-cancel-label="NO" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' +
                 '<a href="/Group/edit/id/' + row.id + '" target="_blank"><i class="glyphicon glyphicon-pencil"></i></a>';
               },
               "targets": 5
