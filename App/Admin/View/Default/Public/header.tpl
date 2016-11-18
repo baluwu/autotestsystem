@@ -69,7 +69,7 @@
                     </in>
                   </if>
                   >
-                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> 任务管理 </a>
+                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> <?php echo gettext('Manage Tasks');?> </a>
                     </li>
                     <if condition="($admin_info.group_id eq 1)">
 

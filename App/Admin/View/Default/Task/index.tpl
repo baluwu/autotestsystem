@@ -51,14 +51,14 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-tasks font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">任务执行记录</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php echo gettext('Task Execute Record');?></span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">任务执行记录</li>
+                        <li class="active"><?php echo gettext('Task Execute Record');?></li>
                       </ol>
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
                         <span class="sr-only">Toggle navigation</span>
@@ -77,7 +77,7 @@
                           <div class="col-md-6">
                             <div class="btn-group">
                               <a id="execute_diff" target="_blank" class="btn sbold green">
-                                <i class="fa fa fa-th-list"></i> 对比
+                                <i class="fa fa fa-th-list"></i> <?php echo gettext('Contrast');?>
                               </a>
                             </div>
                           </div>
@@ -93,12 +93,12 @@
                             </label>
                           </th>
                           <th width="5%"> ID</th>
-                          <th width="15%"> 任务名称</th>
-                          <th width="15%"> 执行时间</th>
-                          <th width="10%"> 版本号</th>
-                          <th width="20%"> 备注</th>
-                          <th width="8%"> 创建者</th>
-                          <th> 操作</th>
+                          <th width="15%"> <?php echo gettext('Task Name');?></th>
+                          <th width="15%"> <?php echo gettext('Execute Time');?></th>
+                          <th width="10%"> <?php echo gettext('Version Number');?></th>
+                          <th width="20%"> <?php echo gettext('Note');?></th>
+                          <th width="8%"> <?php echo gettext('Founder');?></th>
+                          <th> <?php echo gettext('Operate');?></th>
                         </tr>
                         <tr role="row" class="filter">
                           <td></td>
@@ -137,6 +137,8 @@
 <script src="/Public/assets/global/plugins/respond.min.js"></script>
 <script src="/Public/assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="/Public/assets/global/plugins/js.cookie.min.js"></script>

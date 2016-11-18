@@ -13,7 +13,7 @@ return [
   'DB_HOST'              => '127.0.0.1', // 服务器地址
   'DB_NAME'              => 'rokid_ats',          // 数据库名
   'DB_USER'              => 'root',      // 用户名
-  'DB_PWD'               => '',          // 密码
+  'DB_PWD'               => 'root',          // 密码
   'DB_PORT'              => '3306',        // 端口
   'DB_PREFIX'            => 'sys_',    // 数据库表前缀
   'DB_FIELDS_CACHE'      => true,        // 启用字段缓存
@@ -77,5 +77,15 @@ return [
     'from'        =>  'bms@rokid.com',//邮件发送帐号
     'fromName'    =>  'bms@Rokid',//邮件发送帐号名
     'sign'        =>  '<br/><br/>请不要回复此邮件，谢谢！<br/><br/>-- bms@Rokid ',
+  ],
+
+  //网站默认语言，国际化，允许值 en_US、zh_CN
+  'LANG'=>[
+      //允许值 en_US、zh_CN
+      'all'=>['zh_CN', 'en_US'],
+      //默认值
+      'def'=>'zh_CN',
+      //Url 参数名称
+      'get_lan'=>'Lang'
   ],
 ];

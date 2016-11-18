@@ -13,6 +13,25 @@ class BaseController extends Controller {
         $this->_req = new Request();
         $this->createMemberValue();
         $this->_assign();
+
+        $this->_initLang();
+    }
+
+    //网站国际化
+    private function _initLang()
+    {
+        $lan_config = C('LANG');
+        $set_lan = I('get.'.$lan_config['get_lan'], $lan_config['def']);
+        if( !in_array($set_lan, $lan_config['all']) ) {
+            $set_lan = $lan_config['def'];
+        }
+        putenv('LANG='.$set_lan );
+        setlocale(LC_ALL, $set_lan );
+        $domain = 'rokid_lang';
+        bindtextdomain ( $domain ,  ABS_ROOT."/Lang/" ); //设置某个域的mo文件路径
+        bind_textdomain_codeset($domain, 'UTF-8');  //设置mo文件的编码为UTF-8
+        textdomain($domain);                    //设置gettext()函数从哪个域去找mo文件
+        $this->assign('set_lan', $set_lan);
     }
 
 
