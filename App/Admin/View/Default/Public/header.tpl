@@ -69,14 +69,14 @@
                     </in>
                   </if>
                   >
-                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> <?php echo gettext('Manage Tasks');?> </a>
+                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> {:_e('Jobs')}</a>
                     </li>
                     <if condition="($admin_info.group_id eq 1)">
 
                         <li
                         <if condition="($CONTROLLER_NAME eq 'Manage')"> class="active open selected"</if>
                         >
-                        <a href="/Manage/index" class="text-uppercase"> <i class="fa fa-users"></i> 用户管理 </a>
+                        <a href="/Manage/index" class="text-uppercase"> <i class="fa fa-users"></i> {:_e('User List')} </a>
                         </li>
                     </if>
                 </ul>

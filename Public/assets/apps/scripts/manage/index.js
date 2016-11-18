@@ -2,6 +2,7 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
+  var gt = new Gettext({ 'domain' : 'rokid_lang' });
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
@@ -36,10 +37,14 @@ jQuery(document).ready(function () {
                 },
                 success: function (data, response, status) {
                   if (data == 0) {
+                    var jy = gt.gettext('Disable');
+                    var jh = gt.gettext('Activate');
+                    var sb = gt.gettext('Fail');
+                    var cg = gt.gettext('Succeed');
                     App.notification({
                       type: 'danger',
                       icon: 'warning',
-                      message: (act=="Remove"?"禁用":"激活")+"失败",
+                      message: (act=="Remove"?jy:jh)+sb,
                       container: $(".page-content-col .portlet-title"),
                       place: 'prepend'
                     });
@@ -48,7 +53,7 @@ jQuery(document).ready(function () {
                   App.notification({
                     type: 'success',
                     icon: 'success',
-                    message: (act=="Remove"?"禁用":"激活")+'禁用成功',
+                    message: (act=="Remove"?jy:jh)+cg,
                     container: $(".page-content-col .portlet-title"),
                     place: 'prepend'
                   });
@@ -133,7 +138,10 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                  return (row.isrecovery==0? '<a   data-toggle="confirmation" data-action="Remove" data-id="' + data.id + '" data-title="禁用后账号无法登陆" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-remove"></i></a>':'<a data-action="Restore"   data-toggle="confirmation" data-id="' + data.id + '" data-title="确定激活该用户?" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-check"></i> 激活 </a>') +
+                var jh = gt.gettext('Activate');
+                var wfdl = gt.gettext('not login');
+                var qrjh = gt.gettext('Activation Confirmation');
+                  return (row.isrecovery==0? '<a   data-toggle="confirmation" data-action="Remove" data-id="' + data.id + '" data-title="'+wfdl+'" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-remove"></i></a>':'<a data-action="Restore"   data-toggle="confirmation" data-id="' + data.id + '" data-title="'+qrjh+'" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-check"></i> '+jh+' </a>') +
                 '<a href="./edit/id/' + data.id + '" class=""><i class="fa fa-edit"></i></a>'
               },
               "targets": 9

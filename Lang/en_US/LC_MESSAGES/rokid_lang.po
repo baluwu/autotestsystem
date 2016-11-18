@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rokidlan\n"
-"POT-Creation-Date: 2016-11-18 09:49+0800\n"
-"PO-Revision-Date: 2016-11-18 10:29+0800\n"
+"POT-Creation-Date: 2016-11-18 17:24+0800\n"
+"PO-Revision-Date: 2016-11-18 17:25+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -13,8 +13,37 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: gettext\n"
+"X-Poedit-KeywordsList: gettext;_e\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: Public/assets/apps/scripts/manage/index.js:40
+msgid "Disable"
+msgstr ""
+
+#: Public/assets/apps/scripts/manage/index.js:41
+#: Public/assets/apps/scripts/manage/index.js:141
+msgid "Activate"
+msgstr ""
+
+#: Public/assets/apps/scripts/manage/index.js:42
+msgid "Fail"
+msgstr ""
+
+#: Public/assets/apps/scripts/manage/index.js:43
+msgid "Succeed"
+msgstr ""
+
+#: Public/assets/apps/scripts/manage/index.js:142
+msgid "not login"
+msgstr ""
+
+#: Public/assets/apps/scripts/manage/index.js:143
+msgid "Activation Confirmation"
+msgstr ""
+
+#: Public/assets/apps/scripts/task/tasks.js:59
+msgid "Check Result"
+msgstr ""
 
 #: Public/assets/global/plugins/jquery-ui/jquery-ui.min.js:8
 msgid "'"
@@ -136,30 +165,107 @@ msgstr ""
 msgid "Close"
 msgstr "Close"
 
+#: App/Runtime/Cache/Admin/596c46c29568ad316fcce2749fdf9aa2.php:113
+#: App/Runtime/Cache/Admin/9c771e1a5f4ca01be49d3c07f4dda519.php:127
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:108
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:12
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:104
+msgid "Jobs"
+msgstr "Jobs"
+
+#: App/Runtime/Cache/Admin/596c46c29568ad316fcce2749fdf9aa2.php:118
+#: App/Runtime/Cache/Admin/9c771e1a5f4ca01be49d3c07f4dda519.php:132
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:113
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:131
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:147
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:109
+msgid "User List"
+msgstr "User List"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:12
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:152
+msgid "Users"
+msgstr "Users"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:132
+msgid "Add"
+msgstr "Add"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:136
+msgid "User Group"
+msgstr "User Group"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:162
+msgid "Account"
+msgstr "Account"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:163
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:172
+msgid "Name"
+msgstr "Name"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:164
+msgid "Email Address"
+msgstr "Email Address"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:165
+msgid "User Groups"
+msgstr "User Groups"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:166
+msgid "Found Time"
+msgstr "Found Time"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:167
+msgid "Last Visit Time"
+msgstr "Last Visit Time"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:168
+msgid "Last Visit IP"
+msgstr "Last Visit IP"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:169
+msgid "Start"
+msgstr "Start"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:169
+msgid "’N’ is disable state"
+msgstr "’N’ is disable state"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:170
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:177
+msgid "Operate"
+msgstr "Operate"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:174
+msgid "Search By UserName"
+msgstr "Search By UserName"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:175
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:182
+msgid "Search By Name"
+msgstr "Search By Name"
+
+#: App/Runtime/Cache/Admin/f9407c4f5dbe13bfabad21f98686778b.php:99
 msgid "Manage Tasks"
 msgstr "Manage Tasks"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:130
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:137
-msgid "Task Execute Record"
-msgstr "Task Execute Record"
+msgid "Job Record"
+msgstr "Job Record"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:156
 msgid "Contrast"
 msgstr "Contrast"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:172
-msgid "Task Name"
-msgstr "Task Name"
-
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:173
-msgid "Execute Time"
-msgstr "Execute Time"
+msgid "Time"
+msgstr "Time"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:174
-msgid "Version Number"
-msgstr "Version Number"
+msgid "Version"
+msgstr "Version"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:175
 msgid "Note"
@@ -169,6 +275,18 @@ msgstr "Note"
 msgid "Founder"
 msgstr "Founder"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:177
-msgid "Operate"
-msgstr "Operate"
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:189
+msgid "Search By Version"
+msgstr "Search By Version"
+
+#~ msgid "Task Execute Record"
+#~ msgstr "Task Execute Record"
+
+#~ msgid "Task Name"
+#~ msgstr "Task Name"
+
+#~ msgid "Execute Time"
+#~ msgstr "Execute Time"
+
+#~ msgid "Version Number"
+#~ msgstr "Version Number"

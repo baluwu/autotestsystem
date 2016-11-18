@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rokidlan\n"
-"POT-Creation-Date: 2016-11-18 10:19+0800\n"
-"PO-Revision-Date: 2016-11-18 10:28+0800\n"
+"POT-Creation-Date: 2016-11-18 17:16+0800\n"
+"PO-Revision-Date: 2016-11-18 17:22+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -13,8 +13,33 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: gettext\n"
+"X-Poedit-KeywordsList: gettext;_e\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: Public/assets/apps/scripts/manage/index.js:40
+msgid "Disable"
+msgstr "禁用"
+
+#: Public/assets/apps/scripts/manage/index.js:41
+#: Public/assets/apps/scripts/manage/index.js:141
+msgid "Activate"
+msgstr "激活"
+
+#: Public/assets/apps/scripts/manage/index.js:42
+msgid "Fail"
+msgstr "失败"
+
+#: Public/assets/apps/scripts/manage/index.js:43
+msgid "Succeed"
+msgstr "成功"
+
+#: Public/assets/apps/scripts/manage/index.js:142
+msgid "not login"
+msgstr "无法登录"
+
+#: Public/assets/apps/scripts/manage/index.js:143
+msgid "Activation Confirmation"
+msgstr "确认激活"
 
 #: Public/assets/apps/scripts/task/tasks.js:59
 msgid "Check Result"
@@ -140,29 +165,102 @@ msgstr ""
 msgid "Close"
 msgstr "关闭"
 
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:12
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:152
+msgid "Users"
+msgstr "用户管理"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:108
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:12
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:104
+msgid "Jobs"
+msgstr "任务管理"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:113
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:131
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:147
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:109
+msgid "User List"
+msgstr "用户列表"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:132
+msgid "Add"
+msgstr "添加"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:136
+msgid "User Group"
+msgstr "用户组"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:162
+msgid "Account"
+msgstr "账号"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:163
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:172
+msgid "Name"
+msgstr "姓名"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:164
+msgid "Email Address"
+msgstr "邮箱"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:165
+msgid "User Groups"
+msgstr "用户组"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:166
+msgid "Found Time"
+msgstr "创建时间"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:167
+msgid "Last Visit Time"
+msgstr "最后登录时间"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:168
+msgid "Last Visit IP"
+msgstr "最后登录IP"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:169
+msgid "Start"
+msgstr "启用"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:169
+msgid "’N’ is disable state"
+msgstr "N为禁用状态"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:170
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:177
+msgid "Operate"
+msgstr "操作"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:174
+msgid "Search By UserName"
+msgstr "按用户名搜索"
+
+#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:175
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:182
+msgid "Search By Name"
+msgstr "按名称搜索"
+
+#: App/Runtime/Cache/Admin/f9407c4f5dbe13bfabad21f98686778b.php:99
 msgid "Manage Tasks"
 msgstr "任务管理"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:130
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:137
-msgid "Task Execute Record"
+msgid "Job Record"
 msgstr "任务执行记录"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:156
 msgid "Contrast"
 msgstr "对比"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:172
-msgid "Task Name"
-msgstr "任务名称"
-
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:173
-msgid "Execute Time"
+msgid "Time"
 msgstr "执行时间"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:174
-msgid "Version Number"
+msgid "Version"
 msgstr "版本号"
 
 #: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:175
@@ -173,6 +271,18 @@ msgstr "备注"
 msgid "Founder"
 msgstr "创建者"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:177
-msgid "Operate"
-msgstr "操作"
+#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:189
+msgid "Search By Version"
+msgstr "根据版本号查询"
+
+#~ msgid "Task Execute Record"
+#~ msgstr "任务执行记录"
+
+#~ msgid "Task Name"
+#~ msgstr "任务名称"
+
+#~ msgid "Execute Time"
+#~ msgstr "执行时间"
+
+#~ msgid "Version Number"
+#~ msgstr "版本号"
