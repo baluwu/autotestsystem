@@ -32,7 +32,7 @@ class SingleModel extends Model {
         foreach ($where as $key => $value) {
             $map['s.' . $key] = $value;
         }
-        
+
         $obj = M('GroupSingle')
             ->field('s.id,s.uid,s.name,s.create_time,s.nlp,s.arc,u.manager,u.nickname')
             ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
@@ -44,8 +44,6 @@ class SingleModel extends Model {
         //转换属性及规则
         if ($obj) foreach ($obj as $k => $v) {
             $obj[$k]['short_name'] = mb_substr($v['name'],0,30,"utf-8") . (strlen($v['name']) > 30 ? '...' : '');
-            //$obj[$k]['short_nlp'] = mb_substr($v['nlp'],0,20,"utf-8")."...";
-            //$obj[$k]['short_arc'] = mb_substr($v['arc'],0,20,"utf-8")."...";
         }
 
         $total = M('GroupSingle')->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();

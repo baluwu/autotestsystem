@@ -373,7 +373,7 @@ class SingleController extends AuthController {
         if (!IS_AJAX) $this->error('非法操作！');
         
         $order = [
-            'list'   => ['id', 'name', 'nlp', 'create_time', 'nickname' ],
+            'list'   => ['id', 'name', 'nlp', 'nickname', 'create_time'],
             'column' => 'create_time',
             'dir'    => "desc"
         ];

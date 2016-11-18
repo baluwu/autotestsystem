@@ -23,16 +23,17 @@ class TaskController extends AuthController {
     ];
     //获取任务列表
     public function getTasks(){
-        //if (!IS_AJAX) $this->error('非法操作！');
+
         $order = [
-            'list'   => ['id', 'ip', 'port', 'status', 'exec_start_time', 'uid'],
+            'list'   => ['id', 'task_name', '', 'exec_start_time', 'ver', 'description', 'uid'],
             'column' => 'exec_start_time',
             'dir'    => "desc"
         ];
 
         $getOrder = $this->order;
         if (is_array($getOrder)) {
-            $order['column'] = $order['list'][$getOrder[0]['column']];
+            //$order['column'] = $order['list'][$getOrder[0]['column']];
+            $order['column'] = 'exec_start_time';
             $order['dir'] = $getOrder[0]['dir'];
         }
         $where = [];

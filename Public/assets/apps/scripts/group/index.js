@@ -68,11 +68,11 @@ jQuery(document).ready(function () {
             { data: 'id', orderable: false },
             { data: 'name', orderable: false },
             { data: 'nlp', orderable: false },
-            { data: 'create_time'},
             { data: 'nickname', orderable: false },
+            { data: 'create_time', order: 'desc' },
             { class: "action-control", orderable: false, data: null, defaultContent: "" }
           ],
-          "order": [ [4, "desc"] ],
+          "order": [ [4, "asc"] ],
           "columnDefs": [
             {
               "render": function (data, type, row) {
@@ -86,13 +86,13 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return row.create_time;
-              }, "targets": 4
+                return "<span title='"+row.nickname+"'>"+row.nickname+"</span>";
+              }, "targets": 3
             },
             {
               "render": function (data, type, row) {
-                return "<span title='"+row.nickname+"'>"+row.nickname+"</span>";
-              }, "targets": 3
+                return row.create_time;
+              }, "targets": 4
             },
             {
               "render": function (data, type, row) {

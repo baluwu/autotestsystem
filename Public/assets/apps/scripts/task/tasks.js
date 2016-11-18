@@ -38,12 +38,12 @@ jQuery(document).ready(function () {
             { data: 'id', orderable: false },
             { data: 'task_name', orderable: false },
             { data: 'exec_start_time' },
-            { data: 'ver' },
+            { data: 'ver', orderable: false },
             { data: 'description', orderable: false },
             { data: 'nickname', orderable: false },
             { class: "action-control", orderable: false, data: null, defaultContent: "" }
           ],
-          "order": [ [2, "desc"] ],
+          "order": [ [3, "desc"] ],
           "columnDefs": [
             {
               "render": function (data, type, row) {
