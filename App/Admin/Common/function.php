@@ -167,3 +167,9 @@ function truncate($str, $len = 16) {
     return (strlen($str) <= $len) ? $str : (mb_substr($str, 0, $len, 'utf8') . '..');
 }
 
+//gettext方法
+function _e($text)
+{
+    echo gettext($text);
+}
+

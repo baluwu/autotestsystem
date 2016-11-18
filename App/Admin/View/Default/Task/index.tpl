@@ -93,7 +93,7 @@
                             </label>
                           </th>
                           <th width="5%"> ID</th>
-                          <th width="15%"> <?php echo gettext('Task Name');?></th>
+                          <th width="15%"> {:_e('Task Name')}</th>
                           <th width="15%"> <?php echo gettext('Execute Time');?></th>
                           <th width="10%"> <?php echo gettext('Version Number');?></th>
                           <th width="20%"> <?php echo gettext('Note');?></th>
