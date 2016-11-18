@@ -44,6 +44,7 @@
   }
   .case-list { display: none; }
   .tree-ctn { width: 300px; overflow: hidden;}
+  .dropdown-menu > li > a { padding: 4px 18px; font-size: 12px; }
   </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">

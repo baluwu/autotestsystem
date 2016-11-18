@@ -70,29 +70,22 @@ class ExecHistoryModel extends Model {
   }
 
   //执行单例
-  public function ExecuteSingle($mid, $ip, $port = 8080, $exec_type = 1) {
-	if( $exec_type == 2 ) {
-		return $this->SyncExecuteSingle($mid, $ip, $port = 8080);
-	}
-
-    $idsAr = explode(',', $mid);
+  public function ExecuteSingle($mid, $ip, $port = 8080) {
     
     if (!$port) $port = 8080;
-    foreach ($idsAr as $id) {
-        $data = [
-            'isgroup'     => 0,
-            'mid'         => $id,
-            'uid'         => session('admin')['id'],
-            'ip'          => $ip,
-            'port'        => $port,
-            'create_time' => time(),
-            'type' => 'IMME'
-        ]; 
-        DB($data);
-        $r = SyncTask($data);
-    }
+    $data = [
+        'isgroup'     => 0,
+        'mid'         => $mid,
+        'uid'         => session('admin')['id'],
+        'ip'          => $ip,
+        'port'        => $port,
+        'create_time' => time(),
+        'type' => 'IMME'
+    ]; 
 
-    return count($idsAr) == 1 ? $r : 1;
+    $r = SyncTask($data);
+
+    return $r;
   }
   
   //执行同步单例
@@ -120,31 +113,29 @@ class ExecHistoryModel extends Model {
   }
 
   //执行组单例
-  public function ExecuteGroup($tid, $ip, $port) {
-      $idsAr = explode(',', $tid);
-      $ret = [];
-      foreach ($idsAr as $value) {
-          $n_single = M('GroupSingle')->where(['tid' => $value])->count();
-          if ($n_single == 0) {
-              $temp['isSuccess'] = false;
-              $temp['msg'] = '用例组 ' . $value . ' 无用例';
-              $ret[] = json_encode($temp);
-              continue;
-          }
-          $data = [
-              'isgroup'     => 1,
-              'mid'         => $value,
-              'uid'         => session('admin')['id'],
-              'ip'          => $ip,
-              'port'        => $port,
-              'create_time' => time(),
-              'type' => 'IMME'
-          ];
+  public function ExecuteGroup($tid, $ip, $port, $interval) {
+      $tid = intval($tid);
+  
+      $n_single = M('GroupSingle')->where(['tid' => $tid])->count();
 
-          $ret[] = SyncTask($data);
+      if ($n_single == 0) {
+          $temp['isSuccess'] = false;
+          $temp['msg'] = '用例组 ' . $value . ' 无用例';
+          return json_encode($temp);
       }
 
-      return $ret;
+      $data = [
+          'isgroup'     => 1,
+          'mid'         => $tid,
+          'uid'         => session('admin')['id'],
+          'ip'          => $ip,
+          'port'        => $port,
+          'create_time' => time(),
+          'type' => 'IMME',
+          'interval' => $interval
+      ];
+
+      return SyncTask($data);
   }
 
   public function GetById($id,$isgroup=0) {

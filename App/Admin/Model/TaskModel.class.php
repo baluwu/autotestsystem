@@ -97,8 +97,10 @@ class TaskModel {
     public function runSingle($taskData) {
         $taskData['history_id'] = $this->addExecHistory($taskData);
         $taskData['exec_start_time'] = date('Y-h-d H:i:s');
-        tasklog('INSERT history: ' . $taskData['history_id']);
         $thisData = $this->initExecSingle($taskData, null);
+        if (!$thisData) {
+            return ['isSuccess' => false, 'data' => $taskData, 'msg' => '用例不存在'];
+        }
         $r = $this->startExecSingle($taskData, $thisData);
         $this->setExecHistoryResult($taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败', $r->response);       
         return $r;
@@ -110,9 +112,14 @@ class TaskModel {
         if ($thisData) {
             return $thisData;
         }
-        else {
-            return M('GroupSingle')->where(['isrecovery' => 0])->find($taskData['mid']);
+
+        if ($is_group == 0) {
+            $r = $this->getSingles($taskData['mid']);
+            tasklog(json_encode($r));
+            return !empty($r) ? $r[0] : false;
         }
+
+        return false;
     }
 
     private function endExecSingle($taskData) {
@@ -130,6 +137,7 @@ class TaskModel {
         $taskData['asr'] = $thisData['arc'];
         $taskData['nlp'] = $thisData['nlp'];
 
+        tasklog('TASK-DATA: ' . json_encode($thisData));
         $postParms = [];
         $resData = null;
 
@@ -142,7 +150,8 @@ class TaskModel {
                 $arc = $thisData['arc'];
                 tasklog('arc:' . ABS_ROOT . $arc, 'INFO');
 
-                $postParms['voiceUrl'] = 'https://192.168.1.4' . $arc;
+                $postParms['voiceUrl'] = 'http://192.168.1.4' . $arc;
+                tasklog('VoiceUrl: ' . $postParms['voiceUrl']);
                 //$postParms['voiceUrl'] = (C('USE_HTTPS') ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] . $arc;
                 $postParms['asrVoiceInject'] = $thisData['name'];
 
@@ -206,17 +215,19 @@ class TaskModel {
             
             if ($isSuccess && !$ret['isSuccess']) {
                 $isSuccess = false;
+                $msg[] = $thisData['name'] . ': ' . $ret['msg'];
             }
 
-            $msg[] = $ret['msg'];
-
             $this->endExecSingle($taskData);
+
+            tasklog('Sleep ' . $taskData['interval'] . '秒');
+            sleep(isset($taskData['interval']) ? $taskData['interval'] : 5);
         }
 
         $this->setExecHistoryResult($taskData, $isSuccess, $isSuccess ? '成功' : '失败');       
         tasklog('用例组执行完成！');
 
-        return [ 'isSuccess' => $isSuccess, 'data' => $taskData, 'msg' => implode('#', array_unique($msg)) ];
+        return [ 'isSuccess' => $isSuccess, 'data' => $taskData, 'msg' => implode(' ', array_unique($msg)) ];
     }
 
     public function runTask($taskData) {
@@ -249,6 +260,9 @@ class TaskModel {
                 $ret['msg'] = $execRs['msg'];
             }
             $this->endExecSingle($taskData);
+
+            tasklog('Sleep ' . $taskData['interval'] . '秒');
+            sleep($taskData['interval']);
         }
 
         M('Task')->where(['id' => $taskData['id']])->delete();
@@ -260,20 +274,16 @@ class TaskModel {
     public function getGroupSingle($mid) {
         return 
             M('GroupSingle')
-            ->field('a.id,a.tid,a.name,a.nlp,a.arc,a.validates,a.create_time,a.isrecovery,b.uid,b.ispublic,b.name')
-            ->join(' a RIGHT JOIN __GROUP__ b ON a.tid = b.id')
+            ->field('id,tid,name,nlp,arc,validates,create_time')
             ->where(['tid' => $mid])
-            ->where(['a.isrecovery' => 0])
-            ->where(['b.isrecovery' => 0])
             ->order(['create_time' => 'desc'])
             ->select();
     }
 
     private function getSingles($single_ids) {
-        return 
+        return
             M('GroupSingle')
             ->where(['id' => ['IN', $single_ids]])
-            ->where(['isrecovery' => 0])
             ->order(['create_time' => 'desc'])
             ->select();
     }

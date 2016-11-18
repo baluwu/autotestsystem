@@ -302,8 +302,6 @@ class GroupController extends AuthController {
         $this->ajaxReturn($Group->getList($order['column'], $order['dir'], $this->page_start, $this->page_rows, $this->isAll, $where, 1));
     }
 
-//用例组执行管理
-
     //执行
     static $ExecuteRules = [
         'id'   => ['name' => 'id', 'type' => 'int', 'method' => 'post', 'desc' => 'id'],
@@ -313,8 +311,7 @@ class GroupController extends AuthController {
 
     public function Execute() {
         if (!IS_AJAX) $this->error('非法操作！');
-        $group = D('Group');
-        $groupData = $group->getGroup($this->id);
+        $groupData = M('ManageGroupClassify')->where([ 'id' => $this->id ])->find();
         if (!$groupData) {
             $this->ajaxReturn([
                 'error' => -10,
@@ -322,22 +319,27 @@ class GroupController extends AuthController {
                 'msg'   => '参数错误'
             ]);
         }
-        if (!$groupData['ispublic'] && $groupData['uid'] != session('admin')['id']) {
+
+        if ($groupData['uid'] != session('admin')['id']) {
             $this->ajaxReturn([
                 'error' => -11,
                 'data'  => '',
-                'msg'   => '非法参数'
+                'msg'   => '无权限'
             ]);
         }
 
         $excuteAr = D('ExecHistory');
-        $data = $excuteAr->ExecuteGroup($this->id, $this->ip, $this->port);
-        logs('group.execute', $data > 0);
-        $this->ajaxReturn([
-            'error' => $data > 0 ? 0 : -12,
-            'data'  => $data,
-            'msg'   => ''
-        ]);
+        $data = $excuteAr->ExecuteGroup($this->id, $this->ip, $this->port, I('post.interval', 2));
+
+        $ret = ['error' => -1, 'msg' => '后端服务错误'];
+        if ($data) {
+            $data = json_decode($data, true);
+
+            $ret['error'] = $data['isSuccess'] ? 0 : -11;
+            $ret['msg'] = $data['msg'];
+        }
+
+        $this->ajaxReturn($ret);
     }
 
     //执行记录
@@ -1114,4 +1116,25 @@ class GroupController extends AuthController {
             'msg'   => ''
         ]);
     }
+
+    public function ExecuteSingle() {
+        if (!IS_AJAX) $this->ajaxReturn("非法操作！");
+        $single = D('GroupSingle');
+        $singleData = $single->getSingle($this->id);
+
+        $excuteAr = D('ExecHistory');
+
+        $data = $excuteAr->ExecuteSingle(I('post.id'), I('post.ip'), I('post.port', '8080'));
+
+        $ret = ['error' => -1, 'data' => '', 'msg' => '后端服务错误'];
+        if ($data) {
+            $data = json_decode($data, true);
+            $ret['error'] = $data['isSuccess'] ? 0 : -11;
+            $ret['msg'] = $data['msg'];
+        }
+
+        $this->ajaxReturn($ret);
+    }
+
+
 }

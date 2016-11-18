@@ -76,7 +76,7 @@ jQuery(document).ready(function () {
           "columnDefs": [
             {
               "render": function (data, type, row) {
-                return "<span title='"+row.name+"'>"+row.short_name+"</span>";
+                return '<a href="/Group/edit/id/' + row.id +  '" target="_blank"><span title="' + row.name + '">' + row.short_name + '</span></a>';
               }, "targets": 1
             },
             {
@@ -151,8 +151,9 @@ jQuery(document).ready(function () {
           var exec_type = $('#exec').find('[name="type"]').val();
 
           $.ajax({
-            url: exec_type == 'group' ? '/Group/Execute' : '/Single/Execute',
+            url: exec_type == 'group' ? '/Group/Execute' : '/Group/ExecuteSingle',
             type: 'POST',
+            dataType: 'JSON',
             data: $(form).serialize(),
             success: function (res, response, status) {
               $modal_exec.modal('hide');
@@ -160,11 +161,6 @@ jQuery(document).ready(function () {
               App.unblockUI($modal_exec);
               if (res.error < 0) {
                 return App.warning('Execute fail, Error: ' + res.msg);
-              }
-
-              var r = res.data && JSON.parse(res.data);
-              if (r && !r.isSucess) {
-                return App.warning('Execute fail, Error: ' + r.msg);
               }
 
               App.ok('执行成功');

@@ -59,8 +59,8 @@ class AudioUploadsModel extends Model{
         /*web显示路径*/
         $web_dir = C('UPLOAD_PATH') . date('Y-m-d');
 
-        if (!is_dir(ABS_ROOT . '/' . $web_dir)) {
-            mkdir(ABS_ROOT . '/' . $web_dir, 0777, true);            
+        if (!is_dir(ABS_ROOT . $web_dir)) {
+            mkdir(ABS_ROOT . $web_dir, 0777, true);            
         }
 
         $obj = each($_FILES);
@@ -76,12 +76,12 @@ class AudioUploadsModel extends Model{
 
         $web_path = $web_dir . '/' . $name;
 
-        if (file_exists('.' . $web_path)) {
+        if (file_exists(ABS_ROOT . $web_path)) {
             $ret['msg'] = '文件名已使用';
             return $ret;
         }
 
-        if (move_uploaded_file($file['tmp_name'], ABS_ROOT . '/' . $web_path)) {
+        if (move_uploaded_file($file['tmp_name'], ABS_ROOT . $web_path)) {
             $r = $this->add([
                 'source' => 1,
                 'name' => $name,

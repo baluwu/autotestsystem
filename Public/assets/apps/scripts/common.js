@@ -938,7 +938,7 @@ var App = function() {
                 container: ctn,
                 place: 'prepend',
                 align: 'center',
-                closeInSeconds: 3
+                closeInSeconds: 6
             });
         },
 
