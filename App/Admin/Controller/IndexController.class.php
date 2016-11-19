@@ -74,4 +74,15 @@ class IndexController extends AuthController {
     $this->redirect('Index/index');
   }
 
+  //设置国际化语言
+  public function setLangConf()
+  {
+    $get_set_lan = I('get.lan', 'zh_CN');
+    $lan_config = C('LANG');
+    if( !in_array($get_set_lan, $lan_config['all']) ) {
+      $get_set_lan = $lan_config['def'];
+    }
+    session('SET_LANG_CONF', $get_set_lan);
+  }
+
 }

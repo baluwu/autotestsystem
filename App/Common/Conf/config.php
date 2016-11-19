@@ -84,8 +84,6 @@ return [
       //允许值 en_US、zh_CN
       'all'=>['zh_CN', 'en_US'],
       //默认值
-      'def'=>'zh_CN',
-      //Url 参数名称
-      'get_lan'=>'Lang'
+      'def'=>'zh_CN'
   ],
 ];

@@ -21,7 +21,8 @@ class BaseController extends Controller {
     private function _initLang()
     {
         $lan_config = C('LANG');
-        $set_lan = I('get.'.$lan_config['get_lan'], $lan_config['def']);
+        $set_lan = session('SET_LANG_CONF');
+        $set_lan = !empty($set_lan)?$set_lan:$lan_config['def'];
         if( !in_array($set_lan, $lan_config['all']) ) {
             $set_lan = $lan_config['def'];
         }
