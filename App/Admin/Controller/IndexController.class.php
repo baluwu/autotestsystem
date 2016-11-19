@@ -77,7 +77,15 @@ class IndexController extends AuthController {
   //设置国际化语言
   public function setLangConf()
   {
-    $get_set_lan = I('get.lan', 'zh_CN');
+    $get_set_lan = I('get.lan', '');
+    //如果无lan参数，就直接进行 中英文切换
+    if( empty($get_set_lan) ) {
+      if(empty(session('SET_LANG_CONF')) || session('SET_LANG_CONF')=='zh_CN') {
+        $get_set_lan = 'en_US';
+      } else {
+        $get_set_lan = 'zh_CN';
+      }
+    }
     $lan_config = C('LANG');
     if( !in_array($get_set_lan, $lan_config['all']) ) {
       $get_set_lan = $lan_config['def'];
