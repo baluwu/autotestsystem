@@ -37,6 +37,8 @@ class TaskController extends AuthController {
             $order['dir'] = $getOrder[0]['dir'];
         }
         $where = [];
+        $where['uid'] = session('admin')['id'];
+
         if ($this->search_name) $where['task_name'] = ['like', '%' . $this->search_name . '%'];
 
         if ($this->date_from && $this->date_to) {
