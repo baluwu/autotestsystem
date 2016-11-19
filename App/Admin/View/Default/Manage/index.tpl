@@ -90,7 +90,7 @@
                           <th width="15%"> <?php _e('Found Time'); ?></th>
                           <th width="15%"> <?php _e('Last Visit Time'); ?></th>
                           <th width="10%"> <?php _e('Last Visit IP'); ?></th>
-                          <th width="5%"> <?php _e('Start')} <i class="fa fa-info-circle tooltips" data-original-title="{:_e('’N’ is disable state'); ?>"></i></th>
+                          <th width="5%"> <?php _e('Start'); ?> <i class="fa fa-info-circle tooltips" data-original-title="<?php _e('’N’ is disable state'); ?>"></i></th>
                           <th width="5%"> <?php _e('Operate'); ?></th>
                         </tr>
                         <tr role="row" class="filter">

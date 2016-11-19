@@ -1,6 +1,5 @@
 <?php
 namespace Admin\Model;
-use Think\Model;
 
 class TaskModel {
     public function getWorkingMachineSize() { return REDIS()->sCard('working.machine'); }
@@ -257,7 +256,9 @@ class TaskModel {
 
             if ($ret['isSuccess'] && !$execRs['isSuccess']) {
                 $ret['isSuccess'] = false;
-                $ret['msg'] = $execRs['msg'];
+            }
+            if (!$execRs['isSuccess']) {
+                $ret['msg'] .= ' ' . $thisData['name'] . '=>' . $execRs['msg'] . ';';
             }
             $this->endExecSingle($taskData);
 
@@ -268,6 +269,7 @@ class TaskModel {
         M('Task')->where(['id' => $taskData['id']])->delete();
         $this->setExecHistoryResult($taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败');       
 
+        $this->notifyEmail($taskData, $ret['isSuccess'], $ret['msg']);
         return $ret;
     }
 
@@ -355,5 +357,16 @@ class TaskModel {
             'exec_start_time' => $td['single_exec_start_time'],
             'exec_end_time'   => date("Y-m-d H:i:s"),
         ]);
+    }
+
+    private function notifyEmail($taskData, $result, $error_msg) {
+        if ($taskData['notify_email']) {
+            tasklog('Ready to send email to ' . $taskData['notify_email']);
+            require_once(ABS_ROOT . '/' . 'App/Common/Libs/Tool.class.php');
+
+            $msg = 'Job [' . $taskData['name'] . '@' . $taskData['ver'] . '] finished, Result: ' . ($result ? 'success' : 'fail') . ', Errors: ' . $error_msg;
+            $resp = \Tool::mail($taskData['notify_email'], 'RokidATS Job Notify', $msg);
+            tasklog('Email Response: ' . json_encode($resp));
+        }
     }
 }

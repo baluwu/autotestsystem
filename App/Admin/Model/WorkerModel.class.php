@@ -62,6 +62,7 @@ class WorkerModel {
         if (!$serv->taskworker) {
             //扫描任务队列
             $serv->tick(10000, function() use ($serv, $fd) {
+                tasklog('tick');
                 $redis = REDIS();
                 $tasks = M('Task')->order(['create_time' => 'ASC'])->limit(0, 10)->select();    
 
@@ -78,14 +79,12 @@ class WorkerModel {
                     }
 
                     $machine = $task['ip'];
-
                     //不重复执行相同机器的任务
                     if ($machine && 
                         !in_array($machine, $runningMachines) && 
                         ($task['run_at'] < time() || ($task['run_at'] - time() <= 30))  &&
                         !$redis->sIsMember('working.machine', $machine))
                     {
-
                         $task['type'] = 'TASK';
                         $task['isgroup'] = 2;
                         $runningMachines[] = $machine;

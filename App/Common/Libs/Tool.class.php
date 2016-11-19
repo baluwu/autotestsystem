@@ -1,5 +1,5 @@
 <?php
-namespace  Common\Libs;
+//namespace  Common\Libs;
 class Tool {
     /**
      * 生成用户密码
