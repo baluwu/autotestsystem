@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title><?php _e('Case Record')} | {:_e('Public Case')} | {:_e('Auto Test System'); ?> </title>
+  <title><?php _e('Case Record');?> | <?php _e('Public Case');?> | <?php_e('Auto Test System'); ?> </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
