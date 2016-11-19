@@ -64,7 +64,7 @@
                     </li>
                     <li
                   <if condition="(CONTROLLER_NAME eq 'Task')">
-                    <in name="ACTION_NAME" value="index">
+                    <in name="ACTION_NAME" value="index,execute_history_show">
                       class="active open selected"
                     </in>
                   </if>
