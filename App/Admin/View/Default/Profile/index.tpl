@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>用户资料 | 自动化测试系统</title>
+  <title><?php _e('User Info')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -63,7 +63,7 @@
           <li>
             <a href="/Index">Home</a>
           </li>
-          <li class="active">用户资料</li>
+          <li class="active"><?php _e('User Info'); ?></li>
         </ol>
         <!-- Sidebar Toggle Button -->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -128,26 +128,26 @@
                             <div class="tab-pane active" id="tab_1_1">
                               <div class="row">
                               <div class="form-group">
-                                <label class="control-label col-md-2">用户名</label>
+                                <label class="control-label col-md-2"><?php _e('User Name'); ?></label>
 
                               <div class="col-md-10">
                                 <p class="form-control-static"> {$info.nickname} </p>
                               </div>
                               </div>
                               <div class="form-group">
-                                <label class="control-label col-md-2">昵称</label>
+                                <label class="control-label col-md-2"><?php _e('Nickname'); ?></label>
                                 <div class="col-md-10">
                                   <p class="form-control-static"> {$info.nickname} </p>
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="control-label col-md-2">邮箱</label>
+                                <label class="control-label col-md-2"><?php _e('Email Address'); ?></label>
                                 <div class="col-md-10">
                                   <p class="form-control-static"> {$info.email} </p>
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="control-label col-md-2">上次登录</label>
+                                <label class="control-label col-md-2"><?php _e('Last Login'); ?>上次登录</label>
                                 <div class="col-md-10">
                                   <p class="form-control-static"> {$info.last_login} </p>
                                 </div>
@@ -207,7 +207,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例组执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#">
     <div class="modal-body">
@@ -222,7 +222,7 @@
         </label>
 
         <div class="col-md-10">
-          当前执行用例组:<span class="currName"></span>
+          <?php _e('Current Perform'); ?>:<span class="currName"></span>
         </div>
       </div>
 

@@ -69,6 +69,7 @@ table.diff tbody td { padding-top: 0; }
 </style>
 </head>
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
+<script src="/Public/assets/apps/scripts/common.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/beauty-json.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/diffview.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/difflib.js"></script>
@@ -118,8 +119,8 @@ $(function() {
 
         var is_succ = self.attr('data-rs') == '1';
 
-        if (is_succ) self.addClass('label-success').html('成功');
-        else self.addClass('label-danger').html('失败');
+        if (is_succ) self.addClass('label-success').html(_et('Succeed'));
+        else self.addClass('label-danger').html(_et('Fail'));
     });
 
     $('.delay-row').each(function(i, el) {
@@ -155,7 +156,7 @@ $(function() {
 <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" role="grid" aria-describedby="">
 <thead>
 <tr role="row" class="heading">
-	<th width="50%" align="left" class="sorting_disabled" rowspan="1" colspan="1" aria-label="用例">用例</th>
+	<th width="50%" align="left" class="sorting_disabled" rowspan="1" colspan="1" aria-label="<?php _e('Case')}">{:_e('Case'); ?></th>
 	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.left.task_name}">{$data.hd.left.task_name} - {$data.hd.left.ver}</th>
 	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.right.task_name}">{$data.hd.right.task_name} - {$data.hd.right.ver}</th>
 </tr>
@@ -171,7 +172,7 @@ $(function() {
     <tr class="hidden">
         <td colspan="3" class="no-padding">
             <div class="col-sm-12 control-label checkbox">
-                <label for="ck-box-{$sid}" class="toggle-diff" value="0" title="去相同项"><i class="fa fa-exchange"></i></label>
+                <label for="ck-box-{$sid}" class="toggle-diff" value="0" title="<?php _e('Distinct'); ?>"><i class="fa fa-exchange"></i></label>
             </div>
             <div class="diff-ctn"></div>
         </td> 

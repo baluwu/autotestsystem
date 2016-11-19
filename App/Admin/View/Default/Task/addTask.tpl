@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>添加任务 | 用例组管理 | 自动化测试系统</title>
+  <title><?php _e('Add Job')} | {:_e('Case Groups')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -70,11 +70,11 @@
             <nav class="navbar" role="navigation">
               <!-- Brand and toggle get grouped for better mobile display -->
               <!-- Collect the nav links, forms, and other content for toggling -->
-              <h3>用例组管理</h3>
+              <h3><?php _e('Case Groups'); ?></h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
                   <a href="#">
-                    <i class="fa fa-object-group"></i> 添加任务 </a>
+                    <i class="fa fa-object-group"></i> <?php _e('Add Job'); ?> </a>
                 </li>
               </ul>
             </nav>
@@ -88,7 +88,7 @@
                   <div class="portlet  light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
                       <div class="caption">
-                        <i class="fa fa-plus"></i> 添加任务
+                        <i class="fa fa-plus"></i> <?php _e('Add Job'); ?>
                       </div>
                       <!-- BEGIN BREADCRUMBS -->
                       <div class="breadcrumbs">
@@ -98,9 +98,9 @@
                             <a href="/Index">Home</a>
                           </li>
                           <li>
-                            <a href="./index">用例组管理</a>
+                            <a href="./index"><?php _e('Case Groups'); ?></a>
                           </li>
-                          <li class="active">添加任务</li>
+                          <li class="active"><?php _e('Add Job'); ?></li>
                         </ol>
                         <!-- Sidebar Toggle Button -->
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -132,45 +132,45 @@
                             <div class="form-body">
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label" for="name">
-                                  <span class="required"> * </span>名称
+                                  <span class="required"> * </span><?php _e('Name'); ?>
                                 </label>
                                 <div class="col-md-10">
-                                  <input type="text" name="name" class="form-control" maxlength="20" id="name" placeholder="名称">
+                                  <input type="text" name="name" class="form-control" maxlength="20" id="name" placeholder="<?php _e('Name'); ?>">
                                   <div class="form-control-focus"></div>
                                 </div>
                               </div>
 
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label">
-                                  <span class="required"> * </span>执行时间:
+                                  <span class="required"> * </span><?php _e('Time'); ?>:
                                 </label>
                                 <div class="col-md-10">
-                                    <input id="datepicker" type="text" placeholder="执行时间" name="run_at" class="form-control">
+                                    <input id="datepicker" type="text" placeholder="<?php _e('Time'); ?>" name="run_at" class="form-control">
                                     <div class="form-control-focus"></div>
                                 </div>
                              </div>
 
                              <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label">
-                                  <span class="required"> * </span>版本号:
+                                  <span class="required"> * </span><?php _e('Version'); ?>:
                                 </label>
                                 <div class="col-md-10">
-                                    <input type="text" placeholder="版本号" name="ver" class="form-control">
+                                    <input type="text" placeholder="<?php _e('Version'); ?>" name="ver" class="form-control">
                                     <div class="form-control-focus"></div>
                                 </div>
                              </div>
 
                              <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label">
-                                  <span class="required"> * </span>备注:
+                                  <span class="required"> * </span><?php _e('Note'); ?>:
                                 </label>
                                 <div class="col-md-10">
-                                    <input type="text" placeholder="备注" name="description" class="form-control">
+                                    <input type="text" placeholder="<?php _e('Note'); ?>" name="description" class="form-control">
                                     <div class="form-control-focus"></div>
                                 </div>
                              </div>
                              <div class="form-group form-md-line-input">
-                                <label class="col-md-2 control-label">用例选择</label>
+                                <label class="col-md-2 control-label"><?php _e('Select Case'); ?></label>
                              </div>
                              <div class="form-group form-md-line-input">
 

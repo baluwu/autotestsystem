@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8" />
-  <title>自动化测试系统--后台登录</title>
+  <title><?php _e('Login')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <meta content="andy" name="author" />
@@ -53,11 +53,11 @@
     </div>
     <div class="col-md-6 login-container bs-reset">
       <div class="login-content">
-        <h1 class="font-green">Rokid自动化测试系统</h1>
+        <h1 class="font-green"><?php _e('Auto Test System'); ?></h1>
         <form action="javascript:;" class="login-form" method="post">
           <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
-            <span>请输入用户名和密码(Enter any username and password). </span>
+            <span><?php _e('Enter any username and password'); ?>. </span>
           </div>
           <div class="row">
             <div class="col-xs-12 col-md-6">

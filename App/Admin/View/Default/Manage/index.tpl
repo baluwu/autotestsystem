@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>{:_e('Users')}</title>
+  <title><?php _e('Users'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -52,12 +52,12 @@
             <nav class="navbar" role="navigation">
               <h3>用户管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
-                <li class="active"> <a href="/Manage/index"> <i class="fa fa-users"></i> {:_e('User List')} </a> </li>
-                <li> <a href="/Manage/add"> <i class="fa fa-user-plus "></i> {:_e('Add')}</a> </li>
+                <li class="active"> <a href="/Manage/index"> <i class="fa fa-users"></i> <?php _e('User List'); ?> </a> </li>
+                <li> <a href="/Manage/add"> <i class="fa fa-user-plus "></i> <?php _e('Add'); ?></a> </li>
               </ul>
               <h3>用户组管理</h3>
               <ul class="nav navbar-nav">
-                <li> <a href="/Manage/group"> <i class="fa fa-plus "></i> {:_e('User Group')}</a> </li>
+                <li> <a href="/Manage/group"> <i class="fa fa-plus "></i> <?php _e('User Group'); ?></a> </li>
               </ul>
             </nav>
           </div>
@@ -68,12 +68,12 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-users font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">{:_e('User List')}</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('User List'); ?></span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li> <a href="/Index">Home</a> </li>
-                        <li class="active">{:_e('Users')}</li>
+                        <li class="active"><?php _e('Users'); ?></li>
                       </ol>
                     </div>
                   </div>
@@ -83,20 +83,20 @@
                         <thead>
                         <tr role="row" class="heading">
                           <th width="5%"> LDAP</th>
-                          <th width="5%"> {:_e('Account')}</th>
-                          <th width="10%"> {:_e('Name')}</th>
-                          <th width="15%"> {:_e('Email Address')}</th>
-                          <th width="10%"> {:_e('User Groups')}</th>
-                          <th width="15%"> {:_e('Found Time')}</th>
-                          <th width="15%"> {:_e('Last Visit Time')}</th>
-                          <th width="10%"> {:_e('Last Visit IP')}</th>
-                          <th width="5%"> {:_e('Start')} <i class="fa fa-info-circle tooltips" data-original-title="{:_e('’N’ is disable state')}"></i></th>
-                          <th width="5%"> {:_e('Operate')}</th>
+                          <th width="5%"> <?php _e('Account'); ?></th>
+                          <th width="10%"> <?php _e('Name'); ?></th>
+                          <th width="15%"> <?php _e('Email Address'); ?></th>
+                          <th width="10%"> <?php _e('User Groups'); ?></th>
+                          <th width="15%"> <?php _e('Found Time'); ?></th>
+                          <th width="15%"> <?php _e('Last Visit Time'); ?></th>
+                          <th width="10%"> <?php _e('Last Visit IP'); ?></th>
+                          <th width="5%"> <?php _e('Start')} <i class="fa fa-info-circle tooltips" data-original-title="{:_e('’N’ is disable state'); ?>"></i></th>
+                          <th width="5%"> <?php _e('Operate'); ?></th>
                         </tr>
                         <tr role="row" class="filter">
                           <td></td>
-                          <td><input type="text" class="form-control form-filter input-sm" name="search_username" placeholder="{:_e('Search By UserName')}"></td>
-                          <td><input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="{:_e('Search By Name')}"></td>
+                          <td><input type="text" class="form-control form-filter input-sm" name="search_username" placeholder="<?php _e('Search By UserName'); ?>"></td>
+                          <td><input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="<?php _e('Search By Name'); ?>"></td>
                           <td></td>
                           <td></td>
                           <td></td>

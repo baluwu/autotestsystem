@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>用例管理 | 自动化测试系统</title>
+  <title><?php _e('Case')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -71,18 +71,18 @@
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
                   <a href="./index">
-                    <i class="fa fa-object-ungroup"></i> 用例列表 </a>
+                    <i class="fa fa-object-ungroup"></i> <?php _e('List'); ?> </a>
                 </li>
                 <li>
                   <a href="./recycle">
-                    <i class="fa fa-recycle "></i> 回收站 </a>
+                    <i class="fa fa-recycle "></i> <?php _e('Recycle Bin'); ?> </a>
                 </li>
               </ul>
               <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li>
                   <a href="./add">
-                    <i class="fa fa-plus "></i> 添加用例</a>
+                    <i class="fa fa-plus "></i> <?php _e('Add'); ?></a>
                 </li>
 
               </ul>
@@ -95,12 +95,12 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-object-ungroup font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用例管理</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Case'); ?></span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li> <a href="/Index">Home</a> </li>
-                        <li class="active">用例管理</li>
+                        <li class="active"><?php _e('Case'); ?></li>
                       </ol>
                     </div>
                   </div>
@@ -110,30 +110,30 @@
                         <thead>
                         <tr role="row" class="heading">
                           <th width="2%"> ID </th>
-                          <th width="10%"> 名称</th>
+                          <th width="10%"> <?php _e('Name'); ?></th>
                           <th width="20%"> NLP/ASR</th>
-                          <th width="7%"> 属性</th>
-                          <th width="20%"> 规则</th>
-                          <th width="20%"> 创建时间</th>
-                          <td>状态<i class="fa fa-info-circle tooltips" data-original-title="执行中的用例，请等待执行完成后在执行"></i></td>
-                          <th width="20%"> 操作</th>
+                          <th width="7%"> <?php _e('Property'); ?></th>
+                          <th width="20%"> <?php _e('Rule'); ?></th>
+                          <th width="20%"> <?php _e('Create Time'); ?></th>
+                          <td><?php _e('State')}<i class="fa fa-info-circle tooltips" data-original-title="{:_e('If The Use Case Is Being Performed, Please Wait Until It Is Completed Before Performing It Again.'); ?>"></i></td>
+                          <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
 
                         <tr role="row" class="filter">
                           <td></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_name"
-                                   placeholder="按名称搜索"></td>
+                                   placeholder="<?php _e('Search By Name'); ?>"></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_nlp"
-                                   placeholder="按NLP搜索">
+                                   placeholder="<?php _e('Search By NLP'); ?>">
                           </td>
 
                           <td>
                             <select name="search_single_type" class="form-control form-filter input-sm">
-                              <option value="all">属性</option>
-                              <option value="public">公开</option>
-                              <option value="self">私有</option>
+                              <option value="all"><?php _e('Property'); ?></option>
+                              <option value="public"><?php _e('Public'); ?></option>
+                              <option value="self"><?php _e('Private'); ?></option>
 
                             </select></td>
                           <td>
@@ -185,7 +185,7 @@
 
 <div id="recycle" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
   <div class="modal-body">
-    <p> 确定删除当前用例？ </p>
+    <p> <?php _e('It Cannot Be Recovered After Delete, Continue Or Not?'); ?> </p>
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn btn-outline dark">Cancel</button>
@@ -196,7 +196,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例执行</h4>
+    <h4 class="modal-title"><?php _e('Perform'); ?></h4>
   </div>
   <form action="#">
     <div class="modal-body">
@@ -211,7 +211,7 @@
         </label>
 
         <div class="col-md-10">
-          当前执行用例:<span class="currName"></span>
+          <?php _e('Current Perform'); ?>:<span class="currName"></span>
         </div>
       </div>
 

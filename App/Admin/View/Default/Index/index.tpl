@@ -10,7 +10,7 @@
 
 <head>
   <meta charset="utf-8"/>
-  <title>Dashboard | 自动化测试系统</title>
+  <title><?php _e('Log Record')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -56,7 +56,7 @@
               <div class="number">
                 <span data-counter="counterup">{$count.single}</span>
               </div>
-              <div class="desc"> 我的用例</div>
+              <div class="desc"> <?php _e('Case'); ?></div>
             </div>
           </a>
         </div>
@@ -69,7 +69,7 @@
               <div class="number">
                 <span data-counter="counterup" >{$count.group}</span>
               </div>
-              <div class="desc"> 我的用例组</div>
+              <div class="desc"> <?php _e('Case Group'); ?></div>
             </div>
           </a>
         </div>
@@ -82,7 +82,7 @@
               <div class="number">
                 <span data-counter="counterup" >{$count.singlePub}</span>
               </div>
-              <div class="desc">公共用例</div>
+              <div class="desc"><?php _e('Public Case'); ?></div>
             </div>
           </a>
         </div>
@@ -94,7 +94,7 @@
             <div class="details">
               <div class="number">
                 <span data-counter="counterup" >{$count.groupPub}</span></div>
-              <div class="desc">公共用例组</div>
+              <div class="desc"><?php _e('Public Case Group'); ?></div>
             </div>
           </a>
         </div>

@@ -8,7 +8,7 @@
 <!--<![endif]-->
 <head>
   <meta charset="utf-8"/>
-  <title>执行记录查看 | 任务组管理 | 自动化测试系统 </title>
+  <title><?php _e('Case Record Show')} | {:_e('Case Groups')} | {:_e('Auto Test System'); ?> </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -54,19 +54,19 @@
                 <div class="portlet-title">
                   <div class="caption">
                     <i class="fa fa-object-group font-dark sbold"></i>
-                    <span class="caption-subject uppercase font-dark sbold">任务信息</span>
+                    <span class="caption-subject uppercase font-dark sbold"><?php _e('Job Info'); ?></span>
                   </div>
                 </div>
                 <div class="portlet-body list">
-                  <p class="margin-bottom-10 tooltips" data-original-title="名称"><i class="fa fa-object-group"></i>{$data.task_name}</p>
-                  <p class="margin-bottom-10 tooltips" data-original-title="版本"><i class="fa fa-gg"></i>{$data.ver}</p>
-                  <p class="margin-bottom-10 tooltips" data-original-title="所属用户"><i class="fa fa-user"></i>{$data.nickname}<if condition="($data.nickname eq null) OR ($data.nickname eq '') ">{$data.nickname} </if></p>
-                  <p class="margin-bottom-10 tooltips" data-original-title="创建时间"><i class="fa fa-calendar font-blue"></i>{$data.create_time|strtotime|date="Y-m-d H:i:s",###}</p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Name'); ?>"><i class="fa fa-object-group"></i>{$data.task_name}</p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Version'); ?>"><i class="fa fa-gg"></i>{$data.ver}</p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Belongs to the user'); ?>"><i class="fa fa-user"></i>{$data.nickname}<if condition="($data.nickname eq null) OR ($data.nickname eq '') ">{$data.nickname} </if></p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Create Time'); ?>"><i class="fa fa-calendar font-blue"></i>{$data.create_time|strtotime|date="Y-m-d H:i:s",###}</p>
                 </div>
               </div>
               <h3>任务管理</h3>
               <ul class="nav navbar-nav margin-bottom-35">
-                <li class="active"> <a href="/Task/index"> <i class="fa fa-object-ungroup"></i> 任务列表 </a> </li>
+                <li class="active"> <a href="/Task/index"> <i class="fa fa-object-ungroup"></i> <?php _e('List'); ?> </a> </li>
               </ul>
             </nav>
           </div>
@@ -78,31 +78,31 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-history font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase"> 任务执行记录 </span>
+                      <span class="caption-subject font-dark sbold uppercase"> <?php _e('Job Record'); ?> </span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li> <a href="/Index">Home</a> </li>
-                        <li> <a href="/Task/index">任务管理</a> </li>
-                        <li class="active">执行记录查看</li>
+                        <li> <a href="/Task/index"><?php _e('Jobs'); ?></a> </li>
+                        <li class="active"><?php _e('Execution Record Show'); ?></li>
                       </ol>
                     </div>
                   </div>
                   <div class="portlet-body">
                       <div class="form-group">
-                          <div class="col-sm-3 control-label">任务名称: <code>{$data.task_name}</code></div>
-                          <div class="col-sm-3 control-label">版本: <code>{$data.ver}</code></div>
+                          <div class="col-sm-3 control-label"><?php _e('Name'); ?>: <code>{$data.task_name}</code></div>
+                          <div class="col-sm-3 control-label"><?php _e('Version'); ?>: <code>{$data.ver}</code></div>
                           <div class="col-sm-3 control-label">IP Addr: <code>{$data.ip}</code></div>
                           <div class="col-sm-3 control-label">Port: <code>{$data.port}</code></div>
                       </div>
                       <div class="form-group">
-                          <div class="col-sm-3 control-label">创建时间: {$data.create_time}</div>
-                          <div class="col-sm-3 control-label">计划执行时间: {$data.exec_plan_time}</div>
-                          <div class="col-sm-3 control-label">开始时间: {$data.exec_start_time}</div>
-                          <div class="col-sm-3 control-label">结束时间: {$data.exec_end_time}</div>
+                          <div class="col-sm-3 control-label"><?php _e('Create Time'); ?>: {$data.create_time}</div>
+                          <div class="col-sm-3 control-label"><?php _e('Plan To performing'); ?>: {$data.exec_plan_time}</div>
+                          <div class="col-sm-3 control-label"><?php _e('Start Time'); ?>: {$data.exec_start_time}</div>
+                          <div class="col-sm-3 control-label"><?php _e('Finish Time'); ?>: {$data.exec_end_time}</div>
                       </div>
                       <div class="form-group">
-                          <div class="col-sm-12 control-label">备注: <code><if condition="($data.description neq '')">{$data.description}<else />无</if></code></div>
+                          <div class="col-sm-12 control-label"><?php _e('Note')}: <code><if condition="($data.description neq '')">{$data.description}<else />{:_e('Not'); ?></if></code></div>
                       </div>
                       <br />
                       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -114,22 +114,22 @@
                                       <i class="fa fa-cube"></i>
                                       <span class="case-name">{$d.name}</span>
                                       </a>
-                                      <span class="mbadge label <if condition='($d.issuccess eq 1)'>label-success<else />label-danger</if>"><if condition="($d.issuccess eq 1)">成功<else />失败</if></span>
+                                      <span class="mbadge label <if condition='($d.issuccess eq 1)'>label-success<else />label-danger</if>"><if condition="($d.issuccess eq 1)"><?php _e('Case Groups')}成功<else />{:_e('Case Groups'); ?>失败</if></span>
                                   </h4>
                               </div>
                               <div id="collapse{$i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                   <div class="panel-body">
                                       <div class="form-group">
-                                          <div class="col-sm-6 control-label">路径: <code>{$d.path}</code></div>
-                                          <div class="col-sm-6 control-label">类型: 
+                                          <div class="col-sm-6 control-label"><?php _e('Path'); ?>: <code>{$d.path}</code></div>
+                                          <div class="col-sm-6 control-label"><?php _e('Type'); ?>:
                                             <if condition="($d.nlp neq '')"><span class="label label-info">NLP</span><else />
                                             <span class="label label-primary">ASR</span>
                                             </if>
                                           </div>
                                       </div>
                                       <div class="form-group">
-                                          <div class="col-sm-6 control-label">开始时间: {$d.exec_start_time}</div>
-                                          <div class="col-sm-6 control-label">结束时间: {$d.exec_end_time}</div>
+                                          <div class="col-sm-6 control-label"><?php _e('Start Time'); ?>: {$d.exec_start_time}</div>
+                                          <div class="col-sm-6 control-label"><?php _e('Finish Time'); ?>: {$d.exec_end_time}</div>
                                       </div>
                                       <div class="form-group">
                                           <div class="col-sm-12 control-label"><if condition="$d.arc neq ''"><audio controls src="{$d.arc}"><else />nlp: <code>{$d.nlp}</code></if></div>

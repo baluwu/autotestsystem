@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>回收站 | 用例管理 | 自动化测试系统</title>
+  <title><?php _e('Recycle Bin')} | {:_e('Case')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -66,18 +66,18 @@
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
                   <a href="./index">
-                    <i class="fa fa-object-ungroup"></i> 用例列表 </a>
+                    <i class="fa fa-object-ungroup"></i> <?php _e('Case'); ?> </a>
                 </li>
                 <li  class="active">
                   <a href="./recycle">
-                    <i class="fa fa-recycle "></i> 回收站 </a>
+                    <i class="fa fa-recycle "></i> <?php _e('Recycle Bin'); ?> </a>
                 </li>
               </ul>
               <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li>
                   <a href="./add">
-                    <i class="fa fa-plus "></i> 添加用例</a>
+                    <i class="fa fa-plus "></i> <?php _e('Add'); ?></a>
                 </li>
 
               </ul>
@@ -93,7 +93,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-recycle font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">回收站</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Recycle Bin'); ?></span>
                     </div>
                     <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
@@ -102,9 +102,9 @@
                           <a href="/Index">Home</a>
                         </li>
                         <li>
-                          <a href="./index">用例管理</a>
+                          <a href="./index"><?php _e('Case'); ?></a>
                         </li>
-                        <li class="active">回收站</li>
+                        <li class="active"><?php _e('Recycle Bin'); ?></li>
                       </ol>
                       <!-- Sidebar Toggle Button -->
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -128,29 +128,29 @@
                           <th width="2%">
                            ID
                           </th>
-                          <th width="10%"> 名称</th>
+                          <th width="10%"> <?php _e('Name'); ?></th>
                           <th width="20%"> NLP/ASR</th>
-                          <th width="7%"> 属性</th>
-                          <th width="20%"> 规则</th>
-                          <th width="20%"> 创建时间</th>
-                          <th width="20%"> 操作</th>
+                          <th width="7%"> <?php _e('Property'); ?></th>
+                          <th width="20%"> <?php _e('Rule'); ?></th>
+                          <th width="20%"> <?php _e('Create Time'); ?></th>
+                          <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
 
                         <tr role="row" class="filter">
                           <td></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_name"
-                                   placeholder="按名称搜索"></td>
+                                   placeholder="<?php _e('Search By Name'); ?>"></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_nlp"
-                                   placeholder="按NLP搜索">
+                                   placeholder="<?php _e('Search By NLP'); ?>">
                           </td>
 
                           <td>
                             <select name="search_single_type" class="form-control form-filter input-sm">
-                              <option value="all">属性</option>
-                              <option value="public">公开</option>
-                              <option value="self">私有</option>
+                              <option value="all"><?php _e('Property'); ?></option>
+                              <option value="public"><?php _e('Public'); ?></option>
+                              <option value="self"><?php _e('Private'); ?></option>
 
                             </select></td>
                           <td>

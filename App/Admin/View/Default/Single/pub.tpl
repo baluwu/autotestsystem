@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>公共用例 | 自动化测试系统</title>
+  <title><?php _e('Public Case')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -70,7 +70,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-cube font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">公共用例</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Public Case'); ?></span>
                     </div>
                     <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
@@ -78,7 +78,7 @@
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">公共用例</li>
+                        <li class="active"><?php _e('Public Case'); ?></li>
                       </ol>
                     </div>
                     <!-- END BREADCRUMBS -->
@@ -92,23 +92,23 @@
                           <th width="2%">
                             ID
                           </th>
-                          <th width="10%"> 名称</th>
+                          <th width="10%"> <?php _e('Name'); ?></th>
                           <th width="20%"> NLP/ASR</th>
-                          <th width="20%"> 规则</th>
-                          <th width="20%"> 创建时间</th>
-                          <th width="10%"> 创建人</th>
-                          <td>状态<i class="fa fa-info-circle tooltips" data-original-title="执行中的用例，请等待执行完成后在执行"></i></td>
-                          <th width="20%"> 操作</th>
+                          <th width="20%"> <?php _e('Rule'); ?></th>
+                          <th width="20%"> <?php _e('Create Time'); ?></th>
+                          <th width="10%"> <?php _e('Founder'); ?></th>
+                          <td><?php _e('State')}<i class="fa fa-info-circle tooltips" data-original-title="{:_e('If The Use Case Is Being Performed, Please Wait Until It Is Completed Before Performing It Again.'); ?>"></i></td>
+                          <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
 
                         <tr role="row" class="filter">
                           <td></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_name"
-                                   placeholder="按名称搜索"></td>
+                                   placeholder="<?php _e('Search By Name'); ?>"></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_nlp"
-                                   placeholder="按NLP搜索">
+                                   placeholder="<?php _e('Search By NLP'); ?>">
                           </td>
 
                           <td> </td>
@@ -160,7 +160,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#" >
     <div class="modal-body">
@@ -175,7 +175,7 @@
         </label>
 
         <div class="col-md-10">
-          当前执行用例:<span class="currName"></span>
+          <?php _e('Current Perform'); ?>:<span class="currName"></span>
         </div>
       </div>
 

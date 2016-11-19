@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: rokidlan\n"
-"POT-Creation-Date: 2016-11-18 17:16+0800\n"
-"PO-Revision-Date: 2016-11-18 17:22+0800\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-11-19 17:21+0800\n"
+"PO-Revision-Date: 2016-11-19 17:34+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -11,10 +11,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../../..\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-KeywordsList: _e;_et\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: gettext;_e\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: App/Admin/View\n"
+"X-Poedit-SearchPath-1: Public/assets/apps\n"
 
 #: Public/assets/apps/scripts/manage/index.js:40
 msgid "Disable"
@@ -26,10 +26,14 @@ msgid "Activate"
 msgstr "激活"
 
 #: Public/assets/apps/scripts/manage/index.js:42
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:183
+#: App/Admin/View/Default/Single/execute_history_show.tpl:185
 msgid "Fail"
 msgstr "失败"
 
 #: Public/assets/apps/scripts/manage/index.js:43
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:183
+#: App/Admin/View/Default/Single/execute_history_show.tpl:185
 msgid "Succeed"
 msgstr "成功"
 
@@ -41,248 +45,540 @@ msgstr "无法登录"
 msgid "Activation Confirmation"
 msgstr "确认激活"
 
-#: Public/assets/apps/scripts/task/tasks.js:59
+#: Public/assets/apps/scripts/task/tasks.js:58
 msgid "Check Result"
 msgstr "查看结果"
 
-#: Public/assets/global/plugins/jquery-ui/jquery-ui.min.js:8
-msgid "'"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:99
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:216
-msgid "Select files"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:100
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:217
-msgid "Add files to the upload queue and click the start button."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:106
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:227
-msgid "Filename"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:108
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:228
-msgid "Status"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:109
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:229
-msgid "Size"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:118
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:248
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:244
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:886
-msgid "Add Files"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:119
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:245
-msgid "Start Upload"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:201
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:857
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:971
-#, javascript-format
-msgid "Uploaded %d/%d files"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:250
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:888
-#, javascript-format
-msgid "%d files queued"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:262
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:361
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:235
-msgid "Drag files here."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:340
-msgid "Error: File too large:"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js:344
-msgid "Error: Invalid file extension:"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:219
-msgid "List"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:220
-msgid "Thumbnails"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:246
-msgid "Stop Upload"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:437
-msgid "File count error."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:454
-#, javascript-format
-msgid "File: %s"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:458
-#, javascript-format
-msgid "File: %s, size: %d, max file size: %d"
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:462
-#, javascript-format
-msgid "%s already present in the queue."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:466
-#, javascript-format
-msgid "Upload element accepts only %d file(s) at a time. Extra files were stripped."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:470
-msgid "Image format either wrong or not supported."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:474
-msgid "Runtime ran out of available memory."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:483
-msgid "Upload URL might be wrong or doesn't exist."
-msgstr ""
-
-#: Public/assets/global/plugins/plupload/js/jquery.ui.plupload/jquery.ui.plupload.js:780
-msgid "Close"
-msgstr "关闭"
-
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:12
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:152
-msgid "Users"
-msgstr "用户管理"
-
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:108
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:12
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:104
-msgid "Jobs"
-msgstr "任务管理"
-
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:113
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:131
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:147
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:109
-msgid "User List"
-msgstr "用户列表"
-
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:132
+#: App/Admin/View/Default/AuthGroup/index.tpl:5
+#: App/Admin/View/Default/Manage/index.tpl:56
+#: App/Admin/View/Default/Single/execute_history.tpl:126
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:120
+#: App/Admin/View/Default/Single/execute_history_show.tpl:121
+#: App/Admin/View/Default/Single/index.tpl:85
+#: App/Admin/View/Default/Single/recycle.tpl:80
 msgid "Add"
 msgstr "添加"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:136
+#: App/Admin/View/Default/AuthGroup/index.tpl:6
+msgid "Update"
+msgstr "更新"
+
+#: App/Admin/View/Default/AuthGroup/index.tpl:7
+msgid "Delete"
+msgstr "删除"
+
+#: App/Admin/View/Default/AuthGroup/index.tpl:8
+msgid "Refresh"
+msgstr "刷新"
+
+#: App/Admin/View/Default/AuthGroup/index.tpl:9
+msgid "Deselect"
+msgstr "无法选择"
+
+#: App/Admin/View/Default/AuthGroup/index.tpl:14
+#: App/Admin/View/Default/AuthGroup/index.tpl:20
+msgid "Role"
+msgstr "角色"
+
+#: App/Admin/View/Default/AuthGroup/index.tpl:15
+#: App/Admin/View/Default/AuthGroup/index.tpl:21
+msgid "Auth"
+msgstr "权限"
+
+#: App/Admin/View/Default/Diff/diff.tpl:159
+#: App/Admin/View/Default/Index/index.tpl:59
+#: App/Admin/View/Default/Single/execute_history.tpl:12
+#: App/Admin/View/Default/Single/execute_history.tpl:152
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:12
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:105
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:146
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:85
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:131
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:231
+#: App/Admin/View/Default/Single/execute_history_show.tpl:12
+#: App/Admin/View/Default/Single/execute_history_show.tpl:147
+#: App/Admin/View/Default/Single/index.tpl:12
+#: App/Admin/View/Default/Single/index.tpl:98
+#: App/Admin/View/Default/Single/index.tpl:103
+#: App/Admin/View/Default/Single/recycle.tpl:12
+#: App/Admin/View/Default/Single/recycle.tpl:69
+#: App/Admin/View/Default/Single/recycle.tpl:105
+msgid "Case"
+msgstr "我的用例"
+
+#: App/Admin/View/Default/Diff/diff.tpl:175
+msgid "Distinct"
+msgstr "去除重复"
+
+#: App/Admin/View/Default/Index/index.tpl:13
+msgid "Log Record"
+msgstr "任务执行记录"
+
+#: App/Admin/View/Default/Index/index.tpl:13
+#: App/Admin/View/Default/Login/index.tpl:10
+#: App/Admin/View/Default/Login/index.tpl:56
+#: App/Admin/View/Default/Logs/index.tpl:12
+#: App/Admin/View/Default/Profile/index.tpl:12
+#: App/Admin/View/Default/Single/execute_history.tpl:12
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:12
+#: App/Admin/View/Default/Single/execute_history_show.tpl:12
+#: App/Admin/View/Default/Single/index.tpl:12
+#: App/Admin/View/Default/Single/pub.tpl:12
+#: App/Admin/View/Default/Single/recycle.tpl:12
+#: App/Admin/View/Default/Task/addTask.tpl:12
+#: App/Admin/View/Default/Task/execute_history_show.tpl:11
+#: App/Admin/View/Default/Task/index.tpl:12
+msgid "Auto Test System"
+msgstr "自动化测试系统"
+
+#: App/Admin/View/Default/Index/index.tpl:72
+msgid "Case Group"
+msgstr "用例分组"
+
+#: App/Admin/View/Default/Index/index.tpl:85
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:84
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:84
+#: App/Admin/View/Default/Single/pub.tpl:12
+#: App/Admin/View/Default/Single/pub.tpl:73
+#: App/Admin/View/Default/Single/pub.tpl:81
+msgid "Public Case"
+msgstr "公共用例"
+
+#: App/Admin/View/Default/Index/index.tpl:97
+msgid "Public Case Group"
+msgstr "公共用例组"
+
+#: App/Admin/View/Default/Login/index.tpl:10
+msgid "Login"
+msgstr "登录"
+
+#: App/Admin/View/Default/Login/index.tpl:60
+msgid "Enter any username and password"
+msgstr "请输入用户名和密码"
+
+#: App/Admin/View/Default/Manage/index.tpl:12
+#: App/Admin/View/Default/Manage/index.tpl:76
+#: App/Admin/View/Default/Public/header.tpl:87
+msgid "Users"
+msgstr "用户管理"
+
+#: App/Admin/View/Default/Manage/index.tpl:55
+#: App/Admin/View/Default/Manage/index.tpl:71
+#: App/Admin/View/Default/Single/execute_history.tpl:115
+msgid "User List"
+msgstr "用户列表"
+
+#: App/Admin/View/Default/Manage/index.tpl:60
 msgid "User Group"
-msgstr "用户组"
+msgstr "用户组管理"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:162
+#: App/Admin/View/Default/Manage/index.tpl:86
 msgid "Account"
-msgstr "账号"
+msgstr "帐号"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:163
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:172
+#: App/Admin/View/Default/Manage/index.tpl:87
+#: App/Admin/View/Default/Single/execute_history.tpl:81
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:78
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:106
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:110
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:109
+#: App/Admin/View/Default/Single/execute_history_show.tpl:77
+#: App/Admin/View/Default/Single/index.tpl:113
+#: App/Admin/View/Default/Single/pub.tpl:95
+#: App/Admin/View/Default/Single/recycle.tpl:131
+#: App/Admin/View/Default/Task/addTask.tpl:135
+#: App/Admin/View/Default/Task/addTask.tpl:138
+#: App/Admin/View/Default/Task/execute_history_show.tpl:61
+#: App/Admin/View/Default/Task/execute_history_show.tpl:93
+#: App/Admin/View/Default/Task/index.tpl:96
 msgid "Name"
 msgstr "姓名"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:164
+#: App/Admin/View/Default/Manage/index.tpl:88
+#: App/Admin/View/Default/Profile/index.tpl:144
 msgid "Email Address"
 msgstr "邮箱"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:165
+#: App/Admin/View/Default/Manage/index.tpl:89
 msgid "User Groups"
 msgstr "用户组"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:166
+#: App/Admin/View/Default/Manage/index.tpl:90
 msgid "Found Time"
 msgstr "创建时间"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:167
+#: App/Admin/View/Default/Manage/index.tpl:91
 msgid "Last Visit Time"
 msgstr "最后登录时间"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:168
+#: App/Admin/View/Default/Manage/index.tpl:92
 msgid "Last Visit IP"
 msgstr "最后登录IP"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:169
+#: App/Admin/View/Default/Manage/index.tpl:93
 msgid "Start"
 msgstr "启用"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:169
-msgid "’N’ is disable state"
-msgstr "N为禁用状态"
-
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:170
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:177
+#: App/Admin/View/Default/Manage/index.tpl:94
+#: App/Admin/View/Default/Single/execute_history.tpl:198
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:168
+#: App/Admin/View/Default/Single/index.tpl:119
+#: App/Admin/View/Default/Single/pub.tpl:101
+#: App/Admin/View/Default/Single/recycle.tpl:136
+#: App/Admin/View/Default/Task/index.tpl:101
 msgid "Operate"
-msgstr "操作"
+msgstr "操作者"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:174
+#: App/Admin/View/Default/Manage/index.tpl:98
 msgid "Search By UserName"
-msgstr "按用户名搜索"
+msgstr "根据用户名搜索"
 
-#: App/Runtime/Cache/Admin/9e0f50eaaef423502bad01dddfc7a578.php:175
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:182
+#: App/Admin/View/Default/Manage/index.tpl:99
+#: App/Admin/View/Default/Single/index.tpl:126
+#: App/Admin/View/Default/Single/pub.tpl:108
+#: App/Admin/View/Default/Single/recycle.tpl:143
+#: App/Admin/View/Default/Task/index.tpl:106
 msgid "Search By Name"
-msgstr "按名称搜索"
+msgstr "根据姓名搜索"
 
-#: App/Runtime/Cache/Admin/f9407c4f5dbe13bfabad21f98686778b.php:99
-msgid "Manage Tasks"
+#: App/Admin/View/Default/Profile/index.tpl:12
+#: App/Admin/View/Default/Profile/index.tpl:66
+msgid "User Info"
+msgstr "用户信息"
+
+#: App/Admin/View/Default/Profile/index.tpl:131
+msgid "User Name"
+msgstr "用户名"
+
+#: App/Admin/View/Default/Profile/index.tpl:138
+msgid "Nickname"
+msgstr "昵称"
+
+#: App/Admin/View/Default/Profile/index.tpl:150
+msgid "Last Login"
+msgstr "最后登录"
+
+#: App/Admin/View/Default/Profile/index.tpl:210
+#: App/Admin/View/Default/Single/execute_history.tpl:105
+#: App/Admin/View/Default/Single/execute_history.tpl:256
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:98
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:224
+#: App/Admin/View/Default/Single/execute_history_show.tpl:99
+#: App/Admin/View/Default/Single/execute_history_show.tpl:248
+#: App/Admin/View/Default/Single/pub.tpl:163
+msgid "Execution"
+msgstr "执行"
+
+#: App/Admin/View/Default/Profile/index.tpl:225
+#: App/Admin/View/Default/Single/execute_history.tpl:271
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:254
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:239
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:238
+#: App/Admin/View/Default/Single/execute_history_show.tpl:263
+#: App/Admin/View/Default/Single/index.tpl:214
+#: App/Admin/View/Default/Single/pub.tpl:178
+msgid "Current Perform"
+msgstr "当前执行用例"
+
+#: App/Admin/View/Default/Public/header.tpl:23
+msgid "Add Case"
+msgstr "添加用例"
+
+#: App/Admin/View/Default/Public/header.tpl:24
+msgid "Add Case Group"
+msgstr "添加用例组"
+
+#: App/Admin/View/Default/Public/header.tpl:25
+#: App/Admin/View/Default/Task/addTask.tpl:12
+#: App/Admin/View/Default/Task/addTask.tpl:77
+#: App/Admin/View/Default/Task/addTask.tpl:91
+#: App/Admin/View/Default/Task/addTask.tpl:103
+msgid "Add Job"
+msgstr "添加任务"
+
+#: App/Admin/View/Default/Public/header.tpl:44
+msgid "My Information"
+msgstr "我的资料"
+
+#: App/Admin/View/Default/Public/header.tpl:45
+msgid "My Note"
+msgstr "我的日志"
+
+#: App/Admin/View/Default/Public/header.tpl:61
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: App/Admin/View/Default/Public/header.tpl:71
+#: App/Admin/View/Default/Task/addTask.tpl:12
+#: App/Admin/View/Default/Task/addTask.tpl:73
+#: App/Admin/View/Default/Task/addTask.tpl:101
+#: App/Admin/View/Default/Task/execute_history_show.tpl:11
+#: App/Admin/View/Default/Task/execute_history_show.tpl:117
+msgid "Case Groups"
+msgstr "用例分组"
+
+#: App/Admin/View/Default/Public/header.tpl:80
+#: App/Admin/View/Default/Task/execute_history_show.tpl:86
+#: App/Admin/View/Default/Task/index.tpl:12
+msgid "Jobs"
 msgstr "任务管理"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:130
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:137
-msgid "Job Record"
-msgstr "任务执行记录"
+#: App/Admin/View/Default/Single/execute_history.tpl:12
+#: App/Admin/View/Default/Single/execute_history.tpl:142
+#: App/Admin/View/Default/Single/execute_history.tpl:154
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:149
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:202
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:74
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:86
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:88
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:74
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:87
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:89
+#: App/Admin/View/Default/Single/execute_history_show.tpl:12
+#: App/Admin/View/Default/Single/execute_history_show.tpl:137
+#: App/Admin/View/Default/Single/execute_history_show.tpl:150
+#: App/Admin/View/Default/Single/execute_history_show.tpl:213
+msgid "Case Record"
+msgstr "执行记录"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:156
+#: App/Admin/View/Default/Single/execute_history.tpl:75
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:73
+#: App/Admin/View/Default/Single/execute_history_show.tpl:72
+msgid "Case Info"
+msgstr "用例信息"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:83
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:80
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:108
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:112
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:111
+#: App/Admin/View/Default/Single/execute_history_show.tpl:79
+#: App/Admin/View/Default/Single/index.tpl:115
+#: App/Admin/View/Default/Single/index.tpl:134
+#: App/Admin/View/Default/Single/recycle.tpl:133
+#: App/Admin/View/Default/Single/recycle.tpl:151
+msgid "Property"
+msgstr "属性"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:92
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:86
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:121
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:125
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:124
+#: App/Admin/View/Default/Single/execute_history_show.tpl:88
+#: App/Admin/View/Default/Task/execute_history_show.tpl:63
+msgid "Belongs to the user"
+msgstr "所属用户"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:94
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:88
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:186
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:124
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:128
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:127
+#: App/Admin/View/Default/Single/execute_history_show.tpl:90
+#: App/Admin/View/Default/Single/execute_history_show.tpl:189
+#: App/Admin/View/Default/Single/index.tpl:117
+#: App/Admin/View/Default/Single/pub.tpl:98
+#: App/Admin/View/Default/Single/recycle.tpl:135
+#: App/Admin/View/Default/Task/execute_history_show.tpl:64
+#: App/Admin/View/Default/Task/execute_history_show.tpl:99
+msgid "Create Time"
+msgstr "创建时间"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:99
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:92
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:127
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:130
+#: App/Admin/View/Default/Single/execute_history_show.tpl:92
+#: App/Admin/View/Default/Single/index.tpl:116
+#: App/Admin/View/Default/Single/pub.tpl:97
+#: App/Admin/View/Default/Single/recycle.tpl:134
+msgid "Rule"
+msgstr "规则"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:119
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:113
+#: App/Admin/View/Default/Single/execute_history_show.tpl:114
+#: App/Admin/View/Default/Single/index.tpl:78
+#: App/Admin/View/Default/Single/recycle.tpl:12
+#: App/Admin/View/Default/Single/recycle.tpl:73
+#: App/Admin/View/Default/Single/recycle.tpl:96
+#: App/Admin/View/Default/Single/recycle.tpl:107
+msgid "Recycle Bin"
+msgstr "回收站"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:176
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:12
+#: App/Admin/View/Default/Task/index.tpl:80
 msgid "Contrast"
 msgstr "对比"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:173
+#: App/Admin/View/Default/Single/execute_history.tpl:195
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:182
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:165
+#: App/Admin/View/Default/Single/execute_history_show.tpl:183
+msgid "Execution Result"
+msgstr "执行结果"
+
+#: App/Admin/View/Default/Single/execute_history.tpl:196
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:166
+#: App/Admin/View/Default/Task/addTask.tpl:145
+#: App/Admin/View/Default/Task/addTask.tpl:148
+#: App/Admin/View/Default/Task/index.tpl:97
 msgid "Time"
 msgstr "执行时间"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:174
-msgid "Version"
-msgstr "版本号"
+#: App/Admin/View/Default/Single/execute_history.tpl:197
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:198
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:167
+#: App/Admin/View/Default/Single/execute_history_show.tpl:207
+msgid "Executioner"
+msgstr "执行者"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:175
-msgid "Note"
-msgstr "备注"
+#: App/Admin/View/Default/Single/execute_history.tpl:205
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:175
+msgid "Search By IP"
+msgstr "根据IP搜索"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:176
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:109
+#: App/Admin/View/Default/Single/execute_history_show.tpl:110
+#: App/Admin/View/Default/Single/index.tpl:74
+#: App/Admin/View/Default/Task/execute_history_show.tpl:69
+msgid "List"
+msgstr "用例列表"
+
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:136
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:12
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:75
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:90
+msgid "Case Record Contrast"
+msgstr "执行记录对比"
+
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:190
+#: App/Admin/View/Default/Single/execute_history_show.tpl:195
+#: App/Admin/View/Default/Task/execute_history_show.tpl:101
+#: App/Admin/View/Default/Task/execute_history_show.tpl:131
+msgid "Start Time"
+msgstr "开始时间"
+
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:194
+#: App/Admin/View/Default/Single/execute_history_show.tpl:201
+#: App/Admin/View/Default/Task/execute_history_show.tpl:102
+#: App/Admin/View/Default/Task/execute_history_show.tpl:132
+msgid "Finish Time"
+msgstr "结束时间"
+
+#: App/Admin/View/Default/Single/execute_history_diff.tpl:239
+msgid "Performing"
+msgstr "计划执行时间"
+
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:108
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:112
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:111
+#: App/Admin/View/Default/Single/index.tpl:135
+#: App/Admin/View/Default/Single/recycle.tpl:152
+msgid "Public"
+msgstr "公开"
+
+#: App/Admin/View/Default/Single/execute_history_pub.tpl:108
+#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:112
+#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:111
+#: App/Admin/View/Default/Single/index.tpl:136
+#: App/Admin/View/Default/Single/recycle.tpl:153
+msgid "Private"
+msgstr "私有"
+
+#: App/Admin/View/Default/Single/execute_history_show.tpl:152
+#: App/Admin/View/Default/Task/execute_history_show.tpl:11
+msgid "Case Record Show"
+msgstr "执行记录查看"
+
+#: App/Admin/View/Default/Single/execute_history_show.tpl:221
+msgid "Back"
+msgstr "返回"
+
+#: App/Admin/View/Default/Single/index.tpl:118
+#: App/Admin/View/Default/Single/pub.tpl:100
+msgid "State"
+msgstr "状态"
+
+#: App/Admin/View/Default/Single/index.tpl:129
+#: App/Admin/View/Default/Single/pub.tpl:111
+#: App/Admin/View/Default/Single/recycle.tpl:146
+msgid "Search By NLP"
+msgstr "按NLP搜索"
+
+#: App/Admin/View/Default/Single/index.tpl:188
+msgid "It Cannot Be Recovered After Delete, Continue Or Not?"
+msgstr "删除后不可恢复，要继续么？"
+
+#: App/Admin/View/Default/Single/index.tpl:199
+msgid "Perform"
+msgstr "执行用例"
+
+#: App/Admin/View/Default/Single/pub.tpl:99
+#: App/Admin/View/Default/Task/index.tpl:100
 msgid "Founder"
 msgstr "创建者"
 
-#: App/Runtime/Cache/Admin/fca7f0d44584a35b23af56a405a2caea.php:189
+#: App/Admin/View/Default/Task/addTask.tpl:155
+#: App/Admin/View/Default/Task/addTask.tpl:158
+#: App/Admin/View/Default/Task/execute_history_show.tpl:62
+#: App/Admin/View/Default/Task/execute_history_show.tpl:94
+#: App/Admin/View/Default/Task/index.tpl:98
+msgid "Version"
+msgstr "版本号"
+
+#: App/Admin/View/Default/Task/addTask.tpl:165
+#: App/Admin/View/Default/Task/addTask.tpl:168
+#: App/Admin/View/Default/Task/execute_history_show.tpl:105
+#: App/Admin/View/Default/Task/index.tpl:99
+msgid "Note"
+msgstr "备注"
+
+#: App/Admin/View/Default/Task/addTask.tpl:173
+msgid "Select Case"
+msgstr "用例选择"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:57
+msgid "Job Info"
+msgstr "任务信息"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:81
+#: App/Admin/View/Default/Task/index.tpl:54
+#: App/Admin/View/Default/Task/index.tpl:61
+msgid "Job Record"
+msgstr "任务执行记录"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:87
+msgid "Execution Record Show"
+msgstr "执行记录查看"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:100
+msgid "Plan To performing"
+msgstr "计划执行时间"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:105
+msgid "Not"
+msgstr "无"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:123
+msgid "Path"
+msgstr "路径"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:124
+msgid "Type"
+msgstr "类型"
+
+#: App/Admin/View/Default/Task/index.tpl:113
 msgid "Search By Version"
-msgstr "根据版本号查询"
-
-#~ msgid "Task Execute Record"
-#~ msgstr "任务执行记录"
-
-#~ msgid "Task Name"
-#~ msgstr "任务名称"
-
-#~ msgid "Execute Time"
-#~ msgstr "执行时间"
-
-#~ msgid "Version Number"
-#~ msgstr "版本号"
+msgstr "根据版本号搜索"

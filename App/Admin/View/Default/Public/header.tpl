@@ -20,9 +20,9 @@
                             <i class="fa fa-plus"></i>
                         </button>
                         <ul class="dropdown-menu-v2" role="menu">
-                            <li> <a href="/Single/add">添加用例</a> </li>
-                            <li> <a href="/Group/add">添加用例组</a> </li>
-                            <li> <a href="/Group/add">添加任务</a> </li>
+                            <li> <a href="/Single/add"><?php _e('Add Case'); ?></a> </li>
+                            <li> <a href="/Group/add"><?php _e('Add Case Group'); ?></a> </li>
+                            <li> <a href="/Group/add"><?php _e('Add Job'); ?></a> </li>
                         </ul>
                     </div>
                     <div class="btn-group-img btn-group">
@@ -41,8 +41,8 @@
                             <img src="{$admin_info.headImg}" alt="{$admin_info.nickname}">
                         </button>
                         <ul class="dropdown-menu-v2" role="menu">
-                            <li> <a href="/Profile"> <i class="fa fa-user"></i> 我的资料 </a> </li>
-                            <li> <a href="/Logs/"> <i class="fa fa-reorder"></i> 我的日志 </a> </li>
+                            <li> <a href="/Profile"> <i class="fa fa-user"></i> <?php _e('My Information'); ?> </a> </li>
+                            <li> <a href="/Logs/"> <i class="fa fa-reorder"></i> <?php _e('My Note'); ?> </a> </li>
                             <li class="divider"></li>
                             <li> <a href="#"> <i class="fa fa-lock"></i> Lock Screen </a> </li> 
                             <li> <a href="{:U('Login/out')}"> <i class="fa fa-sign-out"></i> Log Out </a> </li>
@@ -58,7 +58,7 @@
                     </if>
                     >
                     <a href="/Index/" class="text-uppercase">
-                        <i class="fa fa-home"></i> Dashboard </a>
+                        <i class="fa fa-home"></i><?php _e('Dashboard'); ?> </a>
                     </li>
                   <li
                   <if condition="(CONTROLLER_NAME eq 'Group')">
@@ -68,7 +68,7 @@
                   </if>
                   >
                     <a href="/Group/index" class="text-uppercase">
-                        <i class="fa fa-object-group"></i> 用例组管理 </a>
+                        <i class="fa fa-object-group"></i><?php _e('Case Groups'); ?> </a>
                     </li>
                     <li
                   <if condition="(CONTROLLER_NAME eq 'Task')">
@@ -77,14 +77,14 @@
                     </in>
                   </if>
                   >
-                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> {:_e('Jobs')}</a>
+                    <a href="/Task/index" class="text-uppercase"><i class="fa fa-tasks"></i> <?php _e('Jobs'); ?></a>
                     </li>
                     <if condition="($admin_info.group_id eq 1)">
 
                         <li
                         <if condition="($CONTROLLER_NAME eq 'Manage')"> class="active open selected"</if>
                         >
-                        <a href="/Manage/index" class="text-uppercase"> <i class="fa fa-users"></i> {:_e('User List')} </a>
+                        <a href="/Manage/index" class="text-uppercase"> <i class="fa fa-users"></i> <?php _e('Users'); ?> </a>
                         </li>
                     </if>
                 </ul>

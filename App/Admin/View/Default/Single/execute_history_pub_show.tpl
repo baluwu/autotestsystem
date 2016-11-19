@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>执行记录查看 | 公共用例 | 自动化测试系统 </title>
+  <title><?php _e('Case Record')} | {:_e('Public Case')} | {:_e('Auto Test System'); ?> </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -71,7 +71,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-history font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">执行记录查看</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Case Record'); ?></span>
                     </div>
                     <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
@@ -81,12 +81,12 @@
                           <a href="/Index">Home</a>
                         </li>
                         <li>
-                          <a href="/Single/pub">公共用例</a>
+                          <a href="/Single/pub"><?php _e('Public Case'); ?></a>
                         </li>
                           <li>
-                              <a href="/Single/execute_history_pub/id/{:I('tid')}">用例执行记录</a>
+                              <a href="/Single/execute_history_pub/id/{:I('tid')}"><?php _e('Case Record'); ?></a>
                           </li>
-                        <li class="active">执行记录查看</li>
+                        <li class="active"><?php _e('Case Record'); ?></li>
                       </ol>
                       <!-- Sidebar Toggle Button -->
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -106,9 +106,9 @@
                         <div class="row">
 
 
-                          <div class="col-md-3">  <p class="margin-bottom-10 tooltips"><i class="fa fa-object-group font-blue"></i>名称:</p>{$single.name}</div>
+                          <div class="col-md-3">  <p class="margin-bottom-10 tooltips"><i class="fa fa-object-group font-blue"></i><?php _e('Name'); ?>:</p>{$single.name}</div>
 
-                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-gg font-blue"></i>属性:</p><if condition="($single.ispublic eq 1)">公有<else />私有</if></div>
+                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-gg font-blue"></i><?php _e('Property')}:</p><if condition="($single.ispublic eq 1)">{:_e('Public')}<else />{:_e('Private'); ?></if></div>
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-user font-blue"></i>所属用户:</p> {$single.nickname}<if condition="($single.nickname eq null) OR ($single.nickname eq '') ">{$single.nickname} </if></div>
+                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-user font-blue"></i><?php _e('Belongs to the user'); ?>:</p> {$single.nickname}<if condition="($single.nickname eq null) OR ($single.nickname eq '') ">{$single.nickname} </if></div>
 
 
-                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-calendar font-blue"></i>创建时间:</p> {$single.create_time|strtotime|date="Y-m-d",###}</div>
+                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-calendar font-blue"></i><?php _e('Create Time'); ?>:</p> {$single.create_time|strtotime|date="Y-m-d",###}</div>
 
 
-                          <div class="col-md-1">  <p class="margin-bottom-10 tooltips" data-original-title="规则"><i class="fa fa-cog font-blue"></i>规则：
+                          <div class="col-md-1">  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Rule')}"><i class="fa fa-cog font-blue"></i>{:_e('Rule'); ?>：
                               <foreach name="single.validates" item="v" >
                                 <li style="list-style-type: none">{$v.v1}{$v.dept}{$v.v2}</li>
                               </foreach>
@@ -135,7 +135,7 @@
                           </div>
                           <div class="col-md-1">
                             <p class="margin-bottom-10" ><i class="fa fa-rotate-left font-blue"></i>
-                              <a href="javascript:void(0)" class="exec_btn" data-toggle="modal" data-title="{$single.name}" data-id="{$single.id}">执行</a>
+                              <a href="javascript:void(0)" class="exec_btn" data-toggle="modal" data-title="{$single.name}" data-id="{$single.id}"><?php _e('Execution'); ?></a>
                             </p>
                           </div>
                         </div>
@@ -155,37 +155,37 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-2">执行结果</label>
+                          <label class="control-label col-md-2"><?php _e('Execution Result'); ?></label>
                           <div class="col-md-10">
-                            <p class="form-control-static"> <if condition="($data.status eq 2) ">成功<else />失败 </if>  </p>
+                            <p class="form-control-static"> <if condition="($data.status eq 2) "><?php _e('Succeed')}<else />{:_e('Fail'); ?> </if>  </p>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-2">创建时间</label>
+                          <label class="control-label col-md-2"><?php _e('Create Time'); ?></label>
                           <div class="col-md-10">
                             <p class="form-control-static"> {$data.create_time} </p>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-2">开始执行时间</label>
+                          <label class="control-label col-md-2"><?php _e('Start Time'); ?></label>
                           <div class="col-md-10">
                             <p class="form-control-static"> {$data.exec_start_time} </p>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-2">执行完成时间</label>
+                          <label class="control-label col-md-2"><?php _e('Case Record'); ?></label>
                           <div class="col-md-10">
                             <p class="form-control-static"> {$data.exec_end_time} </p>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-2">执行人</label>
+                          <label class="control-label col-md-2"><?php _e('Executioner'); ?></label>
                           <div class="col-md-10">
                             <p class="form-control-static"> {$data.nickname}<if condition="($data.nickname eq null) OR ($data.nickname eq '') ">{$data.username} </if></p>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-2">执行记录</label>
+                          <label class="control-label col-md-2"><?php _e('Case Record'); ?></label>
                           <div class="col-md-10">
                             <p class="form-control-static code">  </p>
                           </div>
@@ -193,7 +193,7 @@
 
                       </div>
                       <div class="form-actions">
-                        <a href="/Single/execute_history_pub/id/{:I('tid')}" class="btn default">返回</a>
+                        <a href="/Single/execute_history_pub/id/{:I('tid')}" class="btn default"><?php _e('Back'); ?></a>
                       </div>
 
                     <!-- END -->
@@ -220,7 +220,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#">
     <div class="modal-body">
@@ -235,7 +235,7 @@
         </label>
 
         <div class="col-md-10">
-          当前执行用例:<span class="currName"></span>
+          <?php _e('Current Perform'); ?>:<span class="currName"></span>
         </div>
       </div>
 

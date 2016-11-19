@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>用例执行记录 | 用例管理 | 自动化测试系统 </title>
+  <title><?php _e('Case Record')} | {:_e('Case')} | {:_e('Auto Test System'); ?> </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -72,15 +72,15 @@
                 <div class="portlet-title">
                   <div class="caption">
                     <i class="fa fa-object-group font-green"></i>
-                    <span class="caption-subject font-green bold uppercase">用例信息</span>
+                    <span class="caption-subject font-green bold uppercase"><?php _e('Case Info'); ?></span>
                   </div>
                 </div>
 
 
                 <div class="portlet-body list">
-                  <p class="margin-bottom-10 tooltips" data-original-title="名称"><i class="fa fa-object-group"></i>{$single.name}</p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Name'); ?>"><i class="fa fa-object-group"></i>{$single.name}</p>
 
-                  <p class="margin-bottom-10 tooltips" data-original-title="属性"><i class="fa fa-gg"></i><if condition="($single.ispublic eq 1)">公有<else />私有</if></p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Property')}"><i class="fa fa-gg"></i><if condition="($single.ispublic eq 1)">{:_e('Public')}<else />{:_e('Private'); ?></if></p>
                   <p class="margin-bottom-10 tooltips" data-original-title="NLP\ARC"><i class="fa fa-soundcloud"></i>{$single.nlp}
 
                     <if condition="$single.arc neq '' ">
@@ -89,20 +89,20 @@
 
                   </p>
 
-                  <p class="margin-bottom-10 tooltips" data-original-title="所属用户"><i class="fa fa-user"></i>{$single.nickname}<if condition="($single.nickname eq null) OR ($single.nickname eq '') ">{$group.nickname} </if></p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Belongs to the user'); ?>"><i class="fa fa-user"></i>{$single.nickname}<if condition="($single.nickname eq null) OR ($single.nickname eq '') ">{$group.nickname} </if></p>
 
-                  <p class="margin-bottom-10 tooltips" data-original-title="创建时间"><i class="fa fa-calendar font-blue"></i>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Create Time'); ?>"><i class="fa fa-calendar font-blue"></i>
                     {$single.create_time|strtotime|date="Y-m-d",###}
 
                   </p>
 
-                    <p class="margin-bottom-10 tooltips" data-original-title="规则"><i class="fa fa-cog font-blue"></i>
+                    <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Rule'); ?>"><i class="fa fa-cog font-blue"></i>
                         <foreach name="single.validates" item="v" >
                             <li style="list-style-type: none">{$v.v1}{$v.dept}{$v.v2}</li>
                         </foreach>
                     </p>
                   <p class="margin-bottom-10" ><i class="fa fa-rotate-left font-blue"></i>
-                    <a href="javascript:void(0)" class="exec_btn" data-toggle="modal" data-title="{$single.name}" data-id="{$single.id}">执行</a>
+                    <a href="javascript:void(0)" class="exec_btn" data-toggle="modal" data-title="{$single.name}" data-id="{$single.id}"><?php _e('Execution'); ?></a>
                   </p>
                 </div>
               </div>
@@ -112,18 +112,18 @@
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
                   <a href="/Single/index">
-                    <i class="fa fa-object-ungroup"></i> 用例列表 </a>
+                    <i class="fa fa-object-ungroup"></i> <?php _e('User List'); ?> </a>
                 </li>
                 <li>
                   <a href="/Single/recycle">
-                    <i class="fa fa-recycle "></i> 回收站 </a>
+                    <i class="fa fa-recycle "></i> <?php _e('Recycle Bin'); ?> </a>
                 </li>
               </ul>
               <h3>Quick Actions</h3>
               <ul class="nav navbar-nav">
                 <li>
                   <a href="/Single/add">
-                    <i class="fa fa-plus "></i> 添加用例</a>
+                    <i class="fa fa-plus "></i> <?php _e('Add'); ?></a>
                 </li>
 
               </ul>
@@ -139,7 +139,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-history font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用例执行记录</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Case Record'); ?></span>
                     </div>
                     <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
@@ -149,9 +149,9 @@
                           <a href="/Index">Home</a>
                         </li>
                         <li>
-                          <a href="/Single/index">用例管理</a>
+                          <a href="/Single/index"><?php _e('Case'); ?></a>
                         </li>
-                        <li class="active">用例记录</li>
+                        <li class="active"><?php _e('Case Record'); ?></li>
                       </ol>
                       <!-- Sidebar Toggle Button -->
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -173,7 +173,7 @@
                           <div class="col-md-6">
                             <div class="btn-group">
                               <a id="execute_diff" target="_blank" class="btn sbold green">
-                                <i class="fa fa fa-th-list"></i> 对比
+                                <i class="fa fa fa-th-list"></i> <?php _e('Contrast'); ?>
                               </a>
                             </div>
                           </div>
@@ -192,17 +192,17 @@
                           <th width="10%"> IP</th>
                           <th width="10%"> PORT</th>
 
-                          <th width="10%"> 执行结果</th>
-                          <th width="20%"> 执行时间</th>
-                          <th width="7%"> 执行人</th>
-                          <th width="20%"> 操作</th>
+                          <th width="10%"> <?php _e('Execution Result'); ?></th>
+                          <th width="20%"> <?php _e('Time'); ?></th>
+                          <th width="7%"> <?php _e('Executioner'); ?></th>
+                          <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
 
                         <tr role="row" class="filter">
                           <td></td>
                           <td>
                             <input type="text" class="form-control form-filter input-sm" name="search_single_name"
-                                   placeholder="按ip搜索"></td>
+                                   placeholder="<?php _e('Search By IP'); ?>"></td>
                           <td></td>
                           <td></td>
 
@@ -253,7 +253,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#">
     <div class="modal-body">
@@ -268,7 +268,7 @@
         </label>
 
         <div class="col-md-10">
-          当前执行用例:<span class="currName"></span>
+          <?php _e('Current Perform'); ?>:<span class="currName"></span>
         </div>
       </div>
 

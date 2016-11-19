@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>{:_e('Jobs')}</title>
+  <title><?php _e('Jobs')} | {:_e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -51,14 +51,14 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-tasks font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">{:_e('Job Record')}</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Job Record'); ?></span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">{:_e('Job Record')}</li>
+                        <li class="active"><?php _e('Job Record'); ?></li>
                       </ol>
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
                         <span class="sr-only">Toggle navigation</span>
@@ -77,7 +77,7 @@
                           <div class="col-md-6">
                             <div class="btn-group">
                               <a id="execute_diff" target="_blank" class="btn sbold green">
-                                <i class="fa fa fa-th-list"></i> {:_e('Contrast')}
+                                <i class="fa fa fa-th-list"></i> <?php _e('Contrast'); ?>
                               </a>
                             </div>
                           </div>
@@ -93,24 +93,24 @@
                             </label>
                           </th>
                           <th width="5%"> ID</th>
-                          <th width="15%"> {:_e('Name')}</th>
-                          <th width="15%"> {:_e('Time')}</th>
-                          <th width="10%"> {:_e('Version')}</th>
-                          <th width="20%"> {:_e('Note')}</th>
-                          <th width="8%"> {:_e('Founder')}</th>
-                          <th> {:_e('Operate')}</th>
+                          <th width="15%"> <?php _e('Name'); ?></th>
+                          <th width="15%"> <?php _e('Time'); ?></th>
+                          <th width="10%"> <?php _e('Version'); ?></th>
+                          <th width="20%"> <?php _e('Note'); ?></th>
+                          <th width="8%"> <?php _e('Founder'); ?></th>
+                          <th> <?php _e('Operate'); ?></th>
                         </tr>
                         <tr role="row" class="filter">
                           <td></td>
                           <td></td>
-                          <td> <input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="{:_e('Search By Name')}"></td> <td>
+                          <td> <input type="text" class="form-control form-filter input-sm" name="search_name" placeholder="<?php _e('Search By Name'); ?>"></td> <td>
                             <div class="input-daterange input-group" id="datepicker">
                               <input type="text" class="input-sm form-control form-filter" name="date_from" placeholder="From"/>
                               <span class="input-group-addon">to</span>
                               <input type="text" class="input-sm form-control form-filter" name="date_to" placeholder="To"/>
                             </div>
                           </td>
-                          <td> <input type="text" class="form-control form-filter input-sm" name="search_ver" placeholder="{:_e('Search By Version')}"> </td>
+                          <td> <input type="text" class="form-control form-filter input-sm" name="search_ver" placeholder="<?php _e('Search By Version'); ?>"> </td>
                           <td></td>
                           <td></td>
                           <td>
