@@ -2,7 +2,6 @@
  * Created by andy on 16/7/8.
  */
 jQuery(document).ready(function () {
-  var gt = new Gettext({ 'domain' : 'rokid_lang' });
   var TableDatatablesAjax = function () {
 
     var initPickers = function () {
@@ -56,8 +55,7 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                var ckjg = gt.gettext('Check Result');
-                return '<a title="'+ckjg+'" target="_blank" href="./execute_history_show/id/' + row.id + '" class=""> <i class="fa fa-history"></i></a>';
+                return '<a title="'+_et('Check Result')+'" target="_blank" href="./execute_history_show/id/' + row.id + '" class=""> <i class="fa fa-history"></i></a>';
               },
               "targets": 7
             }

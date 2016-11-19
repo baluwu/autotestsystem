@@ -1263,3 +1263,11 @@ Copyright (C) 2008, Joshua I. Miller E<lt>unrtst@cpan.orgE<gt>, all rights reser
 
 */
 
+//封装一个方便js调用gettext方法
+var _et;
+if(rokid_gt == undefined && Gettext != undefined) {
+    var rokid_gt = new Gettext({ 'domain' : 'rokid_lang' });
+    _et = function (msg) {
+        return rokid_gt.gettext(msg);
+    }
+}
