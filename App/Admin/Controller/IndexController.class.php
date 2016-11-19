@@ -6,7 +6,7 @@ use Think\Auth;
 
 //后台框架首页控制器
 class IndexController extends AuthController {
-  protected $not_verify_action = ['_empty', 'index', 'getNav', 'getNavAll'];
+  protected $not_verify_action = ['_empty', 'index', 'getNav', 'getNavAll', 'setLangConf'];
 
 
   //显示后台框架
@@ -83,6 +83,8 @@ class IndexController extends AuthController {
       $get_set_lan = $lan_config['def'];
     }
     session('SET_LANG_CONF', $get_set_lan);
+
+    $this->ajaxReturn(1);
   }
 
 }
