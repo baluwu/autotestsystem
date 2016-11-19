@@ -2,8 +2,22 @@
 
 namespace Admin\Controller;
 use Think\Controller;
+use Common\Libs\Tool;
 
 class TestController extends Controller {
+
+    /**
+      *邮件发送demo。邮件服务默认配置在Common/Conf/config.php文件
+      *接收方邮箱，qq类型邮箱回被过滤，163可能被当成垃圾邮件
+      */
+    /**
+    public function mail(){
+        $rz = Tool::mail('wone2r@163.compact', 'Test PHPMailer Lite', 'something here ...');
+        echo "<pre>";
+        print_r($rz);
+    }
+    */
+
     public function single() {
         /*single*/
         $taskData = [
