@@ -80,7 +80,8 @@ class IndexController extends AuthController {
     $get_set_lan = I('get.lan', '');
     //如果无lan参数，就直接进行 中英文切换
     if( empty($get_set_lan) ) {
-      if(empty(session('SET_LANG_CONF')) || session('SET_LANG_CONF')=='zh_CN') {
+      $s_lan = session('SET_LANG_CONF');
+      if(empty($s_lan) || $s_lan=='zh_CN') {
         $get_set_lan = 'en_US';
       } else {
         $get_set_lan = 'zh_CN';
