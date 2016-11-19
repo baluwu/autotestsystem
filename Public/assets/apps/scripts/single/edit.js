@@ -400,8 +400,9 @@ jQuery(document).ready(function () {
           Cookies.set('IP', $modal_exec.find('#ip').val());
           Cookies.set('port', $modal_exec.find('#port').val());
           $.ajax({
-            url: CONFIG['MODULE'] + '/Single/ExecuteSingle',
+            url: '/Group/ExecuteSingle',
             type: 'POST',
+            dataType: 'JSON',
             data: $(form).serialize(),
             beforeSend: function () {},
             success: function (res, response, status) {
@@ -411,12 +412,7 @@ jQuery(document).ready(function () {
                 return App.warning( 'Excute fail, Error: ' + res.msg);
               }
 
-              r = JSON.parse(res.data);
-              if (!r || (r && !r.isSucess)) {
-                return App.warning( 'Excute fail, Error: ' + (r && r.msg));
-              }
-
-              App.ok('执行成功, 返回数据:' + res.data);
+              App.ok('执行成功');
             },
             error: function () {
               App.unblockUI($modal_exec);
