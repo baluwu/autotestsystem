@@ -577,10 +577,18 @@ var App = function() {
 
     //* END:CORE HANDLERS *//
 
-    return {
+    var toggleLangInit = function() {
+        $('.lang-toggle').on('click', function(){
+            $.get('/Index/setLangConf', {'lan':''},function(){
+                window.location.href = window.location.href;
+            }, 'json');
+        });
+    }
 
+    return {
         //main function to initiate the theme
         init: function() {
+            toggleLangInit();
             //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //Core handlers
@@ -611,6 +619,7 @@ var App = function() {
 
             // Hacks
             handleFixInputPlaceholderForIE(); //IE8 & IE9 input placeholder issue fix
+
         },
 
         //main function to initiate core javascript after ajax complete

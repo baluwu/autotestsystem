@@ -26,6 +26,14 @@
                         </ul>
                     </div>
                     <div class="btn-group-img btn-group">
+                        <button type="button" class="btn btn-sm md-skip lang-toggle" >
+                            <if condition="$Think.session.SET_LANG_CONF eq 'en_US'">
+                                <span>中文</span>
+                            <else />
+                                <span>English</span>
+                            </if>
+                        </button>
+
                         <button onclick="location.href='/Profile'" type="button"
                                 class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown"
                                 data-hover="dropdown" data-close-others="true">

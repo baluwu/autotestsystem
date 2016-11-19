@@ -22,7 +22,10 @@ class BaseController extends Controller {
     {
         $lan_config = C('LANG');
         $set_lan = session('SET_LANG_CONF');
-        $set_lan = !empty($set_lan)?$set_lan:$lan_config['def'];
+        if( empty($set_lan) ) {
+            session('SET_LANG_CONF', $lan_config['def']);
+        }
+        $set_lan = session('SET_LANG_CONF');
         if( !in_array($set_lan, $lan_config['all']) ) {
             $set_lan = $lan_config['def'];
         }
