@@ -71,11 +71,17 @@ return [
 
   //邮件系统默认配置
   "MAIL_CONFIG"          => [
+    'status'      =>  'On',//是否开启
     'host'        =>  'webmail.rokid.com',//邮件服务器
+    'port'        =>  587,//端口
+    'auth'        =>  true,//是否需要验证
     'username'    =>  'bms@rokid.com',//邮件服务器用户
     'password'    =>  'by4-Wm3-h2T-shK',//邮件服务器用户密码
     'from'        =>  'bms@rokid.com',//邮件发送帐号
-    'fromName'    =>  'bms@Rokid',//邮件发送帐号名
+    'fromName'    =>  'rokid_sys_admin',//邮件发送帐号名
+    'secure'      =>  'tls',//是否加密： '', 'ssl' or 'tls'
+    'charSet'     =>  'utf-8',
+    'debug'       =>  false,
     'sign'        =>  '<br/><br/>请不要回复此邮件，谢谢！<br/><br/>-- bms@Rokid ',
   ],
 

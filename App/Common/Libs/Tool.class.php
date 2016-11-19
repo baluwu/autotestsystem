@@ -165,6 +165,9 @@ class Tool {
         if(empty($mail_config)) {
             $mail_config = C('MAIL_CONFIG');
         }
+        if($mail_config['status'] !== 'On'){
+            return "请开启邮件服务功能。";
+        }
         vendor('PHPMailer.PHPMailerLite');
         $mailer = new \PHPMailerLite($mail_config);
         $result = $mailer->send($addresses, $title, $content,$isHtml);

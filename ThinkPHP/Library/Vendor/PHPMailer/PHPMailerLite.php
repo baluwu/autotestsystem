@@ -53,13 +53,14 @@ class PHPMailerLite
 
         $mail->isSMTP();
         $mail->Host = $cfg['host'];
-        $mail->Port = 587;
-        $mail->SMTPSecure = 'tls';
-        $mail->SMTPAuth = true;
-        $mail->Username = $cfg['username'];
-        $mail->Password = $cfg['password'];
-        $mail->CharSet = 'utf-8';
-
+        $mail->Port = $cfg['port'];
+        $mail->SMTPSecure = $cfg['secure'];
+        if($cfg['auth']){
+            $mail->SMTPAuth = true;
+            $mail->Username = $cfg['username'];
+            $mail->Password = $cfg['password'];
+        }
+        $mail->CharSet = $cfg['charSet'];
         $mail->From = $cfg['username'];
         $mail->FromName = $cfg['fromName'];
         $addresses = is_array($addresses) ? $addresses : array($addresses);
