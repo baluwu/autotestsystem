@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
                     App.notification({
                       type: 'danger',
                       icon: 'warning',
-                      message: (act=="Remove"?"½ûÓÃ":"¼¤»î")+"Ê§°Ü",
+                      message: (act=="Remove"?"ç¦ç”¨":"æ¿€æ´»")+"å¤±è´¥",
                       container: $(".page-content-col .portlet-title"),
                       place: 'prepend'
                     });
@@ -48,7 +48,7 @@ jQuery(document).ready(function () {
                   App.notification({
                     type: 'success',
                     icon: 'success',
-                    message: (act=="Remove"?"½ûÓÃ":"¼¤»î")+'½ûÓÃ³É¹¦',
+                    message: (act=="Remove"?"ç¦ç”¨":"æ¿€æ´»")+'ç¦ç”¨æˆåŠŸ',
                     container: $(".page-content-col .portlet-title"),
                     place: 'prepend'
                   });
@@ -133,7 +133,7 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return (row.isrecovery==0? '<a   data-toggle="confirmation" data-action="Remove" data-id="' + data.id + '" data-title="½ûÓÃºóÕËºÅÎŞ·¨µÇÂ½" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-remove"></i></a>':'<a data-action="Restore"   data-toggle="confirmation" data-id="' + data.id + '" data-title="È·¶¨¼¤»î¸ÃÓÃ»§?" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-check"></i> ¼¤»î </a>') +
+                return (row.isrecovery==0? '<a   data-toggle="confirmation" data-action="Remove" data-id="' + data.id + '" data-title="ç¦ç”¨åè´¦å·æ— æ³•ç™»é™†" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-remove"></i></a>':'<a data-action="Restore"   data-toggle="confirmation" data-id="' + data.id + '" data-title="ç¡®å®šæ¿€æ´»è¯¥ç”¨æˆ·?" data-btn-ok-label="OK" data-btn-ok-icon="icon-like" data-btn-ok-class="btn-success" data-btn-cancel-label="NO" data-btn-cancel-icon="icon-close" data-btn-cancel-class="btn-danger"><i class="fa fa-check"></i> æ¿€æ´» </a>') +
                 '<a href="./edit/id/' + data.id + '" class=""><i class="fa fa-edit"></i></a>'
               },
               "targets": 9
