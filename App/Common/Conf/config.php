@@ -58,7 +58,8 @@ return [
 
   /*任务并发数*/
   'PARALLEL_TASKS'       => 5,
-  'USE_HTTPS'            => true,
+  /*ASR 设置*/
+  'ASR_SERVER_NAME'      => 'https://192.168.1.4',
 
   /*ldap配置*/
   'LDAP_ENABLED'         => 0, //1为开启，0为关闭

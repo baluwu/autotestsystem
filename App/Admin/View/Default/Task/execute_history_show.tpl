@@ -114,7 +114,8 @@
                                       <i class="fa fa-cube"></i>
                                       <span class="case-name">{$d.name}</span>
                                       </a>
-                                      <span class="mbadge label <if condition='($d.issuccess eq 1)'>label-success<else />label-danger</if>"><if condition="($d.issuccess eq 1)"><?php _e('Case Groups');?>成功<else /><?php _e('Case Groups'); ?>失败</if></span>
+                                      <span class="mbadge label <if condition='($d.issuccess eq 1)'>label-success<else />label-danger</if>">
+                                      <if condition="($d.issuccess eq 1)">Succ<else />Fail</if></span>
                                   </h4>
                               </div>
                               <div id="collapse{$i}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">

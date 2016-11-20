@@ -69,7 +69,6 @@ table.diff tbody td { padding-top: 0; }
 </style>
 </head>
 <script src="/Public/assets/global/plugins/jquery.min.js"></script>
-<script src="/Public/assets/apps/scripts/common.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/beauty-json.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/diffview.js"></script>
 <script type="text/javascript" src="/Public/assets/apps/scripts/diff/difflib.js"></script>
@@ -119,8 +118,8 @@ $(function() {
 
         var is_succ = self.attr('data-rs') == '1';
 
-        if (is_succ) self.addClass('label-success').html(_et('Succeed'));
-        else self.addClass('label-danger').html(_et('Fail'));
+        if (is_succ) self.addClass('label-success').html('Succ');
+        else self.addClass('label-danger').html('Fail');
     });
 
     $('.delay-row').each(function(i, el) {

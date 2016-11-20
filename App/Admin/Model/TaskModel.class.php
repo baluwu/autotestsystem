@@ -94,14 +94,14 @@ class TaskModel {
      * 执行状态 0 等待任务执行  1 正在执行 2 执行成功 3 执行失败
      */
     public function runSingle($taskData) {
-        $taskData['history_id'] = $this->addExecHistory($taskData);
+        //$taskData['history_id'] = $this->addExecHistory($taskData);
         $taskData['exec_start_time'] = date('Y-h-d H:i:s');
         $thisData = $this->initExecSingle($taskData, null);
         if (!$thisData) {
             return ['isSuccess' => false, 'data' => $taskData, 'msg' => '用例不存在'];
         }
         $r = $this->startExecSingle($taskData, $thisData);
-        $this->setExecHistoryResult($taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败', $r->response);       
+        //$this->setExecHistoryResult($taskData, $ret['isSuccess'], $ret['isSuccess'] ? '成功' : '失败', $r->response);       
         return $r;
     }
 
@@ -147,11 +147,10 @@ class TaskModel {
             else if ($type == 'ASR') 
             {
                 $arc = $thisData['arc'];
-                tasklog('arc:' . ABS_ROOT . $arc, 'INFO');
-
-                $postParms['voiceUrl'] = 'http://192.168.1.4' . $arc;
+                //$postParms['voiceUrl'] = 'http://192.168.1.4' . $arc;
+                $postParms['voiceUrl'] = (C('ASR_SERVER_NAME') ? C('ASR_SERVER_NAME') : $_SERVER['SERVER_NAME']) . $arc;
+                tasklog(C('ASR_SERVER_NAME'), C('DB_TYPE'));
                 tasklog('VoiceUrl: ' . $postParms['voiceUrl']);
-                //$postParms['voiceUrl'] = (C('USE_HTTPS') ? 'https://' : 'http://' ) . $_SERVER['SERVER_NAME'] . $arc;
                 $postParms['asrVoiceInject'] = $thisData['name'];
 
                 if (!file_exists(ABS_ROOT . $arc)) {
@@ -187,7 +186,9 @@ class TaskModel {
             break;
         } while (1);
 
-        $this->addGroupSingleExecHistory($taskData, $ret['isSuccess'], $ret['msg'], $resData);
+        if ($taskData['isgroup'] == 2) {
+            $this->addGroupSingleExecHistory($taskData, $ret['isSuccess'], $ret['msg'], $resData);
+        }
 
         return $ret;
     }
@@ -205,7 +206,7 @@ class TaskModel {
 
         $isSuccess = true;
         $taskData['exec_start_time'] = date('Y-m-d H:i:s');
-        $taskData['history_id'] = $this->addExecHistory($taskData);
+        //$taskData['history_id'] = $this->addExecHistory($taskData);
 
         $msg = [];
         foreach ($groupSingleData as $key => $thisData) {
@@ -223,7 +224,7 @@ class TaskModel {
             sleep(isset($taskData['interval']) ? $taskData['interval'] : 5);
         }
 
-        $this->setExecHistoryResult($taskData, $isSuccess, $isSuccess ? '成功' : '失败');       
+        //$this->setExecHistoryResult($taskData, $isSuccess, $isSuccess ? '成功' : '失败');       
         tasklog('用例组执行完成！');
 
         return [ 'isSuccess' => $isSuccess, 'data' => $taskData, 'msg' => implode(' ', array_unique($msg)) ];

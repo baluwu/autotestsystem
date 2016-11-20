@@ -29,7 +29,7 @@ class GroupExecHistoryModel extends Model {
     $single_path_info = D('ManageGroupClassify')->getSinglepathInfo($single_ids);
 
     foreach ($r as &$el) {
-        $el['path'] = $single_path_info[$el['single_id']] . ' / ' . $el['name'];
+        $el['path'] = $single_path_info[$el['single_id']] . '/' . $el['name'];
     }
 
     return $r;

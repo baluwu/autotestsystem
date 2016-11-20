@@ -13,14 +13,17 @@
 
 // 检测PHP环境
 if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
- if(!class_exists('swoole_server')){
-//    die('必须安装swoole模块');
+if(!class_exists('swoole_server')){
+    die('必须安装swoole模块');
 }
 if(!class_exists('redis')){
     die('必须安装redis模块');
 }
 if(!function_exists('ldap_connect')){
 //  die('必须安装ldap模块');
+}
+if (!function_exists('gettext')) {
+    die('必须安装gettext模块');
 }
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false

@@ -59,6 +59,7 @@
                         <p class="margin-bottom-10 tooltips" data-original-title="项目"><i class="fa fa-cubes"></i>{$path.project}</p>
                         <p class="margin-bottom-10 tooltips" data-original-title="模块"><i class="fa fa-cube"></i>{$path.model}</p>
                         <p class="margin-bottom-10 tooltips" data-original-title="用例组"><i class="fa fa-object-group"></i>{$path.group}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="创建者"><i class="fa fa-user-md"></i>{$owner}</p>
                         <p class="margin-bottom-10 tooltips" data-original-title="创建时间"><i class="fa fa-calendar"></i>{$data.create_time}</p>
                         <p class="margin-bottom-10 tooltips" data-original-title="执行"><i class="fa fa-chevron-circle-right"></i><a href="javascript:;" id="exec_btn">执行用例</a></p>
                     </div>

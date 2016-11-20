@@ -61,7 +61,11 @@ class ManageGroupClassifyController extends AuthController {
     public function getProjectData()
     {
         if (!IS_AJAX) $this->error('非法操作！');
-        $ret = D('ManageGroupClassify')->getProjectData(I('get.project_id'));
+        $pid = I('get.project_id');
+        if (!$pid) {
+            $ret = [];
+        }
+        else $ret = D('ManageGroupClassify')->getProjectData(I('get.project_id'));
         $this->ajaxReturn($ret);
     }
 

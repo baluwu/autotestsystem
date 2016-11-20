@@ -136,13 +136,18 @@ class GroupController extends AuthController {
             $this->GroupSingle('该用例已被删除');
         }
 
+        /*
         if (!isSuper() && !isLeader() && $data['uid'] != session('admin')['id']) {
             $this->error('非法参数');
         }
+        */
 
         $data['validates'] = unserialize($data['validates']);
         $path = D('ManageGroupClassify')->getSinglePathInfo([$id], false);
+
+        $nickname = M('Manage')->where(['id' => $data['uid']])->getField('nickname');
         $this->assign('data', $data);    
+        $this->assign('owner', $nickname);    
         $this->assign('path', $path[$id]);    
         $this->display();
     }

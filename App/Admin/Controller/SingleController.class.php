@@ -98,14 +98,19 @@ class SingleController extends AuthController {
             $order = "id asc";
         }
 
-        $allowed_group_ids = D('AuthGroup')->getGroupIds();
+        $where = [
+            'id' => array($comp, $id)
+        ];
 
-        if (!$allowed_group_ids) $this->redirect("Group/index");
+        $groupid = session('admin')['group_id'];
 
-        $single = D('GroupSingle')->where([
-            'id' => array($comp, $id),
-            'tid' => ['IN', $allowed_group_ids]
-        ])->order($order)->find();
+        if ($groupid != 1 && $groupid != 3) {
+            $allowed_group_ids = D('AuthGroup')->getGroupIds();
+            if (!$allowed_group_ids) $this->redirect("Group/index");
+            $where['tid'] = ['IN', $allowed_group_ids];
+        }
+
+        $single = D('GroupSingle')->where($where)->find();
 
         if(empty($single)){
             $this->redirect("Group/index");
