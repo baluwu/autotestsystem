@@ -6,7 +6,7 @@ use Think\Auth;
 
 //后台框架首页控制器
 class IndexController extends AuthController {
-  protected $not_verify_action = ['_empty', 'index', 'getNav', 'getNavAll', 'setLangConf'];
+  protected $not_verify_action = ['_empty', 'index', 'getNav', 'getNavAll', 'setLangConf', 'setlangconf'];
 
 
   //显示后台框架
