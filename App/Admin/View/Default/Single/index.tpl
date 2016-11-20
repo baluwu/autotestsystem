@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title><?php _e('Case')?> | <?php _e('Auto Test System'); ?></title>
+  <title><?php _e('Case'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -115,7 +115,7 @@
                           <th width="7%"> <?php _e('Property'); ?></th>
                           <th width="20%"> <?php _e('Rule'); ?></th>
                           <th width="20%"> <?php _e('Create Time'); ?></th>
-                          <td><?php _e('State')}<i class="fa fa-info-circle tooltips" data-original-title="{:_e('If The Use Case Is Being Performed, Please Wait Until It Is Completed Before Performing It Again.'); ?>"></i></td>
+                          <td><?php _e('State'); ?> <i class="fa fa-info-circle tooltips" data-original-title="<?php _e('If The Use Case Is Being Performed, Please Wait Until It Is Completed Before Performing It Again.'); ?>"></i></td>
                           <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
 

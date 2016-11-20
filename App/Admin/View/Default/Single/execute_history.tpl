@@ -80,7 +80,7 @@
                 <div class="portlet-body list">
                   <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Name'); ?>"><i class="fa fa-object-group"></i>{$single.name}</p>
 
-                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Property')}"><i class="fa fa-gg"></i><if condition="($single.ispublic eq 1)">{:_e('Public')}<else />{:_e('Private'); ?></if></p>
+                  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Property') ?>"><i class="fa fa-gg"></i><if condition="($single.ispublic eq 1)"><?php _e('Public');?><else /><?php _e('Private'); ?></if></p>
                   <p class="margin-bottom-10 tooltips" data-original-title="NLP\ARC"><i class="fa fa-soundcloud"></i>{$single.nlp}
 
                     <if condition="$single.arc neq '' ">

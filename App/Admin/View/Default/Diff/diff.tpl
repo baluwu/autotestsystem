@@ -156,7 +156,7 @@ $(function() {
 <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer" role="grid" aria-describedby="">
 <thead>
 <tr role="row" class="heading">
-	<th width="50%" align="left" class="sorting_disabled" rowspan="1" colspan="1" aria-label="<?php _e('Case')}">{:_e('Case'); ?></th>
+	<th width="50%" align="left" class="sorting_disabled" rowspan="1" colspan="1" aria-label="<?php _e('Case');?>"><?php _e('Case'); ?></th>
 	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.left.task_name}">{$data.hd.left.task_name} - {$data.hd.left.ver}</th>
 	<th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="{$data.hd.right.task_name}">{$data.hd.right.task_name} - {$data.hd.right.ver}</th>
 </tr>

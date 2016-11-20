@@ -97,7 +97,7 @@
                           <th width="20%"> <?php _e('Rule'); ?></th>
                           <th width="20%"> <?php _e('Create Time'); ?></th>
                           <th width="10%"> <?php _e('Founder'); ?></th>
-                          <td><?php _e('State')}<i class="fa fa-info-circle tooltips" data-original-title="{:_e('If The Use Case Is Being Performed, Please Wait Until It Is Completed Before Performing It Again.'); ?>"></i></td>
+                          <td><?php _e('State');?><i class="fa fa-info-circle tooltips" data-original-title="<?php _e('If The Use Case Is Being Performed, Please Wait Until It Is Completed Before Performing It Again.'); ?>"></i></td>
                           <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
 

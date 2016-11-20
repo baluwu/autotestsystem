@@ -108,7 +108,7 @@
 
                           <div class="col-md-3">  <p class="margin-bottom-10 tooltips"><i class="fa fa-object-group font-blue"></i><?php _e('Name'); ?>:</p>{$single.name}</div>
 
-                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-gg font-blue"></i><?php _e('Property')}:</p><if condition="($single.ispublic eq 1)">{:_e('Public')}<else />{:_e('Private'); ?></if></div>
+                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-gg font-blue"></i><?php _e('Property')}:</p><if condition="($single.ispublic eq 1)"><?php _e('Public');?><else /><?php _e('Private'); ?></if></div>
 
 
 
@@ -127,7 +127,7 @@
                           <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-calendar font-blue"></i><?php _e('Create Time'); ?>:</p> {$single.create_time|strtotime|date="Y-m-d",###}</div>
 
 
-                          <div class="col-md-1">  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Rule')}"><i class="fa fa-cog font-blue"></i>{:_e('Rule'); ?>：
+                          <div class="col-md-1">  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Rule');?>"><i class="fa fa-cog font-blue"></i><?php _e('Rule'); ?>：
                               <foreach name="single.validates" item="v" >
                                 <li style="list-style-type: none">{$v.v1}{$v.dept}{$v.v2}</li>
                               </foreach>
@@ -157,7 +157,7 @@
                         <div class="form-group">
                           <label class="control-label col-md-2"><?php _e('Execution Result'); ?></label>
                           <div class="col-md-10">
-                            <p class="form-control-static"> <if condition="($data.status eq 2) "><?php _e('Succeed')}<else />{:_e('Fail'); ?> </if>  </p>
+                            <p class="form-control-static"> <if condition="($data.status eq 2) "><?php _e('Succeed');?><else /><?php _e('Fail'); ?> </if>  </p>
                           </div>
                         </div>
                         <div class="form-group">

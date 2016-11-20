@@ -109,7 +109,7 @@
 
                           <div class="col-md-3">  <p class="margin-bottom-10 tooltips"><i class="fa fa-object-group font-blue"></i><?php _e('Name'); ?>:</p>{$single.name}</div>
 
-                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-gg font-blue"></i><?php _e('Property')}:</p><if condition="($single.ispublic eq 1)">{:_e('Public')}<else />{:_e('Private'); ?></if></div>
+                          <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-gg font-blue"></i><?php _e('Property')}:</p><if condition="($single.ispublic eq 1)"><?php _e('Public');?><else /><?php _e('Private'); ?></if></div>
 
 
 
@@ -128,7 +128,7 @@
                           <div class="col-md-2">  <p class="margin-bottom-10 tooltips"><i class="fa fa-calendar font-blue"></i><?php _e('Create Time'); ?>:</p> {$single.create_time|strtotime|date="Y-m-d",###}</div>
 
 
-                          <div class="col-md-1">  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Case')}规则"><i class="fa fa-cog font-blue"></i>{:_e('Rule'); ?>：
+                          <div class="col-md-1">  <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Case');?>规则"><i class="fa fa-cog font-blue"></i><?php _e('Rule'); ?>：
                               <foreach name="single.validates" item="v" >
                                 <li style="list-style-type: none">{$v.v1}{$v.dept}{$v.v2}</li>
                               </foreach>
@@ -157,7 +157,7 @@
                             </tr>
                             <tr>
                               <td> <?php _e('Execution Result'); ?> </td>
-                              <td> <if condition="($data.status eq 2) "><?php _e('Case')}成功<else />{:_e('Case'); ?>失败 </if>  </td>
+                              <td> <if condition="($data.status eq 2) "><?php _e('Case');?>成功<else /><?php _e('Case'); ?>失败 </if>  </td>
                             </tr>
                             <tr>
                               <td> <?php _e('Create Time'); ?> </td>
