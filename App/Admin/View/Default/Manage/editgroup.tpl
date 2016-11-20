@@ -112,13 +112,8 @@
                              <div class="form-control-focus"></div>
                           </div>
                         </div>
-
-
                       <div class="form-group form-md-line-input">
-                        <label class="col-md-2 control-label" for="groupid">
-                          用例组分类
-                        </label>
-
+                        <label class="col-md-2 control-label" for="groupid">项目</label>
                         <div class="col-md-4">
                           <ul id="treeDemo" class="ztree">
                         </div>

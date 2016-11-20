@@ -97,28 +97,21 @@ class AuthGroupModel extends Model {
 
     public function getClassifyData($groupid, $filter = false)
     {
-        $result = array();
-        $classify_str = $this->where(array('id'=>$groupid))->getField('classify');
+        $classify_str = $this->where(array('id'=>$groupid))->getField('project_ids');
         $classify_arr = explode(',', $classify_str);
 
-        $project = M('ManageGroupClassify')->where(['id' => ['IN', $classify_str]])->select();
-        $model = M('ManageGroupClassify')->where(['pid' => ['IN', $classify_str]])->select();
+        $projects = M('ManageGroupClassify')->where(['level' => 0])->select();
 
-        $model_ids = [];
-        foreach ($model as $md) {
-            $project[] = $md;
-            $model_ids[] = $md['id'];
-        }
-
-        if (!empty($model_ids)) {
-            $group = M('ManageGroupClassify')->where(['pid' => ['IN', $model_ids]])->select();
-            foreach ($group as &$gp) {
-                $gp['group_id'] = $gp['id'];
-                $project[] = $gp;
+        if (!empty($projects)) {
+            foreach ($projects as &$project) {
+                if ($groupid == 1 || $groupid ==3 || in_array($project['id'], $classify_arr)) {
+                    $project['checked'] = true;
+                }
+                else $project['checked'] = false;
             }
         }
 
-        return empty($project) ? [] : $project;
+        return empty($projects) ? [] : $projects;
     }
 
     public function saveClassifyData()

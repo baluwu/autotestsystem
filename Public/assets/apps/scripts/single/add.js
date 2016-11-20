@@ -89,6 +89,8 @@ jQuery(document).ready(function () {
         data: $(form).serialize(),
         success: function (res, response, status) {
           if (res.error >= 0) {
+            $('#exec').find('#id').val(res.data);
+            $('.exec-single').show();
             return App.ok('添加成功');
           }
           App.warning( res.msg ? res.msg:'未知错误！请检查内容后重新提交！', $(".page-content-col .portlet-title"));
@@ -311,5 +313,83 @@ jQuery(document).ready(function () {
       audio : true
   }, startUserMedia, function(e) {
       console.log('No live audio input: ' + e + ', code = ' + e.code);
+  });
+
+  $("#exec form").validate({
+    errorElement: 'span', 
+    errorClass: 'help-block help-block-error', 
+    focusInvalid: false, 
+    ignore: "", 
+    errorPlacement: function (error, element) {
+      if (element.is(':checkbox')) {
+        error.insertAfter(element.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline"));
+      } else if (element.is(':radio')) {
+        error.insertAfter(element.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline"));
+      } else {
+        error.insertAfter(element); 
+      }
+    },
+    highlight: function (element) {
+      $(element).closest('.form-group').addClass('has-error'); 
+    },
+    unhighlight: function (element) { 
+      $(element).closest('.form-group').removeClass('has-error'); 
+    },
+    success: function (label) {
+      label.closest('.form-group').removeClass('has-error'); 
+    },
+    rules: {
+      ip: {
+        minlength: 7,
+        maxlength: 20,
+        required: true
+      },
+      port: {
+        minlength: 1,
+        maxlength: 6,
+        number: true
+      }
+    },
+    submitHandler: function (form) {
+      App.blockUI({
+        message: '执行中....',
+        target: $modal_exec,
+        overlayColor: 'none',
+        cenrerY: true,
+        boxed: true
+      });
+
+      Cookies.set('IP', $modal_exec.find('#ip').val());
+      Cookies.set('port', $modal_exec.find('#port').val());
+      $.ajax({
+        url: '/Group/ExecuteSingle',
+        type: 'POST',
+        dataType: 'JSON',
+        data: $(form).serialize(),
+        beforeSend: function () {},
+        success: function (res, response, status) {
+          $modal_exec.modal('hide');
+          App.unblockUI($modal_exec);
+          if (res.error < 0) {
+            return App.warning( 'Excute fail, Error: ' + res.msg);
+          }
+
+          App.ok('执行成功');
+        },
+        error: function () {
+          App.unblockUI($modal_exec);
+        }
+      });
+      return false;
+    }
+  });
+
+  var $modal_exec = $('#exec');
+  $('body').on('click', '#exec_btn', function () {
+      $modal_exec.find('[name="id"]').val($('#id').val());
+      $modal_exec.find('.tips').html("");
+      $modal_exec.find('#ip').val(Cookies.get('IP') || '');
+      $modal_exec.find('#port').val(Cookies.get('port') || '8080');
+      $modal_exec.modal();
   });
 });

@@ -12,23 +12,17 @@ class IndexController extends AuthController {
   //显示后台框架
   public function index() {
     if (!session('admin')) $this->redirect('Login/index');
-    $group = D("Group");
 
-    $single = D("Single");
-    $groupCount = $group->countData([
-      'isrecovery' => ['eq', 0],
+    $mdl = M('ManageGroupClassify');
+    $groupCount = $mdl->where([
+      'level' => 2,
       'uid'        => ['eq', session('admin')['id']]
-    ]);
-    $singleCount = $single->countData([
-      'isrecovery' => ['eq', 0],
+    ])->count();
+    $singleCount = M('GroupSingle')->where([
       'uid'        => ['eq', session('admin')['id']]
-    ]);
-    $grouPubCount = $group->countData([
-      'ispublic' => ['eq', 1]
-    ]);
-    $singlePubCount = $single->countData([
-      'ispublic' => ['eq', 1]
-    ]);
+    ])->count();
+    $grouPubCount = 0;
+    $singlePubCount = 0;
 
     $this->assign('count', ['group' => $groupCount, 'single' => $singleCount, 'singlePub' => $singlePubCount, 'groupPub' => $grouPubCount,]);
     $this->display();

@@ -24,7 +24,7 @@ if(!function_exists('ldap_connect')){
 }
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
-define('APP_DEBUG',TRUE);
+define('APP_DEBUG',false);
 define('ABS_ROOT', dirname(__FILE__));
 
 // 定义应用目录

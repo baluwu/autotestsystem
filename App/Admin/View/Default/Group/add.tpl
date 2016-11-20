@@ -11,17 +11,20 @@
   <title>添加用例 | 用例管理 | 自动化测试系统</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="andy" name="author"/>
+  <meta content="andy" name="author"/> 
   <script src="/Public/assets/global/plugins/pace/pace.min.js"></script>
   <link href="/Public/assets/global/plugins/pace/themes/pace-theme-flash.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+  <link href="/Public/assets/global/css/jsonFormater.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+  <link href="/Public/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/global/css/components-md.css" rel="stylesheet" id="style_components" type="text/css"/>
   <link href="/Public/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
-  <link href="/Public/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/layout/css/custom.css" rel="stylesheet" type="text/css"/>
   <link href="/Public/assets/apps/css/single-add.css" rel="stylesheet" type="text/css"/>
@@ -33,6 +36,7 @@
     display: inline-block;
   }
   .prev-next i { color: #666; }
+  .exec-single { display: none; }
   </style>
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-md">
@@ -56,6 +60,7 @@
                         <p class="margin-bottom-10 tooltips" data-original-title="模块"><i class="fa fa-cube"></i>{$model_name}</p>
                         <p class="margin-bottom-10 tooltips" data-original-title="用例组"><i class="fa fa-object-group"></i>{$group_name}</p>
                         <p class="margin-bottom-10 tooltips" data-original-title="创建人"><i class="fa fa-user"></i>{$user}</p>
+                        <p class="margin-bottom-10 tooltips exec-single" data-original-title="执行"><i class="fa fa-chevron-circle-right"></i><a href="javascript:;" id="exec_btn">执行用例</a></p>
                     </div>
                 </div>
                 <h3>任务管理</h3>
@@ -275,6 +280,56 @@
     </div>
     <include file="Public/footer"/>
   </div>
+</div>
+<div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">用例执行</h4>
+  </div>
+  <form action="#" class="form-horizontal form-row-seperated">
+    <div class="modal-body">
+      <div class="tips"></div>
+      <input type="hidden" name="id" id="id" value=""/>
+      <div class="form-group form-md-line-input">
+        <label class="col-md-2 control-label" for="ip">
+          <span class="required">*</span>IP
+        </label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" id="ip" list="ip_data" placeholder="192.168.19.10" name="ip" required data-tabindex="1">
+          <datalist id="ip_data">
+            <option value="192.168.19.10">
+            <option value="192.168.1.10">
+            <option value="192.168.2.10">
+            <option value="192.168.3.10">
+            <option value="192.168.4.10">
+            <option value="192.168.5.10">
+            <option value="192.168.6.10">
+            <option value="192.168.7.10">
+          </datalist>
+          <div class="form-control-focus"></div>
+        </div>
+      </div>
+      <div class="form-group form-md-line-input">
+        <label class="col-md-2 control-label" for="port">
+          <span class="required"> * </span>Port
+        </label>
+        <div class="col-md-9">
+          <input type="text" name="port" class="form-control" list="port_data" id="port" placeholder="8080" data-tabindex="2">
+          <datalist id="port_data">
+            <option value="80">
+            <option value="8080">
+            <option value="8090">
+            <option value="8001">
+          </datalist>
+          <div class="form-control-focus"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
+        <button type="submit" class="btn green exec_ok">Ok</button>
+      </div>
+    </div>
+  </form>
 </div>
 <audio controls="" src="" id="audio-player" style="display: none; vertical-align: middle;"></audio>
 <!--[if lt IE 9]>

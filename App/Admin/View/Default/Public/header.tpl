@@ -2,18 +2,17 @@
     <nav class="navbar mega-menu" role="navigation">
         <div class="container-fluid">
             <div class="clearfix navbar-fixed-top">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target=".navbar-responsive-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                     <span class="sr-only">Toggle navigation</span>
-                                <span class="toggle-icon">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </span>
+                    <span class="toggle-icon">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </span>
                 </button>
                 <a id="index" class="page-logo" href="/Index"> <img src="/Public/assets/pages/img/logo-big.png" alt="Rokid"> </a>
-
                 <div class="topbar-actions">
+                    <!--
                     <div class="btn-group-red btn-group">
                         <button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown"
                                 data-hover="dropdown" data-close-others="true">
@@ -25,15 +24,15 @@
                             <li> <a href="/Group/add"><?php _e('Add Job'); ?></a> </li>
                         </ul>
                     </div>
+                    -->
                     <div class="btn-group-img btn-group">
                         <button type="button" class="btn btn-sm md-skip lang-toggle" >
                             <if condition="$Think.session.SET_LANG_CONF eq 'en_US'">
-                                <span>中文</span>
+                                <span class="font-white">中文</span>
                             <else />
-                                <span>English</span>
+                                <span class="font-white">English</span>
                             </if>
                         </button>
-
                         <button onclick="location.href='/Profile'" type="button"
                                 class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown"
                                 data-hover="dropdown" data-close-others="true">
@@ -53,10 +52,7 @@
             <div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
                     <li
-                    <if condition="($CONTROLLER_NAME eq 'Index' OR $CONTROLLER_NAME eq '')"> class="active open
-                        selected"
-                    </if>
-                    >
+                    <if condition="($CONTROLLER_NAME eq 'Index' OR $CONTROLLER_NAME eq '')"> class="active open selected" </if> >
                     <a href="/Index/" class="text-uppercase">
                         <i class="fa fa-home"></i><?php _e('Dashboard'); ?> </a>
                     </li>

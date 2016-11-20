@@ -207,7 +207,7 @@ class ManageController extends AuthController {
         }
 
         $r = M('AuthGroup')->where(['id' => $gid])->save([
-            'classify' => $classify_str
+            'project_ids' => $classify_str
         ]);
 
         $this->ajaxReturn($r >= 0 ? true : false);

@@ -75,15 +75,12 @@ jQuery(document).ready(function () {
             {
               "render": function (data, type, row) {
                 return data?data:' '
-                //return ' <span class="label label-sm label-' + (data ? 'success' : 'info') + '">' + (data ? "Y" : "N") + '</span>'
               },
               "targets": 2
             },
             {
               "render": function (data, type, row) {
-                //return '系统用户组';
-                return '<a href="./editgroup/id/' + data.id + '" class="btn dark btn-sm btn-outline margin-bottom-5"> <i class="fa fa-edit"></i> 编辑 </a>';
-
+                return '<a href="./editgroup/id/' + data.id + '" title="项目授权"> <i class="fa fa-cubes font-light"></i></a>';
               },
               "targets": 3
             }

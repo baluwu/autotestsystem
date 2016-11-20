@@ -5,7 +5,7 @@
 function suggestPassword(passwd_form)
 {
   var pwchars = "abcdefhjmnpqrstuvwxyz23456789ABCDEFGHJKLMNPQRSTUVWYXZ";
-  var passwordlength = 16;    // do we want that to be dynamic?  no, keep it simple :)
+  var passwordlength = 16;
   var passwd = passwd_form.generated_password;
   passwd.value = '';
 
