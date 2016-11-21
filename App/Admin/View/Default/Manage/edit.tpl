@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>编辑用户 | 用户管理 | 自动化测试系统</title>
+  <title><?php _e('Edit'); ?> | <?php _e('Users'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -65,27 +65,27 @@
             <nav class="navbar" role="navigation">
               <!-- Brand and toggle get grouped for better mobile display -->
               <!-- Collect the nav links, forms, and other content for toggling -->
-              <h3>用户管理</h3>
+              <h3><?php _e('Users'); ?></h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active">
                   <a href="/Manage/index">
-                    <i class="fa fa-users"></i> 用户列表 </a>
+                    <i class="fa fa-users"></i> <?php _e('User List'); ?> </a>
                 </li>
                 <li>
                   <a href="/Manage/add">
-                    <i class="fa fa-user-plus "></i> 添加用户</a>
+                    <i class="fa fa-user-plus "></i> <?php _e('Add'); ?></a>
                 </li>
 
               </ul>
-              <h3>用户组管理</h3>
+              <h3><?php _e('User Group'); ?></h3>
               <ul class="nav navbar-nav">
                 <li>
                   <a href="/Manage/group">
-                    <i class="fa fa-plus "></i> 用户组管理</a>
+                    <i class="fa fa-plus "></i> <?php _e('User Group'); ?></a>
                 </li>
                 <li>
                   <a href="/ManageGroupClassify/index">
-                    <i class="fa fa-plus "></i> 用例组管理</a>
+                    <i class="fa fa-plus "></i> <?php _e('User Group'); ?></a>
                 </li>
               </ul>
             </nav>
@@ -102,7 +102,7 @@
                   <div class="portlet  light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
                       <div class="caption">
-                        <i class="fa fa-plus"></i> 编辑用户
+                        <i class="fa fa-plus"></i> <?php _e('Edit'); ?>
                       </div>
                       <!-- BEGIN BREADCRUMBS -->
                       <div class="breadcrumbs">
@@ -112,9 +112,9 @@
                             <a href="/Index">Home</a>
                           </li>
                           <li>
-                            <a href="/Manage/index">用户管理</a>
+                            <a href="/Manage/index"><?php _e('Users'); ?></a>
                           </li>
-                          <li class="active">编辑用户</li>
+                          <li class="active"><?php _e('Edit'); ?></li>
                         </ol>
                         <!-- Sidebar Toggle Button -->
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -135,7 +135,7 @@
                       <div class="form-body">
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="username">
-                            用户名
+                            <?php _e('User Name'); ?>
                           </label>
 
 
@@ -149,7 +149,7 @@
 
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="name">
-                            姓名
+                            <?php _e('Real Name'); ?>
                           </label>
 
                           <div class="col-md-4">
@@ -179,7 +179,7 @@
 
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="groupid">
-                            用户组
+                            <?php _e('User Group'); ?>
                           </label>
 
                           <div class="col-md-4">
@@ -199,7 +199,7 @@
 
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="password">
-                            密码
+                            <?php _e('Password'); ?>
                           </label>
 
                           <div class="col-md-4">
@@ -212,7 +212,7 @@
 
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="repassword">
-                            重复密码
+                            <?php _e('Replay Password'); ?>
                           </label>
 
                           <div class="col-md-4">
@@ -225,7 +225,7 @@
 
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label">
-                            <button class="btn green-haze" type="button" onclick="suggestPassword(this.form)">随机生成
+                            <button class="btn green-haze" type="button" onclick="suggestPassword(this.form)"><?php _e('Random Password'); ?>
                             </button>
                           </label>
 

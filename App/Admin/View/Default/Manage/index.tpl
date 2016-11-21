@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title><?php _e('Users'); ?></title>
+  <title><?php _e('Users'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -50,12 +50,12 @@
         <div class="page-content-row">
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <h3>用户管理</h3>
+              <h3><?php _e('Users'); ?></h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li class="active"> <a href="/Manage/index"> <i class="fa fa-users"></i> <?php _e('User List'); ?> </a> </li>
                 <li> <a href="/Manage/add"> <i class="fa fa-user-plus "></i> <?php _e('Add'); ?></a> </li>
               </ul>
-              <h3>用户组管理</h3>
+              <h3><?php _e('User Group'); ?></h3>
               <ul class="nav navbar-nav">
                 <li> <a href="/Manage/group"> <i class="fa fa-plus "></i> <?php _e('User Group'); ?></a> </li>
               </ul>
