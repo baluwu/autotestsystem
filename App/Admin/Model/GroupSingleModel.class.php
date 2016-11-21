@@ -130,7 +130,6 @@ class GroupSingleModel extends Model {
         return $vali;
     }
 
-
     //修改组用例
     public function updateSingle($id, $type, $name_edit, $nlp_edit, $arc_edit, $v1_edit, $dept_edit, $v2_edit, $tid) {
         $data = [
@@ -165,15 +164,33 @@ class GroupSingleModel extends Model {
 
     }
 
-    //删除到回收站
-    public function Remove($ids) {
-        return $this->where(['id' => ['IN', $ids]])->setField('isrecovery', 1);
+    public function canAddSingle($group_id) {
+        $sess = session('admin');
+        $ug_id = $sess['group_id'];
+
+        if ($ug_id == 1) return true;
+
+        $mdl = M('ManageGroupClassify');
+
+        /*检查用例组*/
+        $grp = $mdl->where(['id' => $group_id])->find();
+        if (!$grp) return false;
+        if ($grp['uid'] == $sess['id']) return true;
+
+        /*检查模块*/
+        $model = $mdl->where(['id' => $grp['pid']])->find();
+        if (!$model) return false;
+        if ($model['uid'] == $sess['id']) return true;
+
+        /*检查项目*/
+        $project = $mdl->where(['id' => $model['pid']])->find();
+        if (!$project) return false;
+        if ($project['uid'] == $sess['id']) return true;
+
+        /*检查项目授权*/
+        $allowPids = M('AuthGroup')->where(['id' => $ug_id])->getField('project_ids');
+        $allowPids = explode(',', $allowPids);
+
+        return in_array($project['id'], $allowPids);
     }
-
-    //还原 用例组
-    public function Restore($ids) {
-        return $this->where(['id' => ['IN', $ids]])->setField('isrecovery', 0);
-    }
-
-
 }

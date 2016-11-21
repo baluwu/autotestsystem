@@ -84,7 +84,7 @@ jQuery(document).ready(function () {
     submitHandler: function (form) {
       var form_temp=$(form).serializeArray();
       $.ajax({
-        url: '/Single/addSingle',
+        url: '/Group/addSingle',
         type: 'POST',
         data: $(form).serialize(),
         success: function (res, response, status) {
@@ -101,7 +101,7 @@ jQuery(document).ready(function () {
   });
 
   $("#arc_upload").dropzone({
-    url: "/Single/uploadLocalAudio",
+    url: "/Group/uploadLocalAudio",
     maxFilesize: 2,//单位MB
     uploadMultiple:false,
     dictInvalidFileType:'非法文件',
@@ -200,7 +200,7 @@ jQuery(document).ready(function () {
       formdata.append('len', Math.floor($('#audio-player').get(0).duration || 0));
 
       $.ajax({
-          url : "/single/uploadRecordAudio/",
+          url : "/Group/uploadRecordAudio/",
           type : 'POST',
           data : formdata,
           contentType : false,

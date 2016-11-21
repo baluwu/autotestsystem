@@ -19,7 +19,7 @@ class GroupModel extends Model {
         ['create_time', 'time', self::MODEL_INSERT, 'function'],
     ];
 
-    //用例组列表
+    /*
     public function getList($order, $sort, $page, $rows, $all = false, $where = [], $isrecovery = 0) {
         $allow_group_ids = $this->getAllowGroupIds();
         if ($all) {
@@ -61,6 +61,47 @@ class GroupModel extends Model {
             'data'            => $obj ? $obj : [],
         ];
     }
+    */
+    public function getList($order, $sort, $page, $rows, $where = []) {
+        if (!isset($where['tid'])) {
+            $user_group_id = session('admin')['group_id'];
+            $project_ids = M('AuthGroup')->where(['id' => $user_group_id])->getField('project_ids');
+            
+            if (!empty($project_ids)) {
+                $model_ids = M('ManageGroupClassify')->where(['pid' => [ 'IN', $project_ids]])->getField('id', true);
+                if (!empty($model_ids)) {
+                    $group_ids = M('ManageGroupClassify')->where(['pid' => ['IN', $model_ids]])->getField('id', true);
+                }
+            }
+        }
+
+        foreach ($where as $key => $value) {
+            $map['s.' . $key] = $value;
+        }
+
+        $obj = M('GroupSingle')
+            ->field('s.id,s.uid,s.name,s.create_time,s.nlp,s.arc,u.manager,u.nickname')
+            ->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')
+            ->where($map)
+            ->order([$order => $sort])
+            ->limit($page, $rows)
+            ->select();
+
+        //转换属性及规则
+        if ($obj) foreach ($obj as $k => $v) {
+            $obj[$k]['short_name'] = mb_substr($v['name'],0,30,"utf-8") . (strlen($v['name']) > 30 ? '...' : '');
+        }
+
+        $total = M('GroupSingle')->where($map)->join('s LEFT JOIN  __MANAGE__ u  ON s.uid = u.id')->count();
+
+        return [
+            'recordsTotal'    => $total,
+            'recordsFiltered' => $total,
+            'data'            => $obj ? $obj : [],
+        ];
+    }
+
+
 
     //新增用例组
     public function addGroup($name, $ispublic, $classify) {
@@ -143,4 +184,5 @@ class GroupModel extends Model {
         }
         return implode(',', $temp);
     }
+
 }

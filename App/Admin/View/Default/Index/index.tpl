@@ -48,7 +48,7 @@
       </div>
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <a class="dashboard-stat dashboard-stat-v2 blue" href="/Single/index">
+          <a class="dashboard-stat dashboard-stat-v2 blue" href="/Group/index">
             <div class="visual">
               <i class="fa fa-object-ungroup"></i>
             </div>
@@ -74,7 +74,7 @@
           </a>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <a class="dashboard-stat dashboard-stat-v2 green" href="/Single/pub">
+          <a class="dashboard-stat dashboard-stat-v2 green" href="#">
             <div class="visual">
               <i class="fa fa-cube"></i>
             </div>
@@ -87,7 +87,7 @@
           </a>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <a class="dashboard-stat dashboard-stat-v2 purple" href="/Group/pub">
+          <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
             <div class="visual">
               <i class="fa fa-cubes"></i>
             </div>

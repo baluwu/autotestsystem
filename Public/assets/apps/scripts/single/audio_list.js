@@ -29,7 +29,7 @@ jQuery(document).ready(function () {
           $(this).confirmation();
           $(this).on('confirmed.bs.confirmation', function () {
             $.ajax({
-              url: '/Single/removeAudio',
+              url: '/Group/removeAudio',
               type: 'POST',
               data: {
                 id: $(this).data('id')
@@ -62,7 +62,7 @@ jQuery(document).ready(function () {
           [5, 10, 20]
         ],
         pageLength: 5,
-        ajax: { url: '/Single/getAudioList' },
+        ajax: { url: '/Group/getAudioList' },
         keys: true,
         columns: [
           { data: 'id', orderable: false },

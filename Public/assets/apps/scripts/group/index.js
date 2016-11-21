@@ -41,7 +41,7 @@ jQuery(document).ready(function () {
           $('.J_remove_single').on('confirmed.bs.confirmation', function () {
             var id = $(this).attr('data-id');
             $.ajax({
-                url: '/Single/Remove',
+                url: '/Group/Remove',
                 type: 'POST',
                 data: { id: id },
                 success: function (res, response, status) {
@@ -62,7 +62,7 @@ jQuery(document).ready(function () {
             [10, 20, 50]
           ],
           "pageLength": 20, 
-          "ajax": { "url": '/Single/getList' },
+          "ajax": { "url": '/Group/getList' },
           keys: true,
           columns: [
             { data: 'id', orderable: false },
