@@ -382,4 +382,35 @@ class GroupController extends AuthController {
             D('AudioUploads')->RemoveAudio(intval(I('post.id')))
         );
     }
+
+
+    public function editPreOrNext($id,$type="pre"){
+        if($type == "pre"){
+            $comp = "lt";
+            $order = "id desc";
+        }else{
+            $comp = "gt";
+            $order = "id asc";
+        }
+
+        $where = [
+            'id' => array($comp, $id)
+        ];
+
+        $groupid = session('admin')['group_id'];
+
+        if ($groupid != 1 && $groupid != 3) {
+            $allowed_group_ids = D('AuthGroup')->getGroupIds();
+            if (!$allowed_group_ids) $this->redirect("Group/index");
+            $where['tid'] = ['IN', $allowed_group_ids];
+        }
+
+        $single = D('GroupSingle')->where($where)->find();
+
+        if(empty($single)){
+            $this->redirect("Group/index");
+        }else{
+            $this->redirect("Group/edit/id/".$single['id']);
+        }
+    }
 }

@@ -80,8 +80,8 @@
                     <div class="portlet-title">
                       <div class="caption"> <i class="fa fa-edit font-dark"></i><span class="font-dark"> 编辑用例 </span>
                         <span class="margin-bottom-10 prev-next">
-                            <a href="/Single/editPreOrNext/tid/{$data.tid}/id/{$data.id}/type/pre" title="上一条"><i class="fa fa-arrow-left"></i></a>
-                            <a href="/Single/editPreOrNext/tid/{$data.tid}/id/{$data.id}/type/next" class="info" title="下一条"><i class="fa fa-arrow-right"></i></a>  
+                            <a href="/Group/editPreOrNext/tid/{$data.tid}/id/{$data.id}/type/pre" title="上一条"><i class="fa fa-arrow-left"></i></a>
+                            <a href="/Group/editPreOrNext/tid/{$data.tid}/id/{$data.id}/type/next" class="info" title="下一条"><i class="fa fa-arrow-right"></i></a>  
                         </span>
                       </div>
                       <div class="breadcrumbs">
