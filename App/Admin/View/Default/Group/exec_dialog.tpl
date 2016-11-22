@@ -1,7 +1,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例组执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#" class="form-horizontal form-row-seperated">
     <div class="modal-body">

@@ -8,7 +8,7 @@
 <!--<![endif]-->
 <head>
   <meta charset="utf-8"/>
-  <title>用例组管理 | 自动化测试系统</title>
+  <title><?php _e('Case Groups'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -70,12 +70,12 @@
                             </foreach>
                         </ul>
                     </div>
-                    <p class="navbar-text" id="J_add_project" title="添加项目">
+                    <p class="navbar-text" id="J_add_project" title="<?php _e('Add'); ?>">
                         <a href="javascript:;" class="navbar-link"><i class="fa fa-plus"></i></a>
                     </p>
                     <ul id="J_ztree" class="ztree"></ul>
                 </li>
-                <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> 创建任务 </a> </li>
+                <li> <a href="javascript:;" class="J_add_task"> <i class="fa fa-tasks"></i> <?php _e('Create Job'); ?> </a> </li>
               </ul>
             </nav>
           </div>
@@ -86,12 +86,12 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-object-ungroup font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用例管理</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Case'); ?></span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li> <a href="/Index">Home</a> </li>
-                        <li class="active">用例管理</li>
+                        <li class="active"><?php _e('Case'); ?></li>
                       </ol>
                     </div>
                   </div>
@@ -101,15 +101,15 @@
                         <thead>
                         <tr role="row" class="heading">
                           <th width="5%"> ID </th>
-                          <th width="25%"> 名称</th>
-                          <th width="15%"> 类型</th>
-                          <th width="20%"> 创建人</th>
-                          <th width="20%"> 创建时间</th>
-                          <th width="15%"> 操作</th>
+                          <th width="25%"> <?php _e('Name'); ?></th>
+                          <th width="15%"> <?php _e('Type'); ?></th>
+                          <th width="20%"> <?php _e('Founder'); ?></th>
+                          <th width="20%"> <?php _e('Create Time'); ?></th>
+                          <th width="15%"> <?php _e('Operate'); ?></th>
                         </tr>
                         <tr role="row" class="filter">
                           <td></td>
-                          <td> <input type="text" class="form-control form-filter input-sm input-name" name="search_single_name" placeholder="按名称搜索"></td> 
+                          <td> <input type="text" class="form-control form-filter input-sm input-name" name="search_single_name" placeholder="<?php _e('Search By Name'); ?>"></td>
                           <td>
                               <input type="hidden" class="form-filter" name="case_type" id="J_case_type" value="all" />
                               <div class="btn-group btn-group-xs">

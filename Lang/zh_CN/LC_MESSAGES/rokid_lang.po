@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-19 17:21+0800\n"
-"PO-Revision-Date: 2016-11-19 17:34+0800\n"
+"POT-Creation-Date: 2016-11-22 11:41+0800\n"
+"PO-Revision-Date: 2016-11-22 11:49+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,46 +16,23 @@ msgstr ""
 "X-Poedit-SearchPath-0: App/Admin/View\n"
 "X-Poedit-SearchPath-1: Public/assets/apps\n"
 
-#: Public/assets/apps/scripts/manage/index.js:40
-msgid "Disable"
-msgstr "禁用"
-
-#: Public/assets/apps/scripts/manage/index.js:41
-#: Public/assets/apps/scripts/manage/index.js:141
-msgid "Activate"
-msgstr "激活"
-
-#: Public/assets/apps/scripts/manage/index.js:42
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:183
-#: App/Admin/View/Default/Single/execute_history_show.tpl:185
-msgid "Fail"
-msgstr "失败"
-
-#: Public/assets/apps/scripts/manage/index.js:43
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:183
-#: App/Admin/View/Default/Single/execute_history_show.tpl:185
-msgid "Succeed"
-msgstr "成功"
-
-#: Public/assets/apps/scripts/manage/index.js:142
-msgid "not login"
-msgstr "无法登录"
-
-#: Public/assets/apps/scripts/manage/index.js:143
-msgid "Activation Confirmation"
-msgstr "确认激活"
-
 #: Public/assets/apps/scripts/task/tasks.js:58
 msgid "Check Result"
 msgstr "查看结果"
 
 #: App/Admin/View/Default/AuthGroup/index.tpl:5
+#: App/Admin/View/Default/Group/add.tpl:11
+#: App/Admin/View/Default/Group/edit.tpl:230
+#: App/Admin/View/Default/Group/index.tpl:73
+#: App/Admin/View/Default/Manage/add.tpl:12
+#: App/Admin/View/Default/Manage/add.tpl:88
+#: App/Admin/View/Default/Manage/add.tpl:110
+#: App/Admin/View/Default/Manage/add.tpl:122
+#: App/Admin/View/Default/Manage/edit.tpl:76
+#: App/Admin/View/Default/Manage/editgroup.tpl:54
+#: App/Admin/View/Default/Manage/group.tpl:66
 #: App/Admin/View/Default/Manage/index.tpl:56
-#: App/Admin/View/Default/Single/execute_history.tpl:126
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:120
-#: App/Admin/View/Default/Single/execute_history_show.tpl:121
-#: App/Admin/View/Default/Single/index.tpl:85
-#: App/Admin/View/Default/Single/recycle.tpl:80
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:86
 msgid "Add"
 msgstr "添加"
 
@@ -85,68 +62,354 @@ msgstr "角色"
 msgid "Auth"
 msgstr "权限"
 
-#: App/Admin/View/Default/Diff/diff.tpl:159
+#: App/Admin/View/Default/Diff/diff.tpl:158
+#: App/Admin/View/Default/Group/add.tpl:11
+#: App/Admin/View/Default/Group/add.tpl:61
+#: App/Admin/View/Default/Group/edit.tpl:12
+#: App/Admin/View/Default/Group/index.tpl:89
+#: App/Admin/View/Default/Group/index.tpl:94
 #: App/Admin/View/Default/Index/index.tpl:59
-#: App/Admin/View/Default/Single/execute_history.tpl:12
-#: App/Admin/View/Default/Single/execute_history.tpl:152
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:12
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:105
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:146
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:85
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:131
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:231
-#: App/Admin/View/Default/Single/execute_history_show.tpl:12
-#: App/Admin/View/Default/Single/execute_history_show.tpl:147
-#: App/Admin/View/Default/Single/index.tpl:12
-#: App/Admin/View/Default/Single/index.tpl:98
-#: App/Admin/View/Default/Single/index.tpl:103
-#: App/Admin/View/Default/Single/recycle.tpl:12
-#: App/Admin/View/Default/Single/recycle.tpl:69
-#: App/Admin/View/Default/Single/recycle.tpl:105
 msgid "Case"
 msgstr "我的用例"
 
-#: App/Admin/View/Default/Diff/diff.tpl:175
+#: App/Admin/View/Default/Diff/diff.tpl:174
 msgid "Distinct"
 msgstr "去除重复"
 
-#: App/Admin/View/Default/Index/index.tpl:13
-msgid "Log Record"
-msgstr "任务执行记录"
-
+#: App/Admin/View/Default/Group/add.tpl:11
+#: App/Admin/View/Default/Group/edit.tpl:12
+#: App/Admin/View/Default/Group/index.tpl:11
 #: App/Admin/View/Default/Index/index.tpl:13
 #: App/Admin/View/Default/Login/index.tpl:10
 #: App/Admin/View/Default/Login/index.tpl:56
 #: App/Admin/View/Default/Logs/index.tpl:12
+#: App/Admin/View/Default/Manage/add.tpl:12
+#: App/Admin/View/Default/Manage/edit.tpl:12
+#: App/Admin/View/Default/Manage/editgroup.tpl:12
+#: App/Admin/View/Default/Manage/group.tpl:12
+#: App/Admin/View/Default/Manage/index.tpl:12
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:12
 #: App/Admin/View/Default/Profile/index.tpl:12
-#: App/Admin/View/Default/Single/execute_history.tpl:12
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:12
-#: App/Admin/View/Default/Single/execute_history_show.tpl:12
-#: App/Admin/View/Default/Single/index.tpl:12
-#: App/Admin/View/Default/Single/pub.tpl:12
-#: App/Admin/View/Default/Single/recycle.tpl:12
 #: App/Admin/View/Default/Task/addTask.tpl:12
 #: App/Admin/View/Default/Task/execute_history_show.tpl:11
 #: App/Admin/View/Default/Task/index.tpl:12
 msgid "Auto Test System"
 msgstr "自动化测试系统"
 
+#: App/Admin/View/Default/Group/add.tpl:55
+msgid "Case Info"
+msgstr "用例信息"
+
+#: App/Admin/View/Default/Group/add.tpl:59
+#: App/Admin/View/Default/Group/edit.tpl:59
+#: App/Admin/View/Default/Manage/editgroup.tpl:116
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:70
+msgid "Product"
+msgstr "项目"
+
+#: App/Admin/View/Default/Group/add.tpl:60
+#: App/Admin/View/Default/Group/edit.tpl:60
+msgid "Module"
+msgstr "模块"
+
+#: App/Admin/View/Default/Group/add.tpl:62
+#: App/Admin/View/Default/Group/edit.tpl:62
+#: App/Admin/View/Default/Group/index.tpl:106
+#: App/Admin/View/Default/Task/index.tpl:100
+msgid "Founder"
+msgstr "创建者"
+
+#: App/Admin/View/Default/Group/add.tpl:63
+#: App/Admin/View/Default/Group/add.tpl:287
+#: App/Admin/View/Default/Group/edit.tpl:64
+#: App/Admin/View/Default/Group/edit.tpl:358
+#: App/Admin/View/Default/Group/exec_dialog.tpl:4
+#: App/Admin/View/Default/Profile/index.tpl:210
+msgid "Execution"
+msgstr "执行"
+
+#: App/Admin/View/Default/Group/add.tpl:63
+msgid "Perform"
+msgstr "执行用例"
+
+#: App/Admin/View/Default/Group/add.tpl:66
+msgid "Job"
+msgstr "任务管理"
+
+#: App/Admin/View/Default/Group/add.tpl:68
+#: App/Admin/View/Default/Group/edit.tpl:69
+#: App/Admin/View/Default/Task/execute_history_show.tpl:69
+msgid "List"
+msgstr "用例列表"
+
+#: App/Admin/View/Default/Group/add.tpl:82
+#: App/Admin/View/Default/Group/add.tpl:88
+#: App/Admin/View/Default/Public/header.tpl:22
+msgid "Add Case"
+msgstr "添加用例"
+
+#: App/Admin/View/Default/Group/add.tpl:87
+#: App/Admin/View/Default/Group/edit.tpl:61
+#: App/Admin/View/Default/Group/edit.tpl:93
+#: App/Admin/View/Default/Group/index.tpl:11
+#: App/Admin/View/Default/Manage/group.tpl:12
+#: App/Admin/View/Default/Public/header.tpl:67
+#: App/Admin/View/Default/Task/addTask.tpl:12
+#: App/Admin/View/Default/Task/addTask.tpl:73
+#: App/Admin/View/Default/Task/addTask.tpl:101
+#: App/Admin/View/Default/Task/execute_history_show.tpl:11
+msgid "Case Groups"
+msgstr "用例分组"
+
+#: App/Admin/View/Default/Group/add.tpl:96
+#: App/Admin/View/Default/Group/add.tpl:99
+#: App/Admin/View/Default/Group/add.tpl:140
+#: App/Admin/View/Default/Group/add.tpl:143
+#: App/Admin/View/Default/Group/add.tpl:184
+#: App/Admin/View/Default/Group/create_project_dialog.tpl:10
+#: App/Admin/View/Default/Group/create_project_dialog.tpl:14
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:12
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:15
+#: App/Admin/View/Default/Group/edit.tpl:105
+#: App/Admin/View/Default/Group/edit.tpl:153
+#: App/Admin/View/Default/Group/edit.tpl:156
+#: App/Admin/View/Default/Group/edit.tpl:199
+#: App/Admin/View/Default/Group/index.tpl:104
+#: App/Admin/View/Default/Manage/group.tpl:122
+#: App/Admin/View/Default/Manage/index.tpl:87
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:83
+#: App/Admin/View/Default/Task/addTask.tpl:135
+#: App/Admin/View/Default/Task/addTask.tpl:138
+#: App/Admin/View/Default/Task/execute_history_show.tpl:61
+#: App/Admin/View/Default/Task/execute_history_show.tpl:93
+#: App/Admin/View/Default/Task/index.tpl:96
+msgid "Name"
+msgstr "姓名"
+
+#: App/Admin/View/Default/Group/add.tpl:105
+#: App/Admin/View/Default/Group/edit.tpl:114
+#: App/Admin/View/Default/Group/index.tpl:105
+#: App/Admin/View/Default/Task/execute_history_show.tpl:125
+msgid "Type"
+msgstr "类型"
+
+#: App/Admin/View/Default/Group/add.tpl:131
+#: App/Admin/View/Default/Group/edit.tpl:144
+msgid "Voice Record"
+msgstr "语音录制"
+
+#: App/Admin/View/Default/Group/add.tpl:132
+#: App/Admin/View/Default/Group/edit.tpl:145
+msgid "Upload"
+msgstr "本地上传"
+
+#: App/Admin/View/Default/Group/add.tpl:133
+#: App/Admin/View/Default/Group/edit.tpl:146
+msgid "Voice Library"
+msgstr "语音文件库"
+
+#: App/Admin/View/Default/Group/add.tpl:161
+#: App/Admin/View/Default/Group/edit.tpl:174
+msgid "Record"
+msgstr "录音"
+
+#: App/Admin/View/Default/Group/add.tpl:162
+#: App/Admin/View/Default/Group/edit.tpl:175
+msgid "Play"
+msgstr "播放"
+
+#: App/Admin/View/Default/Group/add.tpl:168
+#: App/Admin/View/Default/Group/edit.tpl:181
+msgid "Save And Use"
+msgstr "保存并使用"
+
+#: App/Admin/View/Default/Group/add.tpl:169
+#: App/Admin/View/Default/Group/edit.tpl:182
+msgid "Re-Record"
+msgstr "重新录制"
+
+#: App/Admin/View/Default/Group/add.tpl:175
+#: App/Admin/View/Default/Group/edit.tpl:189
+msgid "Drag Upload"
+msgstr "拖拽上传"
+
+#: App/Admin/View/Default/Group/add.tpl:192
+#: App/Admin/View/Default/Group/edit.tpl:207
+#: App/Admin/View/Default/Group/index.tpl:112
+#: App/Admin/View/Default/Manage/index.tpl:99
+#: App/Admin/View/Default/Task/index.tpl:106
+msgid "Search By Name"
+msgstr "根据姓名搜索"
+
+#: App/Admin/View/Default/Group/add.tpl:208
+#: App/Admin/View/Default/Group/edit.tpl:225
+msgid "Verify"
+msgstr "验证规格"
+
+#: App/Admin/View/Default/Group/add.tpl:212
+msgid "Add Rule"
+msgstr "添加规则"
+
+#: App/Admin/View/Default/Group/add.tpl:220
+#: App/Admin/View/Default/Group/edit.tpl:238
+msgid ""
+"Case Sensitive, Numbers And Strings Are Not Strictly Distinguished，"
+"For Example:’XXX’!=’xxx’, 123=’123’"
+msgstr ""
+"区分大小写，数字和字符串不做严格区分，如：“XXX”！=“XXX”， 123=“123”"
+
+#: App/Admin/View/Default/Group/add.tpl:230
+msgid "For Example"
+msgstr "比如"
+
+#: App/Admin/View/Default/Group/add.tpl:237
+#: App/Admin/View/Default/Group/edit.tpl:258
+#: App/Admin/View/Default/Group/edit.tpl:305
+msgid "Greater Than"
+msgstr "大于"
+
+#: App/Admin/View/Default/Group/add.tpl:238
+#: App/Admin/View/Default/Group/edit.tpl:261
+#: App/Admin/View/Default/Group/edit.tpl:306
+msgid "Less Than"
+msgstr "小于"
+
+#: App/Admin/View/Default/Group/add.tpl:239
+#: App/Admin/View/Default/Group/edit.tpl:264
+#: App/Admin/View/Default/Group/edit.tpl:307
+msgid "Contain"
+msgstr "包含"
+
+#: App/Admin/View/Default/Group/add.tpl:240
+#: App/Admin/View/Default/Group/edit.tpl:267
+#: App/Admin/View/Default/Group/edit.tpl:308
+msgid "Dose Not Contain"
+msgstr "不包含"
+
+#: App/Admin/View/Default/Group/add.tpl:241
+#: App/Admin/View/Default/Group/edit.tpl:270
+#: App/Admin/View/Default/Group/edit.tpl:309
+msgid "Equal"
+msgstr "等于"
+
+#: App/Admin/View/Default/Group/add.tpl:242
+#: App/Admin/View/Default/Group/edit.tpl:273
+#: App/Admin/View/Default/Group/edit.tpl:310
+msgid "Unequal To"
+msgstr "不等于"
+
+#: App/Admin/View/Default/Group/add.tpl:248
+#: App/Admin/View/Default/Group/edit.tpl:279
+#: App/Admin/View/Default/Group/edit.tpl:317
+msgid "Who"
+msgstr "谁是"
+
+#: App/Admin/View/Default/Group/create_project_dialog.tpl:4
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:4
+msgid "Create Product"
+msgstr "创建项目"
+
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:21
+#: App/Admin/View/Default/Task/addTask.tpl:145
+#: App/Admin/View/Default/Task/addTask.tpl:148
+#: App/Admin/View/Default/Task/index.tpl:97
+msgid "Time"
+msgstr "执行时间"
+
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:30
+#: App/Admin/View/Default/Task/addTask.tpl:155
+#: App/Admin/View/Default/Task/addTask.tpl:158
+#: App/Admin/View/Default/Task/execute_history_show.tpl:62
+#: App/Admin/View/Default/Task/execute_history_show.tpl:94
+#: App/Admin/View/Default/Task/index.tpl:98
+msgid "Version"
+msgstr "版本号"
+
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:38
+#: App/Admin/View/Default/Task/addTask.tpl:165
+#: App/Admin/View/Default/Task/addTask.tpl:168
+#: App/Admin/View/Default/Task/execute_history_show.tpl:105
+#: App/Admin/View/Default/Task/index.tpl:99
+msgid "Note"
+msgstr "备注"
+
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:45
+msgid "Notification email"
+msgstr "通知邮件"
+
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:99
+msgid "Cancel"
+msgstr "取消"
+
+#: App/Admin/View/Default/Group/create_task_dialog.tpl:100
+msgid "Confirm"
+msgstr "确定"
+
+#: App/Admin/View/Default/Group/edit.tpl:12
+#: App/Admin/View/Default/Group/edit.tpl:55
+#: App/Admin/View/Default/Group/edit.tpl:64
+#: App/Admin/View/Default/Group/edit.tpl:81
+#: App/Admin/View/Default/Group/edit.tpl:95
+#: App/Admin/View/Default/Group/edit.tpl:249
+#: App/Admin/View/Default/Manage/edit.tpl:12
+#: App/Admin/View/Default/Manage/edit.tpl:105
+#: App/Admin/View/Default/Manage/edit.tpl:117
+#: App/Admin/View/Default/Manage/editgroup.tpl:12
+#: App/Admin/View/Default/Manage/editgroup.tpl:89
+msgid "Edit"
+msgstr "编辑"
+
+#: App/Admin/View/Default/Group/edit.tpl:63
+#: App/Admin/View/Default/Group/index.tpl:107
+#: App/Admin/View/Default/Task/execute_history_show.tpl:64
+#: App/Admin/View/Default/Task/execute_history_show.tpl:99
+msgid "Create Time"
+msgstr "创建时间"
+
+#: App/Admin/View/Default/Group/edit.tpl:83
+msgid "Previous"
+msgstr "上一条"
+
+#: App/Admin/View/Default/Group/edit.tpl:84
+msgid "Next"
+msgstr "下一条"
+
+#: App/Admin/View/Default/Group/edit.tpl:108
+msgid "Nmae"
+msgstr "名称"
+
+#: App/Admin/View/Default/Group/edit.tpl:140
+msgid "Selected"
+msgstr "已选择"
+
+#: App/Admin/View/Default/Group/edit.tpl:333
+msgid "Reset"
+msgstr "重置"
+
+#: App/Admin/View/Default/Group/edit.tpl:334
+msgid "Save"
+msgstr "保存"
+
+#: App/Admin/View/Default/Group/index.tpl:78
+msgid "Create Job"
+msgstr "创建任务"
+
+#: App/Admin/View/Default/Group/index.tpl:108
+#: App/Admin/View/Default/Manage/group.tpl:124
+#: App/Admin/View/Default/Manage/index.tpl:94
+#: App/Admin/View/Default/Task/index.tpl:101
+msgid "Operate"
+msgstr "操作者"
+
+#: App/Admin/View/Default/Index/index.tpl:13
+msgid "Log Record"
+msgstr "任务执行记录"
+
 #: App/Admin/View/Default/Index/index.tpl:72
 msgid "Case Group"
 msgstr "用例分组"
 
 #: App/Admin/View/Default/Index/index.tpl:85
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:84
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:84
-#: App/Admin/View/Default/Single/pub.tpl:12
-#: App/Admin/View/Default/Single/pub.tpl:73
-#: App/Admin/View/Default/Single/pub.tpl:81
 msgid "Public Case"
 msgstr "公共用例"
 
@@ -162,52 +425,97 @@ msgstr "登录"
 msgid "Enter any username and password"
 msgstr "请输入用户名和密码"
 
+#: App/Admin/View/Default/Manage/add.tpl:12
+#: App/Admin/View/Default/Manage/add.tpl:80
+#: App/Admin/View/Default/Manage/add.tpl:120
+#: App/Admin/View/Default/Manage/edit.tpl:12
+#: App/Admin/View/Default/Manage/edit.tpl:68
+#: App/Admin/View/Default/Manage/edit.tpl:115
+#: App/Admin/View/Default/Manage/editgroup.tpl:12
+#: App/Admin/View/Default/Manage/editgroup.tpl:46
+#: App/Admin/View/Default/Manage/editgroup.tpl:87
+#: App/Admin/View/Default/Manage/group.tpl:58
 #: App/Admin/View/Default/Manage/index.tpl:12
+#: App/Admin/View/Default/Manage/index.tpl:53
 #: App/Admin/View/Default/Manage/index.tpl:76
-#: App/Admin/View/Default/Public/header.tpl:87
+#: App/Admin/View/Default/Public/header.tpl:83
 msgid "Users"
 msgstr "用户管理"
 
+#: App/Admin/View/Default/Manage/add.tpl:84
+#: App/Admin/View/Default/Manage/edit.tpl:72
+#: App/Admin/View/Default/Manage/editgroup.tpl:50
+#: App/Admin/View/Default/Manage/group.tpl:62
+#: App/Admin/View/Default/Manage/group.tpl:89
 #: App/Admin/View/Default/Manage/index.tpl:55
 #: App/Admin/View/Default/Manage/index.tpl:71
-#: App/Admin/View/Default/Single/execute_history.tpl:115
 msgid "User List"
 msgstr "用户列表"
 
+#: App/Admin/View/Default/Manage/add.tpl:92
+#: App/Admin/View/Default/Manage/add.tpl:96
+#: App/Admin/View/Default/Manage/add.tpl:188
+#: App/Admin/View/Default/Manage/edit.tpl:80
+#: App/Admin/View/Default/Manage/edit.tpl:84
+#: App/Admin/View/Default/Manage/edit.tpl:88
+#: App/Admin/View/Default/Manage/edit.tpl:182
+#: App/Admin/View/Default/Manage/editgroup.tpl:57
+#: App/Admin/View/Default/Manage/index.tpl:58
 #: App/Admin/View/Default/Manage/index.tpl:60
 msgid "User Group"
 msgstr "用户组管理"
+
+#: App/Admin/View/Default/Manage/add.tpl:143
+#: App/Admin/View/Default/Manage/edit.tpl:138
+#: App/Admin/View/Default/Profile/index.tpl:131
+msgid "User Name"
+msgstr "用户名"
+
+#: App/Admin/View/Default/Manage/add.tpl:158
+#: App/Admin/View/Default/Manage/edit.tpl:152
+msgid "Real Name"
+msgstr "姓名"
+
+#: App/Admin/View/Default/Manage/add.tpl:204
+#: App/Admin/View/Default/Manage/edit.tpl:202
+msgid "Password"
+msgstr "密码"
+
+#: App/Admin/View/Default/Manage/add.tpl:217
+#: App/Admin/View/Default/Manage/edit.tpl:215
+msgid "Replay Password"
+msgstr "重复密码"
+
+#: App/Admin/View/Default/Manage/add.tpl:230
+#: App/Admin/View/Default/Manage/edit.tpl:228
+msgid "Random Password"
+msgstr "随机生成"
+
+#: App/Admin/View/Default/Manage/editgroup.tpl:61
+#: App/Admin/View/Default/Manage/editgroup.tpl:77
+msgid "Authorization"
+msgstr "用户组分类授权"
+
+#: App/Admin/View/Default/Manage/editgroup.tpl:108
+#: App/Admin/View/Default/Manage/group.tpl:70
+#: App/Admin/View/Default/Manage/group.tpl:74
+#: App/Admin/View/Default/Manage/group.tpl:97
+#: App/Admin/View/Default/Manage/index.tpl:89
+msgid "User Groups"
+msgstr "用户组"
+
+#: App/Admin/View/Default/Manage/group.tpl:123
+msgid "Jurisdiction"
+msgstr "权限"
 
 #: App/Admin/View/Default/Manage/index.tpl:86
 msgid "Account"
 msgstr "帐号"
 
-#: App/Admin/View/Default/Manage/index.tpl:87
-#: App/Admin/View/Default/Single/execute_history.tpl:81
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:78
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:106
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:110
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:109
-#: App/Admin/View/Default/Single/execute_history_show.tpl:77
-#: App/Admin/View/Default/Single/index.tpl:113
-#: App/Admin/View/Default/Single/pub.tpl:95
-#: App/Admin/View/Default/Single/recycle.tpl:131
-#: App/Admin/View/Default/Task/addTask.tpl:135
-#: App/Admin/View/Default/Task/addTask.tpl:138
-#: App/Admin/View/Default/Task/execute_history_show.tpl:61
-#: App/Admin/View/Default/Task/execute_history_show.tpl:93
-#: App/Admin/View/Default/Task/index.tpl:96
-msgid "Name"
-msgstr "姓名"
-
 #: App/Admin/View/Default/Manage/index.tpl:88
 #: App/Admin/View/Default/Profile/index.tpl:144
 msgid "Email Address"
 msgstr "邮箱"
-
-#: App/Admin/View/Default/Manage/index.tpl:89
-msgid "User Groups"
-msgstr "用户组"
 
 #: App/Admin/View/Default/Manage/index.tpl:90
 msgid "Found Time"
@@ -225,36 +533,27 @@ msgstr "最后登录IP"
 msgid "Start"
 msgstr "启用"
 
-#: App/Admin/View/Default/Manage/index.tpl:94
-#: App/Admin/View/Default/Single/execute_history.tpl:198
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:168
-#: App/Admin/View/Default/Single/index.tpl:119
-#: App/Admin/View/Default/Single/pub.tpl:101
-#: App/Admin/View/Default/Single/recycle.tpl:136
-#: App/Admin/View/Default/Task/index.tpl:101
-msgid "Operate"
-msgstr "操作者"
+#: App/Admin/View/Default/Manage/index.tpl:93
+msgid "’N’ is disable state"
+msgstr "N为禁用状态"
 
 #: App/Admin/View/Default/Manage/index.tpl:98
 msgid "Search By UserName"
 msgstr "根据用户名搜索"
 
-#: App/Admin/View/Default/Manage/index.tpl:99
-#: App/Admin/View/Default/Single/index.tpl:126
-#: App/Admin/View/Default/Single/pub.tpl:108
-#: App/Admin/View/Default/Single/recycle.tpl:143
-#: App/Admin/View/Default/Task/index.tpl:106
-msgid "Search By Name"
-msgstr "根据姓名搜索"
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:12
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:75
+msgid "Product Admin"
+msgstr "项目管理"
+
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:106
+msgid "It Cannot Be Recovered After Delete, Continue Or Not?"
+msgstr "删除后不可恢复，要继续么？"
 
 #: App/Admin/View/Default/Profile/index.tpl:12
 #: App/Admin/View/Default/Profile/index.tpl:66
 msgid "User Info"
 msgstr "用户信息"
-
-#: App/Admin/View/Default/Profile/index.tpl:131
-msgid "User Name"
-msgstr "用户名"
 
 #: App/Admin/View/Default/Profile/index.tpl:138
 msgid "Nickname"
@@ -264,37 +563,15 @@ msgstr "昵称"
 msgid "Last Login"
 msgstr "最后登录"
 
-#: App/Admin/View/Default/Profile/index.tpl:210
-#: App/Admin/View/Default/Single/execute_history.tpl:105
-#: App/Admin/View/Default/Single/execute_history.tpl:256
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:98
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:224
-#: App/Admin/View/Default/Single/execute_history_show.tpl:99
-#: App/Admin/View/Default/Single/execute_history_show.tpl:248
-#: App/Admin/View/Default/Single/pub.tpl:163
-msgid "Execution"
-msgstr "执行"
-
 #: App/Admin/View/Default/Profile/index.tpl:225
-#: App/Admin/View/Default/Single/execute_history.tpl:271
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:254
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:239
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:238
-#: App/Admin/View/Default/Single/execute_history_show.tpl:263
-#: App/Admin/View/Default/Single/index.tpl:214
-#: App/Admin/View/Default/Single/pub.tpl:178
 msgid "Current Perform"
 msgstr "当前执行用例"
 
 #: App/Admin/View/Default/Public/header.tpl:23
-msgid "Add Case"
-msgstr "添加用例"
-
-#: App/Admin/View/Default/Public/header.tpl:24
 msgid "Add Case Group"
 msgstr "添加用例组"
 
-#: App/Admin/View/Default/Public/header.tpl:25
+#: App/Admin/View/Default/Public/header.tpl:24
 #: App/Admin/View/Default/Task/addTask.tpl:12
 #: App/Admin/View/Default/Task/addTask.tpl:77
 #: App/Admin/View/Default/Task/addTask.tpl:91
@@ -302,256 +579,39 @@ msgstr "添加用例组"
 msgid "Add Job"
 msgstr "添加任务"
 
-#: App/Admin/View/Default/Public/header.tpl:44
+#: App/Admin/View/Default/Public/header.tpl:43
 msgid "My Information"
 msgstr "我的资料"
 
-#: App/Admin/View/Default/Public/header.tpl:45
+#: App/Admin/View/Default/Public/header.tpl:44
 msgid "My Note"
 msgstr "我的日志"
 
-#: App/Admin/View/Default/Public/header.tpl:61
+#: App/Admin/View/Default/Public/header.tpl:57
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: App/Admin/View/Default/Public/header.tpl:71
-#: App/Admin/View/Default/Task/addTask.tpl:12
-#: App/Admin/View/Default/Task/addTask.tpl:73
-#: App/Admin/View/Default/Task/addTask.tpl:101
-#: App/Admin/View/Default/Task/execute_history_show.tpl:11
-#: App/Admin/View/Default/Task/execute_history_show.tpl:117
-msgid "Case Groups"
-msgstr "用例分组"
-
-#: App/Admin/View/Default/Public/header.tpl:80
+#: App/Admin/View/Default/Public/header.tpl:76
 #: App/Admin/View/Default/Task/execute_history_show.tpl:86
 #: App/Admin/View/Default/Task/index.tpl:12
 msgid "Jobs"
 msgstr "任务管理"
 
-#: App/Admin/View/Default/Single/execute_history.tpl:12
-#: App/Admin/View/Default/Single/execute_history.tpl:142
-#: App/Admin/View/Default/Single/execute_history.tpl:154
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:149
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:202
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:74
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:86
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:88
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:74
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:87
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:89
-#: App/Admin/View/Default/Single/execute_history_show.tpl:12
-#: App/Admin/View/Default/Single/execute_history_show.tpl:137
-#: App/Admin/View/Default/Single/execute_history_show.tpl:150
-#: App/Admin/View/Default/Single/execute_history_show.tpl:213
-msgid "Case Record"
-msgstr "执行记录"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:75
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:73
-#: App/Admin/View/Default/Single/execute_history_show.tpl:72
-msgid "Case Info"
-msgstr "用例信息"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:83
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:80
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:108
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:112
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:111
-#: App/Admin/View/Default/Single/execute_history_show.tpl:79
-#: App/Admin/View/Default/Single/index.tpl:115
-#: App/Admin/View/Default/Single/index.tpl:134
-#: App/Admin/View/Default/Single/recycle.tpl:133
-#: App/Admin/View/Default/Single/recycle.tpl:151
-msgid "Property"
-msgstr "属性"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:92
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:86
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:121
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:125
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:124
-#: App/Admin/View/Default/Single/execute_history_show.tpl:88
-#: App/Admin/View/Default/Task/execute_history_show.tpl:63
-msgid "Belongs to the user"
-msgstr "所属用户"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:94
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:88
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:186
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:124
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:128
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:127
-#: App/Admin/View/Default/Single/execute_history_show.tpl:90
-#: App/Admin/View/Default/Single/execute_history_show.tpl:189
-#: App/Admin/View/Default/Single/index.tpl:117
-#: App/Admin/View/Default/Single/pub.tpl:98
-#: App/Admin/View/Default/Single/recycle.tpl:135
-#: App/Admin/View/Default/Task/execute_history_show.tpl:64
-#: App/Admin/View/Default/Task/execute_history_show.tpl:99
-msgid "Create Time"
-msgstr "创建时间"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:99
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:92
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:127
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:130
-#: App/Admin/View/Default/Single/execute_history_show.tpl:92
-#: App/Admin/View/Default/Single/index.tpl:116
-#: App/Admin/View/Default/Single/pub.tpl:97
-#: App/Admin/View/Default/Single/recycle.tpl:134
-msgid "Rule"
-msgstr "规则"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:119
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:113
-#: App/Admin/View/Default/Single/execute_history_show.tpl:114
-#: App/Admin/View/Default/Single/index.tpl:78
-#: App/Admin/View/Default/Single/recycle.tpl:12
-#: App/Admin/View/Default/Single/recycle.tpl:73
-#: App/Admin/View/Default/Single/recycle.tpl:96
-#: App/Admin/View/Default/Single/recycle.tpl:107
-msgid "Recycle Bin"
-msgstr "回收站"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:176
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:12
-#: App/Admin/View/Default/Task/index.tpl:80
-msgid "Contrast"
-msgstr "对比"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:195
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:182
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:165
-#: App/Admin/View/Default/Single/execute_history_show.tpl:183
-msgid "Execution Result"
-msgstr "执行结果"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:196
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:166
-#: App/Admin/View/Default/Task/addTask.tpl:145
-#: App/Admin/View/Default/Task/addTask.tpl:148
-#: App/Admin/View/Default/Task/index.tpl:97
-msgid "Time"
-msgstr "执行时间"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:197
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:198
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:167
-#: App/Admin/View/Default/Single/execute_history_show.tpl:207
-msgid "Executioner"
-msgstr "执行者"
-
-#: App/Admin/View/Default/Single/execute_history.tpl:205
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:175
-msgid "Search By IP"
-msgstr "根据IP搜索"
-
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:109
-#: App/Admin/View/Default/Single/execute_history_show.tpl:110
-#: App/Admin/View/Default/Single/index.tpl:74
-#: App/Admin/View/Default/Task/execute_history_show.tpl:69
-msgid "List"
-msgstr "用例列表"
-
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:136
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:12
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:75
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:90
-msgid "Case Record Contrast"
-msgstr "执行记录对比"
-
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:190
-#: App/Admin/View/Default/Single/execute_history_show.tpl:195
-#: App/Admin/View/Default/Task/execute_history_show.tpl:101
-#: App/Admin/View/Default/Task/execute_history_show.tpl:131
-msgid "Start Time"
-msgstr "开始时间"
-
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:194
-#: App/Admin/View/Default/Single/execute_history_show.tpl:201
-#: App/Admin/View/Default/Task/execute_history_show.tpl:102
-#: App/Admin/View/Default/Task/execute_history_show.tpl:132
-msgid "Finish Time"
-msgstr "结束时间"
-
-#: App/Admin/View/Default/Single/execute_history_diff.tpl:239
-msgid "Performing"
-msgstr "计划执行时间"
-
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:108
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:112
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:111
-#: App/Admin/View/Default/Single/index.tpl:135
-#: App/Admin/View/Default/Single/recycle.tpl:152
-msgid "Public"
-msgstr "公开"
-
-#: App/Admin/View/Default/Single/execute_history_pub.tpl:108
-#: App/Admin/View/Default/Single/execute_history_pub_diff.tpl:112
-#: App/Admin/View/Default/Single/execute_history_pub_show.tpl:111
-#: App/Admin/View/Default/Single/index.tpl:136
-#: App/Admin/View/Default/Single/recycle.tpl:153
-msgid "Private"
-msgstr "私有"
-
-#: App/Admin/View/Default/Single/execute_history_show.tpl:152
-#: App/Admin/View/Default/Task/execute_history_show.tpl:11
-msgid "Case Record Show"
-msgstr "执行记录查看"
-
-#: App/Admin/View/Default/Single/execute_history_show.tpl:221
-msgid "Back"
-msgstr "返回"
-
-#: App/Admin/View/Default/Single/index.tpl:118
-#: App/Admin/View/Default/Single/pub.tpl:100
-msgid "State"
-msgstr "状态"
-
-#: App/Admin/View/Default/Single/index.tpl:129
-#: App/Admin/View/Default/Single/pub.tpl:111
-#: App/Admin/View/Default/Single/recycle.tpl:146
-msgid "Search By NLP"
-msgstr "按NLP搜索"
-
-#: App/Admin/View/Default/Single/index.tpl:188
-msgid "It Cannot Be Recovered After Delete, Continue Or Not?"
-msgstr "删除后不可恢复，要继续么？"
-
-#: App/Admin/View/Default/Single/index.tpl:199
-msgid "Perform"
-msgstr "执行用例"
-
-#: App/Admin/View/Default/Single/pub.tpl:99
-#: App/Admin/View/Default/Task/index.tpl:100
-msgid "Founder"
-msgstr "创建者"
-
-#: App/Admin/View/Default/Task/addTask.tpl:155
-#: App/Admin/View/Default/Task/addTask.tpl:158
-#: App/Admin/View/Default/Task/execute_history_show.tpl:62
-#: App/Admin/View/Default/Task/execute_history_show.tpl:94
-#: App/Admin/View/Default/Task/index.tpl:98
-msgid "Version"
-msgstr "版本号"
-
-#: App/Admin/View/Default/Task/addTask.tpl:165
-#: App/Admin/View/Default/Task/addTask.tpl:168
-#: App/Admin/View/Default/Task/execute_history_show.tpl:105
-#: App/Admin/View/Default/Task/index.tpl:99
-msgid "Note"
-msgstr "备注"
-
 #: App/Admin/View/Default/Task/addTask.tpl:173
 msgid "Select Case"
 msgstr "用例选择"
 
+#: App/Admin/View/Default/Task/execute_history_show.tpl:11
+msgid "Case Record Show"
+msgstr "执行记录查看"
+
 #: App/Admin/View/Default/Task/execute_history_show.tpl:57
 msgid "Job Info"
 msgstr "任务信息"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:63
+msgid "Belongs to the user"
+msgstr "所属用户"
 
 #: App/Admin/View/Default/Task/execute_history_show.tpl:81
 #: App/Admin/View/Default/Task/index.tpl:54
@@ -567,18 +627,91 @@ msgstr "执行记录查看"
 msgid "Plan To performing"
 msgstr "计划执行时间"
 
+#: App/Admin/View/Default/Task/execute_history_show.tpl:101
+#: App/Admin/View/Default/Task/execute_history_show.tpl:132
+msgid "Start Time"
+msgstr "开始时间"
+
+#: App/Admin/View/Default/Task/execute_history_show.tpl:102
+#: App/Admin/View/Default/Task/execute_history_show.tpl:133
+msgid "Finish Time"
+msgstr "结束时间"
+
 #: App/Admin/View/Default/Task/execute_history_show.tpl:105
 msgid "Not"
 msgstr "无"
 
-#: App/Admin/View/Default/Task/execute_history_show.tpl:123
+#: App/Admin/View/Default/Task/execute_history_show.tpl:124
 msgid "Path"
 msgstr "路径"
 
-#: App/Admin/View/Default/Task/execute_history_show.tpl:124
-msgid "Type"
-msgstr "类型"
+#: App/Admin/View/Default/Task/index.tpl:80
+msgid "Contrast"
+msgstr "对比"
 
 #: App/Admin/View/Default/Task/index.tpl:113
 msgid "Search By Version"
 msgstr "根据版本号搜索"
+
+#~ msgid "Execute"
+#~ msgstr "执行"
+
+#~ msgid "Disable"
+#~ msgstr "禁用"
+
+#~ msgid "Activate"
+#~ msgstr "激活"
+
+#~ msgid "Fail"
+#~ msgstr "失败"
+
+#~ msgid "Succeed"
+#~ msgstr "成功"
+
+#~ msgid "not login"
+#~ msgstr "无法登录"
+
+#~ msgid "Activation Confirmation"
+#~ msgstr "确认激活"
+
+#~ msgid "Case Record"
+#~ msgstr "执行记录"
+
+#~ msgid "Property"
+#~ msgstr "属性"
+
+#~ msgid "Rule"
+#~ msgstr "规则"
+
+#~ msgid "Recycle Bin"
+#~ msgstr "回收站"
+
+#~ msgid "Execution Result"
+#~ msgstr "执行结果"
+
+#~ msgid "Executioner"
+#~ msgstr "执行者"
+
+#~ msgid "Search By IP"
+#~ msgstr "根据IP搜索"
+
+#~ msgid "Case Record Contrast"
+#~ msgstr "执行记录对比"
+
+#~ msgid "Performing"
+#~ msgstr "计划执行时间"
+
+#~ msgid "Public"
+#~ msgstr "公开"
+
+#~ msgid "Private"
+#~ msgstr "私有"
+
+#~ msgid "Back"
+#~ msgstr "返回"
+
+#~ msgid "State"
+#~ msgstr "状态"
+
+#~ msgid "Search By NLP"
+#~ msgstr "按NLP搜索"

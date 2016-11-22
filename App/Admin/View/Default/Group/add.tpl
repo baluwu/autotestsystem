@@ -8,7 +8,7 @@
 <!--<![endif]-->
 <head>
   <meta charset="utf-8"/>
-  <title>添加用例 | 用例管理 | 自动化测试系统</title>
+  <title><?php _e('Add'); ?> | <?php _e('Case'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/> 
@@ -52,20 +52,20 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-cube font-dark"></i>
-                            <span class="caption-subject uppercase font-dark">用例信息</span>
+                            <span class="caption-subject uppercase font-dark"><?php _e('Case Info'); ?></span>
                         </div>
                     </div>
                     <div class="portlet-body list">
-                        <p class="margin-bottom-10 tooltips" data-original-title="项目"><i class="fa fa-cubes"></i>{$project_name}</p>
-                        <p class="margin-bottom-10 tooltips" data-original-title="模块"><i class="fa fa-cube"></i>{$model_name}</p>
-                        <p class="margin-bottom-10 tooltips" data-original-title="用例组"><i class="fa fa-object-group"></i>{$group_name}</p>
-                        <p class="margin-bottom-10 tooltips" data-original-title="创建人"><i class="fa fa-user"></i>{$user}</p>
-                        <p class="margin-bottom-10 tooltips exec-single" data-original-title="执行"><i class="fa fa-chevron-circle-right"></i><a href="javascript:;" id="exec_btn">执行用例</a></p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Product'); ?>"><i class="fa fa-cubes"></i>{$project_name}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Module'); ?>"><i class="fa fa-cube"></i>{$model_name}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Case'); ?>"><i class="fa fa-object-group"></i>{$group_name}</p>
+                        <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Founder'); ?>"><i class="fa fa-user"></i>{$user}</p>
+                        <p class="margin-bottom-10 tooltips exec-single" data-original-title="<?php _e('Execution'); ?>"><i class="fa fa-chevron-circle-right"></i><a href="javascript:;" id="exec_btn"><?php _e('Perform'); ?></a></p>
                     </div>
                 </div>
-                <h3>任务管理</h3>
+                <h3><?php _e('Job'); ?></h3>
                 <ul class="nav navbar-nav margin-bottom-35">
-                    <li class="active"> <a href="/Task/index"> <i class="fa fa-object-ungroup"></i> 任务列表 </a> </li>
+                    <li class="active"> <a href="/Task/index"> <i class="fa fa-object-ungroup"></i> <?php _e('List'); ?> </a> </li>
                 </ul>
             </nav>
           </div>
@@ -79,13 +79,13 @@
                     <div class="portlet-title">
                       <div class="caption">
                       <i class="fa fa-plus font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">添加用例</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Add Case'); ?></span>
                       </div> 
                       <div class="breadcrumbs">
                         <ol class="breadcrumb">
-                          <li> <a href="/Index">Home</a> </li>
-                          <li> <a href="/Group/index">用例组管理</a> </li>
-                          <li class="active"> 添加用例</li>
+                          <> <a href="/Index">Home</a> </>
+                          <li> <a href="/Group/index">用例组管理<?php _e('Case Groups'); ?></a> </li>
+                          <li class="active"> <?php _e('Add Case'); ?></li>
                         </ol>
                       </div>
                     </div>
@@ -93,16 +93,16 @@
                             <div class="form-body">
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label" for="mc">
-                                  <span class="required"> * </span>名称
+                                  <span class="required"> * </span><?php _e('Name'); ?>
                                 </label>
                                 <div class="col-md-9">
-                                  <input type="text" name="mc" class="form-control" id="mc" placeholder="名称">
+                                  <input type="text" name="mc" class="form-control" id="mc" placeholder="<?php _e('Name'); ?>">
                                   <div class="form-control-focus"></div>
                                 </div>
                               </div>
                               <div class="form-group form-md-line-input">
                                 <label class="col-md-2 control-label" for="type">
-                                  <span class="required"> * </span>类型
+                                  <span class="required"> * </span><?php _e('Type'); ?>
                                 </label>
                                 <div class="col-md-9">
                                   <input type="checkbox" name="type_switch"  id="type_switch" class="make-switch"
@@ -128,19 +128,19 @@
                                     <input type="hidden" name="arc" value="" id="arc" />
                                     <input type="hidden" name="groupid" value="{$group_id}" />
                                     <ul class="nav nav-tabs J_asr_type_nav" role="tablist">
-                                        <li role="presentation" class="active" role-index="0"><a href="javascript:;">语音录制</a></li>
-                                        <li role="presentation" role-index="1"><a href="javascript:;">本地上传</a></li>
-                                        <li role="presentation" role-index="2"><a href="javascript:;">语音文件库</a></li>
+                                        <li role="presentation" class="active" role-index="0"><a href="javascript:;"><?php _e('Voice Record'); ?></a></li>
+                                        <li role="presentation" role-index="1"><a href="javascript:;"><?php _e('Upload'); ?></a></li>
+                                        <li role="presentation" role-index="2"><a href="javascript:;"><?php _e('Voice Library'); ?></a></li>
                                     </ul>
                                     <ul class="nav">
                                     <li class="audio-item record-item">
                                         <div class="form-body record-form">
                                             <div class="form-group form-md-line-input">
                                                 <label class="control-label col-md-1">
-                                                    <span class="required"> * </span>名称
+                                                    <span class="required"> * </span><?php _e('Name'); ?>
                                                 </label>
                                                 <div class="col-md-5">
-                                                    <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="录音文件名称">
+                                                    <input type="text" name="record_name" class="form-control" id="J_record_name" placeholder="<?php _e('Name'); ?>">
                                                     <div class="form-control-focus"> </div>
                                                 </div>
                                             </div>
@@ -158,21 +158,21 @@
                                                 <div class="col-md-12 record-ctrl">
                                                     <span class="glyphicon glyphicon-record icon-record"></span>
                                                     <span class="glyphicon glyphicon-play-circle icon-play"></span>
-                                                    <span class="record-btn">录音</span>
-                                                    <span class="play-btn">播放</span>
+                                                    <span class="record-btn"><?php _e('Record'); ?></span>
+                                                    <span class="play-btn"><?php _e('Play'); ?></span>
                                                 </div>
                                             </div>
                                             <div class="form-group form-md-line-input">
                                                 <div class="progress-plh">&nbsp;</div>
                                                 <div class="record-tools">
-                                                    <button type="button" class="btn btn-primary use-audio">保存并使用</button>
-                                                    <button type="button" class="btn btn-default re-record">重新录制</button>
+                                                    <button type="button" class="btn btn-primary use-audio"><?php _e('Save And Use'); ?></button>
+                                                    <button type="button" class="btn btn-default re-record"><?php _e('Re-Record'); ?></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="audio-item upload-item">
-                                        <div id="arc_upload" class="ats-dropzone" /> 拖拽到此处上传(*.wav,*.mp3,*.amr)</if></div>
+                                        <div id="arc_upload" class="ats-dropzone" /> <?php _e('Drag Upload'); ?>(*.wav,*.mp3,*.amr)</if></div>
                                     </li>
                                     <li class="audio-item lib-item">
                                         <div class="form-group ">
@@ -181,7 +181,7 @@
                                                     <thead>
                                                     <tr role="row" class="heading">
                                                         <th width="50">No</th>
-                                                        <th width="250">名称</th>
+                                                        <th width="250"><?php _e('Name'); ?></th>
                                                         <th width="220">Date</th>
                                                         <th>&nbsp;</th>
                                                     </tr>
@@ -189,7 +189,7 @@
                                                     <tr role="row" class="filter">
                                                         <td></td>
                                                         <td>
-                                                        <input type="text" class="form-control form-filter input-sm" name="search_name" id="search_name" placeholder="按名称搜索">
+                                                        <input type="text" class="form-control form-filter input-sm" name="search_name" id="search_name" placeholder="<?php _e('Search By Name'); ?>">
                                                         </td>
                                                         <td></td>
                                                         <td></td>
@@ -205,11 +205,11 @@
                             </div>
                             <div class="form-group form-md-line-input">
                             <label class="col-md-2 control-label">
-                            <span class="required"> * </span>验证规则
+                            <span class="required"> * </span><?php _e('Verify'); ?>
                             </label>
                             <div class="col-md-9">
                             <div class="text-align-reverse margin-bottom-10">
-                                <a id="validates_btn_add" href="javascript:;" class="btn red "><i class="fa fa-plus"></i> 添加规则 </a>
+                                <a id="validates_btn_add" href="javascript:;" class="btn red "><i class="fa fa-plus"></i> <?php _e('Add Rule'); ?> </a>
                             </div>
                             <table class="table table-bordered table-hover" id="validates_table">
                             <thead>
@@ -217,7 +217,7 @@
                                 <th width="2%"> №</th>
                                 <th width="30%"> key</th>
                                 <th width="8%"> condition</th>
-                                <th width="30%"> value <i class="fa fa-info-circle tooltips" data-original-title="区分大小写,数字和字符串不做严格区分,如：'xxx' != 'XXX', 123 = '123' "></i></th>
+                                <th width="30%"> value <i class="fa fa-info-circle tooltips" data-original-title="<?php _e('Case Sensitive, Numbers And Strings Are Not Strictly Distinguished，For Example:’XXX’!=’xxx’, 123=’123’'); ?>"></i></th>
                                 <th width="10%"></th>
                             </tr>
                             </thead>
@@ -227,25 +227,25 @@
                                     <td>
                                         <div class="col-md-12">
                                         <div class="form-group form-md-line-input">
-                                        <input type="text" class="form-control" name="v1[]" placeholder="如: intent.slots.whois">
+                                        <input type="text" class="form-control" name="v1[]" placeholder="<?php _e('For Example');?>: intent.slots.whois">
                                         <div class="form-control-focus"></div>
                                         </div>
                                         </div>
                                     </td>
                                     <td>
                                         <select name="dept[]" class="bs-select form-control">
-                                            <option value="大于">大于</option>
-                                            <option value="小于">小于</option>
-                                            <option value="包含">包含</option>
-                                            <option value="不包含">不包含</option>
-                                            <option value="等于" selected>等于</option>
-                                            <option value="不等于">不等于</option>
+                                            <option value="大于"><?php _e('Greater Than'); ?></option>
+                                            <option value="小于"><?php _e('Less Than'); ?></option>
+                                            <option value="包含"><?php _e('Contain'); ?></option>
+                                            <option value="不包含"><?php _e('Dose Not Contain'); ?></option>
+                                            <option value="等于" selected><?php _e('Equal'); ?></option>
+                                            <option value="不等于"><?php _e('Unequal To'); ?></option>
                                         </select>
                                     </td>
                                     <td>
                                         <div class="col-md-12">
                                             <div class="form-group form-md-line-input">
-                                                <input type="text" class="form-control" name="v2[]" placeholder="谁是">
+                                                <input type="text" class="form-control" name="v2[]" placeholder="<?php _e('Who'); ?>">
                                                 <div class="form-control-focus"></div>
                                             </div>
                                         </div>
@@ -284,7 +284,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#" class="form-horizontal form-row-seperated">
     <div class="modal-body">

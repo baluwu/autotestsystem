@@ -1,17 +1,17 @@
 <div id="J_create_project" class="modal fade" tabindex="-1" data-focus-on="input:first">
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-  <h4 class="modal-title">创建项目</h4>
+  <h4 class="modal-title"><?php _e('Create Product'); ?></h4>
 </div>
 <div class="modal-body">
   <div class="tips"></div>
   <div class="form-group form-md-line-input">
     <label class="col-md-2 control-label" for="port">
-      <span class="required"> * </span>名称
+      <span class="required"> * </span><?php _e('Name'); ?>
     </label>
 
     <div class="col-md-10">
-      <input type="text" name="project_name" class="form-control" id="J_project_name" placeholder="项目名称" data-tabindex="1">
+      <input type="text" name="project_name" class="form-control" id="J_project_name" placeholder="<?php _e('Name'); ?>" data-tabindex="1">
       <div class="form-control-focus"></div>
     </div>
   </div>

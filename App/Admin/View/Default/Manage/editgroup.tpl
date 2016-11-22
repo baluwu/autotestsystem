@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>编辑用户分组 | 用户管理 | 自动化测试系统</title>
+  <title><?php _e('Edit'); ?> | <?php _e('Users'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -43,22 +43,22 @@
         <div class="page-content-row">
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <h3>用户管理</h3>
+              <h3><?php _e('Users'); ?></h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
                   <a href="/Manage/index">
-                    <i class="fa fa-users"></i> 用户列表 </a>
+                    <i class="fa fa-users"></i> <?php _e('User List'); ?> </a>
                 </li>
                 <li>
                   <a href="/Manage/add">
-                    <i class="fa fa-user-plus "></i> 添加用户</a>
+                    <i class="fa fa-user-plus "></i> <?php _e('Add'); ?></a>
                 </li>
               </ul>
-              <h3>用户组管理</h3>
+              <h3><?php _e('User Group'); ?></h3>
               <ul class="nav navbar-nav">
                 <li class="active">
                   <a href="/Manage/group">
-                    <i class="fa fa-plus "></i>用户组项目授权</a>
+                    <i class="fa fa-plus "></i><?php _e('Authorization'); ?></a>
                 </li>
               </ul>
             </nav>
@@ -74,7 +74,7 @@
                   <div class="portlet  light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
                       <div class="caption">
-                        <i class="fa fa-plus"></i> 用户组分类授权
+                        <i class="fa fa-plus"></i> <?php _e('Authorization'); ?>
                       </div>
                       <!-- BEGIN BREADCRUMBS -->
                       <div class="breadcrumbs">
@@ -84,9 +84,9 @@
                             <a href="/Index">Home</a>
                           </li>
                           <li>
-                            <a href="/Manage/index">用户管理</a>
+                            <a href="/Manage/index"><?php _e('Users'); ?></a>
                           </li>
-                          <li class="active">编辑用户</li>
+                          <li class="active"><?php _e('Edit'); ?></li>
                         </ol>
                         <!-- Sidebar Toggle Button -->
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -105,7 +105,7 @@
                     <div class="portlet-body">
                         <div class="form-group form-md-line-input">
                           <label class="col-md-2 control-label" for="groupid">
-                            用户组
+                            <?php _e('User Groups'); ?>
                           </label>
                           <div class="col-md-4">
                             <span class="form-control">{$group_name}</span>
@@ -113,7 +113,7 @@
                           </div>
                         </div>
                       <div class="form-group form-md-line-input">
-                        <label class="col-md-2 control-label" for="groupid">项目</label>
+                        <label class="col-md-2 control-label" for="groupid"><?php _e('Product'); ?></label>
                         <div class="col-md-4">
                           <ul id="treeDemo" class="ztree">
                         </div>

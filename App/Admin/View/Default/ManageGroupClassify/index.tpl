@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>项目管理 | 自动化测试系统</title>
+  <title><?php _e('Product Admin'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -67,12 +67,12 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-users font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">项目</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Product'); ?></span>
                     </div>
                     <div class="breadcrumbs">
                       <ol class="breadcrumb">
                         <li> <a href="/Index">Home</a> </li>
-                        <li class="active">项目管理</li>
+                        <li class="active"><?php _e('Product Admin'); ?></li>
                       </ol>
                     </div>
                   </div>
@@ -80,10 +80,10 @@
                     <div class="table-container">
                       <div class="form-group form-md-line-input">
                       <div class="col-md-1">
-                        <input type="text" name="project" class="form-control" id="project" autocomplete="off" placeholder="项目名称" required="true" aria-required="true">
+                        <input type="text" name="project" class="form-control" id="project" autocomplete="off" placeholder="<?php _e('Name'); ?>" required="true" aria-required="true">
                       </div>
                       <div class="col-md-1">
-                        <button class="btn btn-primary" id="J_add">添加</button>
+                        <button class="btn btn-primary" id="J_add"><?php _e('Add'); ?></button>
                       </div>
                       </div>
                       <br />
@@ -103,7 +103,7 @@
 </div>
 
 <div id="J_del_alert" class="modal fade" tabindex="-1" data-focus-on="input:first">
-    <div class="modal-body"> 删除项目后, 项目下所有用例组和用例将不可见, 确定么? </div>
+    <div class="modal-body"> <?php _e('It Cannot Be Recovered After Delete, Continue Or Not?'); ?> </div>
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
         <button type="button" id="J_do_del" class="btn green exec_ok">Ok</button>

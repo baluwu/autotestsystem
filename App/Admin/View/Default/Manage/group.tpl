@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>用户组管理 | 自动化测试系统</title>
+  <title><?php _e('Case Groups'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -55,23 +55,23 @@
         <div class="page-content-row">
           <div class="page-sidebar">
             <nav class="navbar" role="navigation">
-              <h3>用户管理</h3>
+              <h3><?php _e('Users'); ?></h3>
               <ul class="nav navbar-nav margin-bottom-35">
                 <li>
                   <a href="./index">
-                    <i class="fa fa-users"></i> 用户列表 </a>
+                    <i class="fa fa-users"></i> <?php _e('User List'); ?> </a>
                 </li>
                 <li>
                   <a href="./add">
-                    <i class="fa fa-user-plus "></i> 添加用户</a>
+                    <i class="fa fa-user-plus "></i> <?php _e('Add'); ?></a>
                 </li>
 
               </ul>
-              <h3>用户组管理</h3>
+              <h3><?php _e('User Groups'); ?></h3>
               <ul class="nav navbar-nav">
                 <li  class="active">
                   <a href="/Manage/group">
-                    <i class="fa fa-plus "></i> 用户组管理</a>
+                    <i class="fa fa-plus "></i> <?php _e('User Groups'); ?></a>
                 </li>
               </ul>
             </nav>
@@ -86,7 +86,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-users font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">用户组列表</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('User List'); ?></span>
                     </div>
 
                     <div class="breadcrumbs">
@@ -94,7 +94,7 @@
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">用户组管理</li>
+                        <li class="active"><?php _e('User Groups'); ?></li>
                       </ol>
                     </div>
                   </div>
@@ -119,9 +119,9 @@
                         <tr role="row" class="heading">
 
                           <th> ID</th>
-                          <th> 组名称</th>
-                          <th width="60%"> 权限</th>
-                          <th width="20%"> 操作</th>
+                          <th> <?php _e('Name'); ?></th>
+                          <th width="60%"> <?php _e('Jurisdiction'); ?></th>
+                          <th width="20%"> <?php _e('Operate'); ?></th>
                         </tr>
                         </thead>
                         <tbody></tbody>

@@ -1,7 +1,7 @@
 <div id="J_task_single" class="modal modal-dialog" tabindex="-1" data-focus-on="input:first" style="width: 1000px;">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title"><i class="fa fa-tasks"></i> 创建任务</h4>
+    <h4 class="modal-title"><i class="fa fa-tasks"></i> <?php _e('Create Product'); ?></h4>
   </div>
   <form action="#" class="form-horizontal form-row-seperated" >
     <input type="hidden" id="J_single_ids" name="single_ids" />
@@ -9,16 +9,16 @@
       <div class="tips"></div>
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>名称
+          <span class="required">*</span><?php _e('Name'); ?>
         </label>
         <div class="col-md-9">
-          <input type="text" class="form-control" id="name" placeholder="任务名称" name="name" required data-tabindex="1">
+          <input type="text" class="form-control" id="name" placeholder="<?php _e('Name'); ?>" name="name" required data-tabindex="1">
           <div class="form-control-focus"> </div>
         </div>
       </div>
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>执行时间
+          <span class="required">*</span><?php _e('Time'); ?>
         </label>
         <div class="col-md-9">
           <input type="text" class="form-control" id="run_at" placeholder="2016-10-11 12:08:08" name="run_at" required data-tabindex="1">
@@ -27,7 +27,7 @@
       </div>
       <div class="form-group form-md-line-input">
         <label class="col-md-2 control-label" for="ip">
-          <span class="required">*</span>版本号
+          <span class="required">*</span><?php _e('Version'); ?>
         </label>
         <div class="col-md-9">
           <input type="text" class="form-control" id="ver" placeholder="1.0.1" name="ver" required data-tabindex="1">
@@ -35,14 +35,14 @@
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip"> 注释 </label>
+        <label class="col-md-2 control-label" for="ip"> <?php _e('Note'); ?> </label>
         <div class="col-md-9">
           <input type="text" class="form-control" id="description" placeholder="Description" name="description" data-tabindex="1">
           <div class="form-control-focus"> </div>
         </div>
       </div>
       <div class="form-group form-md-line-input">
-        <label class="col-md-2 control-label" for="ip"> 通知邮箱 </label>
+        <label class="col-md-2 control-label" for="ip"> <?php _e('Notification email'); ?> </label>
         <div class="col-md-9 input-group has-success" id="emailwarp">
             <input type="text" class="form-control" id="notify_email" name="notify_email" autocomplete="off" placeholder="Email Address"><span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
             <div class="form-control-focus"></div>
@@ -96,34 +96,10 @@
       </div>
       <div class="modal-footer col-md-11">
             <!--<button type="button" class="btn btn-default J_view_cases">查看用例</button>-->
-            <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-            <button type="submit" class="btn green exec_ok">确定</button>
+            <button type="button" data-dismiss="modal" class="btn btn-default"><?php _e('Cancel'); ?></button>
+            <button type="submit" class="btn green exec_ok"><?php _e('Confirm'); ?></button>
         </div>
       </div>
-      <!--
-      <div class="col-md-12 case-list">
-        <div class="col-md-12">
-            <div class="portlet-body">
-              <div class="table-container">
-                  <table class="table table-striped table-bordered table-hover table-checkable" id="J_task_singles">
-                  <thead>
-                  <tr role="row" class="heading">
-                  <th>
-                  <input type="checkbox" checked class="group-ckbx" />
-                  </th>
-                  <th width=5%"> ID </th>
-                  <th width="45%"> 名称</th>
-                  <th width="45%"> NLP/ASR</th>
-                  </tr>
-                  </thead>
-                  <tbody id="J_task_single_bd"></tbody>
-                  </table>
-              </div>
-            </div>
-            <div class="form-control-focus"></div>
-        </div>
-      </div>
-      -->
     </div>
   </form>
 </div>
