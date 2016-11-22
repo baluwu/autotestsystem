@@ -171,6 +171,8 @@
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/Public/assets/global/plugins/ztree/js/jquery.ztree.all-3.5.min.js"></script>
 <script src="/Public/assets/apps/scripts/common.js"></script>
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <script src="/Public/assets/apps/scripts/group/index.js"></script>
 <script src="/Public/assets/apps/scripts/group/casetree.js"></script>
 <script src="/Public/assets/layout/scripts/layout.js"></script>

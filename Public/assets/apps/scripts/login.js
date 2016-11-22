@@ -24,10 +24,10 @@ var Login = function () {
 
       messages: {
         username: {
-          required: "用户名必填" || "Username is required."
+          required: _et('Username required') || "Username is required."
         },
         password: {
-          required: "密码必填" || "Password is required."
+          required: _et('Password required') || "Password is required."
         }
       },
 
@@ -63,7 +63,7 @@ var Login = function () {
           data: $('.login-form').serialize(),
           beforeSend: function () {
             $.blockUI({
-              message: "正在尝试登录",
+              message: _et('Are trying to log in'),
               css: {
                 border: 'none',
                 padding: '15px',
@@ -83,7 +83,7 @@ var Login = function () {
             }
             $.unblockUI();
             $.blockUI({
-              message: "管理员帐号或密码不正确",
+              message: _et('The administrator account or password is not correct'),
               css: {
                 border: 'none',
                 padding: '15px',
@@ -112,7 +112,7 @@ var Login = function () {
         //alert('请联系管理员');
 
         $.blockUI({
-          message: "请联系管理员",
+          message: _et('Please contact your administrator'),
           css: {
             border: 'none',
             padding: '15px',

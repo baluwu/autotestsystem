@@ -91,9 +91,9 @@ jQuery(document).ready(function () {
           if (res.error >= 0) {
             $('#exec').find('#id').val(res.data);
             $('.exec-single').show();
-            return App.ok('添加成功');
+            return App.ok(_et('Succeed'));
           }
-          App.warning( res.msg ? res.msg:'未知错误！请检查内容后重新提交！', $(".page-content-col .portlet-title"));
+          App.warning( res.msg ? res.msg:_et('Unknown error!Please check the content after submit again!'), $(".page-content-col .portlet-title"));
         }
       });
       return false;
@@ -104,8 +104,8 @@ jQuery(document).ready(function () {
     url: "/Group/uploadLocalAudio",
     maxFilesize: 2,//单位MB
     uploadMultiple:false,
-    dictInvalidFileType:'非法文件',
-    dictDefaultMessage:'拖拽文件到此处',
+    dictInvalidFileType:_et('Illegal file'),
+    dictDefaultMessage:_et('Drag Upload'),
     acceptedFiles:'audio/*',
     init: function () {},
     complete: function (file) {},
@@ -114,7 +114,7 @@ jQuery(document).ready(function () {
     },
     success: function (file) {
       if(file.status!="success"){
-        return App.warning('上传失败');
+        return App.warning(_et('Fail'));
       }
       var res=JSON.parse(file.xhr.responseText);
       if (res.status==0){
@@ -122,7 +122,7 @@ jQuery(document).ready(function () {
       }
       $('input[name="arc"]').val(res.path);
 
-      $('.J_selected_audio').html('已选择: ' + res.name);
+      $('.J_selected_audio').html(_et('Selected')+': ' + res.name);
       $('#arc_upload').html(res.path);
     },
     addedfile: function (file) {}
@@ -143,11 +143,11 @@ jQuery(document).ready(function () {
 
   function enableRecord() { 
       $('.icon-record').css('color', '#333').attr('data-status', '0');
-      $('.record-btn').text('录音');
+      $('.record-btn').text(_et('Record'));
   }
   function disableRecord() {
       $('.icon-record').css('color', '#A00000').attr('data-status', '1');
-      $('.record-btn').text('停止');
+      $('.record-btn').text(_et('Stop'));
   }
 
   function startUserMedia(stream) {
@@ -208,13 +208,13 @@ jQuery(document).ready(function () {
           success : function(data) {
               if (data.status == 1) {
                   $('#arc').val(data.path);
-                  $('.J_selected_audio').html('已选择: ' + $('#J_record_name').val() + '.wav');
-                  App.ok('已上传');
+                  $('.J_selected_audio').html(_et('Selected')+': ' + $('#J_record_name').val() + '.wav');
+                  App.ok(_et('Succeed'));
               }
               else App.warning(data.msg);
           },
           error : function() {
-              App.warning('上传失败');
+              App.warning(_et('Fail'));
           }
       });
   }
@@ -271,11 +271,11 @@ jQuery(document).ready(function () {
         var self = $(this);
         player.onplay = function() {
             self.css('color', '#A00000').attr('data-status', '1');
-            $('.play-btn').text('暂停');
+            $('.play-btn').text(_et('Suspend'));
         }
         player.onended = player.onpause = function() {
             self.css('color', '#333').attr('data-status', '0');
-            $('.play-btn').text('播放');
+            $('.play-btn').text(_et('Play'));
         }
 
         if (player.ended || player.paused) {
@@ -374,7 +374,7 @@ jQuery(document).ready(function () {
             return App.warning( 'Excute fail, Error: ' + res.msg);
           }
 
-          App.ok('执行成功');
+          App.ok(_et('Succeed'));
         },
         error: function () {
           App.unblockUI($modal_exec);

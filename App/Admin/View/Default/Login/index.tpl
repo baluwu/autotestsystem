@@ -139,6 +139,8 @@
 <script src="/Public/assets/global/plugins/backstretch/jquery.backstretch.min.js"></script>
 
 <script src="/Public/assets/apps/scripts/common.js"></script>
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <script src="/Public/assets/apps/scripts/login.js"></script>
 
 </body>

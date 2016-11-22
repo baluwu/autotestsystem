@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8"/>
-  <title>日志记录 | <?php _e('Auto Test System'); ?></title>
+  <title><?php _e('Log Record'); ?> | <?php _e('Auto Test System'); ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="andy" name="author"/>
@@ -67,7 +67,7 @@
                   <div class="portlet-title">
                     <div class="caption">
                       <i class="fa fa-cubes font-dark"></i>
-                      <span class="caption-subject font-dark sbold uppercase">日志记录</span>
+                      <span class="caption-subject font-dark sbold uppercase"><?php _e('Log Record'); ?></span>
                     </div>
                     <!-- BEGIN BREADCRUMBS -->
                     <div class="breadcrumbs">
@@ -75,7 +75,7 @@
                         <li>
                           <a href="/Index">Home</a>
                         </li>
-                        <li class="active">日志记录</li>
+                        <li class="active"><?php _e('Log Record'); ?></li>
                       </ol>
                       <!-- Sidebar Toggle Button -->
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
@@ -97,10 +97,10 @@
                         <thead>
                         <tr role="row" class="heading">
 
-                          <th width="10%"> 状态</th>
-                          <th width="60%"> 描述</th>
+                          <th width="10%"> <?php _e('State'); ?></th>
+                          <th width="60%"> <?php _e('Log Record'); ?></th>
 
-                          <th width="20%"> 操作时间</th>
+                          <th width="20%"> <?php _e('Time'); ?></th>
                         </tr>
 
                         </thead>
@@ -131,7 +131,7 @@
 <div id="exec" class="modal fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">用例组执行</h4>
+    <h4 class="modal-title"><?php _e('Execution'); ?></h4>
   </div>
   <form action="#" >
     <div class="modal-body">
@@ -146,7 +146,7 @@
         </label>
 
         <div class="col-md-10">
-          当前执行用例组:<span class="currName"></span>
+          <?php _e('Current Perform Group'); ?>:<span class="currName"></span>
         </div>
       </div>
 

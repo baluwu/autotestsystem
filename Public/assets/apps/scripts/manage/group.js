@@ -80,7 +80,7 @@ jQuery(document).ready(function () {
             },
             {
               "render": function (data, type, row) {
-                return '<a href="./editgroup/id/' + data.id + '" title="项目授权"> <i class="fa fa-cubes font-light"></i></a>';
+                return '<a href="./editgroup/id/' + data.id + '" title="'+_et('Authorization')+'"> <i class="fa fa-cubes font-light"></i></a>';
               },
               "targets": 3
             }

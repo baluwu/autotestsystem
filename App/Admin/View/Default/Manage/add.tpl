@@ -301,6 +301,8 @@
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/common.js"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/Public/assets/apps/scripts/manage/add.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->

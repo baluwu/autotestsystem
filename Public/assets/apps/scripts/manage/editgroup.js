@@ -62,9 +62,9 @@ jQuery(document).ready(function () {
       beforeSend: function () {},
       success: function (data, response, status) {
         if (data >= 0) {
-          return App.ok('修改成功');
+          return App.ok(_et('Succeed'));
         }
-        App.warning( (data == -5)?'用户名称被占用':(data == 0)?'修改失败，请重试！':'未知错误！请重新刷新后提交！');
+        App.warning( (data == -5)?_et('Username already exists'):(data == 0)?_et('Fail'):_et('Unknown error!Please check the content after submit again!'));
       }
     });
   });

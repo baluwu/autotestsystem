@@ -84,7 +84,7 @@
                       <div class="breadcrumbs">
                         <ol class="breadcrumb">
                           <> <a href="/Index">Home</a> </>
-                          <li> <a href="/Group/index">用例组管理<?php _e('Case Groups'); ?></a> </li>
+                          <li> <a href="/Group/index"><?php _e('Case Groups'); ?></a> </li>
                           <li class="active"> <?php _e('Add Case'); ?></li>
                         </ol>
                       </div>
@@ -353,6 +353,8 @@
 <script src="/Public/assets/global/scripts/datatable.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="/Public/assets/apps/scripts/common.js"></script>
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <script src="/Public/assets/apps/scripts/single/add.js"></script>
 <script src="/Public/assets/apps/scripts/single/recorder.js"></script>
 <script src="/Public/assets/apps/scripts/single/recorderWorker.js"></script>

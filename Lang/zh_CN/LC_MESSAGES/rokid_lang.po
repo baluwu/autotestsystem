@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-22 11:41+0800\n"
-"PO-Revision-Date: 2016-11-22 11:49+0800\n"
+"POT-Creation-Date: 2016-11-22 13:58+0800\n"
+"PO-Revision-Date: 2016-11-22 14:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -15,6 +15,146 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: App/Admin/View\n"
 "X-Poedit-SearchPath-1: Public/assets/apps\n"
+
+#: Public/assets/apps/scripts/group/add.js:70
+#: Public/assets/apps/scripts/group/edit.js:62
+#: Public/assets/apps/scripts/manage/add.js:141
+#: Public/assets/apps/scripts/manage/edit.js:140
+#: Public/assets/apps/scripts/manage/editgroup.js:67
+#: Public/assets/apps/scripts/single/add.js:96
+msgid "Unknown error!Please check the content after submit again!"
+msgstr "未知错误！请检查内容后重新提交！"
+
+#: Public/assets/apps/scripts/group/index.js:49
+#: Public/assets/apps/scripts/manage/add.js:141
+#: Public/assets/apps/scripts/manage/edit.js:140
+#: Public/assets/apps/scripts/manage/editgroup.js:67
+#: Public/assets/apps/scripts/manage/index.js:42
+#: Public/assets/apps/scripts/single/add.js:117
+#: Public/assets/apps/scripts/single/add.js:217
+msgid "Fail"
+msgstr "失败"
+
+#: Public/assets/apps/scripts/group/index.js:51
+#: Public/assets/apps/scripts/group/index.js:166
+#: Public/assets/apps/scripts/manage/editgroup.js:65
+#: Public/assets/apps/scripts/manage/index.js:51
+#: Public/assets/apps/scripts/single/add.js:94
+#: Public/assets/apps/scripts/single/add.js:212
+#: Public/assets/apps/scripts/single/add.js:377
+msgid "Succeed"
+msgstr "成功"
+
+#: Public/assets/apps/scripts/group/index.js:100
+#: App/Admin/View/Default/ManageGroupClassify/index.tpl:106
+msgid "It Cannot Be Recovered After Delete, Continue Or Not?"
+msgstr "删除后不可恢复，要继续么？"
+
+#: Public/assets/apps/scripts/group/index.js:149
+#: Public/assets/apps/scripts/group/index.js:240
+msgid "Running"
+msgstr "执行中"
+
+#: Public/assets/apps/scripts/group/index.js:236
+msgid "Not selected case"
+msgstr "未选择用例"
+
+#: Public/assets/apps/scripts/group/index.js:341
+#: App/Admin/View/Default/Group/add.tpl:63
+#: App/Admin/View/Default/Group/add.tpl:287
+#: App/Admin/View/Default/Group/edit.tpl:64
+#: App/Admin/View/Default/Group/edit.tpl:358
+#: App/Admin/View/Default/Group/exec_dialog.tpl:4
+#: App/Admin/View/Default/Logs/index.tpl:134
+#: App/Admin/View/Default/Profile/index.tpl:210
+msgid "Execution"
+msgstr "执行"
+
+#: Public/assets/apps/scripts/login.js:27
+msgid "Username required"
+msgstr "用户名必填"
+
+#: Public/assets/apps/scripts/login.js:30
+msgid "Password required"
+msgstr "密码必填"
+
+#: Public/assets/apps/scripts/login.js:66
+msgid "Are trying to log in"
+msgstr "正在尝试登录"
+
+#: Public/assets/apps/scripts/login.js:86
+msgid "The administrator account or password is not correct"
+msgstr "管理员帐号或密码不正确"
+
+#: Public/assets/apps/scripts/login.js:115
+msgid "Please contact your administrator"
+msgstr "请联系管理员"
+
+#: Public/assets/apps/scripts/manage/add.js:141
+#: Public/assets/apps/scripts/manage/edit.js:140
+#: Public/assets/apps/scripts/manage/editgroup.js:67
+msgid "Username already exists"
+msgstr "用户名称被占用"
+
+#: Public/assets/apps/scripts/manage/group.js:83
+#: App/Admin/View/Default/Manage/editgroup.tpl:61
+#: App/Admin/View/Default/Manage/editgroup.tpl:77
+msgid "Authorization"
+msgstr "用户组分类授权"
+
+#: Public/assets/apps/scripts/manage/index.js:42
+#: Public/assets/apps/scripts/manage/index.js:51
+msgid "Disable"
+msgstr "禁用"
+
+#: Public/assets/apps/scripts/manage/index.js:42
+#: Public/assets/apps/scripts/manage/index.js:51
+msgid "Activate"
+msgstr "激活"
+
+#: Public/assets/apps/scripts/manage/index.js:136
+msgid "After disabling account can t log in"
+msgstr "禁用后账号无法登录"
+
+#: Public/assets/apps/scripts/managegroupclassify/index.js:31
+msgid "Node name cannot be empty"
+msgstr "节点名称不能为空"
+
+#: Public/assets/apps/scripts/single/add.js:107
+msgid "Illegal file"
+msgstr "非法文件"
+
+#: Public/assets/apps/scripts/single/add.js:108
+#: App/Admin/View/Default/Group/add.tpl:175
+#: App/Admin/View/Default/Group/edit.tpl:189
+msgid "Drag Upload"
+msgstr "拖拽上传"
+
+#: Public/assets/apps/scripts/single/add.js:125
+#: Public/assets/apps/scripts/single/add.js:211
+#: App/Admin/View/Default/Group/edit.tpl:140
+msgid "Selected"
+msgstr "已选择"
+
+#: Public/assets/apps/scripts/single/add.js:146
+#: App/Admin/View/Default/Group/add.tpl:161
+#: App/Admin/View/Default/Group/edit.tpl:174
+msgid "Record"
+msgstr "录音"
+
+#: Public/assets/apps/scripts/single/add.js:150
+msgid "Stop"
+msgstr "停止"
+
+#: Public/assets/apps/scripts/single/add.js:274
+msgid "Suspend"
+msgstr "暂停"
+
+#: Public/assets/apps/scripts/single/add.js:278
+#: App/Admin/View/Default/Group/add.tpl:162
+#: App/Admin/View/Default/Group/edit.tpl:175
+msgid "Play"
+msgstr "播放"
 
 #: Public/assets/apps/scripts/task/tasks.js:58
 msgid "Check Result"
@@ -97,6 +237,7 @@ msgid "Auto Test System"
 msgstr "自动化测试系统"
 
 #: App/Admin/View/Default/Group/add.tpl:55
+#: App/Admin/View/Default/Group/edit.tpl:55
 msgid "Case Info"
 msgstr "用例信息"
 
@@ -118,15 +259,6 @@ msgstr "模块"
 #: App/Admin/View/Default/Task/index.tpl:100
 msgid "Founder"
 msgstr "创建者"
-
-#: App/Admin/View/Default/Group/add.tpl:63
-#: App/Admin/View/Default/Group/add.tpl:287
-#: App/Admin/View/Default/Group/edit.tpl:64
-#: App/Admin/View/Default/Group/edit.tpl:358
-#: App/Admin/View/Default/Group/exec_dialog.tpl:4
-#: App/Admin/View/Default/Profile/index.tpl:210
-msgid "Execution"
-msgstr "执行"
 
 #: App/Admin/View/Default/Group/add.tpl:63
 msgid "Perform"
@@ -208,16 +340,6 @@ msgstr "本地上传"
 msgid "Voice Library"
 msgstr "语音文件库"
 
-#: App/Admin/View/Default/Group/add.tpl:161
-#: App/Admin/View/Default/Group/edit.tpl:174
-msgid "Record"
-msgstr "录音"
-
-#: App/Admin/View/Default/Group/add.tpl:162
-#: App/Admin/View/Default/Group/edit.tpl:175
-msgid "Play"
-msgstr "播放"
-
 #: App/Admin/View/Default/Group/add.tpl:168
 #: App/Admin/View/Default/Group/edit.tpl:181
 msgid "Save And Use"
@@ -227,11 +349,6 @@ msgstr "保存并使用"
 #: App/Admin/View/Default/Group/edit.tpl:182
 msgid "Re-Record"
 msgstr "重新录制"
-
-#: App/Admin/View/Default/Group/add.tpl:175
-#: App/Admin/View/Default/Group/edit.tpl:189
-msgid "Drag Upload"
-msgstr "拖拽上传"
 
 #: App/Admin/View/Default/Group/add.tpl:192
 #: App/Admin/View/Default/Group/edit.tpl:207
@@ -310,6 +427,7 @@ msgid "Create Product"
 msgstr "创建项目"
 
 #: App/Admin/View/Default/Group/create_task_dialog.tpl:21
+#: App/Admin/View/Default/Logs/index.tpl:103
 #: App/Admin/View/Default/Task/addTask.tpl:145
 #: App/Admin/View/Default/Task/addTask.tpl:148
 #: App/Admin/View/Default/Task/index.tpl:97
@@ -346,8 +464,6 @@ msgid "Confirm"
 msgstr "确定"
 
 #: App/Admin/View/Default/Group/edit.tpl:12
-#: App/Admin/View/Default/Group/edit.tpl:55
-#: App/Admin/View/Default/Group/edit.tpl:64
 #: App/Admin/View/Default/Group/edit.tpl:81
 #: App/Admin/View/Default/Group/edit.tpl:95
 #: App/Admin/View/Default/Group/edit.tpl:249
@@ -366,6 +482,17 @@ msgstr "编辑"
 msgid "Create Time"
 msgstr "创建时间"
 
+#: App/Admin/View/Default/Group/edit.tpl:64
+msgid "Performing"
+msgstr "计划执行时间"
+
+#: App/Admin/View/Default/Group/edit.tpl:67
+#: App/Admin/View/Default/Public/header.tpl:76
+#: App/Admin/View/Default/Task/execute_history_show.tpl:86
+#: App/Admin/View/Default/Task/index.tpl:12
+msgid "Jobs"
+msgstr "任务管理"
+
 #: App/Admin/View/Default/Group/edit.tpl:83
 msgid "Previous"
 msgstr "上一条"
@@ -377,10 +504,6 @@ msgstr "下一条"
 #: App/Admin/View/Default/Group/edit.tpl:108
 msgid "Nmae"
 msgstr "名称"
-
-#: App/Admin/View/Default/Group/edit.tpl:140
-msgid "Selected"
-msgstr "已选择"
 
 #: App/Admin/View/Default/Group/edit.tpl:333
 msgid "Reset"
@@ -402,6 +525,10 @@ msgid "Operate"
 msgstr "操作者"
 
 #: App/Admin/View/Default/Index/index.tpl:13
+#: App/Admin/View/Default/Logs/index.tpl:12
+#: App/Admin/View/Default/Logs/index.tpl:70
+#: App/Admin/View/Default/Logs/index.tpl:78
+#: App/Admin/View/Default/Logs/index.tpl:101
 msgid "Log Record"
 msgstr "任务执行记录"
 
@@ -424,6 +551,14 @@ msgstr "登录"
 #: App/Admin/View/Default/Login/index.tpl:60
 msgid "Enter any username and password"
 msgstr "请输入用户名和密码"
+
+#: App/Admin/View/Default/Logs/index.tpl:100
+msgid "State"
+msgstr "状态"
+
+#: App/Admin/View/Default/Logs/index.tpl:149
+msgid "Current Perform Group"
+msgstr ""
 
 #: App/Admin/View/Default/Manage/add.tpl:12
 #: App/Admin/View/Default/Manage/add.tpl:80
@@ -491,11 +626,6 @@ msgstr "重复密码"
 msgid "Random Password"
 msgstr "随机生成"
 
-#: App/Admin/View/Default/Manage/editgroup.tpl:61
-#: App/Admin/View/Default/Manage/editgroup.tpl:77
-msgid "Authorization"
-msgstr "用户组分类授权"
-
 #: App/Admin/View/Default/Manage/editgroup.tpl:108
 #: App/Admin/View/Default/Manage/group.tpl:70
 #: App/Admin/View/Default/Manage/group.tpl:74
@@ -546,10 +676,6 @@ msgstr "根据用户名搜索"
 msgid "Product Admin"
 msgstr "项目管理"
 
-#: App/Admin/View/Default/ManageGroupClassify/index.tpl:106
-msgid "It Cannot Be Recovered After Delete, Continue Or Not?"
-msgstr "删除后不可恢复，要继续么？"
-
 #: App/Admin/View/Default/Profile/index.tpl:12
 #: App/Admin/View/Default/Profile/index.tpl:66
 msgid "User Info"
@@ -590,12 +716,6 @@ msgstr "我的日志"
 #: App/Admin/View/Default/Public/header.tpl:57
 msgid "Dashboard"
 msgstr "Dashboard"
-
-#: App/Admin/View/Default/Public/header.tpl:76
-#: App/Admin/View/Default/Task/execute_history_show.tpl:86
-#: App/Admin/View/Default/Task/index.tpl:12
-msgid "Jobs"
-msgstr "任务管理"
 
 #: App/Admin/View/Default/Task/addTask.tpl:173
 msgid "Select Case"
@@ -656,18 +776,6 @@ msgstr "根据版本号搜索"
 #~ msgid "Execute"
 #~ msgstr "执行"
 
-#~ msgid "Disable"
-#~ msgstr "禁用"
-
-#~ msgid "Activate"
-#~ msgstr "激活"
-
-#~ msgid "Fail"
-#~ msgstr "失败"
-
-#~ msgid "Succeed"
-#~ msgstr "成功"
-
 #~ msgid "not login"
 #~ msgstr "无法登录"
 
@@ -698,9 +806,6 @@ msgstr "根据版本号搜索"
 #~ msgid "Case Record Contrast"
 #~ msgstr "执行记录对比"
 
-#~ msgid "Performing"
-#~ msgstr "计划执行时间"
-
 #~ msgid "Public"
 #~ msgstr "公开"
 
@@ -709,9 +814,6 @@ msgstr "根据版本号搜索"
 
 #~ msgid "Back"
 #~ msgstr "返回"
-
-#~ msgid "State"
-#~ msgstr "状态"
 
 #~ msgid "Search By NLP"
 #~ msgstr "按NLP搜索"

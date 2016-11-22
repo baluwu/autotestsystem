@@ -64,7 +64,7 @@
                         <p class="margin-bottom-10 tooltips" data-original-title="<?php _e('Execution'); ?>"><i class="fa fa-chevron-circle-right"></i><a href="javascript:;" id="exec_btn"><?php _e('Performing'); ?></a></p>
                     </div>
                 </div>
-                <h3>任务管理</h3>
+                <h3><?php _e('Jobs'); ?></h3>
                 <ul class="nav navbar-nav margin-bottom-35">
                     <li class="active"> <a href="/Task/index"> <i class="fa fa-object-ungroup"></i> <?php _e('List'); ?> </a> </li>
                 </ul>
@@ -427,6 +427,8 @@
 <script src="/Public/assets/global/scripts/datatable.js"></script>
 <script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="/Public/assets/apps/scripts/common.js"></script>
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <script src="/Public/assets/apps/scripts/single/edit.js"></script>
 <script src="/Public/assets/apps/scripts/single/recorder.js"></script>
 <script src="/Public/assets/apps/scripts/single/recorderWorker.js"></script>

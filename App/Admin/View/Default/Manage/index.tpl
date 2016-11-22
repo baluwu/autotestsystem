@@ -144,6 +144,8 @@
 <script src="/Public/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script src="/Public/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script src="/Public/assets/apps/scripts/common.js"></script>
+<link rel="gettext" type="application/x-po" href="/Lang/{$set_lan}/LC_MESSAGES/rokid_lang.po" />
+<script src="/Public/assets/global/scripts/Gettext.js"></script>
 <script src="/Public/assets/pages/scripts/ui-extended-modals.js"></script>
 <script src="/Public/assets/apps/scripts/manage/index.js"></script>
 <script src="/Public/assets/layout/scripts/layout.js"></script>

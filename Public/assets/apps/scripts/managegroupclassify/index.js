@@ -28,7 +28,7 @@ jQuery(document).ready(function () {
       setTimeout(function() {
         var zTree = $.fn.zTree.getZTreeObj("treeDemo");
         zTree.cancelEditName();
-        alert("节点名称不能为空.");
+        alert(_et('Node name cannot be empty'));
       }, 0);
       return false;
     }

@@ -46,9 +46,9 @@ jQuery(document).ready(function () {
                 data: { id: id },
                 success: function (res, response, status) {
                   if (res.error < 0) {
-                    return App.warning( '删除失败' + res.msg, $(".page-content-col .portlet-title"));
+                    return App.warning( _et('Fail') + res.msg, $(".page-content-col .portlet-title"));
                   }
-                  App.ok( '删除成功', $(".page-content-col .portlet-title"));
+                  App.ok( _et('Succeed'), $(".page-content-col .portlet-title"));
                   $('.filter-submit').trigger('click');
                 }
               });
@@ -97,7 +97,7 @@ jQuery(document).ready(function () {
             {
               "render": function (data, type, row) {
                 return '<a href="javascript:;" data-id="' + row.id + '" data-name="' + row.short_name + '" class="J_play_single"><i class="glyphicon glyphicon-play"></i></a>' + 
-                '<a data-toggle="confirmation" data-placement="top" data-id="' + row.id + '" data-title="删除后不可恢复, 要继续么?" data-btn-ok-label="OK" data-btn-cancel-label="NO" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' +
+                '<a data-toggle="confirmation" data-placement="top" data-id="' + row.id + '" data-title="'+_et('It Cannot Be Recovered After Delete, Continue Or Not?')+'" data-btn-ok-label="OK" data-btn-cancel-label="NO" class="J_remove_single"><i class="glyphicon glyphicon-remove"></i></a>' +
                 '<a href="/Group/edit/id/' + row.id + '" target="_blank"><i class="glyphicon glyphicon-pencil"></i></a>';
               },
               "targets": 5
@@ -146,7 +146,7 @@ jQuery(document).ready(function () {
           }
         },
         submitHandler: function (form) {
-          App.blockUI({ message: '执行中....', target: $modal_exec, overlayColor: 'none', cenrerY: true, boxed: true });
+          App.blockUI({ message: _et('Running')+'....', target: $modal_exec, overlayColor: 'none', cenrerY: true, boxed: true });
 
           var exec_type = $('#exec').find('[name="type"]').val();
 
@@ -163,7 +163,7 @@ jQuery(document).ready(function () {
                 return App.warning('Execute fail, Error: ' + res.msg);
               }
 
-              App.ok('执行成功');
+              App.ok(_et('Succeed'));
             },
             error: function () {
               App.unblockUI($modal_exec);
@@ -233,11 +233,11 @@ jQuery(document).ready(function () {
           */
 
           if ($('#J_single_ids').val() == '') {
-            return App.warning('未选择用例');
+            return App.warning(_et('Not selected case'));
           }
 
           App.blockUI({
-            message: '执行中....',
+            message: _et('Running')+'....',
             target: $modal_exec,
             overlayColor: 'none',
             cenrerY: true,
@@ -338,7 +338,7 @@ jQuery(document).ready(function () {
     $('#exec').modal();
     $('#exec').on('shown.bs.modal', function () {
       var self = $(this);
-      self.find('.modal-title').text('执行用例 [' + that.attr('data-name') + ']');
+      self.find('.modal-title').text(_et('Execution')+' [' + that.attr('data-name') + ']');
       self.find('.form-interval').hide();
       self.find('[name="id"]').val(that.attr('data-id'));
       self.find('[name="type"]').val('single');

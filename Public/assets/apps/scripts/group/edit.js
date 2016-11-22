@@ -59,7 +59,7 @@ jQuery(document).ready(function () {
           }
 
           App.warning(
-            res.msg?res.msg:'未知错误！请检查内容后重新提交！',
+            res.msg?res.msg:_et('Unknown error!Please check the content after submit again!'),
             $(".page-content-col .portlet-title")
           );
         }
